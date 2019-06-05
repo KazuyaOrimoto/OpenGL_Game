@@ -13,3 +13,6 @@ kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32
 <構成->release,リンカー->システム->サブシステム>
 コンソール (/SUBSYSTEM:CONSOLE)
 
+<ビルドイベント->ビルド後のイベント->コマンドライン>
+xcopy "$(ProjectDir)\..\..\external\SDL\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
+xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
