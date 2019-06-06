@@ -12,9 +12,15 @@ public:
 	void GameLoop();
 
 private:
+
+    void ProcessInput();
+    void GenerateOutput();
+
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	FPS *fps;
+
+    bool isRunning;
 
 };
 

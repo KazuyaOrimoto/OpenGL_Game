@@ -3,9 +3,10 @@
 #include "FPS.h"
 
 Game::Game()
-	: fps(nullptr)
-	, window(nullptr)
-	, renderer(nullptr)
+    : fps(nullptr)
+    , window(nullptr)
+    , renderer(nullptr)
+    , isRunning(true)
 {
 }
 
@@ -22,7 +23,7 @@ bool Game::Initialize()
 		return false;
 	}
 
-	window = SDL_CreateWindow("Game Programming in C++ (Chapter 2)", 100, 100, 1024, 768, 0);
+	window = SDL_CreateWindow("OpenGL Game", 100, 100, 1024, 768, 0);
 	if (!window)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
@@ -38,6 +39,7 @@ bool Game::Initialize()
 
 	fps = new FPS();
 
+
 	return true;
 }
 
@@ -50,12 +52,42 @@ void Game::Termination()
 
 void Game::GameLoop()
 {
-	while (true)
+	while (isRunning)
 	{
+        ProcessInput();
 		fps->Update();
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
+        
+        GenerateOutput();
 
-		SDL_RenderPresent(renderer);
 	}
+}
+
+void Game::ProcessInput()
+{
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            isRunning = false;
+            break;
+        }
+    }
+
+    const Uint8* state = SDL_GetKeyboardState(NULL);
+    if (state[SDL_SCANCODE_ESCAPE])
+    {
+        isRunning = false;
+    }
+}
+
+void Game::GenerateOutput()
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+
+
+    SDL_RenderPresent(renderer);
 }
