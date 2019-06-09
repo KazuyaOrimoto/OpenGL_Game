@@ -15,6 +15,9 @@ FPS::~FPS()
 {
 }
 
+/**
+@brief	フレーム毎の処理
+*/
 void FPS::Update()
 {
 	//1フレーム目の時刻を保存
@@ -22,6 +25,7 @@ void FPS::Update()
 	{
 		frameStartTickTime = SDL_GetTicks();
 	}
+	//設定したフレーム数が経過したら
 	if (fpsCount == setFps)
 	{
 		int nowTickTime = SDL_GetTicks();
@@ -35,6 +39,9 @@ void FPS::Update()
 	Wait();
 }
 
+/**
+@brief	FPSが設定値より大きくならないための制御
+*/
 void FPS::Wait()
 {
 	int nowTickTime = SDL_GetTicks();

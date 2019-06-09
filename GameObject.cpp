@@ -4,6 +4,9 @@
 #include "GameObject.h"
 #include "Component.h"
 
+/**
+@param	ゲームクラスのポインタ
+*/
 GameObject::GameObject(Game * argGame)
 	: state(Active)
 	, position(Vector2::Zero)
@@ -18,6 +21,10 @@ GameObject::~GameObject()
 {
 }
 
+/**
+@brief	フレーム毎の処理
+@param	最後のフレームを完了するのに要した時間
+*/
 void GameObject::Update(float argDaltaTime)
 {
 	if (state == Active)
@@ -26,18 +33,34 @@ void GameObject::Update(float argDaltaTime)
 	}
 }
 
+/**
+@brief	アタッチされてるコンポーネントのアップデート
+@param	最後のフレームを完了するのに要した時間
+*/
 void GameObject::UpdateComponents(float argDaltaTime)
 {
 }
 
-void GameObject::UpdateActor(float argDaltaTime)
+/**
+@brief	ゲームオブジェクトのアップデート
+@param	最後のフレームを完了するのに要した時間
+*/
+void GameObject::UpdateGameObject(float argDaltaTime)
 {
 }
 
+/**
+@brief	コンポーネントを追加する
+@param	追加するコンポーネントのポインタ
+*/
 void GameObject::AddComponent(Component * argComponent)
 {
 }
 
+/**
+@brief	コンポーネントを削除する
+@param	削除するコンポーネントのポインタ
+*/
 void GameObject::RemoveComponent(Component * argComponent)
 {
 }

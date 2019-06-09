@@ -4,18 +4,23 @@ class FPS
 public:
 	FPS();
 	~FPS();
+
+	/**
+	@brief	フレーム毎の処理
+	*/
 	void Update();
 
-    int x, y;
-
 private:
+	/**
+	@brief	FPSが設定値より大きくならないための制御
+	*/
 	void Wait();
 
-	const Uint32 setFps;
-	const Uint32 oneFrameTickCount;
-	Uint32 fpsCount;
-	Uint32 frameStartTickTime;
-	Uint32 fps;
+	const Uint32 setFps;				//フレームレートの最高値
+	const Uint32 oneFrameTickCount;		//１フレームにかける時間
+	Uint32 fpsCount;					//フレームのカウンター
+	Uint32 frameStartTickTime;			//FPSの計算を始めた時の時間
+	Uint32 fps;							//計算したフレームレート
 
 };
 
