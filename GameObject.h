@@ -57,6 +57,7 @@ public:
 	void RemoveComponent(Component* argComponent);
 
 	cpp_module::ReadOnlyProperty<Vector2> readOnlyPosition;		//読み込み専用のポジション
+    cpp_module::ReadOnlyProperty<Game*> readOnlyGame;
 
 private:
 

@@ -1,12 +1,14 @@
-#include "SDL.h"
 #include "Game.h"
+#include "SDL.h"
+#include <glew.h>
+#include <algorithm>
 #include "FPS.h"
 #include "GameObject.h"
 
 Game::Game()
     : fps(nullptr)
     , window(nullptr)
-    , renderer(nullptr)
+    , context()
     , isRunning(true)
 	, updatingGameObject(false)
 {
@@ -23,25 +25,48 @@ Game::~Game()
 */
 bool Game::Initialize()
 {
+    //SDLの初期化
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
 	}
 
-	window = SDL_CreateWindow("OpenGL Game", 100, 100, 1024, 768, 0);
+    //コアOpenGLプロファイルを使う
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    //OpenGLの使用バージョンを3.3に指定
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    //RGBA各チャンネル8ビットのカラーバッファを使う
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+    //ダブルバッファを有効にする
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    //ハードウェアアクセラレーションを使う
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+
+	window = SDL_CreateWindow("OpenGL Game", 100, 100, 1024, 768, SDL_WINDOW_OPENGL);
 	if (!window)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		return false;
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (!renderer)
-	{
-		SDL_Log("Failed to create renderer: %s", SDL_GetError());
-		return false;
-	}
+    context = SDL_GL_CreateContext(window);
+
+    //GLEWの初期化
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK)
+    {
+        SDL_Log("Failed to initialize GLEW.");
+        return false;
+    }
+
+    //一部のプラットフォームで出る無害なエラーコードをクリアする
+    glGetError();
+
 
 	fps = new FPS();
 
@@ -54,7 +79,7 @@ bool Game::Initialize()
 */
 void Game::Termination()
 {
-	SDL_DestroyRenderer(renderer);
+    SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
@@ -139,10 +164,13 @@ void Game::ProcessInput()
 */
 void Game::GenerateOutput()
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
+    //クリアカラーを灰色に設定
+    glClearColor(0.86f, 0.86f, 0.86f, 1.0f);
+    //カラーバッファをクリア
+    glClear(GL_COLOR_BUFFER_BIT);
 
+    //シーンを描画
 
-
-    SDL_RenderPresent(renderer);
+    //バッファを交換
+    SDL_GL_SwapWindow(window);
 }

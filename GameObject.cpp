@@ -14,6 +14,7 @@ GameObject::GameObject(Game * argGame)
 	, scale(1.0f)
 	, rotation(0.0f)
 	, game(argGame)
+    ,readOnlyGame(game)
 {
 }
 

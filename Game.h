@@ -1,8 +1,10 @@
 #pragma once
+#include "SDL.h"
 #include <vector>
 
 class FPS;
 class GameObject;
+class Sprite;
 struct SDL_Window;
 struct SDL_Renderer;
 
@@ -36,6 +38,7 @@ public:
 	*/
 	void RemoveGameObject(GameObject* argObj);
 
+    void AddSprite();
 
 
 private:
@@ -48,9 +51,9 @@ private:
 	*/
     void GenerateOutput();
 
-	SDL_Window	* window;
-	SDL_Renderer* renderer;
-	FPS			*fps;
+	FPS*            fps;
+	SDL_Window*     window;
+    SDL_GLContext   context;
 
 	std::vector<GameObject*> gameObjects;				//ゲームオブジェクトのポインタの可変長コンテナ
 	std::vector<GameObject*> pendingGameObjects;		//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ

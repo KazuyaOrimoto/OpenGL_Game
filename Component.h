@@ -22,7 +22,7 @@ public:
 	*/
 	int GetUpdateOrder() const { return updateOrder; }
 
-private:
+protected:
 	GameObject* owner;			//アタッチしているゲームオブジェクトのポインタ
 	int updateOrder;			//コンポーネントの更新順番（数値が小さいほど早く更新される）
 
