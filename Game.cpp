@@ -4,6 +4,11 @@
 #include <algorithm>
 #include "FPS.h"
 #include "GameObject.h"
+#include "SpriteComponent.h"
+#include "Texture.h"
+#include "Ship.h"
+#include "Shader.h"
+#include "VertexArray.h"
 
 Game::Game()
     : fps(nullptr)
@@ -67,6 +72,15 @@ bool Game::Initialize()
     //一部のプラットフォームで出る無害なエラーコードをクリアする
     glGetError();
 
+	if (!LoadShaders())
+	{
+		SDL_Log("Failed to load shaders.");
+		return false;
+	}
+
+	CreateSpriteVerts();
+
+	LoadData();
 
 	fps = new FPS();
 
@@ -79,6 +93,10 @@ bool Game::Initialize()
 */
 void Game::Termination()
 {
+	UnloadData();
+	delete spriteVerts;
+	spriteShader->Unload();
+	delete spriteShader;
     SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -93,6 +111,7 @@ void Game::GameLoop()
 	{
         ProcessInput();
 		fps->Update();
+		UpdateGame();
         
         GenerateOutput();
 
@@ -136,6 +155,72 @@ void Game::RemoveGameObject(GameObject * argObj)
 	}
 }
 
+void Game::AddSprite(SpriteComponent * argSprite)
+{
+	int DrawOder = argSprite->readOnlyDrawOrder;
+	auto itr = sprites.begin();
+	for ( ;itr != sprites.end();++itr)
+	{
+		if (DrawOder < (*itr)->readOnlyDrawOrder)
+		{
+			break;
+		}
+	}
+
+	sprites.insert(itr, argSprite);
+}
+
+void Game::RemoveSprite(SpriteComponent * argSprite)
+{
+	auto itr = std::find(sprites.begin(),sprites.end(),argSprite);
+	sprites.erase(itr);
+}
+
+Texture * Game::GetTexture(const std::string & argFileName)
+{
+	Texture* texture = nullptr;
+	auto itr = textures.find(argFileName);
+	if (itr != textures.end())
+	{
+		texture = itr->second;
+	}
+	else
+	{
+		texture = new Texture();
+		if (texture->Load(argFileName))
+		{
+			textures.emplace(argFileName,texture);
+		}
+		else
+		{
+			delete texture;
+			texture = nullptr;
+		}
+	}
+
+	return texture;
+}
+
+void Game::LoadData()
+{
+	ship = new Ship(this);
+
+}
+
+void Game::UnloadData()
+{
+	while (!gameObjects.empty())
+	{
+		delete gameObjects.back();
+	}
+	for (auto itr : textures)
+	{
+		itr.second->Unload();
+		delete itr.second;
+	}
+	textures.clear();
+}
+
 /**
 @brief  入力関連の処理
 */
@@ -169,8 +254,69 @@ void Game::GenerateOutput()
     //カラーバッファをクリア
     glClear(GL_COLOR_BUFFER_BIT);
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     //シーンを描画
+	spriteShader->SetActive();
+	spriteVerts->SetActive();
+
+	for (auto sprite : sprites)
+	{
+		sprite->Draw(spriteShader);
+	}
 
     //バッファを交換
     SDL_GL_SwapWindow(window);
+}
+
+void Game::UpdateGame()
+{
+	updatingGameObject = true;
+	for (auto gameObject : gameObjects)
+	{
+		gameObject->Update(0.05f);
+	}
+	updatingGameObject = false;
+
+	for (auto pending : pendingGameObjects)
+	{
+		pending->ComputeWorldTransform();
+		gameObjects.emplace_back(pending);
+	}
+	pendingGameObjects.clear();
+
+
+}
+
+bool Game::LoadShaders()
+{
+	spriteShader = new Shader();
+	if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
+	{
+		return false;
+	}
+	spriteShader->SetActive();
+
+	Matrix4 viewProj = Matrix4::CreateSimpleViewProj(1024.f,768.f);
+	spriteShader->SetMatrixUniform("uViewProj", viewProj);
+	return true;
+
+}
+
+void Game::CreateSpriteVerts()
+{
+	float vertices[] = {
+	-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
+	 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
+	 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
+	-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
+	};
+
+	unsigned int indices[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	spriteVerts = new VertexArray(vertices,4,indices,6);
 }

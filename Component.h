@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Property.h"
+#include <cstdint>
+
 class GameObject;
 
 class Component
@@ -17,11 +20,11 @@ public:
 	*/
 	virtual void Update(float argDeltaTime);
 
-	/**
-	@return コンポーネントの更新順番（数値が小さいほど早く更新される）
-	*/
-	int GetUpdateOrder() const { return updateOrder; }
+	virtual void ProcessInput(const uint8_t* keyState) {}
 
+	virtual void OnUpdateWorldTransform() {}
+
+	cpp_module::ReadOnlyProperty<int> readOnlyUpdateOrder;
 protected:
 	GameObject* owner;			//アタッチしているゲームオブジェクトのポインタ
 	int updateOrder;			//コンポーネントの更新順番（数値が小さいほど早く更新される）

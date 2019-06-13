@@ -1,10 +1,16 @@
 #pragma once
 #include "SDL.h"
+#include <unordered_map>
 #include <vector>
+#include <string>
 
 class FPS;
 class GameObject;
-class Sprite;
+class Texture;
+class Ship;
+class Shader;
+class SpriteComponent;
+class VertexArray;
 struct SDL_Window;
 struct SDL_Renderer;
 
@@ -37,8 +43,18 @@ public:
 	@param	削除するGameObjectクラスのポインタ
 	*/
 	void RemoveGameObject(GameObject* argObj);
+	/**
+	@brief  スプライトの追加
+	@param	追加するSpriteComponentクラスのポインタ
+	*/
+    void AddSprite(SpriteComponent* argSprite);
+	/**
+	@brief  スプライトの削除
+	@param	削除するSpriteComponentクラスのポインタ
+	*/
+	void RemoveSprite(SpriteComponent* argSprite);
 
-    void AddSprite();
+	Texture* GetTexture(const std::string& argFileName);
 
 
 private:
@@ -51,15 +67,36 @@ private:
 	*/
     void GenerateOutput();
 
+	void UpdateGame();
+
+	bool LoadShaders();
+	void CreateSpriteVerts();
+
+	void LoadData();
+	void UnloadData();
+
 	FPS*            fps;
 	SDL_Window*     window;
     SDL_GLContext   context;
 
-	std::vector<GameObject*> gameObjects;				//ゲームオブジェクトのポインタの可変長コンテナ
-	std::vector<GameObject*> pendingGameObjects;		//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
+	//ゲームオブジェクトのポインタの可変長コンテナ
+	std::vector<GameObject*> gameObjects;
+	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
+	std::vector<GameObject*> pendingGameObjects;
+	//スプライトコンポーネントのポインタの可変長コンテナ
+	std::vector<SpriteComponent*> sprites;
 
-    bool isRunning;										//ゲームを続けるかどうか
-	bool updatingGameObject;							//Update中かどうか
+	std::unordered_map<std::string, Texture*>textures;
+
+	//ゲームを続けるかどうか
+    bool isRunning;
+	//Update中かどうか
+	bool updatingGameObject;
+
+	Shader* spriteShader;
+	VertexArray* spriteVerts;
+
+	Ship* ship;
 
 };
 

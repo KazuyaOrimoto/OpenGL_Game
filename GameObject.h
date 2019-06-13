@@ -56,19 +56,28 @@ public:
 	*/
 	void RemoveComponent(Component* argComponent);
 
-	cpp_module::ReadOnlyProperty<Vector2> readOnlyPosition;		//読み込み専用のポジション
+	void ComputeWorldTransform();
+
+
+	cpp_module::ReadOnlyProperty<Vector2> readOnlyPosition;
     cpp_module::ReadOnlyProperty<Game*> readOnlyGame;
+	cpp_module::ReadOnlyProperty<Matrix4> readOnlyWorldTransform;
 
 private:
+	//ゲームオブジェクトの状態
+	State state;
 
-	State state;												//ゲームオブジェクトの状態
+	//Transform
+	Matrix4 worldTransform;
+	Vector2 position;
+	float scale;
+	float rotation;	
+	bool recomputeWorldTransform;
 
-	Vector2 position;											//位置
-	float scale;												//大きさ（比率）
-	float rotation;												//回転
-
-	std::vector<class Component*>components;					//アタッチされているコンポーネント
-	Game* game;													//ゲームクラスのインスタンス
+	//アタッチされているコンポーネント
+	std::vector<class Component*>components;
+	//ゲームクラスのインスタンス
+	Game* game;
 
 };
 

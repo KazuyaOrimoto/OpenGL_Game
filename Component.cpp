@@ -8,6 +8,7 @@
 Component::Component(GameObject* argOwner, int argUpdateOrder)
 	: owner(argOwner)
 	, updateOrder(argUpdateOrder)
+	, readOnlyUpdateOrder(updateOrder)
 {
 	owner->AddComponent(this);
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "Property.h"
 
 class GameObject;
 class Shader;
@@ -13,14 +14,16 @@ public:
     ~SpriteComponent();
 
     virtual void Draw(class Shader* shader);
-    virtual void SetTexture(class Texture* texture);
+    virtual void SetTexture(class Texture* argTexture);
 
-    int GetDrawOrder() const { return drawOrder; }
     int GetTexWidth() const { return textureWidth; }
     int GetTexHeight() const { return textureHeight; }
 
+	cpp_module::ReadOnlyProperty<int> readOnlyDrawOrder;
+	cpp_module::ReadOnlyProperty<int> readOnlyTextureWidth;
+	cpp_module::ReadOnlyProperty<int> readOnlyTextureHeight;
 protected:
-    Texture * texture;
+    Texture* texture;
     int drawOrder;
     int textureWidth;
     int textureHeight;
