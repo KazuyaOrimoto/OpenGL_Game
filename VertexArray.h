@@ -2,10 +2,19 @@
 class VertexArray
 {
 public:
+	/**
+	@param	頂点バッファの配列のポインタ
+	@param	頂点数
+	@param	インデックスバッファの配列のポインタ
+	@param	インデックスの数
+	*/
 	VertexArray(const float* argVerts, unsigned int argNumVerts,
 		const unsigned int* argIndices, unsigned int argNumIndices);
 	~VertexArray();
 
+	/**
+	@brief	頂点配列をアクティブにする（描画に使用できるようにする）
+	*/
 	void SetActive();
 
 	unsigned int GetNumIndices() const { return numIndices; }
