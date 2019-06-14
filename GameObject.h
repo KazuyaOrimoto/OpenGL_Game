@@ -56,6 +56,9 @@ public:
 	*/
 	void RemoveComponent(Component* argComponent);
 
+	/**
+	@brief	Transformのワールド変換
+	*/
 	void ComputeWorldTransform();
 
 	void SetRotation(float argRotation) { rotation = argRotation;  recomputeWorldTransform = true; }
@@ -71,10 +74,12 @@ protected:
 	State state;
 
 	//Transform
-	Matrix4 worldTransform;
 	Vector2 position;
 	float scale;
 	float rotation;	
+
+	Matrix4 worldTransform;
+	//ワールド変換の処理を行う必要性があるか
 	bool recomputeWorldTransform;
 
 	//アタッチされているコンポーネント

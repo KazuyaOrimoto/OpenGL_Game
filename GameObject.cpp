@@ -102,6 +102,9 @@ void GameObject::RemoveComponent(Component * argComponent)
 	}
 }
 
+/**
+@brief	Transform‚Ìƒ[ƒ‹ƒh•ÏŠ·
+*/
 void GameObject::ComputeWorldTransform()
 {
 	if (recomputeWorldTransform)
