@@ -39,8 +39,12 @@ void GameObject::Update(float argDaltaTime)
 {
 	if (state == Active)
 	{
-		
+		ComputeWorldTransform();
 
+		UpdateComponents(argDaltaTime);
+		UpdateGameObject(argDaltaTime);
+
+		ComputeWorldTransform();
 
 	}
 }

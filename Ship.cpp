@@ -17,4 +17,5 @@ Ship::~Ship()
 
 void Ship::UpdateGameObject(float argDeltaTime)
 {
+	position.x++;
 }

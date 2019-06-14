@@ -204,6 +204,7 @@ Texture * Game::GetTexture(const std::string & argFileName)
 void Game::LoadData()
 {
 	ship = new Ship(this);
+	ship->SetRotation(Math::PiOver2);
 
 }
 
@@ -292,6 +293,7 @@ void Game::UpdateGame()
 bool Game::LoadShaders()
 {
 	spriteShader = new Shader();
+
 	if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
 	{
 		return false;
@@ -307,10 +309,10 @@ bool Game::LoadShaders()
 void Game::CreateSpriteVerts()
 {
 	float vertices[] = {
-	-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
-	 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
-	 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
-	-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
+	-1,  0, 0.f, 0.f, 0.f, // top left
+	 0,  0, 0.f, 1.f, 0.f, // top right
+	 0, -1, 0.f, 1.f, 1.f, // bottom right
+	-1, -1, 0.f, 0.f, 1.f  // bottom left
 	};
 
 	unsigned int indices[] = {

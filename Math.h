@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <cmath>
 #include <memory.h>
 #include <limits>
@@ -121,11 +120,6 @@ public:
 		, y(inY)
 	{}
 
-	const float* GetAsFloatPtr() const
-	{
-		return reinterpret_cast<const float*>(&x);
-	}
-
 	// Set both components in one line
 	void Set(float inX, float inY)
 	{
@@ -243,7 +237,6 @@ public:
 	static const Vector2 NegUnitX;
 	static const Vector2 NegUnitY;
 };
-
 
 // 3D Vector
 class Vector3

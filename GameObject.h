@@ -58,12 +58,15 @@ public:
 
 	void ComputeWorldTransform();
 
+	void SetRotation(float argRotation) { rotation = argRotation;  recomputeWorldTransform = true; }
+	const Matrix4& GetWorldTransform() const { return worldTransform; }
+
 
 	cpp_module::ReadOnlyProperty<Vector2> readOnlyPosition;
     cpp_module::ReadOnlyProperty<Game*> readOnlyGame;
 	cpp_module::ReadOnlyProperty<Matrix4> readOnlyWorldTransform;
 
-private:
+protected:
 	//ゲームオブジェクトの状態
 	State state;
 

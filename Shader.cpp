@@ -49,6 +49,10 @@ void Shader::SetActive()
 	glUseProgram(shaderProgram);
 }
 
+/**
+@param シェーダー内の変数名
+@param 渡す行列
+*/
 void Shader::SetMatrixUniform(const char * name, const Matrix4 & matrix)
 {
 	GLuint loc = glGetUniformLocation(shaderProgram,name);
