@@ -17,6 +17,11 @@ Texture::~Texture()
 {
 }
 
+/**
+@brief	テクスチャのロード
+@param	テクスチャのファイル名
+@return	true : 成功 , false : 失敗
+*/
 bool Texture::Load(const std::string& fileName)
 {
 	int channels = 0;
@@ -49,11 +54,17 @@ bool Texture::Load(const std::string& fileName)
 	return true;
 }
 
+/**
+@brief	ロードしたテクスチャの解放
+*/
 void Texture::Unload()
 {
 	glDeleteTextures(1,&textureID);
 }
 
+/**
+@brief	テクスチャをアクティブにする
+*/
 void Texture::SetActive()
 {
 	glBindTexture(GL_TEXTURE_2D,textureID);
