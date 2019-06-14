@@ -4,7 +4,10 @@
 #include "GameObject.h"
 #include "Game.h"
 
-
+/**
+@param	アタッチするゲームオブジェクトのポインタ
+@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
+*/
 SpriteComponent::SpriteComponent(GameObject * argOwner, int argDrawOrder)
     :Component(argOwner)
     ,texture(nullptr)
@@ -23,6 +26,10 @@ SpriteComponent::~SpriteComponent()
 	owner->readOnlyGame->RemoveSprite(this);
 }
 
+/**
+@brief	描画処理
+@param	使用するシェーダークラスのポインタ
+*/
 void SpriteComponent::Draw(Shader * shader)
 {
 	if (texture)
@@ -43,6 +50,10 @@ void SpriteComponent::Draw(Shader * shader)
 	}
 }
 
+/**
+@brief	使用するテクスチャの設定
+@param	使用するテクスチャのポインタ
+*/
 void SpriteComponent::SetTexture(Texture * argTexture)
 {
 	texture = argTexture;
