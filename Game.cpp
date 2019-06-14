@@ -155,6 +155,10 @@ void Game::RemoveGameObject(GameObject * argObj)
 	}
 }
 
+/**
+@brief  スプライトの追加
+@param	追加するSpriteComponentクラスのポインタ
+*/
 void Game::AddSprite(SpriteComponent * argSprite)
 {
 	int DrawOder = argSprite->readOnlyDrawOrder;
@@ -170,12 +174,21 @@ void Game::AddSprite(SpriteComponent * argSprite)
 	sprites.insert(itr, argSprite);
 }
 
+/**
+@brief  スプライトの削除
+@param	削除するSpriteComponentクラスのポインタ
+*/
 void Game::RemoveSprite(SpriteComponent * argSprite)
 {
 	auto itr = std::find(sprites.begin(),sprites.end(),argSprite);
 	sprites.erase(itr);
 }
 
+/**
+@brief  テクスチャの取得
+@param	取得したいテクスチャのファイル名
+@return テクスチャのポインタ
+*/
 Texture * Game::GetTexture(const std::string & argFileName)
 {
 	Texture* texture = nullptr;
@@ -201,6 +214,9 @@ Texture * Game::GetTexture(const std::string & argFileName)
 	return texture;
 }
 
+/**
+@brief  ゲームに必要なデータのロード
+*/
 void Game::LoadData()
 {
 	ship = new Ship(this);
@@ -208,6 +224,9 @@ void Game::LoadData()
 
 }
 
+/**
+@brief  ゲームで使ったデータの解放
+*/
 void Game::UnloadData()
 {
 	while (!gameObjects.empty())
@@ -271,6 +290,9 @@ void Game::GenerateOutput()
     SDL_GL_SwapWindow(window);
 }
 
+/**
+@brief  ゲームのアップデート処理
+*/
 void Game::UpdateGame()
 {
 	updatingGameObject = true;
@@ -290,6 +312,9 @@ void Game::UpdateGame()
 
 }
 
+/**
+@brief  シェーダーの読み込み
+*/
 bool Game::LoadShaders()
 {
 	spriteShader = new Shader();
@@ -306,6 +331,9 @@ bool Game::LoadShaders()
 
 }
 
+/**
+@brief  Sprite用の頂点バッファとインデックスバッファの作成
+*/
 void Game::CreateSpriteVerts()
 {
 	float vertices[] = {

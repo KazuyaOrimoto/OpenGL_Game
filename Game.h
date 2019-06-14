@@ -54,6 +54,11 @@ public:
 	*/
 	void RemoveSprite(SpriteComponent* argSprite);
 
+	/**
+	@brief  テクスチャの取得
+	@param	取得したいテクスチャのファイル名
+	@return テクスチャのポインタ
+	*/
 	Texture* GetTexture(const std::string& argFileName);
 
 
@@ -67,12 +72,29 @@ private:
 	*/
     void GenerateOutput();
 
+	/**
+	@brief  ゲームのアップデート処理
+	*/
 	void UpdateGame();
 
+	/**
+	@brief  シェーダーの読み込み
+	*/
 	bool LoadShaders();
+
+	/**
+	@brief  Sprite用の頂点バッファとインデックスバッファの作成
+	*/
 	void CreateSpriteVerts();
 
+	/**
+	@brief  ゲームに必要なデータのロード
+	*/
 	void LoadData();
+
+	/**
+	@brief  ゲームで使ったデータの解放
+	*/
 	void UnloadData();
 
 	FPS*            fps;
@@ -85,7 +107,7 @@ private:
 	std::vector<GameObject*> pendingGameObjects;
 	//スプライトコンポーネントのポインタの可変長コンテナ
 	std::vector<SpriteComponent*> sprites;
-
+	//ファイル名でテクスチャを取得するための可変長コンテナ
 	std::unordered_map<std::string, Texture*>textures;
 
 	//ゲームを続けるかどうか
