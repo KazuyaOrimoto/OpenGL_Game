@@ -16,12 +16,14 @@ public:
 	virtual ~Component();
 
 	/**
+	@brief	フレーム毎の処理
 	@param	最後のフレームを完了するのに要した時間
 	*/
 	virtual void Update(float argDeltaTime);
 
-	virtual void ProcessInput(const uint8_t* keyState) {}
-
+	/**
+	@brief	Transformのワールド変換
+	*/
 	virtual void OnUpdateWorldTransform() {}
 
 	cpp_module::ReadOnlyProperty<int> readOnlyUpdateOrder;
