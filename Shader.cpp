@@ -16,6 +16,12 @@ Shader::~Shader()
 {
 }
 
+/**
+@brief	頂点シェーダーとフラグメントシェーダーのロード
+@param	頂点シェーダーのファイル名
+@param	頂点シェーダーのファイル名
+@return	true : 成功 , false : 失敗
+*/
 bool Shader::Load(const std::string & vertName, const std::string & fragName)
 {
 	if (!CompileShader(vertName,GL_VERTEX_SHADER,vertexShader) ||
@@ -37,6 +43,9 @@ bool Shader::Load(const std::string & vertName, const std::string & fragName)
 	return true;
 }
 
+/**
+@brief	ロードしたシェーダーの解放
+*/
 void Shader::Unload()
 {
 	glDeleteProgram(shaderProgram);
@@ -44,6 +53,9 @@ void Shader::Unload()
 	glDeleteShader(fragShader);
 }
 
+/**
+@brief	シェーダープログラムをアクティブにする
+*/
 void Shader::SetActive()
 {
 	glUseProgram(shaderProgram);
@@ -60,6 +72,13 @@ void Shader::SetMatrixUniform(const char * name, const Matrix4 & matrix)
 	glUniformMatrix4fv(loc, 1, GL_TRUE, matrix.GetAsFloatPtr());
 }
 
+/**
+@brief	シェーダーをコンパイルする
+@param	コンパイルするシェーダーのファイル名
+@param	シェーダーの種類
+@param	シェーダーのID用の参照変数
+@return	true : 成功 , false : 失敗
+*/
 bool Shader::CompileShader(const std::string & fileName, GLenum shaderType, GLuint & outShader)
 {
 	std::ifstream shaderFile(fileName);
@@ -90,6 +109,11 @@ bool Shader::CompileShader(const std::string & fileName, GLenum shaderType, GLui
 	return true;
 }
 
+/**
+@brief	シェーダーがコンパイル出来ているか確認
+@param	シェーダーのID
+@return	true : 成功 , false : 失敗
+*/
 bool Shader::IsCompiled(GLuint shader)
 {
 	GLint status;
@@ -107,6 +131,11 @@ bool Shader::IsCompiled(GLuint shader)
 	return true;
 }
 
+/**
+@brief	シェーダーがリンク出来ているか確認
+@param	シェーダーのID
+@return	true : 成功 , false : 失敗
+*/
 bool Shader::IsVaildProgram()
 {
 	GLint status;
