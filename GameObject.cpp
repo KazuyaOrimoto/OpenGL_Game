@@ -112,7 +112,7 @@ void GameObject::ComputeWorldTransform()
 		recomputeWorldTransform = false;
 		worldTransform = Matrix4::CreateScale(scale);
 		worldTransform *= Matrix4::CreateFromQuaternion(rotation);
-		worldTransform *= Matrix4::CreateTranslation(Vector3(position.x,position.y,0.0f));
+		worldTransform *= Matrix4::CreateTranslation(position);
 
 		for (auto itr : components)
 		{

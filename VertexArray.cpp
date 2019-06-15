@@ -19,7 +19,7 @@ VertexArray::VertexArray(const float* argVerts, unsigned int argNumVerts,
 	// 頂点バッファの作成
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, argNumVerts * 5 * sizeof(float), argVerts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, argNumVerts * 8 * sizeof(float), argVerts, GL_STATIC_DRAW);
 
 	// インデクスバッファの作成
 	glGenBuffers(1, &indexBuffer);

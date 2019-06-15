@@ -13,11 +13,12 @@ MeshComponent::MeshComponent(GameObject* owner)
     , mMesh(nullptr)
     , mTextureIndex(0)
 {
+    owner->GetGame()->GetRenderer()->AddMeshComp(this);
 }
 
 MeshComponent::~MeshComponent()
 {
-    owner->GetGame()->GetRenderer()->AddMeshComp(this);
+    owner->GetGame()->GetRenderer()->RemoveMeshComp(this);
 }
 
 void MeshComponent::Draw(Shader* shader)

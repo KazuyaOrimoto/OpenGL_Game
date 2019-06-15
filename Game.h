@@ -12,8 +12,6 @@ class Shader;
 class SpriteComponent;
 class VertexArray;
 class Renderer;
-struct SDL_Window;
-struct SDL_Renderer;
 
 class Game
 {
@@ -44,23 +42,23 @@ public:
 	@param	削除するGameObjectクラスのポインタ
 	*/
 	void RemoveGameObject(GameObject* argObj);
-	/**
-	@brief  スプライトの追加
-	@param	追加するSpriteComponentクラスのポインタ
-	*/
-    void AddSprite(SpriteComponent* argSprite);
-	/**
-	@brief  スプライトの削除
-	@param	削除するSpriteComponentクラスのポインタ
-	*/
-	void RemoveSprite(SpriteComponent* argSprite);
+	///**
+	//@brief  スプライトの追加
+	//@param	追加するSpriteComponentクラスのポインタ
+	//*/
+ //   void AddSprite(SpriteComponent* argSprite);
+	///**
+	//@brief  スプライトの削除
+	//@param	削除するSpriteComponentクラスのポインタ
+	//*/
+	//void RemoveSprite(SpriteComponent* argSprite);
 
-	/**
-	@brief  テクスチャの取得
-	@param	取得したいテクスチャのファイル名
-	@return テクスチャのポインタ
-	*/
-	Texture* GetTexture(const std::string& argFileName);
+	///**
+	//@brief  テクスチャの取得
+	//@param	取得したいテクスチャのファイル名
+	//@return テクスチャのポインタ
+	//*/
+	//Texture* GetTexture(const std::string& argFileName);
 
     class Renderer* GetRenderer() { return renderer; }
 

@@ -65,7 +65,7 @@ public:
     const Vector3& GetPosition() const { return position; }
     void SetPosition(const Vector3& pos) { position = pos; recomputeWorldTransform = true; }
     float GetScale() const { return scale; }
-    void SetScale(float scale) { scale = scale;  recomputeWorldTransform = true; }
+    void SetScale(float argScale) { scale = argScale;  recomputeWorldTransform = true; }
     const Quaternion& GetRotation() const { return rotation; }
     void SetRotation(const Quaternion& argQotation) { rotation = argQotation;  recomputeWorldTransform = true; }
 
