@@ -46,7 +46,7 @@ VertexArray::VertexArray(const float* argVerts, unsigned int argNumVerts,
 		sizeof(float) * 8,		//各頂点のサイズ
 		reinterpret_cast<void*>(sizeof(float) * 3));	//オフセットポインタ
     //第3の頂点属性を有効に（テクスチャ座標）
-    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
     glVertexAttribPointer(
         2,						//頂点属性インデックス（テクスチャ座標）
         2,						//要素の数（UVは2個）
