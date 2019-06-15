@@ -3,6 +3,7 @@
 #include "Shader.h"
 #include "GameObject.h"
 #include "Game.h"
+#include "Renderer.h"
 
 /**
 @param	アタッチするゲームオブジェクトのポインタ
@@ -18,12 +19,12 @@ SpriteComponent::SpriteComponent(GameObject * argOwner, int argDrawOrder)
     ,textureHeight(0)
 	,readOnlyTextureHeight(textureHeight)
 {
-	owner->readOnlyGame->AddSprite(this);
+    owner->GetGame()->GetRenderer()->AddSprite(this);
 }
 
 SpriteComponent::~SpriteComponent()
 {
-	owner->readOnlyGame->RemoveSprite(this);
+    owner->GetGame()->GetRenderer()->RemoveSprite(this);
 }
 
 /**
@@ -39,7 +40,7 @@ void SpriteComponent::Draw(Shader * shader)
 			static_cast<float>(textureHeight),
 			1.0f);
 
-		Matrix4 world = scaleMatrix * owner->GetWorldTransform();
+		Matrix4 world = scaleMatrix * owner->readOnlyWorldTransform;
 
 		shader->SetMatrixUniform("uWorldTransform",world);
 		

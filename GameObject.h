@@ -4,7 +4,7 @@
 #include "Property.h"
 
 class Game;
-class Vector2;
+class Vector3;
 class Matrix4;
 class Component;
 
@@ -62,11 +62,18 @@ public:
 	*/
 	void ComputeWorldTransform();
 
-	void SetRotation(float argRotation) { rotation = argRotation;  recomputeWorldTransform = true; }
-	const Matrix4& GetWorldTransform() const { return worldTransform; }
+    const Vector3& GetPosition() const { return position; }
+    void SetPosition(const Vector3& pos) { position = pos; recomputeWorldTransform = true; }
+    float GetScale() const { return scale; }
+    void SetScale(float scale) { scale = scale;  recomputeWorldTransform = true; }
+    const Quaternion& GetRotation() const { return rotation; }
+    void SetRotation(const Quaternion& argQotation) { rotation = argQotation;  recomputeWorldTransform = true; }
 
+    Game* GetGame() { return game; }
 
-	cpp_module::ReadOnlyProperty<Vector2> readOnlyPosition;
+    Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
+
+	cpp_module::ReadOnlyProperty<Vector3> readOnlyPosition;
     cpp_module::ReadOnlyProperty<Game*> readOnlyGame;
 	cpp_module::ReadOnlyProperty<Matrix4> readOnlyWorldTransform;
 
@@ -75,9 +82,9 @@ protected:
 	State state;
 
 	//Transform
-	Vector2 position;
+	Vector3 position;
+	Quaternion rotation;	
 	float scale;
-	float rotation;	
 
 	Matrix4 worldTransform;
 	//ワールド変換の処理を行う必要性があるか

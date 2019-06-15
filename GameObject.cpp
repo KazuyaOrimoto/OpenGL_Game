@@ -11,10 +11,10 @@ GameObject::GameObject(Game * argGame)
 	: state(Active)
 	, worldTransform()
 	, readOnlyWorldTransform(worldTransform)
-	, position(Vector2::Zero)
+	, position(Vector3::Zero)
 	, readOnlyPosition(position)
 	, scale(1.0f)
-	, rotation(0.0f)
+	, rotation(Quaternion::Identity)
 	, recomputeWorldTransform(true)
 	, game(argGame)
     , readOnlyGame(game)
@@ -111,7 +111,7 @@ void GameObject::ComputeWorldTransform()
 	{
 		recomputeWorldTransform = false;
 		worldTransform = Matrix4::CreateScale(scale);
-		worldTransform *= Matrix4::CreateRotationZ(rotation);
+		worldTransform *= Matrix4::CreateFromQuaternion(rotation);
 		worldTransform *= Matrix4::CreateTranslation(Vector3(position.x,position.y,0.0f));
 
 		for (auto itr : components)

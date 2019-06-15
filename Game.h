@@ -11,6 +11,7 @@ class Ship;
 class Shader;
 class SpriteComponent;
 class VertexArray;
+class Renderer;
 struct SDL_Window;
 struct SDL_Renderer;
 
@@ -61,6 +62,8 @@ public:
 	*/
 	Texture* GetTexture(const std::string& argFileName);
 
+    class Renderer* GetRenderer() { return renderer; }
+
 
 private:
 	/**
@@ -98,27 +101,22 @@ private:
 	void UnloadData();
 
 	FPS*            fps;
-	SDL_Window*     window;
-    SDL_GLContext   context;
 
 	//ゲームオブジェクトのポインタの可変長コンテナ
 	std::vector<GameObject*> gameObjects;
 	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
 	std::vector<GameObject*> pendingGameObjects;
-	//スプライトコンポーネントのポインタの可変長コンテナ
-	std::vector<SpriteComponent*> sprites;
-	//ファイル名でテクスチャを取得するための可変長コンテナ
-	std::unordered_map<std::string, Texture*>textures;
+	////スプライトコンポーネントのポインタの可変長コンテナ
+	//std::vector<SpriteComponent*> sprites;
+	////ファイル名でテクスチャを取得するための可変長コンテナ
+	//std::unordered_map<std::string, Texture*>textures;
+
+    Renderer* renderer;
 
 	//ゲームを続けるかどうか
     bool isRunning;
 	//Update中かどうか
 	bool updatingGameObject;
-
-	Shader* spriteShader;
-	VertexArray* spriteVerts;
-
-	Ship* ship;
 
 };
 

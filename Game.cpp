@@ -9,11 +9,15 @@
 #include "Ship.h"
 #include "Shader.h"
 #include "VertexArray.h"
+#include "Renderer.h"
+#include "PlaneObject.h"
+#include "MeshComponent.h"
+#include "Mesh.h"
+#include "CameraObject.h"
 
 Game::Game()
     : fps(nullptr)
-    , window(nullptr)
-    , context()
+    , renderer(nullptr)
     , isRunning(true)
 	, updatingGameObject(false)
 {
@@ -37,48 +41,15 @@ bool Game::Initialize()
 		return false;
 	}
 
-    //コアOpenGLプロファイルを使う
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    //OpenGLの使用バージョンを3.3に指定
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-    //RGBA各チャンネル8ビットのカラーバッファを使う
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-    //ダブルバッファを有効にする
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    //ハードウェアアクセラレーションを使う
-    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-
-	window = SDL_CreateWindow("OpenGL Game", 100, 100, 1024, 768, SDL_WINDOW_OPENGL);
-	if (!window)
-	{
-		SDL_Log("Failed to create window: %s", SDL_GetError());
-		return false;
-	}
-
-    context = SDL_GL_CreateContext(window);
-
-    //GLEWの初期化
-    glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK)
+    renderer = new Renderer(this);
+    if (!renderer->Initialize(1024.0f, 768.0f))
     {
-        SDL_Log("Failed to initialize GLEW.");
+        SDL_Log("Failed to initialize renderer");
+        delete renderer;
+        renderer = nullptr;
         return false;
     }
-
-    //一部のプラットフォームで出る無害なエラーコードをクリアする
-    glGetError();
-
-	if (!LoadShaders())
-	{
-		SDL_Log("Failed to load shaders.");
-		return false;
-	}
-
-	CreateSpriteVerts();
+ 
 
 	LoadData();
 
@@ -94,11 +65,6 @@ bool Game::Initialize()
 void Game::Termination()
 {
 	UnloadData();
-	delete spriteVerts;
-	spriteShader->Unload();
-	delete spriteShader;
-    SDL_GL_DeleteContext(context);
-	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
@@ -155,72 +121,87 @@ void Game::RemoveGameObject(GameObject * argObj)
 	}
 }
 
-/**
-@brief  スプライトの追加
-@param	追加するSpriteComponentクラスのポインタ
-*/
-void Game::AddSprite(SpriteComponent * argSprite)
-{
-	int DrawOder = argSprite->readOnlyDrawOrder;
-	auto itr = sprites.begin();
-	for ( ;itr != sprites.end();++itr)
-	{
-		if (DrawOder < (*itr)->readOnlyDrawOrder)
-		{
-			break;
-		}
-	}
+///**
+//@brief  スプライトの追加
+//@param	追加するSpriteComponentクラスのポインタ
+//*/
+//void Game::AddSprite(SpriteComponent * argSprite)
+//{
+//	int DrawOder = argSprite->readOnlyDrawOrder;
+//	auto itr = sprites.begin();
+//	for ( ;itr != sprites.end();++itr)
+//	{
+//		if (DrawOder < (*itr)->readOnlyDrawOrder)
+//		{
+//			break;
+//		}
+//	}
+//
+//	sprites.insert(itr, argSprite);
+//}
+//
+///**
+//@brief  スプライトの削除
+//@param	削除するSpriteComponentクラスのポインタ
+//*/
+//void Game::RemoveSprite(SpriteComponent * argSprite)
+//{
+//	auto itr = std::find(sprites.begin(),sprites.end(),argSprite);
+//	sprites.erase(itr);
+//}
 
-	sprites.insert(itr, argSprite);
-}
-
-/**
-@brief  スプライトの削除
-@param	削除するSpriteComponentクラスのポインタ
-*/
-void Game::RemoveSprite(SpriteComponent * argSprite)
-{
-	auto itr = std::find(sprites.begin(),sprites.end(),argSprite);
-	sprites.erase(itr);
-}
-
-/**
-@brief  テクスチャの取得
-@param	取得したいテクスチャのファイル名
-@return テクスチャのポインタ
-*/
-Texture * Game::GetTexture(const std::string & argFileName)
-{
-	Texture* texture = nullptr;
-	auto itr = textures.find(argFileName);
-	if (itr != textures.end())
-	{
-		texture = itr->second;
-	}
-	else
-	{
-		texture = new Texture();
-		if (texture->Load(argFileName))
-		{
-			textures.emplace(argFileName,texture);
-		}
-		else
-		{
-			delete texture;
-			texture = nullptr;
-		}
-	}
-
-	return texture;
-}
+///**
+//@brief  テクスチャの取得
+//@param	取得したいテクスチャのファイル名
+//@return テクスチャのポインタ
+//*/
+//Texture * Game::GetTexture(const std::string & argFileName)
+//{
+//	Texture* texture = nullptr;
+//	auto itr = textures.find(argFileName);
+//	if (itr != textures.end())
+//	{
+//		texture = itr->second;
+//	}
+//	else
+//	{
+//		texture = new Texture();
+//		if (texture->Load(argFileName))
+//		{
+//			textures.emplace(argFileName,texture);
+//		}
+//		else
+//		{
+//			delete texture;
+//			texture = nullptr;
+//		}
+//	}
+//
+//	return texture;
+//}
 
 /**
 @brief  ゲームに必要なデータのロード
 */
 void Game::LoadData()
 {
-	ship = new Ship(this);
-	ship->SetRotation(Math::PiOver2);
+    GameObject* a = new GameObject(this);
+    a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
+    a->SetScale(100.0f);
+    Quaternion q(Vector3::UnitY, -Math::PiOver2);
+    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
+    a->SetRotation(q);
+    MeshComponent* mc = new MeshComponent(a);
+    mc->SetMesh(renderer->GetMesh("Assets/Cube.gpmesh"));
+
+    renderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+    DirectionalLight& dir = renderer->GetDirectionalLight();
+    dir.mDirection = Vector3(0.0f, -0.707f, -0.707f);
+    dir.mDiffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+    dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
+
+    // Camera actor
+    CameraObject* mCameraActor = new CameraObject(this);
 
 }
 
@@ -233,12 +214,10 @@ void Game::UnloadData()
 	{
 		delete gameObjects.back();
 	}
-	for (auto itr : textures)
-	{
-		itr.second->Unload();
-		delete itr.second;
-	}
-	textures.clear();
+    if (renderer)
+    {
+        renderer->UnloadData();
+    }
 }
 
 /**
@@ -269,25 +248,8 @@ void Game::ProcessInput()
 */
 void Game::GenerateOutput()
 {
-    //クリアカラーを灰色に設定
-    glClearColor(0.86f, 0.86f, 0.86f, 1.0f);
-    //カラーバッファをクリア
-    glClear(GL_COLOR_BUFFER_BIT);
+    renderer->Draw();
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    //シーンを描画
-	spriteShader->SetActive();
-	spriteVerts->SetActive();
-
-	for (auto sprite : sprites)
-	{
-		sprite->Draw(spriteShader);
-	}
-
-    //バッファを交換
-    SDL_GL_SwapWindow(window);
 }
 
 /**
@@ -311,42 +273,40 @@ void Game::UpdateGame()
 
 
 }
+//
+///**
+//@brief  シェーダーの読み込み
+//*/
+//bool Game::LoadShaders()
+//{
+//	if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
+//	{
+//		return false;
+//	}
+//	spriteShader->SetActive();
+//
+//	Matrix4 viewProj = Matrix4::CreateSimpleViewProj(1024.f,768.f);
+//	spriteShader->SetMatrixUniform("uViewProj", viewProj);
+//	return true;
+//
+//}
 
-/**
-@brief  シェーダーの読み込み
-*/
-bool Game::LoadShaders()
-{
-	spriteShader = new Shader();
-
-	if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
-	{
-		return false;
-	}
-	spriteShader->SetActive();
-
-	Matrix4 viewProj = Matrix4::CreateSimpleViewProj(1024.f,768.f);
-	spriteShader->SetMatrixUniform("uViewProj", viewProj);
-	return true;
-
-}
-
-/**
-@brief  Sprite用の頂点バッファとインデックスバッファの作成
-*/
-void Game::CreateSpriteVerts()
-{
-	float vertices[] = {
-	-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
-	 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
-	 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
-	-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
-	};
-
-	unsigned int indices[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
-
-	spriteVerts = new VertexArray(vertices,4,indices,6);
-}
+///**
+//@brief  Sprite用の頂点バッファとインデックスバッファの作成
+//*/
+//void Game::CreateSpriteVerts()
+//{
+//	float vertices[] = {
+//	-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
+//	 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
+//	 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
+//	-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
+//	};
+//
+//	unsigned int indices[] = {
+//		0, 1, 2,
+//		2, 3, 0
+//	};
+//
+//	spriteVerts = new VertexArray(vertices,4,indices,6);
+//}

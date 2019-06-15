@@ -33,6 +33,20 @@ public:
 	*/
 	void SetMatrixUniform(const char* name , const Matrix4& matrix);
 
+    /**
+    @brief	Vector3のUniform変数を設定する
+    @param	設定するUniform変数名
+    @param	設定するVector3
+    */
+    void SetVectorUniform(const char* name, const Vector3& vector);
+
+    /**
+    @brief	floatのUniform変数を設定する
+    @param	設定するUniform変数名
+    @param	設定するfloat
+    */
+    void SetFloatUniform(const char* name, const float& value);
+
 private:
 	/**
 	@brief	シェーダーをコンパイルする
