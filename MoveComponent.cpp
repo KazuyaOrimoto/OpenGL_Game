@@ -11,7 +11,3 @@ void MoveComponent::Update(float deltaTime)
 {
 }
 
-
-MoveComponent::~MoveComponent()
-{
-}

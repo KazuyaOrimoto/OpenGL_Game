@@ -62,8 +62,9 @@ void Shader::SetActive()
 }
 
 /**
-@param シェーダー内の変数名
-@param 渡す行列
+@brief	行列のUniform変数を設定する
+@param	設定するUniform変数名
+@param	設定する行列
 */
 void Shader::SetMatrixUniform(const char * name, const Matrix4 & matrix)
 {

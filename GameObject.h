@@ -5,6 +5,7 @@
 
 class Game;
 class Vector2;
+class Matrix4;
 class Component;
 
 class GameObject
