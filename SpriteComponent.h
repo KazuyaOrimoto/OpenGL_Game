@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Component.h"
-#include "Property.h"
 
 class GameObject;
 class Shader;
@@ -29,12 +28,11 @@ public:
 	*/
     virtual void SetTexture(Texture* argTexture);
 
+	// Getter / Setter
     int GetTexWidth() const { return textureWidth; }
     int GetTexHeight() const { return textureHeight; }
+	int GetDrawOrder() { return drawOrder; }
 
-	cpp_module::ReadOnlyProperty<int> readOnlyDrawOrder;
-	cpp_module::ReadOnlyProperty<int> readOnlyTextureWidth;
-	cpp_module::ReadOnlyProperty<int> readOnlyTextureHeight;
 protected:
     Texture* texture;
     int drawOrder;

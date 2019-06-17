@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "Math.h"
-#include "Property.h"
 #include "GameObject.h"
 #include "Component.h"
 
@@ -10,14 +9,11 @@
 GameObject::GameObject(Game * argGame)
 	: state(Active)
 	, worldTransform()
-	, readOnlyWorldTransform(worldTransform)
 	, position(Vector3::Zero)
-	, readOnlyPosition(position)
 	, scale(1.0f)
 	, rotation(Quaternion::Identity)
 	, recomputeWorldTransform(true)
 	, game(argGame)
-    , readOnlyGame(game)
 {
 	game->AddGameObject(this);
 }
@@ -75,13 +71,13 @@ void GameObject::UpdateGameObject(float argDaltaTime)
 */
 void GameObject::AddComponent(Component * argComponent)
 {
-	int order = argComponent->readOnlyUpdateOrder;
+	int order = argComponent->GetUpdateOder();
 	auto itr = components.begin();
 	for (;
 		itr != components.end();
 		++itr)
 	{
-		if (order < (*itr)->readOnlyUpdateOrder)
+		if (order < (*itr)->GetUpdateOder())
 		{
 			break;
 		}

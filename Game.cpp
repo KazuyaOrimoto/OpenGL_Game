@@ -121,65 +121,6 @@ void Game::RemoveGameObject(GameObject * argObj)
 	}
 }
 
-///**
-//@brief  スプライトの追加
-//@param	追加するSpriteComponentクラスのポインタ
-//*/
-//void Game::AddSprite(SpriteComponent * argSprite)
-//{
-//	int DrawOder = argSprite->readOnlyDrawOrder;
-//	auto itr = sprites.begin();
-//	for ( ;itr != sprites.end();++itr)
-//	{
-//		if (DrawOder < (*itr)->readOnlyDrawOrder)
-//		{
-//			break;
-//		}
-//	}
-//
-//	sprites.insert(itr, argSprite);
-//}
-//
-///**
-//@brief  スプライトの削除
-//@param	削除するSpriteComponentクラスのポインタ
-//*/
-//void Game::RemoveSprite(SpriteComponent * argSprite)
-//{
-//	auto itr = std::find(sprites.begin(),sprites.end(),argSprite);
-//	sprites.erase(itr);
-//}
-
-///**
-//@brief  テクスチャの取得
-//@param	取得したいテクスチャのファイル名
-//@return テクスチャのポインタ
-//*/
-//Texture * Game::GetTexture(const std::string & argFileName)
-//{
-//	Texture* texture = nullptr;
-//	auto itr = textures.find(argFileName);
-//	if (itr != textures.end())
-//	{
-//		texture = itr->second;
-//	}
-//	else
-//	{
-//		texture = new Texture();
-//		if (texture->Load(argFileName))
-//		{
-//			textures.emplace(argFileName,texture);
-//		}
-//		else
-//		{
-//			delete texture;
-//			texture = nullptr;
-//		}
-//	}
-//
-//	return texture;
-//}
-
 /**
 @brief  ゲームに必要なデータのロード
 */

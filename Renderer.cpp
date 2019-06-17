@@ -91,20 +91,20 @@ void Renderer::Shutdown()
 void Renderer::UnloadData()
 {
     // Destroy textures
-    for (auto i : mTextures)
+    for (auto i : textures)
     {
         i.second->Unload();
         delete i.second;
     }
-    mTextures.clear();
+	textures.clear();
 
     // Destroy meshes
-    for (auto i : mMeshes)
+    for (auto i : meshes)
     {
         i.second->Unload();
         delete i.second;
     }
-    mMeshes.clear();
+	meshes.clear();
 }
 
 void Renderer::Draw()
@@ -124,7 +124,7 @@ void Renderer::Draw()
     mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
     // Update lighting uniforms
     SetLightUniforms(mMeshShader);
-    for (auto mc : mMeshComps)
+    for (auto mc : meshComponents)
     {
         mc->Draw(mMeshShader);
     }
@@ -140,7 +140,7 @@ void Renderer::Draw()
     // Set shader/vao as active
     mSpriteShader->SetActive();
     mSpriteVerts->SetActive();
-    for (auto sprite : mSprites)
+    for (auto sprite : sprites)
     {
         sprite->Draw(mSpriteShader);
     }
@@ -153,68 +153,69 @@ void Renderer::AddSprite(SpriteComponent* sprite)
 {
     // Find the insertion point in the sorted vector
     // (The first element with a higher draw order than me)
-    int myDrawOrder = sprite->readOnlyDrawOrder;
-    auto iter = mSprites.begin();
+	int myDrawOrder = sprite->GetDrawOrder();
+    auto iter = sprites.begin();
     for (;
-        iter != mSprites.end();
+        iter != sprites.end();
         ++iter)
     {
-        if (myDrawOrder < (*iter)->readOnlyDrawOrder)
+        if (myDrawOrder < (*iter)->GetDrawOrder())
         {
             break;
         }
     }
 
     // Inserts element before position of iterator
-    mSprites.insert(iter, sprite);
+	sprites.insert(iter, sprite);
 }
 
 void Renderer::RemoveSprite(SpriteComponent* sprite)
 {
-    auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
-    mSprites.erase(iter);
+    auto iter = std::find(sprites.begin(), sprites.end(), sprite);
+	sprites.erase(iter);
 }
 
 void Renderer::AddMeshComp(MeshComponent* mesh)
 {
-    mMeshComps.emplace_back(mesh);
+	meshComponents.emplace_back(mesh);
 }
 
 void Renderer::RemoveMeshComp(MeshComponent* mesh)
 {
-    auto iter = std::find(mMeshComps.begin(), mMeshComps.end(), mesh);
-    mMeshComps.erase(iter);
+    auto iter = std::find(meshComponents.begin(), meshComponents.end(), mesh);
+    meshComponents.erase(iter);
 }
 
-Texture* Renderer::GetTexture(const std::string& fileName)
+Texture* Renderer::GetTexture(const std::string& argFileName)
 {
-    Texture* tex = nullptr;
-    auto iter = mTextures.find(fileName);
-    if (iter != mTextures.end())
-    {
-        tex = iter->second;
-    }
-    else
-    {
-        tex = new Texture();
-        if (tex->Load(fileName))
-        {
-            mTextures.emplace(fileName, tex);
-        }
-        else
-        {
-            delete tex;
-            tex = nullptr;
-        }
-    }
-    return tex;
+	Texture* texture = nullptr;
+	auto itr = textures.find(argFileName);
+	if (itr != textures.end())
+	{
+		texture = itr->second;
+	}
+	else
+	{
+		texture = new Texture();
+		if (texture->Load(argFileName))
+		{
+			textures.emplace(argFileName, texture);
+		}
+		else
+		{
+			delete texture;
+			texture = nullptr;
+		}
+	}
+
+	return texture;
 }
 
 Mesh* Renderer::GetMesh(const std::string & fileName)
 {
     Mesh* m = nullptr;
-    auto iter = mMeshes.find(fileName);
-    if (iter != mMeshes.end())
+    auto iter = meshes.find(fileName);
+    if (iter != meshes.end())
     {
         m = iter->second;
     }
@@ -223,7 +224,7 @@ Mesh* Renderer::GetMesh(const std::string & fileName)
         m = new Mesh();
         if (m->Load(fileName, this))
         {
-            mMeshes.emplace(fileName, m);
+			meshes.emplace(fileName, m);
         }
         else
         {
@@ -234,6 +235,9 @@ Mesh* Renderer::GetMesh(const std::string & fileName)
     return m;
 }
 
+/**
+@brief  シェーダーの読み込み
+*/
 bool Renderer::LoadShaders()
 {
     // Create sprite shader
@@ -264,6 +268,9 @@ bool Renderer::LoadShaders()
     return true;
 }
 
+/**
+@brief  Sprite用の頂点バッファとインデックスバッファの作成
+*/
 void Renderer::CreateSpriteVerts()
 {
     float vertices[] = {

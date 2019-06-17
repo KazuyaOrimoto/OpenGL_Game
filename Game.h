@@ -42,23 +42,7 @@ public:
 	@param	削除するGameObjectクラスのポインタ
 	*/
 	void RemoveGameObject(GameObject* argObj);
-	///**
-	//@brief  スプライトの追加
-	//@param	追加するSpriteComponentクラスのポインタ
-	//*/
- //   void AddSprite(SpriteComponent* argSprite);
-	///**
-	//@brief  スプライトの削除
-	//@param	削除するSpriteComponentクラスのポインタ
-	//*/
-	//void RemoveSprite(SpriteComponent* argSprite);
 
-	///**
-	//@brief  テクスチャの取得
-	//@param	取得したいテクスチャのファイル名
-	//@return テクスチャのポインタ
-	//*/
-	//Texture* GetTexture(const std::string& argFileName);
 
     class Renderer* GetRenderer() { return renderer; }
 
@@ -77,16 +61,6 @@ private:
 	@brief  ゲームのアップデート処理
 	*/
 	void UpdateGame();
-
-	/**
-	@brief  シェーダーの読み込み
-	*/
-	bool LoadShaders();
-
-	/**
-	@brief  Sprite用の頂点バッファとインデックスバッファの作成
-	*/
-	void CreateSpriteVerts();
 
 	/**
 	@brief  ゲームに必要なデータのロード

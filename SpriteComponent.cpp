@@ -13,11 +13,8 @@ SpriteComponent::SpriteComponent(GameObject * argOwner, int argDrawOrder)
     :Component(argOwner)
     ,texture(nullptr)
     ,drawOrder(argDrawOrder)
-	,readOnlyDrawOrder(drawOrder)
     ,textureWidth(0)
-	,readOnlyTextureWidth(textureWidth)
     ,textureHeight(0)
-	,readOnlyTextureHeight(textureHeight)
 {
     owner->GetGame()->GetRenderer()->AddSprite(this);
 }
@@ -40,7 +37,7 @@ void SpriteComponent::Draw(Shader * shader)
 			static_cast<float>(textureHeight),
 			1.0f);
 
-		Matrix4 world = scaleMatrix * owner->readOnlyWorldTransform;
+		Matrix4 world = scaleMatrix * owner->GetWorldTransform();
 
 		shader->SetMatrixUniform("uWorldTransform",world);
 		
@@ -58,6 +55,6 @@ void SpriteComponent::Draw(Shader * shader)
 void SpriteComponent::SetTexture(Texture * argTexture)
 {
 	texture = argTexture;
-	textureWidth = texture->readOnlyWidth;
-	textureHeight = texture->readOnlyHeight;
+	textureWidth = texture->GetWidth();
+	textureHeight = texture->GetHeight();
 }

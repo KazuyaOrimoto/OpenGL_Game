@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Property.h"
 #include <cstdint>
 
 class GameObject;
@@ -26,7 +25,10 @@ public:
 	*/
 	virtual void OnUpdateWorldTransform() {}
 
-	cpp_module::ReadOnlyProperty<int> readOnlyUpdateOrder;
+	// Getter / Setter
+
+	int GetUpdateOder() { return updateOrder; }
+
 protected:
 	GameObject* owner;			//アタッチしているゲームオブジェクトのポインタ
 	int updateOrder;			//コンポーネントの更新順番（数値が小さいほど早く更新される）

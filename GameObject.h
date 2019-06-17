@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include "Math.h"
-#include "Property.h"
 
 class Game;
 class Vector3;
@@ -62,20 +61,19 @@ public:
 	*/
 	void ComputeWorldTransform();
 
+	// Getter / Setter
+
     const Vector3& GetPosition() const { return position; }
-    void SetPosition(const Vector3& pos) { position = pos; recomputeWorldTransform = true; }
+    void SetPosition(const Vector3& argPos) { position = argPos; recomputeWorldTransform = true; }
     float GetScale() const { return scale; }
     void SetScale(float argScale) { scale = argScale;  recomputeWorldTransform = true; }
     const Quaternion& GetRotation() const { return rotation; }
     void SetRotation(const Quaternion& argQotation) { rotation = argQotation;  recomputeWorldTransform = true; }
-
+	State GetState() const { return state; }
+	void SetState(State argState) { state = argState; }
+	const Matrix4& GetWorldTransform() const { return worldTransform; }
     Game* GetGame() { return game; }
-
     Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
-
-	cpp_module::ReadOnlyProperty<Vector3> readOnlyPosition;
-    cpp_module::ReadOnlyProperty<Game*> readOnlyGame;
-	cpp_module::ReadOnlyProperty<Matrix4> readOnlyWorldTransform;
 
 protected:
 	//ゲームオブジェクトの状態
@@ -85,7 +83,6 @@ protected:
 	Vector3 position;
 	Quaternion rotation;	
 	float scale;
-
 	Matrix4 worldTransform;
 	//ワールド変換の処理を行う必要性があるか
 	bool recomputeWorldTransform;

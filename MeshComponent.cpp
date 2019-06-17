@@ -27,7 +27,7 @@ void MeshComponent::Draw(Shader* shader)
     {
         // Set the world transform
         shader->SetMatrixUniform("uWorldTransform",
-            owner->readOnlyWorldTransform);
+            owner->GetWorldTransform());
         // Set specular power
         shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
         // Set the active texture

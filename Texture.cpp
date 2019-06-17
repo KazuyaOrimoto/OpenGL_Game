@@ -6,9 +6,7 @@
 Texture::Texture()
 	:textureID(0)
 	,width(0)
-	,readOnlyWidth(width)
 	,height(0)
-	,readOnlyHeight(height)
 {
 }
 

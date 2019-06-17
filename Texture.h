@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Property.h"
 #include <string>
 
 class Texture
@@ -24,8 +23,10 @@ public:
 	*/
 	void SetActive();
 
-	cpp_module::ReadOnlyProperty<int> readOnlyWidth;
-	cpp_module::ReadOnlyProperty<int> readOnlyHeight;
+	// Getter / Setter
+
+	int GetWidth() const { return width; }
+	int GetHeight() const { return height; }
 
 private:
 	unsigned int textureID;

@@ -16,10 +16,18 @@ struct DirectionalLight
     Vector3 mSpecColor;
 };
 
+class SpriteComponent;
+class Texture;
+class Mesh;
+class Game;
+class MeshComponent;
+class Shader;
+class VertexArray;
+
 class Renderer
 {
 public:
-    Renderer(class Game* game);
+    Renderer(Game* game);
     ~Renderer();
 
     bool Initialize(float screenWidth, float screenHeight);
@@ -28,14 +36,30 @@ public:
 
     void Draw();
 
-    void AddSprite(class SpriteComponent* sprite);
-    void RemoveSprite(class SpriteComponent* sprite);
+	/**
+	@brief  スプライトの追加
+	@param	追加するSpriteComponentクラスのポインタ
+	*/
+	void AddSprite(SpriteComponent* argSprite);
 
-    void AddMeshComp(class MeshComponent* mesh);
-    void RemoveMeshComp(class MeshComponent* mesh);
+	/**
+	@brief  スプライトの削除
+	@param	削除するSpriteComponentクラスのポインタ
+	*/
+	void RemoveSprite(SpriteComponent* argSprite);
 
-    class Texture* GetTexture(const std::string& fileName);
-    class Mesh* GetMesh(const std::string& fileName);
+	/**
+	@brief  テクスチャの取得
+	@param	取得したいテクスチャのファイル名
+	@return テクスチャのポインタ
+	*/
+	Texture* GetTexture(const std::string& argFileName);
+
+
+    void AddMeshComp(MeshComponent* mesh);
+    void RemoveMeshComp(MeshComponent* mesh);
+
+    Mesh* GetMesh(const std::string& fileName);
 
     void SetViewMatrix(const Matrix4& view) { mView = view; }
 
@@ -45,31 +69,37 @@ public:
     float GetScreenWidth() const { return mScreenWidth; }
     float GetScreenHeight() const { return mScreenHeight; }
 private:
+	/**
+	@brief  シェーダーの読み込み
+	*/
     bool LoadShaders();
+	/**
+	@brief  Sprite用の頂点バッファとインデックスバッファの作成
+	*/
     void CreateSpriteVerts();
-    void SetLightUniforms(class Shader* shader);
+    void SetLightUniforms(Shader* shader);
 
-    // Map of textures loaded
-    std::unordered_map<std::string, class Texture*> mTextures;
     // Map of meshes loaded
-    std::unordered_map<std::string, class Mesh*> mMeshes;
-
-    // All the sprite components drawn
-    std::vector<class SpriteComponent*> mSprites;
+    std::unordered_map<std::string, Mesh*> meshes;
 
     // All mesh components drawn
-    std::vector<class MeshComponent*> mMeshComps;
+    std::vector<MeshComponent*> meshComponents;
+
+	//スプライトコンポーネントのポインタの可変長コンテナ
+	std::vector<SpriteComponent*> sprites;
+	//ファイル名でテクスチャを取得するための可変長コンテナ
+	std::unordered_map<std::string, Texture*>textures;
 
     // Game
-    class Game* mGame;
+    Game* mGame;
 
     // Sprite shader
-    class Shader* mSpriteShader;
+    Shader* mSpriteShader;
     // Sprite vertex array
-    class VertexArray* mSpriteVerts;
+    VertexArray* mSpriteVerts;
 
     // Mesh shader
-    class Shader* mMeshShader;
+    Shader* mMeshShader;
 
     // View/projection for 3D shaders
     Matrix4 mView;
