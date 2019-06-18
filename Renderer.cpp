@@ -9,9 +9,15 @@
 #include <glew.h>
 
 Renderer::Renderer(Game* argGame)
-    :game(argGame)
+    : game(argGame)
     , spriteShader(nullptr)
+	, spriteVerts(nullptr)
     , meshShader(nullptr)
+	, view(Matrix4::Identity)
+	, projection(Matrix4::Identity)
+	, screenWidth(0)
+	, screenHeight(0)
+	, ambientLight(Vector3::Zero)
 {
 }
 

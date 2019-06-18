@@ -114,39 +114,36 @@ private:
 	*/
     void SetLightUniforms(Shader* argShader);
 
-    // Map of meshes loaded
+    //ファイル名でメッシュを取得するための可変長コンテナ
     std::unordered_map<std::string, Mesh*> meshes;
-    // All mesh components drawn
+    //メッシュコンポーネントのポインタの可変長コンテナ
     std::vector<MeshComponent*> meshComponents;
 	//スプライトコンポーネントのポインタの可変長コンテナ
 	std::vector<SpriteComponent*> sprites;
 	//ファイル名でテクスチャを取得するための可変長コンテナ
 	std::unordered_map<std::string, Texture*>textures;
 
-    // Game
+	//クラスのポインタ
+
     Game* game;
-
-    // Sprite shader
     Shader* spriteShader;
-    // Sprite vertex array
     VertexArray* spriteVerts;
-
-    // Mesh shader
     Shader* meshShader;
 
-    // View/projection for 3D shaders
+    //ビュー行列
     Matrix4 view;
+	//射影行列
     Matrix4 projection;
-    // Width/height of screen
+    //スクリーンの横幅
     float screenWidth;
+	//スクリーンの縦幅
     float screenHeight;
-
-    // Lighting data
+    //環境光
     Vector3 ambientLight;
+	//平行光源
     DirectionalLight dirLight;
-
-    // Window
+    //ウィンドウ
     SDL_Window* window;
-    // OpenGL context
+    //コンテキスト
     SDL_GLContext context;
 };
