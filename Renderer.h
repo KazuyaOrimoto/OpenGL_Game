@@ -9,11 +9,11 @@
 struct DirectionalLight
 {
     // Direction of light
-    Vector3 mDirection;
+    Vector3 direction;
     // Diffuse color
-    Vector3 mDiffuseColor;
+    Vector3 diffuseColor;
     // Specular color
-    Vector3 mSpecColor;
+    Vector3 specColor;
 };
 
 class SpriteComponent;
@@ -61,13 +61,13 @@ public:
 
     Mesh* GetMesh(const std::string& argFileName);
 
-    void SetViewMatrix(const Matrix4& argView) { mView = argView; }
+    void SetViewMatrix(const Matrix4& argView) { view = argView; }
 
-    void SetAmbientLight(const Vector3& argAmbient) { mAmbientLight = argAmbient; }
-    DirectionalLight& GetDirectionalLight() { return mDirLight; }
+    void SetAmbientLight(const Vector3& argAmbient) { ambientLight = argAmbient; }
+    DirectionalLight& GetDirectionalLight() { return dirLight; }
 
-    float GetScreenWidth() const { return mScreenWidth; }
-    float GetScreenHeight() const { return mScreenHeight; }
+    float GetScreenWidth() const { return screenWidth; }
+    float GetScreenHeight() const { return screenHeight; }
 private:
 	/**
 	@brief  シェーダーの読み込み
@@ -94,26 +94,26 @@ private:
     Game* game;
 
     // Sprite shader
-    Shader* mSpriteShader;
+    Shader* spriteShader;
     // Sprite vertex array
-    VertexArray* mSpriteVerts;
+    VertexArray* spriteVerts;
 
     // Mesh shader
-    Shader* mMeshShader;
+    Shader* meshShader;
 
     // View/projection for 3D shaders
-    Matrix4 mView;
-    Matrix4 mProjection;
+    Matrix4 view;
+    Matrix4 projection;
     // Width/height of screen
-    float mScreenWidth;
-    float mScreenHeight;
+    float screenWidth;
+    float screenHeight;
 
     // Lighting data
-    Vector3 mAmbientLight;
-    DirectionalLight mDirLight;
+    Vector3 ambientLight;
+    DirectionalLight dirLight;
 
     // Window
-    SDL_Window* mWindow;
+    SDL_Window* window;
     // OpenGL context
-    SDL_GLContext mContext;
+    SDL_GLContext context;
 };

@@ -10,8 +10,8 @@
 
 Renderer::Renderer(Game* argGame)
     :game(argGame)
-    , mSpriteShader(nullptr)
-    , mMeshShader(nullptr)
+    , spriteShader(nullptr)
+    , meshShader(nullptr)
 {
 }
 
@@ -21,8 +21,8 @@ Renderer::~Renderer()
 
 bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
 {
-    mScreenWidth = argScreenWidth;
-    mScreenHeight = argScreenHeight;
+    screenWidth = argScreenWidth;
+    screenHeight = argScreenHeight;
 
     // Set OpenGL attributes
     // Use the core OpenGL profile
@@ -41,16 +41,16 @@ bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
     // Force OpenGL to use hardware acceleration
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-    mWindow = SDL_CreateWindow("Game Programming in C++ (Chapter 6)", 100, 100,
-        static_cast<int>(mScreenWidth), static_cast<int>(mScreenHeight), SDL_WINDOW_OPENGL);
-    if (!mWindow)
+    window = SDL_CreateWindow("Game Programming in C++ (Chapter 6)", 100, 100,
+        static_cast<int>(screenWidth), static_cast<int>(screenHeight), SDL_WINDOW_OPENGL);
+    if (!window)
     {
         SDL_Log("Failed to create window: %s", SDL_GetError());
         return false;
     }
 
     // Create an OpenGL context
-    mContext = SDL_GL_CreateContext(mWindow);
+    context = SDL_GL_CreateContext(window);
 
     // Initialize GLEW
     glewExperimental = GL_TRUE;
@@ -79,13 +79,13 @@ bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
 
 void Renderer::Shutdown()
 {
-    delete mSpriteVerts;
-    mSpriteShader->Unload();
-    delete mSpriteShader;
-    mMeshShader->Unload();
-    delete mMeshShader;
-    SDL_GL_DeleteContext(mContext);
-    SDL_DestroyWindow(mWindow);
+    delete spriteVerts;
+    spriteShader->Unload();
+    delete spriteShader;
+    meshShader->Unload();
+    delete meshShader;
+    SDL_GL_DeleteContext(context);
+    SDL_DestroyWindow(window);
 }
 
 void Renderer::UnloadData()
@@ -119,14 +119,14 @@ void Renderer::Draw()
     glEnable(GL_DEPTH_TEST);
     glDisable(GL_BLEND);
     // Set the mesh shader active
-    mMeshShader->SetActive();
+    meshShader->SetActive();
     // Update view-projection matrix
-    mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+    meshShader->SetMatrixUniform("uViewProj", view * projection);
     // Update lighting uniforms
-    SetLightUniforms(mMeshShader);
+    SetLightUniforms(meshShader);
     for (auto mc : meshComponents)
     {
-        mc->Draw(mMeshShader);
+        mc->Draw(meshShader);
     }
 
     // Draw all sprite components
@@ -138,15 +138,15 @@ void Renderer::Draw()
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
     // Set shader/vao as active
-    mSpriteShader->SetActive();
-    mSpriteVerts->SetActive();
+    spriteShader->SetActive();
+    spriteVerts->SetActive();
     for (auto sprite : sprites)
     {
-        sprite->Draw(mSpriteShader);
+        sprite->Draw(spriteShader);
     }
 
     // Swap the buffers
-    SDL_GL_SwapWindow(mWindow);
+    SDL_GL_SwapWindow(window);
 }
 
 void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
@@ -241,30 +241,30 @@ Mesh* Renderer::GetMesh(const std::string &argFfileName)
 bool Renderer::LoadShaders()
 {
     // Create sprite shader
-    mSpriteShader = new Shader();
-    if (!mSpriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
+    spriteShader = new Shader();
+    if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
     {
         return false;
     }
 
-    mSpriteShader->SetActive();
+    spriteShader->SetActive();
     // Set the view-projection matrix
-    Matrix4 viewProj = Matrix4::CreateSimpleViewProj(mScreenWidth, mScreenHeight);
-    mSpriteShader->SetMatrixUniform("uViewProj", viewProj);
+    Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
+    spriteShader->SetMatrixUniform("uViewProj", viewProj);
 
     // Create basic mesh shader
-    mMeshShader = new Shader();
-    if (!mMeshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
+    meshShader = new Shader();
+    if (!meshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
     {
         return false;
     }
 
-    mMeshShader->SetActive();
+    meshShader->SetActive();
     // Set the view-projection matrix
-    mView = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
-    mProjection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
-        mScreenWidth, mScreenHeight, 25.0f, 10000.0f);
-    mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+    view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
+    projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
+        screenWidth, screenHeight, 25.0f, 10000.0f);
+    meshShader->SetMatrixUniform("uViewProj", view * projection);
     return true;
 }
 
@@ -285,22 +285,22 @@ void Renderer::CreateSpriteVerts()
         2, 3, 0
     };
 
-    mSpriteVerts = new VertexArray(vertices, 4, indices, 6);
+    spriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
 void Renderer::SetLightUniforms(Shader* shader)
 {
     // Camera position is from inverted view
-    Matrix4 invView = mView;
+    Matrix4 invView = view;
     invView.Invert();
     shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
     // Ambient light
-    shader->SetVectorUniform("uAmbientLight", mAmbientLight);
+    shader->SetVectorUniform("uAmbientLight", ambientLight);
     // Directional light
     shader->SetVectorUniform("uDirLight.mDirection",
-        mDirLight.mDirection);
+        dirLight.direction);
     shader->SetVectorUniform("uDirLight.mDiffuseColor",
-        mDirLight.mDiffuseColor);
+        dirLight.diffuseColor);
     shader->SetVectorUniform("uDirLight.mSpecColor",
-        mDirLight.mSpecColor);
+        dirLight.specColor);
 }
