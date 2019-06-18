@@ -6,11 +6,6 @@
 
 class FPS;
 class GameObject;
-class Texture;
-class Ship;
-class Shader;
-class SpriteComponent;
-class VertexArray;
 class Renderer;
 
 class Game
@@ -43,9 +38,8 @@ public:
 	*/
 	void RemoveGameObject(GameObject* argObj);
 
-
-    class Renderer* GetRenderer() { return renderer; }
-
+	// Getter / Setter
+    Renderer* GetRenderer() { return renderer; }
 
 private:
 	/**
@@ -72,17 +66,14 @@ private:
 	*/
 	void UnloadData();
 
-	FPS*            fps;
-
 	//ゲームオブジェクトのポインタの可変長コンテナ
 	std::vector<GameObject*> gameObjects;
 	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
 	std::vector<GameObject*> pendingGameObjects;
-	////スプライトコンポーネントのポインタの可変長コンテナ
-	//std::vector<SpriteComponent*> sprites;
-	////ファイル名でテクスチャを取得するための可変長コンテナ
-	//std::unordered_map<std::string, Texture*>textures;
 
+	// クラスのインスタンス
+
+	FPS* fps;
     Renderer* renderer;
 
 	//ゲームを続けるかどうか

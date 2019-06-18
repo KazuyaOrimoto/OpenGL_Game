@@ -41,6 +41,7 @@ bool Game::Initialize()
 		return false;
 	}
 
+	//レンダラーの初期化
     renderer = new Renderer(this);
     if (!renderer->Initialize(1024.0f, 768.0f))
     {
@@ -49,12 +50,11 @@ bool Game::Initialize()
         renderer = nullptr;
         return false;
     }
- 
 
-	LoadData();
-
+	//FPS管理クラスの初期化
 	fps = new FPS();
 
+	LoadData();
 
 	return true;
 }
@@ -78,9 +78,7 @@ void Game::GameLoop()
         ProcessInput();
 		fps->Update();
 		UpdateGame();
-        
         GenerateOutput();
-
 	}
 }
 
@@ -268,43 +266,4 @@ void Game::UpdateGame()
 		gameObjects.emplace_back(pending);
 	}
 	pendingGameObjects.clear();
-
-
 }
-//
-///**
-//@brief  シェーダーの読み込み
-//*/
-//bool Game::LoadShaders()
-//{
-//	if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
-//	{
-//		return false;
-//	}
-//	spriteShader->SetActive();
-//
-//	Matrix4 viewProj = Matrix4::CreateSimpleViewProj(1024.f,768.f);
-//	spriteShader->SetMatrixUniform("uViewProj", viewProj);
-//	return true;
-//
-//}
-
-///**
-//@brief  Sprite用の頂点バッファとインデックスバッファの作成
-//*/
-//void Game::CreateSpriteVerts()
-//{
-//	float vertices[] = {
-//	-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
-//	 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
-//	 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
-//	-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
-//	};
-//
-//	unsigned int indices[] = {
-//		0, 1, 2,
-//		2, 3, 0
-//	};
-//
-//	spriteVerts = new VertexArray(vertices,4,indices,6);
-//}
