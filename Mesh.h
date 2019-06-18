@@ -8,10 +8,10 @@ class Mesh
 public:
     Mesh();
     ~Mesh();
-    // Load/unload mesh
+    // Load/unload argMesh
     bool Load(const std::string& fileName, class Renderer* renderer);
     void Unload();
-    // Get the vertex array associated with this mesh
+    // Get the vertex array associated with this argMesh
     class VertexArray* GetVertexArray() { return mVertexArray; }
     // Get a texture from specified index
     class Texture* GetTexture(size_t index);
@@ -19,14 +19,14 @@ public:
     const std::string& GetShaderName() const { return mShaderName; }
     // Get object space bounding sphere radius
     float GetRadius() const { return mRadius; }
-    // Get specular power of mesh
+    // Get specular power of argMesh
     float GetSpecPower() const { return mSpecPower; }
 private:
-    // Textures associated with this mesh
+    // Textures associated with this argMesh
     std::vector<class Texture*> mTextures;
-    // Vertex array associated with this mesh
+    // Vertex array associated with this argMesh
     class VertexArray* mVertexArray;
-    // Name of shader specified by mesh
+    // Name of shader specified by argMesh
     std::string mShaderName;
     // Stores object space bounding sphere radius
     float mRadius;

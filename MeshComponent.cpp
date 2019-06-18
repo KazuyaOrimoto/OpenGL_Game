@@ -36,7 +36,7 @@ void MeshComponent::Draw(Shader* shader)
         {
             t->SetActive();
         }
-        // Set the mesh's vertex array as active
+        // Set the argMesh's vertex array as active
         VertexArray* va = mMesh->GetVertexArray();
         va->SetActive();
         // Draw

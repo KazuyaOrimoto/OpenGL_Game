@@ -10,8 +10,8 @@ public:
     MeshComponent(GameObject* owner);
     ~MeshComponent();
     virtual void Draw(class Shader* shader);
-    // Set the mesh/texture index used by mesh component
-    virtual void SetMesh(class Mesh* mesh) { mMesh = mesh; }
+    // Set the argMesh/texture index used by argMesh component
+    virtual void SetMesh(class Mesh* argMesh) { mMesh = argMesh; }
     void SetTextureIndex(size_t index) { mTextureIndex = index; }
 protected:
     class Mesh* mMesh;

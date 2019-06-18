@@ -8,8 +8,8 @@
 #include "MeshComponent.h"
 #include <glew.h>
 
-Renderer::Renderer(Game* game)
-    :mGame(game)
+Renderer::Renderer(Game* argGame)
+    :game(argGame)
     , mSpriteShader(nullptr)
     , mMeshShader(nullptr)
 {
@@ -19,10 +19,10 @@ Renderer::~Renderer()
 {
 }
 
-bool Renderer::Initialize(float screenWidth, float screenHeight)
+bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
 {
-    mScreenWidth = screenWidth;
-    mScreenHeight = screenHeight;
+    mScreenWidth = argScreenWidth;
+    mScreenHeight = argScreenHeight;
 
     // Set OpenGL attributes
     // Use the core OpenGL profile
@@ -149,11 +149,11 @@ void Renderer::Draw()
     SDL_GL_SwapWindow(mWindow);
 }
 
-void Renderer::AddSprite(SpriteComponent* sprite)
+void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
 {
     // Find the insertion point in the sorted vector
     // (The first element with a higher draw order than me)
-	int myDrawOrder = sprite->GetDrawOrder();
+	int myDrawOrder = argSpriteComponent->GetDrawOrder();
     auto iter = sprites.begin();
     for (;
         iter != sprites.end();
@@ -166,23 +166,23 @@ void Renderer::AddSprite(SpriteComponent* sprite)
     }
 
     // Inserts element before position of iterator
-	sprites.insert(iter, sprite);
+	sprites.insert(iter, argSpriteComponent);
 }
 
-void Renderer::RemoveSprite(SpriteComponent* sprite)
+void Renderer::RemoveSprite(SpriteComponent* argSpriteComponent)
 {
-    auto iter = std::find(sprites.begin(), sprites.end(), sprite);
+    auto iter = std::find(sprites.begin(), sprites.end(), argSpriteComponent);
 	sprites.erase(iter);
 }
 
-void Renderer::AddMeshComp(MeshComponent* mesh)
+void Renderer::AddMeshComp(MeshComponent* argMeshComponent)
 {
-	meshComponents.emplace_back(mesh);
+	meshComponents.emplace_back(argMeshComponent);
 }
 
-void Renderer::RemoveMeshComp(MeshComponent* mesh)
+void Renderer::RemoveMeshComp(MeshComponent* argMeshComponent)
 {
-    auto iter = std::find(meshComponents.begin(), meshComponents.end(), mesh);
+    auto iter = std::find(meshComponents.begin(), meshComponents.end(), argMeshComponent);
     meshComponents.erase(iter);
 }
 
@@ -211,10 +211,10 @@ Texture* Renderer::GetTexture(const std::string& argFileName)
 	return texture;
 }
 
-Mesh* Renderer::GetMesh(const std::string & fileName)
+Mesh* Renderer::GetMesh(const std::string &argFfileName)
 {
     Mesh* m = nullptr;
-    auto iter = meshes.find(fileName);
+    auto iter = meshes.find(argFfileName);
     if (iter != meshes.end())
     {
         m = iter->second;
@@ -222,9 +222,9 @@ Mesh* Renderer::GetMesh(const std::string & fileName)
     else
     {
         m = new Mesh();
-        if (m->Load(fileName, this))
+        if (m->Load(argFfileName, this))
         {
-			meshes.emplace(fileName, m);
+			meshes.emplace(argFfileName, m);
         }
         else
         {

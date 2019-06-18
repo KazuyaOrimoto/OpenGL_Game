@@ -27,10 +27,10 @@ class VertexArray;
 class Renderer
 {
 public:
-    Renderer(Game* game);
+    Renderer(Game* argGame);
     ~Renderer();
 
-    bool Initialize(float screenWidth, float screenHeight);
+    bool Initialize(float argScreenWidth, float argScreenHeight);
     void Shutdown();
     void UnloadData();
 
@@ -40,13 +40,13 @@ public:
 	@brief  スプライトの追加
 	@param	追加するSpriteComponentクラスのポインタ
 	*/
-	void AddSprite(SpriteComponent* argSprite);
+	void AddSprite(SpriteComponent* argSpriteComponent);
 
 	/**
 	@brief  スプライトの削除
 	@param	削除するSpriteComponentクラスのポインタ
 	*/
-	void RemoveSprite(SpriteComponent* argSprite);
+	void RemoveSprite(SpriteComponent* argSpriteComponent);
 
 	/**
 	@brief  テクスチャの取得
@@ -56,14 +56,14 @@ public:
 	Texture* GetTexture(const std::string& argFileName);
 
 
-    void AddMeshComp(MeshComponent* mesh);
-    void RemoveMeshComp(MeshComponent* mesh);
+    void AddMeshComp(MeshComponent* argMeshComponent);
+    void RemoveMeshComp(MeshComponent* argMeshComponent);
 
-    Mesh* GetMesh(const std::string& fileName);
+    Mesh* GetMesh(const std::string& argFileName);
 
-    void SetViewMatrix(const Matrix4& view) { mView = view; }
+    void SetViewMatrix(const Matrix4& argView) { mView = argView; }
 
-    void SetAmbientLight(const Vector3& ambient) { mAmbientLight = ambient; }
+    void SetAmbientLight(const Vector3& argAmbient) { mAmbientLight = argAmbient; }
     DirectionalLight& GetDirectionalLight() { return mDirLight; }
 
     float GetScreenWidth() const { return mScreenWidth; }
@@ -77,7 +77,7 @@ private:
 	@brief  Sprite用の頂点バッファとインデックスバッファの作成
 	*/
     void CreateSpriteVerts();
-    void SetLightUniforms(Shader* shader);
+    void SetLightUniforms(Shader* argShader);
 
     // Map of meshes loaded
     std::unordered_map<std::string, Mesh*> meshes;
@@ -91,7 +91,7 @@ private:
 	std::unordered_map<std::string, Texture*>textures;
 
     // Game
-    Game* mGame;
+    Game* game;
 
     // Sprite shader
     Shader* mSpriteShader;
