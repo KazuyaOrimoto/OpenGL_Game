@@ -202,7 +202,7 @@ void Game::LoadData()
 }
 
 /**
-@brief  ゲームで使ったデータの解放
+@brief   ロードしたデータの解放
 */
 void Game::UnloadData()
 {

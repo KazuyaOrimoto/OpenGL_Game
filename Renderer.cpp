@@ -19,6 +19,10 @@ Renderer::~Renderer()
 {
 }
 
+/**
+@brief  初期化処理
+@return true : 成功 , false : 失敗
+*/
 bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
 {
     screenWidth = argScreenWidth;
@@ -77,6 +81,9 @@ bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
     return true;
 }
 
+/**
+@brief  終了処理
+*/
 void Renderer::Shutdown()
 {
     delete spriteVerts;
@@ -88,6 +95,9 @@ void Renderer::Shutdown()
     SDL_DestroyWindow(window);
 }
 
+/**
+@brief  ロードしたデータの解放
+*/
 void Renderer::UnloadData()
 {
     // Destroy textures
@@ -107,6 +117,9 @@ void Renderer::UnloadData()
 	meshes.clear();
 }
 
+/**
+@brief  描画処理
+*/
 void Renderer::Draw()
 {
     // Set the clear color to light grey
@@ -149,6 +162,10 @@ void Renderer::Draw()
     SDL_GL_SwapWindow(window);
 }
 
+/**
+@brief  スプライトの削除
+@param	削除するSpriteComponentクラスのポインタ
+*/
 void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
 {
     // Find the insertion point in the sorted vector
@@ -169,23 +186,40 @@ void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
 	sprites.insert(iter, argSpriteComponent);
 }
 
+/**
+@brief  スプライトの削除
+@param	削除するSpriteComponentクラスのポインタ
+*/
 void Renderer::RemoveSprite(SpriteComponent* argSpriteComponent)
 {
     auto iter = std::find(sprites.begin(), sprites.end(), argSpriteComponent);
 	sprites.erase(iter);
 }
 
-void Renderer::AddMeshComp(MeshComponent* argMeshComponent)
+/**
+@brief  メッシュコンポーネントの追加
+@param	追加するMeshComponentクラスのポインタ
+*/
+void Renderer::AddMeshComponent(MeshComponent* argMeshComponent)
 {
 	meshComponents.emplace_back(argMeshComponent);
 }
 
-void Renderer::RemoveMeshComp(MeshComponent* argMeshComponent)
+/**
+@brief  メッシュコンポーネントの削除
+@param	削除するMeshComponentクラスのポインタ
+*/
+void Renderer::RemoveMeshComponent(MeshComponent* argMeshComponent)
 {
     auto iter = std::find(meshComponents.begin(), meshComponents.end(), argMeshComponent);
     meshComponents.erase(iter);
 }
 
+/**
+@brief  テクスチャの取得
+@param	取得したいテクスチャのファイル名
+@return Textureクラスのポインタ
+*/
 Texture* Renderer::GetTexture(const std::string& argFileName)
 {
 	Texture* texture = nullptr;
@@ -211,6 +245,11 @@ Texture* Renderer::GetTexture(const std::string& argFileName)
 	return texture;
 }
 
+/**
+@brief  メッシュの取得
+@param	取得したいメッシュのファイル名
+@return Meshクラスのポインタ
+*/
 Mesh* Renderer::GetMesh(const std::string &argFfileName)
 {
     Mesh* m = nullptr;
@@ -237,6 +276,7 @@ Mesh* Renderer::GetMesh(const std::string &argFfileName)
 
 /**
 @brief  シェーダーの読み込み
+@return true : 成功 , false : 失敗
 */
 bool Renderer::LoadShaders()
 {
@@ -288,6 +328,11 @@ void Renderer::CreateSpriteVerts()
     spriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
+
+/**
+@brief  光源情報をシェーダーの変数にセットする
+@param  セットするShaderクラスのポインタ
+*/
 void Renderer::SetLightUniforms(Shader* shader)
 {
     // Camera position is from inverted view

@@ -62,7 +62,7 @@ private:
 	void LoadData();
 
 	/**
-	@brief  ゲームで使ったデータの解放
+	@brief   ロードしたデータの解放
 	*/
 	void UnloadData();
 
