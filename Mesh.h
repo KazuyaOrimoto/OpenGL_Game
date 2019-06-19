@@ -3,33 +3,48 @@
 #include <vector>
 #include <string>
 
+class Renderer;
+class VertexArray;
+class Texture;
+
 class Mesh
 {
 public:
     Mesh();
     ~Mesh();
-    // Load/unload argMesh
-    bool Load(const std::string& fileName, class Renderer* renderer);
+	/**
+	@brief  メッシュデータの読み込み
+	@param	ロードしたいメッシュのファイル名
+	@param	Rendererクラスのポインタ
+	@return true : 成功 , false : 失敗
+	*/
+    bool Load(const std::string& argFileName, Renderer* argRenderer);
+
+	/**
+	@brief  ロードしたメッシュデータの解放
+	*/
     void Unload();
-    // Get the vertex array associated with this argMesh
-    class VertexArray* GetVertexArray() { return mVertexArray; }
-    // Get a texture from specified index
-    class Texture* GetTexture(size_t index);
-    // Get name of shader
-    const std::string& GetShaderName() const { return mShaderName; }
-    // Get object space bounding sphere radius
-    float GetRadius() const { return mRadius; }
-    // Get specular power of argMesh
-    float GetSpecPower() const { return mSpecPower; }
+
+	// Getter / Setter
+
+    VertexArray* GetVertexArray() { return vertexArray; }
+    Texture* GetTexture(size_t argIndex);
+    const std::string& GetShaderName() const { return shaderName; }
+    float GetRadius() const { return radius; }
+    float GetSpecPower() const { return specPower; }
+
 private:
-    // Textures associated with this argMesh
-    std::vector<class Texture*> mTextures;
-    // Vertex array associated with this argMesh
-    class VertexArray* mVertexArray;
-    // Name of shader specified by argMesh
-    std::string mShaderName;
-    // Stores object space bounding sphere radius
-    float mRadius;
-    // Specular power of surface
-    float mSpecPower;
+    //このメッシュに使うテクスチャのポインタの可変長コンテナ
+    std::vector<Texture*> textures;
+
+	//クラスのポインタ
+
+    VertexArray* vertexArray;
+
+    //このメッシュに使うシェーダーの名前
+    std::string shaderName;
+    //オブジェクト空間での境界球の半径を記録
+    float radius;
+    //鏡面反射成分の大きさ
+    float specPower;
 };
