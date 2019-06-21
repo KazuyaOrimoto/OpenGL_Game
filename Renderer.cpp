@@ -234,11 +234,13 @@ void Renderer::RemoveMeshComponent(MeshComponent* argMeshComponent)
 Texture* Renderer::GetTexture(const std::string& argFileName)
 {
 	Texture* texture = nullptr;
+	//すでに作成されてないか調べる
 	auto itr = textures.find(argFileName);
 	if (itr != textures.end())
 	{
 		texture = itr->second;
 	}
+	//作成済みでない場合、新しくテクスチャを作成
 	else
 	{
 		texture = new Texture();
@@ -264,11 +266,13 @@ Texture* Renderer::GetTexture(const std::string& argFileName)
 Mesh* Renderer::GetMesh(const std::string &argFfileName)
 {
     Mesh* m = nullptr;
+	//すでに作成されてないか調べる
     auto iter = meshes.find(argFfileName);
     if (iter != meshes.end())
     {
         m = iter->second;
     }
+	//作成済みでない場合、新しくメッシュを作成
     else
     {
         m = new Mesh();
