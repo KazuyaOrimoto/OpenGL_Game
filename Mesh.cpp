@@ -49,7 +49,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
 
     int ver = doc["version"].GetInt();
 
-    // Check the version
+    // バージョンのチェック
     if (ver != 1)
     {
         SDL_Log("Mesh %s not version 1", argFileName.c_str());
@@ -62,7 +62,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
     // (This is changed in a later chapter's code)
     size_t vertSize = 8;
 
-    // Load textures
+    // テクスチャのロード
     const rapidjson::Value& readTextures = doc["textures"];
     if (!readTextures.IsArray() || readTextures.Size() < 1)
     {
@@ -74,23 +74,23 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
 
     for (rapidjson::SizeType i = 0; i < readTextures.Size(); i++)
     {
-        // Is this texture already loaded?
+        // すでにロードされたテクスチャじゃないか調べる
         std::string texName = readTextures[i].GetString();
         Texture* t = argRenderer->GetTexture(texName);
         if (t == nullptr)
         {
-            // Try loading the texture
+            // テクスチャをロードする
             t = argRenderer->GetTexture(texName);
             if (t == nullptr)
             {
-                // If it's still null, just use the default texture
+                // テクスチャがロードできなかった場合、デフォルトのテクスチャを使用
                 t = argRenderer->GetTexture("Assets/Default.png");
             }
         }
 		textures.emplace_back(t);
     }
 
-    // Load in the vertices
+    // 頂点配列データをロード
     const rapidjson::Value& vertsJson = doc["vertices"];
     if (!vertsJson.IsArray() || vertsJson.Size() < 1)
     {
@@ -103,7 +103,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
 	radius = 0.0f;
     for (rapidjson::SizeType i = 0; i < vertsJson.Size(); i++)
     {
-        // For now, just assume we have 8 elements
+        // 今のところは８つの要素とする
         const rapidjson::Value& vert = vertsJson[i];
         if (!vert.IsArray() || vert.Size() != 8)
         {
@@ -114,17 +114,17 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
         Vector3 pos(vert[0].GetFloat(), vert[1].GetFloat(), vert[2].GetFloat());
 		radius = Math::Max(radius, pos.LengthSq());
 
-        // Add the floats
+        // float型で要素を追加
         for (rapidjson::SizeType i = 0; i < vert.Size(); i++)
         {
             vertices.emplace_back(static_cast<float>(vert[i].GetDouble()));
         }
     }
 
-    // We were computing length squared earlier
+    // 半径を2乗する
 	radius = Math::Sqrt(radius);
 
-    // Load in the indices
+    // 要素配列データのロード
     const rapidjson::Value& indJson = doc["indices"];
     if (!indJson.IsArray() || indJson.Size() < 1)
     {
@@ -148,7 +148,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
         indices.emplace_back(ind[2].GetUint());
     }
 
-    // Now create a vertex array
+    // ここでVertexArrayクラスの作成
 	vertexArray = new VertexArray(vertices.data(), static_cast<unsigned>(vertices.size()) / vertSize,
         indices.data(), static_cast<unsigned>(indices.size()));
     return true;
