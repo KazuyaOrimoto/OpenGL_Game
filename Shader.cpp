@@ -69,21 +69,31 @@ void Shader::SetActive()
 void Shader::SetMatrixUniform(const char * name, const Matrix4 & matrix)
 {
 	GLuint loc = glGetUniformLocation(shaderProgram,name);
-
+	// シェーダーに行列データを送る
 	glUniformMatrix4fv(loc, 1, GL_TRUE, matrix.GetAsFloatPtr());
 }
 
+/**
+@brief	ベクトルのUniform変数を設定する
+@param	設定するUniform変数名
+@param	設定するベクトル
+*/
 void Shader::SetVectorUniform(const char * name, const Vector3 & vector)
 {
     GLuint loc = glGetUniformLocation(shaderProgram, name);
-    // Send the vector data
+    // シェーダーにVectorデータを送る
     glUniform3fv(loc, 1, vector.GetAsFloatPtr());
 }
 
+/**
+@brief	floatのUniform変数を設定する
+@param	設定するUniform変数名
+@param	設定するfloat
+*/
 void Shader::SetFloatUniform(const char * name, const float & value)
 {
     GLuint loc = glGetUniformLocation(shaderProgram, name);
-    // Send the float data
+    // シェーダーにfloatデータを送る
     glUniform1f(loc, value);
 }
 
