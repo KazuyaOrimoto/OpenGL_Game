@@ -34,23 +34,24 @@ bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
     screenWidth = argScreenWidth;
     screenHeight = argScreenHeight;
 
-    // Set OpenGL attributes
-    // Use the core OpenGL profile
+    // OpenGLの各属性を設定する
+    // コアOpenGLプロファイルを使う
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    // Specify version 3.3
+    // OpenGLの使用バージョンを3.3に指定
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-    // Request a color buffer with 8-bits per RGBA channel
+    // RGBA各チャンネル8ビットのカラーバッファを使う
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    // Enable double buffering
+    // ダブルバッファを有効にする
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    // Force OpenGL to use hardware acceleration
+    // ハードウェアアクセラレーションを使う
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
+	//ウィンドウの作成
     window = SDL_CreateWindow("Game Programming in C++ (Chapter 6)", 100, 100,
         static_cast<int>(screenWidth), static_cast<int>(screenHeight), SDL_WINDOW_OPENGL);
     if (!window)
@@ -59,10 +60,10 @@ bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
         return false;
     }
 
-    // Create an OpenGL context
+    // OpenGLのコンテキストを作成
     context = SDL_GL_CreateContext(window);
 
-    // Initialize GLEW
+    // GLEWの初期化
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
@@ -70,18 +71,17 @@ bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
         return false;
     }
 
-    // On some platforms, GLEW will emit a benign error code,
-    // so clear it
+    // 一部のプラットフォームで出る無害なエラーコードをクリアする
     glGetError();
 
-    // Make sure we can create/compile shaders
+    // シェーダーのロード
     if (!LoadShaders())
     {
         SDL_Log("Failed to load shaders.");
         return false;
     }
 
-    // Create quad for drawing sprites
+    //スプライト用の頂点配列を作成
     CreateSpriteVerts();
 
     return true;
@@ -106,7 +106,7 @@ void Renderer::Shutdown()
 */
 void Renderer::UnloadData()
 {
-    // Destroy textures
+    // すべてのテクスチャのデータを解放
     for (auto i : textures)
     {
         i.second->Unload();
@@ -114,7 +114,7 @@ void Renderer::UnloadData()
     }
 	textures.clear();
 
-    // Destroy meshes
+    // すべてのメッシュのデータを解放
     for (auto i : meshes)
     {
         i.second->Unload();
@@ -128,43 +128,48 @@ void Renderer::UnloadData()
 */
 void Renderer::Draw()
 {
-    // Set the clear color to light grey
+    // クリアカラーを灰色に設定
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    // Clear the color buffer
+    // カラーバッファとデプスバッファをクリア
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Draw mesh components
-    // Enable depth buffering/disable alpha blend
+    // メッシュコンポーネントの描画
+    // デプスバッファ法を有効にする
     glEnable(GL_DEPTH_TEST);
+	//アルファブレンディングを無効にする
     glDisable(GL_BLEND);
-    // Set the mesh shader active
+    // 基本的なメッシュシェーダーをアクティブにする
     meshShader->SetActive();
-    // Update view-projection matrix
+    // ビュー射影行列を更新する
     meshShader->SetMatrixUniform("uViewProj", view * projection);
-    // Update lighting uniforms
+    // シェーダーに渡すライティング情報を更新する
     SetLightUniforms(meshShader);
+	// すべてのメッシュの描画
     for (auto mc : meshComponents)
     {
         mc->Draw(meshShader);
     }
 
-    // Draw all sprite components
-    // Disable depth buffering
+    // スプライトコンポーネントの描画
+    // デプスバッファ法を無効にする
     glDisable(GL_DEPTH_TEST);
-    // Enable alpha blending on the color buffer
+    // アルファブレンディングを有効にする
     glEnable(GL_BLEND);
+	// RGB成分とα成分のブレンディング方法を別々に設定
     glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+	// RGB成分とアルファ成分に別々の混合係数を設定
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
-    // Set shader/vao as active
+    // スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
     spriteShader->SetActive();
     spriteVerts->SetActive();
+	// すべてのスプライトの描画
     for (auto sprite : sprites)
     {
         sprite->Draw(spriteShader);
     }
 
-    // Swap the buffers
+    // バッファを交換
     SDL_GL_SwapWindow(window);
 }
 
@@ -174,8 +179,8 @@ void Renderer::Draw()
 */
 void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
 {
-    // Find the insertion point in the sorted vector
-    // (The first element with a higher draw order than me)
+    // 今あるスプライトから挿入する場所の検索
+    // (DrawOrderが小さい順番に描画するため)
 	int myDrawOrder = argSpriteComponent->GetDrawOrder();
     auto iter = sprites.begin();
     for (;
@@ -188,7 +193,7 @@ void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
         }
     }
 
-    // Inserts element before position of iterator
+    // 検索した場所のiterの場所に挿入
 	sprites.insert(iter, argSpriteComponent);
 }
 
@@ -286,7 +291,7 @@ Mesh* Renderer::GetMesh(const std::string &argFfileName)
 */
 bool Renderer::LoadShaders()
 {
-    // Create sprite shader
+    // スプライトシェーダーの作成
     spriteShader = new Shader();
     if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
     {
@@ -294,11 +299,11 @@ bool Renderer::LoadShaders()
     }
 
     spriteShader->SetActive();
-    // Set the view-projection matrix
+    // ビュー行列の設定
     Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
     spriteShader->SetMatrixUniform("uViewProj", viewProj);
 
-    // Create basic mesh shader
+    // 標準のメッシュシェーダーの作成
     meshShader = new Shader();
     if (!meshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
     {
@@ -306,7 +311,7 @@ bool Renderer::LoadShaders()
     }
 
     meshShader->SetActive();
-    // Set the view-projection matrix
+    // ビュー行列の設定
     view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
     projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
         screenWidth, screenHeight, 25.0f, 10000.0f);
@@ -320,10 +325,10 @@ bool Renderer::LoadShaders()
 void Renderer::CreateSpriteVerts()
 {
     float vertices[] = {
-        -0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
-        0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f, // top right
-        0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // bottom right
-        -0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // bottom left
+        -0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // 左上
+        0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f, // 右上
+        0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // 右下
+        -0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // 左下
     };
 
     unsigned int indices[] = {
@@ -341,13 +346,13 @@ void Renderer::CreateSpriteVerts()
 */
 void Renderer::SetLightUniforms(Shader* shader)
 {
-    // Camera position is from inverted view
+	// ビュー行列を転置行列にする
     Matrix4 invView = view;
     invView.Invert();
     shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
-    // Ambient light
+    // 環境光の設定
     shader->SetVectorUniform("uAmbientLight", ambientLight);
-    // Directional light
+    // 平行光源の設定
     shader->SetVectorUniform("uDirLight.mDirection",
         dirLight.direction);
     shader->SetVectorUniform("uDirLight.mDiffuseColor",
