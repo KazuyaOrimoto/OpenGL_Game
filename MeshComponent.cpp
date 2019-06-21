@@ -7,7 +7,9 @@
 #include "VertexArray.h"
 #include "Texture.h"
 
-
+/**
+@param	アタッチするゲームオブジェクトのポインタ
+*/
 MeshComponent::MeshComponent(GameObject* owner)
     :Component(owner)
     , mMesh(nullptr)
@@ -21,6 +23,10 @@ MeshComponent::~MeshComponent()
     owner->GetGame()->GetRenderer()->RemoveMeshComponent(this);
 }
 
+/**
+@brief　描画処理
+@param	使用するシェーダークラスのポインタ
+*/
 void MeshComponent::Draw(Shader* shader)
 {
     if (mMesh)

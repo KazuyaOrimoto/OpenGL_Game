@@ -12,7 +12,7 @@ void CameraObject::UpdateGameObject(float deltaTime)
 {
     GameObject::UpdateGameObject(deltaTime);
 
-    // Compute new camera from this actor
+	// このオブジェクトのポジションからビュー行列を計算
     Vector3 cameraPos = GetPosition();
     Vector3 target = GetPosition() + GetForward() * 100.0f;
     Vector3 up = Vector3::UnitZ;
