@@ -17,7 +17,16 @@ public:
 	*/
 	void SetActive();
 
+	/**
+	@brief	インデックスバッファにあるインデックスの数を取得する
+	@return numIndices（インデックスの数）
+	*/
 	unsigned int GetNumIndices() const { return numIndices; }
+
+	/**
+	@brief	頂点バッファにある頂点の数を取得する
+	@return numVerts（頂点の数）
+	*/
 	unsigned int GetNumVerts() const { return numVerts; }
 
 private:

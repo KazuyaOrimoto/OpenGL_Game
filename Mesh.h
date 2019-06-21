@@ -24,13 +24,37 @@ public:
 	@brief  ロードしたメッシュデータの解放
 	*/
     void Unload();
-
-	// Getter / Setter
-
+	
+	/**
+	@brief	メッシュの頂点配列を取得する
+	@return	VertexArray型のポインタ
+	*/
     VertexArray* GetVertexArray() { return vertexArray; }
+
+	/**
+	@brief	インデクスからメッシュに使っているテクスチャを取得する
+	@param	テクスチャのインデックス
+	@return Textureクラスのポインタ
+	*/
     Texture* GetTexture(size_t argIndex);
+
+	/**
+	@brief	インデクスからメッシュに使っているテクスチャを取得する
+	@param	テクスチャのインデックス
+	@return Textureクラスのポインタ
+	*/
     const std::string& GetShaderName() const { return shaderName; }
+
+	/**
+	@brief	オブジェクト空間で境界球の半径を取得する
+	@return radius（半径）
+	*/
     float GetRadius() const { return radius; }
+
+	/**
+	@brief	鏡面反射成分の大きさを取得する
+	@return specPower（鏡面反射成分）
+	*/
     float GetSpecPower() const { return specPower; }
 
 private:
@@ -43,7 +67,7 @@ private:
 
     //このメッシュに使うシェーダーの名前
     std::string shaderName;
-    //オブジェクト空間での境界球の半径を記録
+    //オブジェクト空間での境界球の半径
     float radius;
     //鏡面反射成分の大きさ
     float specPower;

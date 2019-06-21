@@ -28,15 +28,35 @@ public:
 	*/
     virtual void SetTexture(Texture* argTexture);
 
-	// Getter / Setter
+	/**
+	@brief	テクスチャの横幅を取得する
+	@return テクスチャの横幅
+	*/
     int GetTexWidth() const { return textureWidth; }
+
+	/**
+	@brief	テクスチャの縦幅を取得する
+	@return テクスチャの縦幅
+	*/
     int GetTexHeight() const { return textureHeight; }
+
+	/**
+	@brief	DrawOrderを取得する
+	@return DrawOrder（数値が少ないほど早く更新される）
+	*/
 	int GetDrawOrder() { return drawOrder; }
 
 protected:
+
+	//クラスのポインタ
+
     Texture* texture;
+
+	//描画される順番（数値が少ないほど早く更新される）
     int drawOrder;
+	//テクスチャの横幅
     int textureWidth;
+	//テクスチャの縦幅
     int textureHeight;
 };
 

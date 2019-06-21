@@ -23,15 +23,24 @@ public:
 	*/
 	void SetActive();
 
-	// Getter / Setter
-
+	/**
+	@brief	テクスチャの横幅を取得する
+	@return 横幅
+	*/
 	int GetWidth() const { return width; }
+
+	/**
+	@brief	テクスチャの縦幅を取得する
+	@return 縦幅
+	*/
 	int GetHeight() const { return height; }
 
 private:
 	unsigned int textureID;
 
+	//テクスチャの横幅
 	int width;
+	//テクスチャの縦幅
 	int height;
 };
 

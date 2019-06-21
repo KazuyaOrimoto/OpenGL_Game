@@ -89,13 +89,35 @@ public:
 	*/
     Mesh* GetMesh(const std::string& argFileName);
 
-	// Getter / Setter
-
+	/**
+	@brief	ビュー行列を設定する
+	@param	ビュー行列
+	*/
     void SetViewMatrix(const Matrix4& argView) { view = argView; }
+
+	/**
+	@brief	環境光を設定する
+	@param	Vector3（環境光を表す）
+	*/
     void SetAmbientLight(const Vector3& argAmbient) { ambientLight = argAmbient; }
+
+	/**
+	@brief	平行光源の構造体を取得する
+	@return	DirectionalLight（平行光源の構造体）
+	*/
     DirectionalLight& GetDirectionalLight() { return dirLight; }
+
+	/**
+	@brief	スクリーンの横幅を取得する
+	@return	スクリーンの横幅
+	*/
     float GetScreenWidth() const { return screenWidth; }
-    float GetScreenHeight() const { return screenHeight; }
+	
+	/**
+	@brief	スクリーンの縦幅を取得する
+	@return	スクリーンの縦幅
+	*/
+	float GetScreenHeight() const { return screenHeight; }
 
 private:
 	/**

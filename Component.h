@@ -25,13 +25,18 @@ public:
 	*/
 	virtual void OnUpdateWorldTransform() {}
 
-	// Getter / Setter
-
+	/**
+	@brief	UpdateOrderを取得する
+	@return UpdateOrder（数値が小さいほど早く更新される）
+	*/
 	int GetUpdateOder() { return updateOrder; }
 
 protected:
-	GameObject* owner;			//アタッチしているゲームオブジェクトのポインタ
-	int updateOrder;			//コンポーネントの更新順番（数値が小さいほど早く更新される）
+
+	//アタッチしているゲームオブジェクトのポインタ
+	GameObject* owner;			
+	// コンポーネントの更新順番（数値が小さいほど早く更新される）
+	int updateOrder;
 
 };
 

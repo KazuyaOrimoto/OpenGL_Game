@@ -61,18 +61,70 @@ public:
 	*/
 	void ComputeWorldTransform();
 
-	// Getter / Setter
-
+	/**
+	@brief　オブジェクトのポジションを取得する
+	@return	position
+	*/
     const Vector3& GetPosition() const { return position; }
+
+	/**
+	@brief　オブジェクトのポジションを設定する
+	@param	position
+	*/
     void SetPosition(const Vector3& argPos) { position = argPos; recomputeWorldTransform = true; }
+
+	/**
+	@brief　オブジェクトのスケールを取得する
+	@return	scale
+	*/
     float GetScale() const { return scale; }
+
+	/**
+	@brief　オブジェクトのスケールを設定する
+	@param	scale
+	*/
     void SetScale(float argScale) { scale = argScale;  recomputeWorldTransform = true; }
+
+	/**
+	@brief　オブジェクトのクォータニオンを取得する
+	@return	rotation（Quaternion型）
+	*/
     const Quaternion& GetRotation() const { return rotation; }
+
+	/**
+	@brief　オブジェクトのクォータニオンを設定する
+	@param	rotation（Quaternion型）
+	*/
     void SetRotation(const Quaternion& argQotation) { rotation = argQotation;  recomputeWorldTransform = true; }
+
+	/**
+	@brief　オブジェクトの状態を取得する
+	@return	state
+	*/
 	State GetState() const { return state; }
+
+	/**
+	@brief　オブジェクトの状態を設定する
+	@param	state
+	*/
 	void SetState(State argState) { state = argState; }
+
+	/**
+	@brief　オブジェクトのワールド行列を取得する
+	@return	worldTransform
+	*/
 	const Matrix4& GetWorldTransform() const { return worldTransform; }
+
+	/**
+	@brief　Gameクラスのインスタンスを取得する
+	@return	Gameクラスのポインタ
+	*/
     Game* GetGame() { return game; }
+
+	/**
+	@brief　オブジェクトの前方を表すベクトルを取得する
+	@param	forward(Vector3型)
+	*/
     Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
 
 protected:
