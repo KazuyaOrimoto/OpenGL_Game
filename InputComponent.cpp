@@ -38,3 +38,4 @@ void InputComponent::ProcessInput(const InputState& state)
 	}
 	SetAngularSpeed(angularSpeed);
 }
+

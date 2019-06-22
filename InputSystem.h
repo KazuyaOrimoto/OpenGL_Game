@@ -5,63 +5,112 @@
 #include <SDL_mouse.h>
 #include "Math.h"
 
+//ボタンの状態を表す
 enum ButtonState
 {
-	None,
-	Pressed,
-	Released,
-	Held
+	None,		//押されていない
+	Pressed,	//押したフレーム
+	Released,	//離したフレーム
+	Held		//押されている間
 };
 
-// Helper for keyboard input
+//キーボードの入力管理クラス
 class KeyboardState
 {
 public:
-	// Friend so InputSystem can easily update it
+	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
-	// Get just the boolean true/false value of key
+
+	/**
+	@brief	現在のキーの入力状態のみを取得する
+	@param	SDL_Scancodeのキーコード
+	@return	true : 押されている , false : 押されていない
+	*/
 	bool GetKeyValue(SDL_Scancode keyCode) const;
-	// Get a state based on current and previous frame
+
+	/**
+	@brief	現在と1フレーム前の状態からButtonStateを返す
+	@param	SDL_Scancodeのキーコード
+	@return	ButtonState型の現在の状態
+	*/
 	ButtonState GetKeyState(SDL_Scancode keyCode) const;
 private:
+	//現在のキーボードの入力状態
 	const Uint8* currState;
+	//１フレーム前のキーボードの入力状態
 	Uint8 prevState[SDL_NUM_SCANCODES];
 };
 
-// Helper for mouse input
+//マウスの入力管理クラス
 class MouseState
 {
 public:
+	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
 
-	// For mouse position
+	/**
+	@brief	現在のマウスのポジションを取得する
+	@return	Position
+	*/
 	const Vector2& GetPosition() const { return mousePos; }
+
+	/**
+	@brief	現在のマウスのスクロールホイールの状態を取得する
+	@return	スクロール量（Vector2）
+	*/
 	const Vector2& GetScrollWheel() const { return scrollWheel; }
+
+	/**
+	@brief	相対マウスモードかどうかを取得する
+	@return	true : 相対モード , false , 通常モード
+	*/
 	bool IsRelative() const { return isRelative; }
 
-	// For buttons
+	/**
+	@brief	現在の入力状態のみを取得する
+	@param	SDL_BUTTON定数
+	@return	true : 押されている , false : 押されていない
+	*/
 	bool GetButtonValue(int button) const;
+
+	/**
+	@brief	現在と1フレーム前の状態からButtonStateを返す
+	@param	SDL_BUTTON定数
+	@return	ButtonState型の現在の状態
+	*/
 	ButtonState GetButtonState(int button) const;
 private:
-	// Store current mouse position
+	//現在のマウスのポジション
 	Vector2 mousePos;
-	// Motion of scroll wheel
+	//スクロールホイールのスクロール量
 	Vector2 scrollWheel;
-	// Store button data
+	// 現在のマウスの入力状態
 	Uint32 currButtons;
+	//１フレーム前のマウスの入力状態
 	Uint32 prevButtons;
-	// Are we in relative mouse mode
+	// 相対マウスモードかどうか
 	bool isRelative;
 };
 
-// Helper for controller input
+// コントローラーの入力管理クラス
 class ControllerState
 {
 public:
+	// InputSystemから容易に更新できるようにする
 	friend class InputSystem;
 
-	// For buttons
+	/**
+	@brief	現在の入力状態のみを取得する
+	@param	SDL_GameControllerButtonのボタンコード
+	@return	true : 押されている , false : 押されていない
+	*/
 	bool GetButtonValue(SDL_GameControllerButton button) const;
+
+	/**
+	@brief	現在と1フレーム前の状態からButtonStateを返す
+	@param	SDL_GameControllerButtonのボタンコード
+	@return	ButtonState型の現在の状態
+	*/
 	ButtonState GetButtonState(SDL_GameControllerButton button) const;
 
 	const Vector2& GetLeftStick() const { return leftStick; }
