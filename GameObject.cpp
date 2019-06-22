@@ -2,6 +2,7 @@
 #include "Math.h"
 #include "GameObject.h"
 #include "Component.h"
+#include "InputSystem.h"
 
 /**
 @param	ゲームクラスのポインタ
@@ -62,6 +63,24 @@ void GameObject::UpdateComponents(float argDaltaTime)
 @param	最後のフレームを完了するのに要した時間
 */
 void GameObject::UpdateGameObject(float argDaltaTime)
+{
+}
+
+void GameObject::ProcessInput(const InputState& keyState)
+{
+	if (state == Active)
+	{
+		// First process input for components
+		for (auto comp : components)
+		{
+			comp->ProcessInput(keyState);
+		}
+
+		GameObjectInput(keyState);
+	}
+}
+
+void GameObject::GameObjectInput(const InputState& keyState)
 {
 }
 

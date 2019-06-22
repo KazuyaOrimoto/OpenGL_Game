@@ -6,6 +6,7 @@ class Game;
 class Vector3;
 class Matrix4;
 class Component;
+struct InputState;
 
 class GameObject
 {
@@ -43,6 +44,9 @@ public:
 	@param	最後のフレームを完了するのに要した時間
 	*/
 	virtual void UpdateGameObject(float argDaltaTime);
+
+	void ProcessInput(const InputState& keyState);
+	virtual void GameObjectInput(const InputState& keyState);
 
 	/**
 	@brief	コンポーネントを追加する

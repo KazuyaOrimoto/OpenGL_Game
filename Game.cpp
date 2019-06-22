@@ -14,6 +14,7 @@
 #include "MeshComponent.h"
 #include "Mesh.h"
 #include "CameraObject.h"
+#include "InputSystem.h"
 
 Game::Game()
     : fps(nullptr)
@@ -50,6 +51,13 @@ bool Game::Initialize()
         renderer = nullptr;
         return false;
     }
+
+	inputSystem = new InputSystem();
+	if (!inputSystem->Initialize())
+	{
+		SDL_Log("Failed to initialize input system");
+		return false;
+	}
 
 	//FPSŠÇ—ƒNƒ‰ƒX‚Ì‰Šú‰»
 	fps = new FPS();
@@ -221,6 +229,8 @@ void Game::UnloadData()
 */
 void Game::ProcessInput()
 {
+	inputSystem->PrepareForUpdate();
+
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
@@ -229,14 +239,30 @@ void Game::ProcessInput()
         case SDL_QUIT:
             isRunning = false;
             break;
+		case SDL_MOUSEWHEEL:
+			inputSystem->ProcessEvent(event);
+			break;
+		default:
+			break;
         }
     }
 
-    const Uint8* state = SDL_GetKeyboardState(NULL);
-    if (state[SDL_SCANCODE_ESCAPE])
-    {
-        isRunning = false;
-    }
+	inputSystem->Update();
+	const InputState& state = inputSystem->GetState();
+    
+
+	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
+	{
+		isRunning = false;
+	}
+
+	updatingGameObject = true;
+	for (auto gameObject : gameObjects)
+	{
+		gameObject->ProcessInput(state);
+	}
+	updatingGameObject = false;
+
 }
 
 /**

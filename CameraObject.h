@@ -2,6 +2,9 @@
 
 #include "GameObject.h"
 
+struct InputState;
+class InputComponent;
+
 class CameraObject : public GameObject
 {
 public:
@@ -9,5 +12,6 @@ public:
 
     void UpdateGameObject(float deltaTime) override;
 private:
+	InputComponent* inputComponent;
 };
 

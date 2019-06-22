@@ -48,6 +48,12 @@
     <ClCompile Include="PlaneObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -96,6 +102,12 @@
     <ClInclude Include="PlaneObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
@@ -112,6 +124,9 @@
     </Filter>
     <Filter Include="FPS">
       <UniqueIdentifier>{f5cd1200-4d13-4894-b195-06cc32386c5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputSystem">
+      <UniqueIdentifier>{86dd1375-242a-47c5-b4ab-8c242a88e640}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -21,6 +21,12 @@ public:
 	virtual void Update(float argDeltaTime);
 
 	/**
+	@brief	“ü—Íˆ—
+	@param	InputState\‘¢‘Ì
+	*/
+	virtual void ProcessInput(const struct InputState& state) {}
+
+	/**
 	@brief	Transform‚Ìƒ[ƒ‹ƒh•ÏŠ·
 	*/
 	virtual void OnUpdateWorldTransform() {}

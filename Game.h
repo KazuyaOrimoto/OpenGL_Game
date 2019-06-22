@@ -7,6 +7,7 @@
 class FPS;
 class GameObject;
 class Renderer;
+class InputSystem;
 
 class Game
 {
@@ -79,6 +80,7 @@ private:
 
 	FPS* fps;
     Renderer* renderer;
+	InputSystem* inputSystem;
 
 	//ƒQ[ƒ€‚ğ‘±‚¯‚é‚©‚Ç‚¤‚©
     bool isRunning;
