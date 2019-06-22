@@ -132,21 +132,22 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton button) con
 */
 bool InputSystem::Initialize()
 {
-	// Keyboard
-	// Assign current state pointer
+	//キーボードの初期化処理
+	//今のキーボードの状態を割り当てる
 	state.Keyboard.currState = SDL_GetKeyboardState(NULL);
-	// Clear previous state memory
+	//１フレーム前の入力状態を初期化する
 	memset(state.Keyboard.prevState, 0,
 		SDL_NUM_SCANCODES);
 
-	// Mouse (just set everything to 0)
+	//現在と１フレーム前のマウスの入力状態を初期化する
 	state.Mouse.currButtons = 0;
 	state.Mouse.prevButtons = 0;
 
-	// Get the connected controller, if it exists
+	//コントローラーが接続されているなら取得する
 	controller = SDL_GameControllerOpen(0);
-	// Initialize controller state
+	//コントローラーが接続されているかを記録する
 	state.Controller.isConnected = (controller != nullptr);
+	//現在と１フレーム前のコントローラーの入力状態を初期化する
 	memset(state.Controller.currButtons, 0,
 		SDL_CONTROLLER_BUTTON_MAX);
 	memset(state.Controller.prevButtons, 0,
@@ -167,18 +168,18 @@ void InputSystem::Shutdown()
 */
 void InputSystem::PrepareForUpdate()
 {
-	// Copy current state to previous
-	// Keyboard
+	//現在の入力状態を１フレーム前の入力状態にコピーする
+	//キーボード
 	memcpy(state.Keyboard.prevState,
 		state.Keyboard.currState,
 		SDL_NUM_SCANCODES);
 
-	// Mouse
+	//マウス
 	state.Mouse.prevButtons = state.Mouse.currButtons;
 	state.Mouse.isRelative = false;
 	state.Mouse.scrollWheel = Vector2::Zero;
 
-	// Controller
+	//コントローラー
 	memcpy(state.Controller.prevButtons,
 		state.Controller.currButtons,
 		SDL_CONTROLLER_BUTTON_MAX);
@@ -189,7 +190,7 @@ void InputSystem::PrepareForUpdate()
 */
 void InputSystem::Update()
 {
-	// Mouse
+	//マウス
 	int x = 0, y = 0;
 	if (state.Mouse.isRelative)
 	{
@@ -205,8 +206,8 @@ void InputSystem::Update()
 	state.Mouse.mousePos.x = static_cast<float>(x);
 	state.Mouse.mousePos.y = static_cast<float>(y);
 
-	// Controller
-	// Buttons
+	//コントローラー
+	//・ボタン
 	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; i++)
 	{
 		state.Controller.currButtons[i] =
@@ -214,7 +215,7 @@ void InputSystem::Update()
 				SDL_GameControllerButton(i));
 	}
 
-	// Triggers
+	//・トリガー
 	state.Controller.leftTrigger =
 		Filter1D(SDL_GameControllerGetAxis(controller,
 			SDL_CONTROLLER_AXIS_TRIGGERLEFT));
@@ -222,7 +223,7 @@ void InputSystem::Update()
 		Filter1D(SDL_GameControllerGetAxis(controller,
 			SDL_CONTROLLER_AXIS_TRIGGERRIGHT));
 
-	// Sticks
+	//・スティック
 	x = SDL_GameControllerGetAxis(controller,
 		SDL_CONTROLLER_AXIS_LEFTX);
 	y = -SDL_GameControllerGetAxis(controller,
@@ -272,24 +273,24 @@ void InputSystem::SetRelativeMouseMode(bool value)
 */
 float InputSystem::Filter1D(int input)
 {
-	// A value < dead zone is interpreted as 0%
+	//デッドゾーン（この値より小さいなら0.0にする）
 	const int deadZone = 250;
-	// A value > max value is interpreted as 100%
+	//最大値（この値より大きくても1.0にする）
 	const int maxValue = 30000;
 
 	float retVal = 0.0f;
 
-	// Take absolute value of input
+	//入力値の絶対値を取る
 	int absValue = input > 0 ? input : -input;
-	// Ignore input within dead zone
+	//入力値がデッドゾーンより小さいなら
 	if (absValue > deadZone)
 	{
-		// Compute fractional value between dead zone and max value
+		//デッドゾーンと最大値の間で1.0以下になるよう計算する
 		retVal = static_cast<float>(absValue - deadZone) /
 			(maxValue - deadZone);
-		// Make sure sign matches original value
+		//符号を元の値と同じにする
 		retVal = input > 0 ? retVal : -1.0f * retVal;
-		// Clamp between -1.0f and 1.0f
+		//-1.0~1.0の間に収める
 		retVal = Math::Clamp(retVal, -1.0f, 1.0f);
 	}
 
@@ -297,37 +298,37 @@ float InputSystem::Filter1D(int input)
 }
 
 /**
-@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
+@brief  入力された値（int）をフィルタリングする（範囲内に収めて0.0~1.0にまとめる）
 @param	入力された値のx（int）
 @param	入力された値のy（int）
 @return	フィルタリングされた値
 */
 Vector2 InputSystem::Filter2D(int inputX, int inputY)
 {
+	//デッドゾーン（この値より小さいなら0.0にする）
 	const float deadZone = 8000.0f;
+	//最大値（この値より大きくても1.0にする）
 	const float maxValue = 30000.0f;
 
-	// Make into 2D vector
+	//2次元ベクトルにする
 	Vector2 dir;
 	dir.x = static_cast<float>(inputX);
 	dir.y = static_cast<float>(inputY);
 
 	float length = dir.Length();
 
-	// If length < deadZone, should be no input
+	//入力値のベクトルの長さがデッドゾーンより小さいなら
 	if (length < deadZone)
 	{
 		dir = Vector2::Zero;
 	}
 	else
 	{
-		// Calculate fractional value between
-		// dead zone and max value circles
+		//デッドゾーンと最大値の間で1.0以下になるよう計算する
 		float f = (length - deadZone) / (maxValue - deadZone);
-		// Clamp f between 0.0f and 1.0f
+		//0.0と1.0の間に収める
 		f = Math::Clamp(f, 0.0f, 1.0f);
-		// Normalize the vector, and then scale it to the
-		// fractional value
+		//ベクトルを正規化して、分数の値にスケーリングする
 		dir *= f / length;
 	}
 

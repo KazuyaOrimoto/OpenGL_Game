@@ -216,7 +216,7 @@ private:
 	float Filter1D(int input);
 
 	/**
-	@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
+	@brief  入力された値（int）をフィルタリングする（範囲内に収めて0.0~1.0にまとめる）
 	@param	入力された値のx（int）
 	@param	入力された値のy（int）
 	@return	フィルタリングされた値
