@@ -32,13 +32,17 @@ public:
 	@param	追加するGameObjectクラスのポインタ
 	*/
 	void AddGameObject(GameObject* argObj);
+
 	/**
 	@brief  ゲームオブジェクトの削除
 	@param	削除するGameObjectクラスのポインタ
 	*/
 	void RemoveGameObject(GameObject* argObj);
 
-	// Getter / Setter
+	/**
+	@brief	レンダラーを取得する
+	@param	Redererクラスのポインタ
+	*/
     Renderer* GetRenderer() { return renderer; }
 
 private:
