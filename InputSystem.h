@@ -80,7 +80,7 @@ public:
 	*/
 	ButtonState GetButtonState(int button) const;
 private:
-	//現在のマウスのポジション
+	//マウスのポジション
 	Vector2 mousePos;
 	//スクロールホイールのスクロール量
 	Vector2 scrollWheel;
@@ -113,27 +113,53 @@ public:
 	*/
 	ButtonState GetButtonState(SDL_GameControllerButton button) const;
 
+	/**
+	@brief	左のスティックの入力値を取得する
+	@return	入力値（-1.0~1.0）
+	*/
 	const Vector2& GetLeftStick() const { return leftStick; }
+
+	/**
+	@brief	右のスティックの入力値を取得する
+	@return	入力値（-1.0~1.0）
+	*/
 	const Vector2& GetRightStick() const { return rightStick; }
+
+	/**
+	@brief	左のトリガーの入力値を取得する
+	@return	入力値（0.0~1.0）
+	*/
 	float GetLeftTrigger() const { return leftTrigger; }
+
+	/**
+	@brief	右のトリガーの入力値を取得する
+	@return	入力値（0.0~1.0）
+	*/
 	float GetRightTrigger() const { return rightTrigger; }
 
+	/**
+	@brief	コントローラーが接続されているか
+	@return	true : 接続されている , false : 接続されていない
+	*/
 	bool GetIsConnected() const { return isConnected; }
 private:
-	// Current/previous buttons
+	//現在のボタンの入力状態
 	Uint8 currButtons[SDL_CONTROLLER_BUTTON_MAX];
+	//１フレーム前のボタンの入力状態
 	Uint8 prevButtons[SDL_CONTROLLER_BUTTON_MAX];
-	// Left/right sticks
+	//左のスティックの入力値
 	Vector2 leftStick;
+	//右のスティックの入力値
 	Vector2 rightStick;
-	// Left/right trigger
+	//左のトリガーの入力値
 	float leftTrigger;
+	//右のトリガーの入力値
 	float rightTrigger;
-	// Is this controller connected?
+	//コントローラーが接続されているか
 	bool isConnected;
 };
 
-// Wrapper that contains current state of input
+//各入力機器の入力状態をまとめたラッパー構造体
 struct InputState
 {
 	KeyboardState Keyboard;
@@ -144,22 +170,61 @@ struct InputState
 class InputSystem
 {
 public:
+	/**
+	@brief  初期化処理
+	@return true : 成功 , false : 失敗
+	*/
 	bool Initialize();
+
+	/**
+	@brief  終了処理
+	*/
 	void Shutdown();
 
-	// Called right before SDL_PollEvents loop
+	/**
+	@brief  Updateの準備をする（SDL_PollEventsの直前に呼ぶ）
+	*/
 	void PrepareForUpdate();
-	// Called after SDL_PollEvents loop
+
+	/**
+	@brief  フレーム毎の処理（SDL_PollEventsの直後に呼ぶ）
+	*/
 	void Update();
-	// Called to process an SDL event in input system
+
+	/**
+	@brief  SDLイベントをInputSystemに渡す
+	*/
 	void ProcessEvent(union SDL_Event& event);
 
+	/**
+	@brief  現在の入力状態を取得する
+	@return （InputState）各入力情報をまとめた構造体
+	*/
 	const InputState& GetState() const { return state; }
 
+	/**
+	@brief  マウスのモードを設定する
+	@param	true : 相対モード , false : デフォルトモード
+	*/
 	void SetRelativeMouseMode(bool value);
 private:
+	/**
+	@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
+	@param	入力された値（int）
+	@return	フィルタリングされた値
+	*/
 	float Filter1D(int input);
+
+	/**
+	@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
+	@param	入力された値のx（int）
+	@param	入力された値のy（int）
+	@return	フィルタリングされた値
+	*/
 	Vector2 Filter2D(int inputX, int inputY);
+
+	//各入力機器の入力状態をまとめたラッパー構造体
 	InputState state;
+	//SDLでコントローラーを認識するためのクラスポインタ
 	SDL_GameController* controller;
 };

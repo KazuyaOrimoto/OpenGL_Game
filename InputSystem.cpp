@@ -2,11 +2,21 @@
 #include <SDL.h>
 #include <cstring>
 
+/**
+@brief	現在のキーの入力状態のみを取得する
+@param	SDL_Scancodeのキーコード
+@return	true : 押されている , false : 押されていない
+*/
 bool KeyboardState::GetKeyValue(SDL_Scancode keyCode) const
 {
 	return currState[keyCode] == 1;
 }
 
+/**
+@brief	現在と1フレーム前の状態からButtonStateを返す
+@param	SDL_Scancodeのキーコード
+@return	ButtonState型の現在の状態
+*/
 ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
 {
 	if (prevState[keyCode] == 0)
@@ -33,11 +43,21 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
 	}
 }
 
+/**
+@brief	現在の入力状態のみを取得する
+@param	SDL_BUTTON定数
+@return	true : 押されている , false : 押されていない
+*/
 bool MouseState::GetButtonValue(int button) const
 {
 	return (SDL_BUTTON(button) & currButtons) == 1;
 }
 
+/**
+@brief	現在と1フレーム前の状態からButtonStateを返す
+@param	SDL_BUTTON定数
+@return	ButtonState型の現在の状態
+*/
 ButtonState MouseState::GetButtonState(int button) const
 {
 	int mask = SDL_BUTTON(button);
@@ -65,11 +85,21 @@ ButtonState MouseState::GetButtonState(int button) const
 	}
 }
 
+/**
+@brief	現在の入力状態のみを取得する
+@param	SDL_GameControllerButtonのボタンコード
+@return	true : 押されている , false : 押されていない
+*/
 bool ControllerState::GetButtonValue(SDL_GameControllerButton button) const
 {
 	return currButtons[button] == 1;
 }
 
+/**
+@brief	現在と1フレーム前の状態からButtonStateを返す
+@param	SDL_GameControllerButtonのボタンコード
+@return	ButtonState型の現在の状態
+*/
 ButtonState ControllerState::GetButtonState(SDL_GameControllerButton button) const
 {
 	if (prevButtons[button] == 0)
@@ -96,6 +126,10 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton button) con
 	}
 }
 
+/**
+@brief  初期化処理
+@return true : 成功 , false : 失敗
+*/
 bool InputSystem::Initialize()
 {
 	// Keyboard
@@ -121,10 +155,16 @@ bool InputSystem::Initialize()
 	return true;
 }
 
+/**
+@brief  終了処理
+*/
 void InputSystem::Shutdown()
 {
 }
 
+/**
+@brief  Updateの準備をする（SDL_PollEventsの直前に呼ぶ）
+*/
 void InputSystem::PrepareForUpdate()
 {
 	// Copy current state to previous
@@ -144,6 +184,9 @@ void InputSystem::PrepareForUpdate()
 		SDL_CONTROLLER_BUTTON_MAX);
 }
 
+/**
+@brief  フレーム毎の処理（SDL_PollEventsの直後に呼ぶ）
+*/
 void InputSystem::Update()
 {
 	// Mouse
@@ -193,6 +236,9 @@ void InputSystem::Update()
 	state.Controller.rightStick = Filter2D(x, y);
 }
 
+/**
+@brief  SDLイベントをInputSystemに渡す
+*/
 void InputSystem::ProcessEvent(SDL_Event& event)
 {
 	switch (event.type)
@@ -207,6 +253,10 @@ void InputSystem::ProcessEvent(SDL_Event& event)
 	}
 }
 
+/**
+@brief  マウスのモードを設定する
+@param	true : 相対モード , false : デフォルトモード
+*/
 void InputSystem::SetRelativeMouseMode(bool value)
 {
 	SDL_bool set = value ? SDL_TRUE : SDL_FALSE;
@@ -215,6 +265,11 @@ void InputSystem::SetRelativeMouseMode(bool value)
 	state.Mouse.isRelative = value;
 }
 
+/**
+@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
+@param	入力された値（int）
+@return	フィルタリングされた値
+*/
 float InputSystem::Filter1D(int input)
 {
 	// A value < dead zone is interpreted as 0%
@@ -241,6 +296,12 @@ float InputSystem::Filter1D(int input)
 	return retVal;
 }
 
+/**
+@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
+@param	入力された値のx（int）
+@param	入力された値のy（int）
+@return	フィルタリングされた値
+*/
 Vector2 InputSystem::Filter2D(int inputX, int inputY)
 {
 	const float deadZone = 8000.0f;
