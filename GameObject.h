@@ -131,6 +131,12 @@ public:
 	*/
     Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
 
+	/**
+	@brief　オブジェクトの右を表すベクトルを取得する
+	@param	right(Vector3型)
+	*/
+	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitY, rotation); }
+
 protected:
 	//ゲームオブジェクトの状態
 	State state;

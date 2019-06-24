@@ -54,6 +54,12 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSGameObject.cpp" />
+    <ClCompile Include="FPSCamera.cpp" />
+    <ClCompile Include="FPSCameraInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -108,6 +114,12 @@
     <ClInclude Include="InputComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSGameObject.h" />
+    <ClInclude Include="FPSCamera.h" />
+    <ClInclude Include="FPSCameraInput.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
@@ -127,6 +139,9 @@
     </Filter>
     <Filter Include="InputSystem">
       <UniqueIdentifier>{86dd1375-242a-47c5-b4ab-8c242a88e640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{baceb5f2-8168-4a27-a023-a8b9d9ba8383}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

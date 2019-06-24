@@ -15,6 +15,7 @@
 #include "Mesh.h"
 #include "CameraObject.h"
 #include "InputSystem.h"
+#include "FPSGameObject.h"
 
 Game::Game()
     : fps(nullptr)
@@ -53,6 +54,7 @@ bool Game::Initialize()
     }
 
 	inputSystem = new InputSystem();
+	//inputSystem->SetRelativeMouseMode(true);
 	if (!inputSystem->Initialize())
 	{
 		SDL_Log("Failed to initialize input system");
@@ -193,7 +195,7 @@ void Game::LoadData()
     dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
     // Camera actor
-    CameraObject* mCameraActor = new CameraObject(this);
+    GameObject* mCameraActor = new FPSGameObject(this);
 
     // UI elements
     a = new GameObject(this);

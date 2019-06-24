@@ -33,11 +33,27 @@ public:
 	*/
     void SetTextureIndex(size_t index) { mTextureIndex = index; }
 
+
+	/**
+	@brief@•`‰æ‚ğ‚·‚é‚©‚Ç‚¤‚©‚ğİ’è
+	@param	true : •`‰æ‚·‚é , false : •`‰æ‚µ‚È‚¢
+	*/
+	void SetVisible(bool argVisible) { visible = argVisible; }
+
+	/**
+	@brief@•`‰æ‚ğ‚·‚é‚©‚Ç‚¤‚©‚ğæ“¾‚·‚é
+	@return	true : •`‰æ‚·‚é , false : •`‰æ‚µ‚È‚¢
+	*/
+	bool GetVisible() const { return visible; }
+
 protected:
 
 	//ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
 
     Mesh* mMesh;
     size_t mTextureIndex;
+
+	//•`‰æ‚ğ‚·‚é‚©‚Ç‚¤‚©
+	bool visible;
 };
 

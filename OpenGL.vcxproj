@@ -140,9 +140,13 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="FPS.cpp" />
+    <ClCompile Include="FPSCamera.cpp" />
+    <ClCompile Include="FPSCameraInput.cpp" />
+    <ClCompile Include="FPSGameObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputComponent.cpp" />
@@ -161,9 +165,13 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CameraObject.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="FPS.h" />
+    <ClInclude Include="FPSCamera.h" />
+    <ClInclude Include="FPSCameraInput.h" />
+    <ClInclude Include="FPSGameObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputComponent.h" />

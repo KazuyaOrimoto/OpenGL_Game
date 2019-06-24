@@ -203,8 +203,8 @@ void InputSystem::Update()
 			SDL_GetMouseState(&x, &y);
 	}
 
-	state.Mouse.mousePos.x = static_cast<float>(x);
-	state.Mouse.mousePos.y = static_cast<float>(y);
+	state.Mouse.mousePos.x = static_cast<float>(x) - 1024.0f/2;
+	state.Mouse.mousePos.y = 768.0f / 2 - static_cast<float>(y);
 
 	//コントローラー
 	//・ボタン
