@@ -24,7 +24,6 @@ void InputComponent::ProcessInput(const InputState& state)
 	{
 		forwardSpeed -= mMaxForwardSpeed;
 	}
-	SetForwardSpeed(forwardSpeed);
 
 	// Calculate angular speed for MoveComponent
 	float angularSpeed = 0.0f;
@@ -36,6 +35,6 @@ void InputComponent::ProcessInput(const InputState& state)
 	{
 		angularSpeed -= mMaxAngularSpeed;
 	}
-	SetAngularSpeed(angularSpeed);
+	//SetAngularSpeed(angularSpeed);
 }
 

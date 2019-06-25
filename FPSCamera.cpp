@@ -1,38 +1,77 @@
 #include "FPSCamera.h"
 #include "GameObject.h"
+#include "InputSystem.h"
+#include "Game.h"
+#include "Renderer.h"
 
 FPSCamera::FPSCamera(GameObject * argOwner)
 	:CameraComponent(argOwner)
-	, mPitchSpeed(0.0f)
-	, mMaxPitch(Math::Pi / 3.0f)
-	, mPitch(0.0f)
+	, angularSpeed(0.0f)
+	, maxAngularSpeed(Math::Pi * 8)
+	, pitch(0.0f)
+	, pitchSpeed(0.0f)
+	, maxPitch(Math::Pi / 3.0f)
+	, maxPitchSpeed(Math::Pi * 8)
 {
 }
 
 void FPSCamera::Update(float deltaTime)
 {
-	// Call parent update (doesn't do anything right now)
 	CameraComponent::Update(deltaTime);
-	// Camera position is owner position
-	Vector3 cameraPos = owner->GetPosition();
+	if (!Math::NearZero(pitchSpeed))
+	{
+		Vector3 cameraPos = owner->GetPosition();
 
-	// Update pitch based on pitch speed
-	mPitch += mPitchSpeed * deltaTime;
-	// Clamp pitch to [-max, +max]
-	mPitch = Math::Clamp(mPitch, -mMaxPitch, mMaxPitch);
-	// Make a quaternion representing pitch rotation,
-	// which is about owner's right vector
-	Quaternion q(owner->GetRight(), mPitch);
+		pitch += pitchSpeed * deltaTime;
 
-	// Rotate owner forward by pitch quaternion
-	Vector3 viewForward = Vector3::Transform(
-		owner->GetForward(), q);
-	// Target position 100 units in front of view forward
-	Vector3 target = cameraPos + viewForward * 100.0f;
-	// Also rotate up by pitch quaternion
-	Vector3 up = Vector3::Transform(Vector3::UnitZ, q);
+		pitch = Math::Clamp(pitch, -maxPitch, maxPitch);
 
-	// Create look at matrix, set as view
-	Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
-	SetViewMatrix(view);
+		Quaternion q(owner->GetRight(), pitch);
+
+		Vector3 viewForward = Vector3::Transform(owner->GetForward(), q);
+
+		Vector3 target = cameraPos + viewForward * 100.0f;
+
+		Vector3 up = Vector3::Transform(Vector3::UnitZ, q);
+
+		Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
+
+		Game* game = owner->GetGame();
+		game->GetRenderer()->SetViewMatrix(view);
+	}
+
+	if (!Math::NearZero(angularSpeed))
+	{
+		Quaternion rot = owner->GetRotation();
+		float angle = angularSpeed * deltaTime;
+		// Create quaternion for incremental rotation
+		// (Rotate about up axis)
+		Quaternion inc(Vector3::UnitZ, angle);
+		// Concatenate old and new quaternion
+		rot = Quaternion::Concatenate(rot, inc);
+		owner->SetRotation(rot);
+	}
+}
+
+void FPSCamera::ProcessInput(const InputState & state)
+{
+	// Calculate angular speed for MoveComponent
+	const Vector2 mouse = state.Mouse.GetPosition();
+	const int maxMouseSpeed = 500;
+	angularSpeed = 0.0f;
+	if (mouse.x != 0)
+	{
+		// Convert to ~[-1.0, 1.0]
+		angularSpeed = static_cast<float>(mouse.x) / maxMouseSpeed;
+		// Multiply by rotation/sec
+		angularSpeed *= maxAngularSpeed;
+	}
+
+	float pitchSpeed = 0.0f;
+	if (mouse.y != 0)
+	{
+		// Convert to ~[-1.0, 1.0]
+		pitchSpeed = static_cast<float>(mouse.y) / maxMouseSpeed;
+		pitchSpeed *= -maxPitchSpeed;
+	}
 }

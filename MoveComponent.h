@@ -8,21 +8,30 @@ class MoveComponent : public Component
 public:
 	MoveComponent(GameObject* owner, int updateOrder = 10);
 	void Update(float deltaTime) override;
+	void ProcessInput(const struct InputState& state) override;
 
-	float GetAngularSpeed() const { return angularSpeed; }
-	float GetPitchSpeed() const { return pitchSpeed; }
+	int GetForwardKey() const { return mForwardKey; }
+	int GetBackKey() const { return mBackKey; }
+	int GetRightKey() const { return rightKey; }
+	int GetLeftKey() const { return leftKey; }
+	void SetForwardKey(int key) { mForwardKey = key; }
+	void SetBackKey(int key) { mBackKey = key; }
+	void SetRightKey(int key) { rightKey = key; }
+	void SetLeftKey(int key) { leftKey = key; }
+
 	float GetForwardSpeed() const { return forwardSpeed; }
-	float GetStrafeSpeed() const { return strafeSpeed; }
-	void SetAngularSpeed(float speed) { angularSpeed = speed; }
-	void SetPitchSpeed(float speed) { pitchSpeed = speed; }
-	void SetForwardSpeed(float speed) { forwardSpeed = speed; }
-	void SetStrafeSpeed(float speed) { strafeSpeed = speed; }
+	float GetStrafeSpeed() const { return starafeSpeed; }
 private:
-	float angularSpeed;
-	float pitchSpeed;
-	float pitch;
-	float maxPitch;
 	float forwardSpeed;
-	float strafeSpeed;
+	float starafeSpeed;
+
+	float maxForwardSpeed;
+	float maxStrafeSpeed;
+
+	// Keys for forward/back movement
+	int mForwardKey;
+	int mBackKey;
+	int rightKey;
+	int leftKey;
 };
 

@@ -2,69 +2,49 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "Renderer.h"
+#include "InputSystem.h"
 
 MoveComponent::MoveComponent(GameObject* owner, int updateOrder)
 	:Component(owner, updateOrder)
-	, angularSpeed(0.0f)
-	, pitchSpeed(0.0f)
 	, forwardSpeed(0.0f)
-	, strafeSpeed(0.0f)
-	, maxPitch(Math::Pi / 3.0f)
+	, starafeSpeed(0.0f)
+	, maxForwardSpeed(400.0f)
+	, maxStrafeSpeed(400.0f)
 {
 
 }
 
 void MoveComponent::Update(float deltaTime)
 {
-
-	if (!Math::NearZero(pitchSpeed))
-	{
-		Vector3 cameraPos = owner->GetPosition();
-
-		pitch += pitchSpeed * deltaTime;
-
-		pitch = Math::Clamp(pitch, -maxPitch, maxPitch);
-
-		Quaternion q(owner->GetRight(), pitch);
-
-		Vector3 viewForward = Vector3::Transform(owner->GetForward(), q);
-
-		Vector3 target = cameraPos + viewForward * 100.0f;
-
-		Vector3 up = Vector3::Transform(Vector3::UnitZ, q);
-
-		Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
-
-		Game* game = owner->GetGame();
-		game->GetRenderer()->SetViewMatrix(view);
-	}
-
-	if (!Math::NearZero(angularSpeed))
-	{
-		Quaternion rot = owner->GetRotation();
-		float angle = angularSpeed * deltaTime;
-		// Create quaternion for incremental rotation
-		// (Rotate about up axis)
-		Quaternion inc(Vector3::UnitZ, angle);
-		// Concatenate old and new quaternion
-		rot = Quaternion::Concatenate(rot, inc);
-		owner->SetRotation(rot);
-	}
-
-
-
-	if (!Math::NearZero(forwardSpeed))
+	if (!Math::NearZero(forwardSpeed) || !Math::NearZero(starafeSpeed))
 	{
 		Vector3 pos = owner->GetPosition();
 		pos += owner->GetForward() * forwardSpeed * deltaTime;
-		pos += owner->GetRight() * strafeSpeed * deltaTime;
+		pos += owner->GetRight() * starafeSpeed * deltaTime;
 		owner->SetPosition(pos);
 	}
+}
 
-	if (!Math::NearZero(strafeSpeed))
+void MoveComponent::ProcessInput(const InputState & state)
+{
+	// Calculate forward speed for MoveComponent
+	forwardSpeed = 0.0f;
+	starafeSpeed = 0.0f;
+
+	if (state.Keyboard.GetKeyValue(SDL_Scancode(mForwardKey)))
 	{
-		Vector3 pos = owner->GetPosition();
-		pos += owner->GetRight() * strafeSpeed * deltaTime;
-		owner->SetPosition(pos);
+		forwardSpeed += maxForwardSpeed;
+	}
+	if (state.Keyboard.GetKeyValue(SDL_Scancode(mBackKey)))
+	{
+		forwardSpeed -= maxForwardSpeed;
+	}
+	if (state.Keyboard.GetKeyValue(SDL_Scancode(rightKey)))
+	{
+		starafeSpeed += maxStrafeSpeed;
+	}
+	if (state.Keyboard.GetKeyValue(SDL_Scancode(leftKey)))
+	{
+		starafeSpeed -= maxStrafeSpeed;
 	}
 }

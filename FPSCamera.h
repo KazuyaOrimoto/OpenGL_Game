@@ -10,19 +10,25 @@ public:
 	FPSCamera(GameObject* argOwner);
 
 	void Update(float deltaTime) override;
+	void ProcessInput(const struct InputState& state) override;
 
-	float GetPitch() const { return mPitch; }
-	float GetPitchSpeed() const { return mPitchSpeed; }
-	float GetMaxPitch() const { return mMaxPitch; }
+	float GetPitch() const { return pitch; }
+	float GetPitchSpeed() const { return pitchSpeed; }
+	float GetMaxPitch() const { return maxPitchSpeed; }
+	void SetPitchSpeed(float speed) { pitchSpeed = speed; }
+	void SetMaxPitch(float pitch) { maxPitchSpeed = pitch; }
 
-	void SetPitchSpeed(float speed) { mPitchSpeed = speed; }
-	void SetMaxPitch(float pitch) { mMaxPitch = pitch; }
+	float GetAngularSpeed() const { return angularSpeed; }
+	float GetMaxAngular() const { return maxAngularSpeed; }
+	void SetAngularSpeed(float speed) { angularSpeed = speed; }
+	void SetMaxAngular(float angular) { maxAngularSpeed = pitch; }
 private:
-	// Rotation/sec speed of pitch
-	float mPitchSpeed;
-	// Maximum pitch deviation from forward
-	float mMaxPitch;
-	// Current pitch
-	float mPitch;
+
+	float angularSpeed;
+	float maxAngularSpeed;
+	float pitch;
+	float pitchSpeed;
+	float maxPitch;
+	float maxPitchSpeed;
 };
 

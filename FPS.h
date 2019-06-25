@@ -10,6 +10,8 @@ public:
 	*/
 	void Update();
 
+	float GetDeltaTime() {return deltaTime;}
+
 private:
 	/**
 	@brief	FPSが設定値より大きくならないための制御
@@ -21,6 +23,8 @@ private:
 	Uint32 fpsCount;					//フレームのカウンター
 	Uint32 frameStartTickTime;			//FPSの計算を始めた時の時間
 	Uint32 fps;							//計算したフレームレート
+	int beforetickCount;				//前のフレームのかかった時間
+	float deltaTime;					//現在のフレームのかかった時間
 
 };
 

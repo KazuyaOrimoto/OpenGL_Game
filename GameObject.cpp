@@ -75,7 +75,6 @@ void GameObject::ProcessInput(const InputState& keyState)
 		{
 			comp->ProcessInput(keyState);
 		}
-
 		GameObjectInput(keyState);
 	}
 }

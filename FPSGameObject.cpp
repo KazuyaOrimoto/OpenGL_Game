@@ -5,22 +5,18 @@
 #include "Game.h"
 #include "FPSCamera.h"
 #include "MeshComponent.h"
-#include "FPSCameraInput.h"
 
 FPSGameObject::FPSGameObject(Game* game)
 	:GameObject(game)
 {
-	mMoveComp = new MoveComponent(this);
-	mCameraComp = new FPSCamera(this);
-	input = new FPSCameraInput(this);
+	//mCameraComp = new FPSCamera(this);
+	moveComponent = new MoveComponent(this);
+	fpsCamera = new FPSCamera(this);
 
-	input->SetForwardKey(SDL_SCANCODE_W);
-	input->SetBackKey(SDL_SCANCODE_S);
-	input->SetLeftKey(SDL_SCANCODE_A);
-	input->SetRightKey(SDL_SCANCODE_D);
-	input->SetMaxForwardSpeed(200.0f);
-	input->SetStrafeSpeed(200.0f);
-	input->SetMaxAngularSpeed(Math::Pi * 8);
+	moveComponent->SetForwardKey(SDL_SCANCODE_W);
+	moveComponent->SetBackKey(SDL_SCANCODE_S);
+	moveComponent->SetLeftKey(SDL_SCANCODE_A);
+	moveComponent->SetRightKey(SDL_SCANCODE_D);
 
 	mFPSModel = new GameObject(game);
 	mFPSModel->SetScale(0.75f);
@@ -42,7 +38,7 @@ void FPSGameObject::UpdateGameObject(float deltaTime)
 	// Initialize rotation to actor rotation
 	Quaternion q = GetRotation();
 	// Rotate by pitch from camera
-	q = Quaternion::Concatenate(q, Quaternion(GetRight(), mCameraComp->GetPitch()));
+	q = Quaternion::Concatenate(q, Quaternion(GetRight(), fpsCamera->GetPitch()));
 	mFPSModel->SetRotation(q);
 }
 

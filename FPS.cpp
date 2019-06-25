@@ -20,6 +20,8 @@ FPS::~FPS()
 */
 void FPS::Update()
 {
+	deltaTime = (SDL_GetTicks() - beforetickCount) / 1000.0f;
+	beforetickCount = SDL_GetTicks();
 	//1ƒtƒŒ[ƒ€–Ú‚Ì‚ğ•Û‘¶
 	if (fpsCount == 0)
 	{

@@ -13,9 +13,9 @@ public:
 
 	void SetVisible(bool visible);
 private:
-	class MoveComponent* mMoveComp;
+	class MoveComponent* moveComponent;
 	class MeshComponent* mMeshComp;
-	class FPSCamera* mCameraComp;
+	class FPSCamera* fpsCamera;
 	class GameObject* mFPSModel;
 	class FPSCameraInput* input;
 };

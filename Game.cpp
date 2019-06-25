@@ -252,7 +252,6 @@ void Game::ProcessInput()
 	inputSystem->Update();
 	const InputState& state = inputSystem->GetState();
     
-
 	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
 	{
 		isRunning = false;
@@ -282,9 +281,10 @@ void Game::GenerateOutput()
 void Game::UpdateGame()
 {
 	updatingGameObject = true;
+	float deltaTime = fps->GetDeltaTime();
 	for (auto gameObject : gameObjects)
 	{
-		gameObject->Update(0.05f);
+		gameObject->Update(deltaTime);
 	}
 	updatingGameObject = false;
 
