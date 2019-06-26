@@ -16,6 +16,7 @@
 #include "CameraObject.h"
 #include "InputSystem.h"
 #include "FPSGameObject.h"
+#include "FollowCameraObject.h"
 
 Game::Game()
     : fps(nullptr)
@@ -195,7 +196,7 @@ void Game::LoadData()
     dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
     // Camera actor
-    GameObject* mCameraActor = new FPSGameObject(this);
+    GameObject* mCameraActor = new FollowCameraObject(this);
 
     // UI elements
     a = new GameObject(this);

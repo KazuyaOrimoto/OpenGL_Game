@@ -63,6 +63,8 @@
     <ClCompile Include="FPSGameObject.cpp">
       <Filter>FPSCamera</Filter>
     </ClCompile>
+    <ClCompile Include="FollowCamera.cpp" />
+    <ClCompile Include="FollowCameraObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -126,6 +128,8 @@
     <ClInclude Include="FPSGameObject.h">
       <Filter>FPSCamera</Filter>
     </ClInclude>
+    <ClInclude Include="FollowCamera.h" />
+    <ClInclude Include="FollowCameraObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">

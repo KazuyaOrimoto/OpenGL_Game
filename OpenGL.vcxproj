@@ -143,6 +143,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraObject.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="FollowCamera.cpp" />
+    <ClCompile Include="FollowCameraObject.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="FPSGameObject.cpp" />
@@ -167,6 +169,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CameraObject.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="FollowCamera.h" />
+    <ClInclude Include="FollowCameraObject.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="FPSGameObject.h" />

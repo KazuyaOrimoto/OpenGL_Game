@@ -8,8 +8,8 @@ MoveComponent::MoveComponent(GameObject* owner, int updateOrder)
 	:Component(owner, updateOrder)
 	, forwardSpeed(0.0f)
 	, starafeSpeed(0.0f)
-	, maxForwardSpeed(400.0f)
-	, maxStrafeSpeed(400.0f)
+	, maxForwardSpeed(0.0f)
+	, maxStrafeSpeed(0.0f)
 {
 
 }
