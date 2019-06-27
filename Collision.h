@@ -1,6 +1,6 @@
 #pragma once
 #include "Math.h"
-#include "vector"
+#include <vector>
 
 //ê¸ï™
 struct LineSegment
@@ -20,7 +20,7 @@ struct Plane
     Plane(const Vector3& argNormal, float argDistance);
     Plane(const Vector3& argVec1, const Vector3& argVec2, const Vector3& argVec3);
 
-    float SignedDistance(const LineSegment& argLine1, const LineSegment& argLine2);
+    float SignedDistance(const Vector3& argPoint);
 
     Vector3 normal;
     float distance;
@@ -83,7 +83,7 @@ bool Intersect(const Sphere& argSphere, const AABB& argAABB);
 bool Intersect(const LineSegment& argLine, const Sphere& argSphere, float& outT);
 bool Intersect(const LineSegment& argLine, const Plane& argPlane, float& outT);
 bool Intersect(const LineSegment& argLine, const AABB& argAABB, float& outT,
-    Vector3& argOutNorm);
+    Vector3& outNorm);
 
 bool SweptSphere(const Sphere& argSphere1, const Sphere& argSphere2,
     const Sphere& argSphere3, const Sphere& argSphere4, float& outT);
