@@ -8,7 +8,6 @@
 class Game;
 class BoxComponent;
 class GameObject;
-class LineSegment;
 
 class PhysicsWorld
 {

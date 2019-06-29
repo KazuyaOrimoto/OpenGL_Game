@@ -65,9 +65,15 @@
     </ClCompile>
     <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="FollowCameraObject.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="PhysicsWorld.cpp" />
-    <ClCompile Include="BoxComponent.cpp" />
+    <ClCompile Include="Collision.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsWorld.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxComponent.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -133,9 +139,15 @@
     </ClInclude>
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="FollowCameraObject.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="PhysicsWorld.h" />
-    <ClInclude Include="BoxComponent.h" />
+    <ClInclude Include="Collision.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsWorld.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxComponent.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
@@ -161,6 +173,9 @@
     </Filter>
     <Filter Include="FPSCamera">
       <UniqueIdentifier>{b427765a-6a2f-4bbd-b4b0-d4aa06f05efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{016f7373-9fd9-4a05-bbd3-36e0ad2fe6f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

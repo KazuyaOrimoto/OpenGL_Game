@@ -18,14 +18,17 @@ bool PhysicsWorld::SegmentCast(LineSegment & argLine, CollisionInfo & outCollisi
     for (auto box : boxes)
     {
         float t;
-        if (t < closestT)
-        {
-            outCollision.point = argLine.PointOnSegment(t);
-            outCollision.normal = norm;
-            outCollision.box = box;
-            outCollision.gameObject = box->GetOwner();
-            collided = true;
-        }
+		if (Intersect(argLine,box->GetWorldBox(),t,norm))
+		{
+			if (t < closestT)
+			{
+				outCollision.point = argLine.PointOnSegment(t);
+				outCollision.normal = norm;
+				outCollision.box = box;
+				outCollision.gameObject = box->GetOwner();
+				collided = true;
+			}
+		}
     }
     return collided;
 }

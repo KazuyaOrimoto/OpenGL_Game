@@ -2,17 +2,31 @@
 #include <algorithm>
 #include <array>
 
+/**
+@param	線分の開始地点のポジション
+@param	線分の終了地点のポジション
+*/
 LineSegment::LineSegment(const Vector3 & argStart, const Vector3 & argEnd)
 	:start(argStart)
 	, end(argEnd)
 {
 }
 
+/**
+@brief	線分上の点を返す
+@param	入力値 t（L(t) = Start + (End - Start)t）
+@return 線分上の点のポジション
+*/
 Vector3 LineSegment::PointOnSegment(float t) const
 {
 	return start + (end - start) * t;
 }
 
+/**
+@brief	点と線分の間の最短距離を返す
+@param	任意の点のポジション
+@return 最短距離
+*/
 float LineSegment::MinDistanceSquared(const Vector3 & argPoint) const
 {
 	Vector3 ab = end - start;
@@ -36,6 +50,12 @@ float LineSegment::MinDistanceSquared(const Vector3 & argPoint) const
 	}
 }
 
+/**
+@brief	線分と線分の間の最短距離を返す
+@param	判定する線分の構造体１
+@param	判定する線分の構造体２
+@return 最短距離
+*/
 float LineSegment::MinDistanceSquared(const LineSegment & argLine1, const LineSegment & argLine2)
 {
 	Vector3 u = argLine1.end - argLine1.start;
@@ -109,12 +129,21 @@ float LineSegment::MinDistanceSquared(const LineSegment & argLine1, const LineSe
 	return dP.LengthSq();   // return the closest distance squared
 }
 
+/**
+@param	平面の法線ベクトル
+@param	平面と原点の符号つき最短距離
+*/
 Plane::Plane(const Vector3 & argNormal, float argDistance)
 	:normal(argNormal)
 	, distance(argDistance)
 {
 }
 
+/**
+@param	平面上の点1
+@param	平面上の点2
+@param	平面上の点3
+*/
 Plane::Plane(const Vector3 & argVec1, const Vector3 & argVec2, const Vector3 & argVec3)
 {
 	Vector3 ab = argVec2 - argVec1;
@@ -127,29 +156,51 @@ Plane::Plane(const Vector3 & argVec1, const Vector3 & argVec2, const Vector3 & a
 
 }
 
+/**
+@brief	点と平面の最短距離を返す
+@param	任意の点のポジション
+@return 符号つき最短距離
+*/
 float Plane::SignedDistance(const Vector3& argPoint)
 {
 	return Vector3::Dot(argPoint, normal) - distance;
 }
 
+/**
+@param	球体の中心座標
+@param	球体の半径
+*/
 Sphere::Sphere(const Vector3 & argCenter, const float argRadius)
 	:center(argCenter)
 	, radius(argRadius)
 {
 }
 
+/**
+@brief	球体に点が含まれているかどうか
+@param	任意の点
+@return true : 当たっている , false : 当たっていない
+*/
 bool Sphere::Contains(const Vector3 & argPoint) const
 {
 	float distansSquared = (center - argPoint).LengthSq();
 	return distansSquared <= (radius * radius);
 }
 
+/**
+@param	最小のx,y,zの値のポジション
+@param	最大のx,y,zの値のポジション
+*/
 AABB::AABB(const Vector3 & argMin, const Vector3 & argMax)
 	:min(argMin)
 	, max(argMax)
 {
 }
 
+/**
+@brief	最小値と最大値を各成分ごとに更新する
+@param	任意の点のポジション
+*/
 void AABB::UpdateMinMax(const Vector3 & argPoint)
 {
 	min.x = Math::Min(min.x, argPoint.x);
@@ -161,6 +212,10 @@ void AABB::UpdateMinMax(const Vector3 & argPoint)
 	max.z = Math::Max(max.z, argPoint.z);
 }
 
+/**
+@brief	当たり判定ボックスの回転
+@param	回転軸と回転表す値（Quaternion）
+*/
 void AABB::Rotate(const Quaternion & argQuaternion)
 {
 	std::array<Vector3, 8> points;
@@ -189,6 +244,11 @@ void AABB::Rotate(const Quaternion & argQuaternion)
 	}
 }
 
+/**
+@brief	ボックスに点が含まれているかどうか
+@param	任意の点
+@return true : 当たっている , false : 当たっていない
+*/
 bool AABB::Contains(const Vector3 & argPoint) const
 {
 	bool outside =
@@ -201,6 +261,11 @@ bool AABB::Contains(const Vector3 & argPoint) const
 	return !outside;
 }
 
+/**
+@brief	点とボックスの最短距離を返す
+@param	任意の点
+@return 最短距離
+*/
 float AABB::MinDistanceSquared(const Vector3 & argPoint) const
 {
 	float dx = Math::Max(min.x - argPoint.x, 0.0f);
@@ -212,23 +277,43 @@ float AABB::MinDistanceSquared(const Vector3 & argPoint) const
 	return dx * dx + dy * dy + dz * dz;
 }
 
+/**
+@param	始点となる点の座標
+@param	終点となる点の座標
+@param	カプセルの半径
+*/
 Capsule::Capsule(const Vector3 & argStart, const Vector3 & argEnd, float argRadius)
 	:segment(argStart, argEnd)
 	, radius(argRadius)
 {
 }
 
+/**
+@brief	カプセルの始点と終点の線分上の点を返す
+@param	入力値 t（L(t) = Start + (End - Start)t）
+@return 線分上の点のポジション
+*/
 Vector3 Capsule::PointOnSegment(float t) const
 {
 	return segment.PointOnSegment(t);
 }
 
+/**
+@brief	カプセルに点が含まれているかどうか
+@param	任意の点
+@return true : 当たっている , false : 当たっていない
+*/
 bool Capsule::Contains(const Vector3 & argPoint) const
 {
 	float distanceSquared = segment.MinDistanceSquared(argPoint);
 	return distanceSquared <= (radius * radius);
 }
 
+/**
+@brief	２次元のポリゴンに点が含まれているかどうか
+@param	任意の点
+@return true : 当たっている , false : 当たっていない
+*/
 bool ConvexPolygon::Contains(const Vector2 & argPoint) const
 {
 	float sum = 0.0f;
@@ -253,6 +338,12 @@ bool ConvexPolygon::Contains(const Vector2 & argPoint) const
 	return Math::NearZero(sum - Math::TwoPi);
 }
 
+/**
+@brief	球と球の当たり判定
+@param	球の構造体１
+@param	球の構造体２
+@return true : 当たっている , false : 当たっていない
+*/
 bool Intersect(const Sphere & argSphere1, const Sphere & argSphere2)
 {
 	float distanceSquared = (argSphere1.center - argSphere2.center).LengthSq();
@@ -260,6 +351,12 @@ bool Intersect(const Sphere & argSphere1, const Sphere & argSphere2)
 	return distanceSquared <= (sumRadius * sumRadius);
 }
 
+/**
+@brief	ボックスとボックスの当たり判定
+@param	ボックスの構造体１
+@param	ボックスの構造体２
+@return true : 当たっている , false : 当たっていない
+*/
 bool Intersect(const AABB & argAABB1, const AABB & argAABB2)
 {
 	bool no =
@@ -273,6 +370,12 @@ bool Intersect(const AABB & argAABB1, const AABB & argAABB2)
 	return !no;
 }
 
+/**
+@brief	カプセルとカプセルの当たり判定
+@param	カプセルの構造体１
+@param	カプセルの構造体２
+@return true : 当たっている , false : 当たっていない
+*/
 bool Intersect(const Capsule & argCapsule1, const Capsule & argCapsule2)
 {
 	float distanceSquared = LineSegment::MinDistanceSquared(argCapsule1.segment,
@@ -281,12 +384,25 @@ bool Intersect(const Capsule & argCapsule1, const Capsule & argCapsule2)
 	return distanceSquared <= (sumRadius * sumRadius);
 }
 
+/**
+@brief	球とボックスの当たり判定
+@param	球の構造体
+@param	ボックスの構造体
+@return true : 当たっている , false : 当たっていない
+*/
 bool Intersect(const Sphere & argSphere, const AABB & argAABB)
 {
 	float distanceSquared = argAABB.MinDistanceSquared(argSphere.center);
 	return distanceSquared <= (argSphere.radius * argSphere.radius);
 }
 
+/**
+@brief	線分と球の当たり判定
+@param	線分の構造体
+@param	球の構造体
+@param	線分の始点から接触している点までの値tを格納する
+@return true : 当たっている , false : 当たっていない
+*/
 bool Intersect(const LineSegment & argLine, const Sphere & argSphere, float & outT)
 {
 	Vector3 X = argLine.start - argSphere.center;
@@ -324,6 +440,13 @@ bool Intersect(const LineSegment & argLine, const Sphere & argSphere, float & ou
 	}
 }
 
+/**
+@brief	線分と平面の当たり判定
+@param	線分の構造体
+@param	平面の構造体
+@param	線分の始点から接触している点までの値tを格納する
+@return true : 当たっている , false : 当たっていない
+*/
 bool Intersect(const LineSegment & argLine, const Plane & argPlane, float & outT)
 {
 	float denom = Vector3::Dot(argLine.end - argLine.start,
@@ -354,6 +477,15 @@ bool Intersect(const LineSegment & argLine, const Plane & argPlane, float & outT
 	}
 }
 
+/**
+@brief	各軸での面と線分の当たり判定
+@param	線分の始点
+@param	線分の終点
+@param	平面上の点の値
+@param	平面の法線ベクトル
+@param	当たった物を格納する可変長コンテナ
+@return true : 当たっている , false : 当たっていない
+*/
 bool TestSidePlane(float argStart, float argEnd, float argNegd, const Vector3& argNorm,
 	std::vector<std::pair<float, Vector3>>& out)
 {
@@ -379,6 +511,14 @@ bool TestSidePlane(float argStart, float argEnd, float argNegd, const Vector3& a
 	}
 }
 
+/**
+@brief	線分とボックスの当たり判定
+@param	線分の構造体
+@param	ボックスの構造体
+@param	線分の始点から接触している点までの値tを格納する
+@param	線分の始点から接触した面の法線ベクトルを格納する
+@return true : 当たっている , false : 当たっていない
+*/
 bool Intersect(const LineSegment & argLine, const AABB & argAABB, float & outT, Vector3 & outNorm)
 {
 	std::vector<std::pair<float, Vector3>> values;
@@ -409,6 +549,15 @@ bool Intersect(const LineSegment & argLine, const AABB & argAABB, float & outT, 
 	return false;
 }
 
+/**
+@brief	球スイープの当たり判定
+@param	１フレーム前の球１の構造体
+@param	現在のフレームの球１の構造体
+@param	１フレーム前の球２の構造体
+@param	現在のフレームの球２の構造体
+@param	線分の始点から接触している点までの値tを格納する
+@return true : 当たっている , false : 当たっていない
+*/
 bool SweptSphere(const Sphere & argSphere1, const Sphere & argSphere2, const Sphere & argSphere3, const Sphere & argSphere4, float & outT)
 {
 	Vector3 X = argSphere1.center - argSphere3.center;

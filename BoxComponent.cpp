@@ -3,8 +3,8 @@
 #include "Game.h"
 #include "PhysicsWorld.h"
 
-BoxComponent::BoxComponent(GameObject* argOwner, int argUpdateOrder = 100)
-    :Component(owner, updateOrder)
+BoxComponent::BoxComponent(GameObject* argOwner, int argUpdateOrder)
+    :Component(argOwner,argUpdateOrder)
     , objectBox(Vector3::Zero, Vector3::Zero)
     , worldBox(Vector3::Zero, Vector3::Zero)
     , shouldRotate(true)
