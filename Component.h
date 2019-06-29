@@ -37,6 +37,8 @@ public:
 	*/
 	int GetUpdateOder() { return updateOrder; }
 
+    GameObject* GetOwner() { return owner; };
+
 protected:
 
 	//アタッチしているゲームオブジェクトのポインタ

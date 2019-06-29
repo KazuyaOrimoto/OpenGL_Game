@@ -8,6 +8,7 @@ class FPS;
 class GameObject;
 class Renderer;
 class InputSystem;
+class PhysicsWorld;
 
 class Game
 {
@@ -46,6 +47,12 @@ public:
 	*/
     Renderer* GetRenderer() { return renderer; }
 
+    /**
+    @brief	アタリ判定空間を取得する
+    @param	PhysicsWorldクラスのポインタ
+    */
+    PhysicsWorld* GetPhysicsWorld() { return physicsWorld; }
+
 private:
 	/**
 	@brief  入力関連の処理
@@ -80,6 +87,7 @@ private:
 
 	FPS* fps;
     Renderer* renderer;
+    PhysicsWorld* physicsWorld;
 	InputSystem* inputSystem;
 
 	//ゲームを続けるかどうか

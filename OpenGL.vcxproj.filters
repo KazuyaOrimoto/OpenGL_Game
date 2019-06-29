@@ -66,6 +66,8 @@
     <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="FollowCameraObject.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="PhysicsWorld.cpp" />
+    <ClCompile Include="BoxComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -132,6 +134,8 @@
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="FollowCameraObject.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="PhysicsWorld.h" />
+    <ClInclude Include="BoxComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
