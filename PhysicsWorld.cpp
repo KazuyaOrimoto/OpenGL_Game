@@ -77,6 +77,17 @@ void PhysicsWorld::TestSweepAndPrune(std::function<void(GameObject*, GameObject*
     }
 }
 
+void PhysicsWorld::HitCheck()
+{
+    for (size_t i = 0; i < boxes.size();i++)
+    {
+        for (size_t j = 1; j < boxes.size(); j++)
+        {
+
+        }
+    }
+}
+
 void PhysicsWorld::AddBox(BoxComponent * argBox)
 {
     boxes.emplace_back(argBox);

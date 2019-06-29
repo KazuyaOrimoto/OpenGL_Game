@@ -196,7 +196,7 @@ void Game::LoadData()
     dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
     // Camera actor
-    GameObject* mCameraActor = new FollowCameraObject(this);
+    GameObject* mCameraActor = new FPSGameObject(this);
 
     // UI elements
     a = new GameObject(this);

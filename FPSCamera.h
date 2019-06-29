@@ -15,7 +15,7 @@ public:
 	float GetPitch() const { return pitch; }
 	float GetPitchSpeed() const { return pitchSpeed; }
 	float GetMaxPitch() const { return maxPitchSpeed; }
-	void SetPitchSpeed(float speed) { pitchSpeed = speed; }
+	//void SetPitchSpeed(float speed) { pitchSpeed = speed; }
 	void SetMaxPitch(float pitch) { maxPitchSpeed = pitch; }
 
 	float GetAngularSpeed() const { return angularSpeed; }

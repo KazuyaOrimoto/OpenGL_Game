@@ -28,6 +28,8 @@ public:
 
     void TestSweepAndPrune(std::function<void(GameObject*,GameObject*)> argFunc);
 
+    void HitCheck();
+
     void AddBox(BoxComponent* argBox);
     void RemoveBox(BoxComponent* argBox);
 

@@ -7,7 +7,7 @@
 FPSCamera::FPSCamera(GameObject * argOwner)
 	:CameraComponent(argOwner)
 	, angularSpeed(0.0f)
-	, maxAngularSpeed(Math::Pi * 8)
+	, maxAngularSpeed(Math::Pi * 4)
 	, pitch(0.0f)
 	, pitchSpeed(0.0f)
 	, maxPitch(Math::Pi / 3.0f)
@@ -67,7 +67,7 @@ void FPSCamera::ProcessInput(const InputState & state)
 		angularSpeed *= maxAngularSpeed;
 	}
 
-	float pitchSpeed = 0.0f;
+	pitchSpeed = 0.0f;
 	if (mouse.y != 0)
 	{
 		// Convert to ~[-1.0, 1.0]
