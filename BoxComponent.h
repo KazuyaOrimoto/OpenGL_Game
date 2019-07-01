@@ -21,8 +21,5 @@ private:
     AABB objectBox;
     AABB worldBox;
     bool shouldRotate;
-
-
-
 };
 

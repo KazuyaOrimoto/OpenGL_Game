@@ -140,6 +140,8 @@ public:
 protected:
 	//ゲームオブジェクトの状態
 	State state;
+	//ゲームオブジェクトのタグ
+	std::string tag;
 
 	//Transform
 	Vector3 position;

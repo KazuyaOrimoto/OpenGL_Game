@@ -27,7 +27,6 @@ void BoxComponent::OnUpdateWorldTransform()
     if (shouldRotate)
     {
         worldBox.Rotate(owner->GetRotation());
-
     }
     worldBox.min += owner->GetPosition();
     worldBox.max += owner->GetPosition();

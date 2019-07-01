@@ -17,6 +17,6 @@ private:
 	class MoveComponent* mMoveComp;
 	class FollowCamera* mCameraComp;
 	class MeshComponent* mMeshComp;
-
+	class SphereCollider* sphereCollider;
 };
 

@@ -74,6 +74,9 @@
     <ClCompile Include="BoxComponent.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="SphereObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -148,6 +151,9 @@
     <ClInclude Include="BoxComponent.h">
       <Filter>Collider</Filter>
     </ClInclude>
+    <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="SphereObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">

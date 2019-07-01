@@ -17,6 +17,8 @@
 #include "InputSystem.h"
 #include "FPSGameObject.h"
 #include "FollowCameraObject.h"
+#include "SphereObject.h"
+#include "PhysicsWorld.h"
 
 Game::Game()
     : fps(nullptr)
@@ -54,6 +56,8 @@ bool Game::Initialize()
         return false;
     }
 
+	physicsWorld = new PhysicsWorld(this);
+
 	inputSystem = new InputSystem();
 	//inputSystem->SetRelativeMouseMode(true);
 	if (!inputSystem->Initialize())
@@ -89,6 +93,7 @@ void Game::GameLoop()
         ProcessInput();
 		fps->Update();
 		UpdateGame();
+		physicsWorld->HitCheck();
         GenerateOutput();
 	}
 }
@@ -144,11 +149,11 @@ void Game::LoadData()
     MeshComponent* mc = new MeshComponent(a);
     mc->SetMesh(renderer->GetMesh("Assets/Cube.gpmesh"));
 
-    a = new GameObject(this);
-    a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
-    a->SetScale(3.0f);
-    mc = new MeshComponent(a);
-    mc->SetMesh(renderer->GetMesh("Assets/Sphere.gpmesh"));
+    a = new SphereObject(this);
+    //a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
+    //a->SetScale(3.0f);
+    //mc = new MeshComponent(a);
+    //mc->SetMesh(renderer->GetMesh("Assets/Sphere.gpmesh"));
 
     // Setup floor
     const float start = -1250.0f;
@@ -196,7 +201,7 @@ void Game::LoadData()
     dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
     // Camera actor
-    GameObject* mCameraActor = new FPSGameObject(this);
+    GameObject* mCameraActor = new FollowCameraObject(this);
 
     // UI elements
     a = new GameObject(this);
