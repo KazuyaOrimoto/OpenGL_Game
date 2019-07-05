@@ -11,9 +11,9 @@ FollowCameraObject::FollowCameraObject(Game* game)
 {
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Sphere.gpmesh"));
-	SetPosition(Vector3(0.0f, -75.0f, -100.0f));
+	SetPosition(Vector3(0.0f, -0.0f, 100.0f));
 	//SetPosition(Vector3(200.0f, -75.0f, 0.0f));
-	SetScale(8.0f);
+	SetScale(10.0f);
 
 	mMoveComp = new MoveComponent(this);
 	mMoveComp->SetForwardKey(SDL_SCANCODE_W);
@@ -27,7 +27,7 @@ FollowCameraObject::FollowCameraObject(Game* game)
 	mCameraComp->SnapToIdeal();
 
 	sphereCollider = new SphereCollider(this);
-	sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 10.0f));
+	sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
 }
 
 void FollowCameraObject::SetVisible(bool visible)

@@ -21,9 +21,9 @@
 #include "PhysicsWorld.h"
 
 Game::Game()
-    : fps(nullptr)
-    , renderer(nullptr)
-    , isRunning(true)
+	: fps(nullptr)
+	, renderer(nullptr)
+	, isRunning(true)
 	, updatingGameObject(false)
 {
 }
@@ -39,7 +39,7 @@ Game::~Game()
 */
 bool Game::Initialize()
 {
-    //SDL‚Ì‰Šú‰»
+	//SDL‚Ì‰Šú‰»
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
@@ -47,14 +47,14 @@ bool Game::Initialize()
 	}
 
 	//ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»
-    renderer = new Renderer(this);
-    if (!renderer->Initialize(1024.0f, 768.0f))
-    {
-        SDL_Log("Failed to initialize renderer");
-        delete renderer;
-        renderer = nullptr;
-        return false;
-    }
+	renderer = new Renderer(this);
+	if (!renderer->Initialize(1024.0f, 768.0f))
+	{
+		SDL_Log("Failed to initialize renderer");
+		delete renderer;
+		renderer = nullptr;
+		return false;
+	}
 
 	physicsWorld = new PhysicsWorld(this);
 
@@ -90,11 +90,11 @@ void Game::GameLoop()
 {
 	while (isRunning)
 	{
-        ProcessInput();
+		ProcessInput();
 		fps->Update();
 		UpdateGame();
 		physicsWorld->HitCheck();
-        GenerateOutput();
+		GenerateOutput();
 	}
 }
 
@@ -120,17 +120,17 @@ void Game::AddGameObject(GameObject* argObj)
 */
 void Game::RemoveGameObject(GameObject * argObj)
 {
-	auto iter = std::find(pendingGameObjects.begin(),pendingGameObjects.end(),argObj);
+	auto iter = std::find(pendingGameObjects.begin(), pendingGameObjects.end(), argObj);
 	if (iter != pendingGameObjects.end())
 	{
-		std::iter_swap(iter,pendingGameObjects.end() - 1);
+		std::iter_swap(iter, pendingGameObjects.end() - 1);
 		pendingGameObjects.pop_back();
 	}
 
-	iter = std::find(gameObjects.begin(),gameObjects.end(),argObj);
+	iter = std::find(gameObjects.begin(), gameObjects.end(), argObj);
 	if (iter != gameObjects.end())
 	{
-		std::iter_swap(iter,gameObjects.end()-1);
+		std::iter_swap(iter, gameObjects.end() - 1);
 		gameObjects.pop_back();
 	}
 }
@@ -140,80 +140,99 @@ void Game::RemoveGameObject(GameObject * argObj)
 */
 void Game::LoadData()
 {
-    GameObject* a = new GameObject(this);
-    a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
-    a->SetScale(100.0f);
-    Quaternion q(Vector3::UnitY, -Math::PiOver2);
-    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
-    a->SetRotation(q);
-    MeshComponent* mc = new MeshComponent(a);
-    mc->SetMesh(renderer->GetMesh("Assets/Cube.gpmesh"));
+	//   GameObject* a = new GameObject(this);
+	//   a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
+	//   a->SetScale(100.0f);
+	//   Quaternion q(Vector3::UnitY, -Math::PiOver2);
+	//   q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
+	//   a->SetRotation(q);
+	//   MeshComponent* mc = new MeshComponent(a);
+	//   mc->SetMesh(renderer->GetMesh("Assets/Cube.gpmesh"));
 
-    a = new SphereObject(this);
-    //a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
-    //a->SetScale(3.0f);
-    //mc = new MeshComponent(a);
-    //mc->SetMesh(renderer->GetMesh("Assets/Sphere.gpmesh"));
+	//   a = new SphereObject(this);
+	//   a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
+	//   a->SetScale(3.0f);
+	//   mc = new MeshComponent(a);
+	//   mc->SetMesh(renderer->GetMesh("Assets/Sphere.gpmesh"));
 
-    // Setup floor
-    const float start = -1250.0f;
-    const float size = 250.0f;
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            a = new PlaneObject(this);
-            a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
-        }
-    }
+	//   // Setup floor
+	//   const float start = -1250.0f;
+	//   const float size = 250.0f;
+	//   for (int i = 0; i < 10; i++)
+	//   {
+	//       for (int j = 0; j < 10; j++)
+	//       {
+	//           a = new PlaneObject(this);
+	//           a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
+	//       }
+	//   }
 
-    // Left/right walls
-    q = Quaternion(Vector3::UnitX, Math::PiOver2);
-    for (int i = 0; i < 10; i++)
-    {
-        a = new PlaneObject(this);
-        a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
-        a->SetRotation(q);
+	   //for (int i = 0; i < 10; i++)
+	   //{
+	   //	for (int j = 0; j < 10; j++)
+	   //	{
+	   //		a = new PlaneObject(this);
+	   //		a->SetPosition(Vector3(start + i * size, start + j * size, -100.0f));
+	   //	}
+	   //}
 
-        a = new PlaneObject(this);
-        a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
-        a->SetRotation(q);
-    }
+	//   // Left/right walls
+	//   q = Quaternion(Vector3::UnitX, Math::PiOver2);
+	//   for (int i = 0; i < 10; i++)
+	//   {
+	//       a = new PlaneObject(this);
+	//       a->SetPosition(Vector3(start + i * size, start - size, 0.0f));
+	//       a->SetRotation(q);
 
-    q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
-    // Forward/back walls
-    for (int i = 0; i < 10; i++)
-    {
-        a = new PlaneObject(this);
-        a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
-        a->SetRotation(q);
+	//       a = new PlaneObject(this);
+	//       a->SetPosition(Vector3(start + i * size, -start + size, 0.0f));
+	//       a->SetRotation(q);
+	//   }
 
-        a = new PlaneObject(this);
-        a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
-        a->SetRotation(q);
-    }
+	   //q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::PiOver2));
+	   //// Forward/back walls
+	   //for (int i = 0; i < 10; i++)
+	   //{
+	   //    a = new PlaneObject(this);
+	   //    a->SetPosition(Vector3(start - size, start + i * size, 0.0f));
+	   //    a->SetRotation(q);
 
-    // Setup lights
-    renderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
-    DirectionalLight& dir = renderer->GetDirectionalLight();
-    dir.direction = Vector3(0.0f, -0.707f, -0.707f);
-    dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-    dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
+	   //    a = new PlaneObject(this);
+	   //    a->SetPosition(Vector3(-start + size, start + i * size, 0.0f));
+	   //    a->SetRotation(q);
+	   //}
 
-    // Camera actor
-    GameObject* mCameraActor = new FollowCameraObject(this);
+	   // Setup lights
+	renderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+	DirectionalLight& dir = renderer->GetDirectionalLight();
+	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
+	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-    // UI elements
-    a = new GameObject(this);
-    a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
-    SpriteComponent* sc = new SpriteComponent(a);
-    sc->SetTexture(renderer->GetTexture("Assets/HealthBar.png"));
+	// Camera actor
+	GameObject* mCameraActor = new FollowCameraObject(this);
 
-    a = new GameObject(this);
-    a->SetPosition(Vector3(375.0f, -275.0f, 0.0f));
-    a->SetScale(0.75f);
-    sc = new SpriteComponent(a);
-    sc->SetTexture(renderer->GetTexture("Assets/Radar.png"));
+	for (int i = 0; i < 50; i++)
+	{
+		GameObject* a = new GameObject(this);
+		a->SetScale(1000.0f);
+		a->SetPosition(Vector3(i*2000.0f, 0.0f, 0.0f));
+		MeshComponent* mc = new MeshComponent(a);
+		mc->SetMesh(renderer->GetMesh("Assets/Wall.gpmesh"));
+	}
+
+
+	//// UI elements
+	//a = new GameObject(this);
+	//a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
+	//SpriteComponent* sc = new SpriteComponent(a);
+	//sc->SetTexture(renderer->GetTexture("Assets/HealthBar.png"));
+
+	//a = new GameObject(this);
+	//a->SetPosition(Vector3(375.0f, -275.0f, 0.0f));
+	//a->SetScale(0.75f);
+	//sc = new SpriteComponent(a);
+	//sc->SetTexture(renderer->GetTexture("Assets/Radar.png"));
 
 }
 
@@ -226,10 +245,10 @@ void Game::UnloadData()
 	{
 		delete gameObjects.back();
 	}
-    if (renderer)
-    {
-        renderer->UnloadData();
-    }
+	if (renderer)
+	{
+		renderer->UnloadData();
+	}
 }
 
 /**
@@ -239,25 +258,25 @@ void Game::ProcessInput()
 {
 	inputSystem->PrepareForUpdate();
 
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
-        switch (event.type)
-        {
-        case SDL_QUIT:
-            isRunning = false;
-            break;
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+		case SDL_QUIT:
+			isRunning = false;
+			break;
 		case SDL_MOUSEWHEEL:
 			inputSystem->ProcessEvent(event);
 			break;
 		default:
 			break;
-        }
-    }
+		}
+	}
 
 	inputSystem->Update();
 	const InputState& state = inputSystem->GetState();
-    
+
 	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
 	{
 		isRunning = false;
@@ -277,7 +296,7 @@ void Game::ProcessInput()
 */
 void Game::GenerateOutput()
 {
-    renderer->Draw();
+	renderer->Draw();
 
 }
 
