@@ -19,7 +19,7 @@ public:
 	void SetRightKey(int key) { rightKey = key; }
 	void SetLeftKey(int key) { leftKey = key; }
 	void SetMaxForwardSpeed(float value) { maxForwardSpeed = value; }
-	void SetMaxStrageSpeed(float value) { maxStrafeSpeed = value; }
+	void SetMaxStrafeSpeed(float value) { maxStrafeSpeed = value; }
 
 	float GetForwardSpeed() const { return forwardSpeed; }
 	float GetStrafeSpeed() const { return starafeSpeed; }

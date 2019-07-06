@@ -78,6 +78,8 @@
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="SphereObject.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
+    <ClCompile Include="MainCamera.cpp" />
+    <ClCompile Include="AutoRunComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -156,6 +158,8 @@
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="SphereObject.h" />
     <ClInclude Include="PlayerObject.h" />
+    <ClInclude Include="MainCamera.h" />
+    <ClInclude Include="AutoRunComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
