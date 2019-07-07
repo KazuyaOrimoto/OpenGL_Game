@@ -233,6 +233,7 @@ void Game::UpdateGame()
 {
 	updatingGameObject = true;
 	float deltaTime = fps->GetDeltaTime();
+
 	for (auto gameObject : gameObjects)
 	{
 		gameObject->Update(deltaTime);

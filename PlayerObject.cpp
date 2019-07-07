@@ -19,10 +19,10 @@ PlayerObject::PlayerObject(Game* game)
     moveComp->SetRightKey(SDL_SCANCODE_D);
     moveComp->SetLeftKey(SDL_SCANCODE_A);
     moveComp->SetMaxStrafeSpeed(1200.0f);
-    camera = new MainCamera(this);
-    camera->SnapToIdeal();
     autoRun = new AutoRunComponent(this);
     autoRun->SetForwardSpeed(1200.0f);
+	camera = new MainCamera(this);
+	camera->SnapToIdeal();
 
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));

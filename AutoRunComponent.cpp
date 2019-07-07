@@ -5,14 +5,18 @@
 
 
 AutoRunComponent::AutoRunComponent(GameObject* owner, int updateOrder)
-    : Component(owner,updateOrder)
-    , forwardSpeed(0.0f)
+	: Component(owner, updateOrder)
+	, forwardSpeed(0.0f)
 {
 }
 
 void AutoRunComponent::Update(float deltaTime)
 {
-        Vector3 pos = owner->GetPosition();
-        pos += owner->GetForward() * forwardSpeed * deltaTime;
-        owner->SetPosition(pos);
+	if (deltaTime > 0.03)
+	{
+		return;
+	}
+	Vector3 pos = owner->GetPosition();
+	pos += owner->GetForward() * forwardSpeed * deltaTime;
+	owner->SetPosition(pos);
 }

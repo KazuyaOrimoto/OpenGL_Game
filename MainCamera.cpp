@@ -1,6 +1,6 @@
 #include "MainCamera.h"
 #include "GameObject.h"
-
+#include "SDL.h"
 
 MainCamera::MainCamera(GameObject* owner)
     :CameraComponent(owner)

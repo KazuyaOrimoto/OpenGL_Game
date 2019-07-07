@@ -8,6 +8,7 @@ FPS::FPS()
 	, frameStartTickTime(0)
 	, fps(0)
     , beforetickCount(0)
+	, deltaTime(0)
 {
 
 }
