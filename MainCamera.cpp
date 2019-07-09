@@ -1,7 +1,6 @@
 #include "MainCamera.h"
 #include "GameObject.h"
 #include "SDL.h"
-#include "GLEW.h"
 
 MainCamera::MainCamera(GameObject* owner)
     :CameraComponent(owner)
