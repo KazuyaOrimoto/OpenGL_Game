@@ -137,6 +137,12 @@ public:
 	*/
 	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitY, rotation); }
 
+	/**
+	@brief　オブジェクトの上を表すベクトルを取得する
+	@param	up(Vector3型)
+	*/
+	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
+
 protected:
 	//ゲームオブジェクトの状態
 	State state;

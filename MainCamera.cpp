@@ -1,6 +1,7 @@
 #include "MainCamera.h"
 #include "GameObject.h"
 #include "SDL.h"
+#include "GLEW.h"
 
 MainCamera::MainCamera(GameObject* owner)
     :CameraComponent(owner)
@@ -13,7 +14,6 @@ MainCamera::MainCamera(GameObject* owner)
 
 void MainCamera::Update(float deltaTime)
 {
-
     CameraComponent::Update(deltaTime);
 
     float dampening = 2.0f * Math::Sqrt(springConstant);
@@ -30,7 +30,7 @@ void MainCamera::Update(float deltaTime)
 
     Vector3 target = owner->GetPosition() + owner->GetForward() * targetDist;
 
-    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, Vector3::UnitZ);
+    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, owner->GetUp());
 
     SetViewMatrix(view);
 }
@@ -43,7 +43,7 @@ void MainCamera::SnapToIdeal()
 
     Vector3 target = owner->GetPosition() + owner->GetForward() * targetDist;
 
-    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, Vector3::UnitZ);
+    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, owner->GetUp());
 
     SetViewMatrix(view);
 }
@@ -54,7 +54,7 @@ Vector3 MainCamera::ComputeCameraPos() const
 
     cameraPos -= owner->GetForward() * horzDist;
 
-    cameraPos += Vector3::UnitZ * vertDist;
+    cameraPos += owner->GetUp() * vertDist;
 
     return cameraPos;
 }
