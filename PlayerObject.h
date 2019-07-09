@@ -12,6 +12,8 @@ class PlayerObject : public GameObject
 public:
 	PlayerObject(Game* game);
 
+	virtual void UpdateGameObject(float argDaltaTime);
+
     void SetVisible(bool visible);
 
 private:

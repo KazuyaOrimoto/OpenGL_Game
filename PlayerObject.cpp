@@ -6,14 +6,17 @@
 #include "SphereCollider.h"
 #include "MainCamera.h"
 #include "AutoRunComponent.h"
+#include "RotateComponent.h"
 
 PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Sphere.gpmesh"));
-    SetPosition(Vector3(0.0f, -0.0f, 100.0f));
+    SetPosition(Vector3(0.0f, -0.0f, 150.0f));
     SetScale(10.0f);
+
+	RotateComponent* rotate = new RotateComponent(this);
 
     moveComp = new MoveComponent(this);
     moveComp->SetRightKey(SDL_SCANCODE_D);
@@ -26,6 +29,11 @@ PlayerObject::PlayerObject(Game* game)
 
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
+}
+
+void PlayerObject::UpdateGameObject(float argDaltaTime)
+{
+	SDL_Log("%f",position.x);
 }
 
 void PlayerObject::SetVisible(bool visible)
