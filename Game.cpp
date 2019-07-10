@@ -20,12 +20,12 @@
 #include "SphereObject.h"
 #include "PhysicsWorld.h"
 #include "PlayerObject.h"
+#include "GameObjectManager.h"
 
 Game::Game()
 	: fps(nullptr)
 	, renderer(nullptr)
-	, isRunning(true)
-	, updatingGameObject(false)
+
 {
 }
 
@@ -100,48 +100,11 @@ void Game::GameLoop()
 }
 
 /**
-@brief  ゲームオブジェクトの追加
-@param	追加するGameObjectクラスのポインタ
-*/
-void Game::AddGameObject(GameObject* argObj)
-{
-	if (updatingGameObject)
-	{
-		pendingGameObjects.emplace_back(argObj);
-	}
-	else
-	{
-		gameObjects.emplace_back(argObj);
-	}
-}
-
-/**
-@brief  ゲームオブジェクトの削除
-@param	削除するGameObjectクラスのポインタ
-*/
-void Game::RemoveGameObject(GameObject * argObj)
-{
-	auto iter = std::find(pendingGameObjects.begin(), pendingGameObjects.end(), argObj);
-	if (iter != pendingGameObjects.end())
-	{
-		std::iter_swap(iter, pendingGameObjects.end() - 1);
-		pendingGameObjects.pop_back();
-	}
-
-	iter = std::find(gameObjects.begin(), gameObjects.end(), argObj);
-	if (iter != gameObjects.end())
-	{
-		std::iter_swap(iter, gameObjects.end() - 1);
-		gameObjects.pop_back();
-	}
-}
-
-/**
 @brief  ゲームに必要なデータのロード
 */
 void Game::LoadData()
 {
-	   // Setup lights
+	  // Setup lights
 	renderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
 	DirectionalLight& dir = renderer->GetDirectionalLight();
 	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
@@ -150,6 +113,8 @@ void Game::LoadData()
 
 	// Camera actor
 	GameObject* mCameraActor = new PlayerObject(this);
+
+	GAME_OBJECT_MANAGER->CreateInstance();
 
 	for (int i = 0; i < 50; i++)
 	{
@@ -167,10 +132,7 @@ void Game::LoadData()
 */
 void Game::UnloadData()
 {
-	while (!gameObjects.empty())
-	{
-		delete gameObjects.back();
-	}
+	GAME_OBJECT_MANAGER->DeleteInstance();
 	if (renderer)
 	{
 		renderer->UnloadData();
@@ -208,13 +170,7 @@ void Game::ProcessInput()
 		isRunning = false;
 	}
 
-	updatingGameObject = true;
-	for (auto gameObject : gameObjects)
-	{
-		gameObject->ProcessInput(state);
-	}
-	updatingGameObject = false;
-
+	GAME_OBJECT_MANAGER->ProcessInput(state);
 }
 
 /**
@@ -223,7 +179,6 @@ void Game::ProcessInput()
 void Game::GenerateOutput()
 {
 	renderer->Draw();
-
 }
 
 /**
@@ -231,19 +186,7 @@ void Game::GenerateOutput()
 */
 void Game::UpdateGame()
 {
-	updatingGameObject = true;
 	float deltaTime = fps->GetDeltaTime();
-
-	for (auto gameObject : gameObjects)
-	{
-		gameObject->Update(deltaTime);
-	}
-	updatingGameObject = false;
-
-	for (auto pending : pendingGameObjects)
-	{
-		pending->ComputeWorldTransform();
-		gameObjects.emplace_back(pending);
-	}
-	pendingGameObjects.clear();
+	
+	GAME_OBJECT_MANAGER->UpdateGameObject(deltaTime);
 }

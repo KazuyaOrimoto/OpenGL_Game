@@ -63,8 +63,6 @@
     <ClCompile Include="FPSGameObject.cpp">
       <Filter>FPSCamera</Filter>
     </ClCompile>
-    <ClCompile Include="FollowCamera.cpp" />
-    <ClCompile Include="FollowCameraObject.cpp" />
     <ClCompile Include="Collision.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
@@ -74,13 +72,36 @@
     <ClCompile Include="BoxComponent.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="ColliderComponent.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="SphereObject.cpp" />
-    <ClCompile Include="PlayerObject.cpp" />
-    <ClCompile Include="MainCamera.cpp" />
-    <ClCompile Include="AutoRunComponent.cpp" />
-    <ClCompile Include="RotateComponent.cpp" />
+    <ClCompile Include="PlayerObject.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoRunComponent.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCamera.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateComponent.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCameraObject.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBase.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -144,8 +165,6 @@
     <ClInclude Include="FPSGameObject.h">
       <Filter>FPSCamera</Filter>
     </ClInclude>
-    <ClInclude Include="FollowCamera.h" />
-    <ClInclude Include="FollowCameraObject.h" />
     <ClInclude Include="Collision.h">
       <Filter>Collider</Filter>
     </ClInclude>
@@ -155,13 +174,36 @@
     <ClInclude Include="BoxComponent.h">
       <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="SphereCollider.h" />
-    <ClInclude Include="SphereObject.h" />
-    <ClInclude Include="PlayerObject.h" />
-    <ClInclude Include="MainCamera.h" />
-    <ClInclude Include="AutoRunComponent.h" />
-    <ClInclude Include="RotateComponent.h" />
+    <ClInclude Include="PlayerObject.h">
+      <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoRunComponent.h">
+      <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCamera.h">
+      <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RotateComponent.h">
+      <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCameraObject.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="GameObjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
@@ -190,6 +232,9 @@
     </Filter>
     <Filter Include="Collider">
       <UniqueIdentifier>{016f7373-9fd9-4a05-bbd3-36e0ad2fe6f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayerObject">
+      <UniqueIdentifier>{e043dd64-5fbe-40fa-a067-148e66f6a8ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

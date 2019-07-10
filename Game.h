@@ -28,18 +28,6 @@ public:
 	@brief  ゲームループ
 	*/
 	void GameLoop();
-	
-	/**
-	@brief  ゲームオブジェクトの追加
-	@param	追加するGameObjectクラスのポインタ
-	*/
-	void AddGameObject(GameObject* argObj);
-
-	/**
-	@brief  ゲームオブジェクトの削除
-	@param	削除するGameObjectクラスのポインタ
-	*/
-	void RemoveGameObject(GameObject* argObj);
 
 	/**
 	@brief	レンダラーを取得する
@@ -78,11 +66,6 @@ private:
 	*/
 	void UnloadData();
 
-	//ゲームオブジェクトのポインタの可変長コンテナ
-	std::vector<GameObject*> gameObjects;
-	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
-	std::vector<GameObject*> pendingGameObjects;
-
 	// クラスのインスタンス
 
 	FPS* fps;
@@ -92,8 +75,6 @@ private:
 
 	//ゲームを続けるかどうか
     bool isRunning;
-	//Update中かどうか
-	bool updatingGameObject;
 
 };
 
