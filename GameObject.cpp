@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "InputSystem.h"
+#include "GameObjectManager.h"
 
 /**
 @param	ゲームクラスのポインタ
@@ -16,12 +17,12 @@ GameObject::GameObject(Game * argGame)
 	, recomputeWorldTransform(true)
 	, game(argGame)
 {
-	game->AddGameObject(this);
+	GAME_OBJECT_MANAGER->AddGameObject(this);
 }
 
 GameObject::~GameObject()
 {
-	game->RemoveGameObject(this);
+    GAME_OBJECT_MANAGER->RemoveGameObject(this);
 	while (!components.empty())
 	{
 		delete components.back();

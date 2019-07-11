@@ -17,6 +17,7 @@ void GameObjectManager::DeleteInstance()
 	if (manager != nullptr)
 	{
 		delete manager;
+        manager = nullptr;
 	}
 }
 

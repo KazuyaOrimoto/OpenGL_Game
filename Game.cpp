@@ -21,11 +21,12 @@
 #include "PhysicsWorld.h"
 #include "PlayerObject.h"
 #include "GameObjectManager.h"
+#include "GameObjectCreater.h"
 
 Game::Game()
 	: fps(nullptr)
 	, renderer(nullptr)
-
+    , isRunning(true)
 {
 }
 
@@ -70,6 +71,9 @@ bool Game::Initialize()
 	//FPSŠÇ—ƒNƒ‰ƒX‚Ì‰Šú‰»
 	fps = new FPS();
 
+    GameObjectManager::CreateInstance();
+    GameObjectCreater::CreateInstance();
+
 	LoadData();
 
 	return true;
@@ -80,6 +84,8 @@ bool Game::Initialize()
 */
 void Game::Termination()
 {
+    GameObjectManager::DeleteInstance();
+    GameObjectCreater::DeleteInstance();
 	UnloadData();
 	SDL_Quit();
 }
@@ -111,20 +117,7 @@ void Game::LoadData()
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	// Camera actor
-	GameObject* mCameraActor = new PlayerObject(this);
-
-	GAME_OBJECT_MANAGER->CreateInstance();
-
-	for (int i = 0; i < 50; i++)
-	{
-		GameObject* a = new GameObject(this);
-		a->SetScale(1000.0f);
-		a->SetPosition(Vector3(i*2000.0f, 0.0f, 0.0f));
-		MeshComponent* mc = new MeshComponent(a);
-		mc->SetMesh(renderer->GetMesh("Assets/Wall.gpmesh"));
-	}
-
+    GAME_OBJECT_CREATER->PlayerAndWallCreate(*this);
 }
 
 /**
@@ -132,7 +125,6 @@ void Game::LoadData()
 */
 void Game::UnloadData()
 {
-	GAME_OBJECT_MANAGER->DeleteInstance();
 	if (renderer)
 	{
 		renderer->UnloadData();
