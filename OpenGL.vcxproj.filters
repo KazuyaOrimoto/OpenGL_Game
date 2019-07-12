@@ -69,9 +69,6 @@
     <ClCompile Include="PhysicsWorld.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="BoxComponent.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerObject.cpp">
       <Filter>PlayerObject</Filter>
     </ClCompile>
@@ -103,6 +100,7 @@
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameObjectCreater.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -172,9 +170,6 @@
     <ClInclude Include="PhysicsWorld.h">
       <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="BoxComponent.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerObject.h">
       <Filter>PlayerObject</Filter>
     </ClInclude>
@@ -206,6 +201,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameObjectCreater.h" />
+    <ClInclude Include="BoxCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">

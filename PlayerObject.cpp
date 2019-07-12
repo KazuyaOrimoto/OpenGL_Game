@@ -33,7 +33,6 @@ PlayerObject::PlayerObject(Game* game)
 
 void PlayerObject::UpdateGameObject(float argDaltaTime)
 {
-	SDL_Log("%f",position.x);
 }
 
 void PlayerObject::SetVisible(bool visible)

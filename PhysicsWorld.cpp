@@ -1,8 +1,8 @@
 #include "PhysicsWorld.h"
 #include <algorithm>
 #include <SDL.h>
-#include "BoxComponent.h"
 #include "SphereCollider.h"
+#include "BoxCollider.h"
 #include "GameObject.h"
 
 PhysicsWorld::PhysicsWorld(Game * argGame)
@@ -10,101 +10,19 @@ PhysicsWorld::PhysicsWorld(Game * argGame)
 {
 }
 
-bool PhysicsWorld::SegmentCast(LineSegment & argLine, CollisionInfo & outCollision)
-{
-	bool collided = false;
-
-	float closestT = Math::Infinity;
-	Vector3 norm;
-
-	for (auto box : boxes)
-	{
-		float t;
-		if (Intersect(argLine, box->GetWorldBox(), t, norm))
-		{
-			if (t < closestT)
-			{
-				outCollision.point = argLine.PointOnSegment(t);
-				outCollision.normal = norm;
-				outCollision.box = box;
-				outCollision.gameObject = box->GetOwner();
-				collided = true;
-			}
-		}
-	}
-	return collided;
-}
-
-void PhysicsWorld::TestPairwise(std::function<void(GameObject*, GameObject*)> argFunc)
-{
-	for (size_t i = 0; i < boxes.size(); i++)
-	{
-		for (size_t j = i + 1; j < boxes.size(); j++)
-		{
-			BoxComponent* a = boxes[i];
-			BoxComponent* b = boxes[j];
-			if (Intersect(a->GetWorldBox(), b->GetWorldBox()))
-			{
-				argFunc(a->GetOwner(), b->GetOwner());
-			}
-		}
-
-	}
-}
-
-void PhysicsWorld::TestSweepAndPrune(std::function<void(GameObject*, GameObject*)> argFunc)
-{
-	std::sort(boxes.begin(), boxes.end(), [](BoxComponent* a, BoxComponent*b)
-		{
-			return a->GetWorldBox().min.x < b->GetWorldBox().min.x;
-		});
-
-	for (size_t i = 0; i < boxes.size(); i++)
-	{
-		BoxComponent* a = boxes[i];
-		float max = a->GetWorldBox().max.x;
-		for (size_t j = i + 1; j < boxes.size(); j++)
-		{
-			BoxComponent*b = boxes[j];
-
-			if (b->GetWorldBox().min.x > max)
-			{
-				break;
-			}
-			else if (Intersect(a->GetWorldBox(), b->GetWorldBox()))
-			{
-				argFunc(a->GetOwner(), b->GetOwner());
-			}
-		}
-	}
-}
 
 void PhysicsWorld::HitCheck()
 {
-	for (size_t i = 0; i < spheres.size(); i++)
-	{
-		for (size_t j =i + 1; j < spheres.size(); j++)
-		{
-			bool hit = Intersect(spheres[i]->GetWorldSphere(), spheres[j]->GetWorldSphere());
-
-			if (hit)
-			{
-				SphereCollider* sphereA = spheres[i];
-				SphereCollider* sphereB = spheres[j];
-
-				sphereA->OnCollision(*(sphereB->GetOwner()));
-				sphereB->OnCollision(*(sphereA->GetOwner()));
-			}
-		}
-	}
+	SphereAndSphere();
+	
 }
 
-void PhysicsWorld::AddBox(BoxComponent * argBox)
+void PhysicsWorld::AddBox(BoxCollider * argBox)
 {
 	boxes.emplace_back(argBox);
 }
 
-void PhysicsWorld::RemoveBox(BoxComponent * argBox)
+void PhysicsWorld::RemoveBox(BoxCollider * argBox)
 {
 	auto iter = std::find(boxes.begin(), boxes.end(), argBox);
 	if (iter != boxes.end())
@@ -128,4 +46,61 @@ void PhysicsWorld::RemoveSphere(SphereCollider * argSphere)
 		spheres.pop_back();
 	}
 
+}
+
+void PhysicsWorld::SphereAndSphere()
+{
+	for (size_t i = 0; i < spheres.size(); i++)
+	{
+		for (size_t j = i + 1; j < spheres.size(); j++)
+		{
+			bool hit = Intersect(spheres[i]->GetWorldSphere(), spheres[j]->GetWorldSphere());
+
+			if (hit)
+			{
+				SphereCollider* sphereA = spheres[i];
+				SphereCollider* sphereB = spheres[j];
+
+				sphereA->OnCollision(*(sphereB->GetOwner()));
+				sphereB->OnCollision(*(sphereA->GetOwner()));
+			}
+		}
+	}
+}
+
+void PhysicsWorld::BoxAndBox()
+{
+	for (size_t i = 0; i < boxes.size(); i++)
+	{
+		for (size_t j = i + 1; j < boxes.size(); j++)
+		{
+			bool hit = Intersect(boxes[i]->GetWorldBox(), boxes[j]->GetWorldBox());
+
+			if (hit)
+			{
+				BoxCollider* boxA = boxes[i];
+				BoxCollider* boxB = boxes[j];
+
+				boxA->OnCollision(*(boxB->GetOwner()));
+				boxB->OnCollision(*(boxA->GetOwner()));
+			}
+		}
+	}
+}
+
+void PhysicsWorld::SphereAndBox()
+{
+	for (size_t i = 0; i < spheres.size(); i++)
+	{
+		for (size_t j = 0; j < boxes.size(); j++)
+		{
+			bool hit = Intersect(spheres[i]->GetWorldSphere(), boxes[j]->GetWorldBox());
+
+			if (hit)
+			{
+				spheres[i]->OnCollision(*(boxes[j]->GetOwner()));
+				boxes[j]->OnCollision(*(spheres[i]->GetOwner()));
+			}
+		}
+	}
 }

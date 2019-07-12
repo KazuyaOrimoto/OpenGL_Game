@@ -10,15 +10,8 @@ RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
 void RotateComponent::Update(float argDeltaTime)
 {
 	Vector3 pos = owner->GetPosition();
-	float rad;
-	if (right)
-	{
-		rad = Math::ToRadians(90.0f);
-	}
-	else
-	{
-		rad = Math::ToRadians(-90.0f);
-	}
+	//このフレームで入力されたのが右なら右回転、左なら左回転用の角度を代入する
+	float rad = right ? Math::ToRadians(90.0f) : Math::ToRadians(-90.0f);
 	if (pos.y > 850)
 	{
 		Quaternion rot = owner->GetRotation();

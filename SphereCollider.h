@@ -17,9 +17,9 @@ public:
 	Sphere GetWorldSphere() const { return worldSphere; }
 
 private:
-	//オブジェクトに設定する用の球（球の中心をオブジェクトの中心にする）
+	//オブジェクトに設定する用の球（中心をオブジェクトの中心にする）
 	Sphere objectSphere;
-	//当たり判定するときに使う球（球の中心をワールド座標の中心にする）
+	//当たり判定するときに使う球（中心をワールド座標の中心にする）
 	Sphere worldSphere;
 
 };
