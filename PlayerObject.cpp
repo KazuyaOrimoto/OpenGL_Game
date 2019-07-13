@@ -31,10 +31,18 @@ PlayerObject::PlayerObject(Game* game)
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
 }
 
+/**
+@brief	ゲームオブジェクトのアップデート
+@param	最後のフレームを完了するのに要した時間
+*/
 void PlayerObject::UpdateGameObject(float argDaltaTime)
 {
 }
 
+/**
+@brief	描画するかどうかを設定する
+@param	true : 描画する , false : 描画しない
+*/
 void PlayerObject::SetVisible(bool visible)
 {
     meshComp->SetVisible(visible);

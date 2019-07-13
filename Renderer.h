@@ -29,8 +29,20 @@ class VertexArray;
 class Renderer
 {
 public:
+	/**
+	@brief  インスタンスを取得する
+	@return Rendererクラスのインスタンス
+	*/
 	static Renderer* GetInstance() { return renderer; }
+
+	/**
+	@brief  インスタンスを作成する
+	*/
 	static void CreateInstance();
+
+	/**
+	@brief  インスタンスを削除する
+	*/
 	static void DeleteInstance();
 
 	/**

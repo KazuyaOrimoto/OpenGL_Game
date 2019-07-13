@@ -26,6 +26,9 @@ Renderer::~Renderer()
 {
 }
 
+/**
+@brief  インスタンスを作成する
+*/
 void Renderer::CreateInstance()
 {
 	if (renderer == nullptr)
@@ -34,6 +37,10 @@ void Renderer::CreateInstance()
 	}
 }
 
+
+/**
+@brief  インスタンスを削除する
+*/
 void Renderer::DeleteInstance()
 {
 	if (renderer != nullptr)
