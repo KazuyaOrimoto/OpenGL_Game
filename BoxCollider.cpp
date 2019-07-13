@@ -5,7 +5,6 @@
 #include "Game.h"
 #include "PhysicsWorld.h"
 
-
 BoxCollider::BoxCollider(GameObject* argOwner, int argUpdateOrder, int argCollisionOrder)
 	: ColliderComponent(argOwner, argUpdateOrder, argCollisionOrder)
 	, objectBox({Vector3::Zero,Vector3::Zero})
@@ -14,13 +13,15 @@ BoxCollider::BoxCollider(GameObject* argOwner, int argUpdateOrder, int argCollis
 	owner->GetGame()->GetPhysicsWorld()->AddBox(this);
 }
 
-
 BoxCollider::~BoxCollider()
 {
+    owner->GetGame()->GetPhysicsWorld()->RemoveBox(this);
 }
 
 void BoxCollider::OnUpdateWorldTransform()
 {
+    worldBox.min = (objectBox.min * owner->GetScale()) + owner->GetPosition();
+    worldBox.max = (objectBox.max * owner->GetScale()) + owner->GetPosition();
 }
 
 void BoxCollider::OnCollision(const GameObject & argHitObject)

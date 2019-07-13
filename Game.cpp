@@ -3,23 +3,9 @@
 #include <glew.h>
 #include <algorithm>
 #include "FPS.h"
-#include "GameObject.h"
-#include "SpriteComponent.h"
-#include "Texture.h"
-#include "Ship.h"
-#include "Shader.h"
-#include "VertexArray.h"
 #include "Renderer.h"
-#include "PlaneObject.h"
-#include "MeshComponent.h"
-#include "Mesh.h"
-#include "CameraObject.h"
 #include "InputSystem.h"
-#include "FPSGameObject.h"
-#include "FollowCameraObject.h"
-#include "SphereObject.h"
 #include "PhysicsWorld.h"
-#include "PlayerObject.h"
 #include "GameObjectManager.h"
 #include "GameObjectCreater.h"
 

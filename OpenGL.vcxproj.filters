@@ -100,7 +100,10 @@
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameObjectCreater.cpp" />
-    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -201,7 +204,10 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameObjectCreater.h" />
-    <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">

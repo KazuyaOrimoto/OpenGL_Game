@@ -4,6 +4,7 @@
 #include "MeshComponent.h"
 #include "Game.h"
 #include "Renderer.h"
+#include "BoxObject.h"
 
 GameObjectCreater* GameObjectCreater::creater = nullptr;
 
@@ -28,7 +29,6 @@ GameObjectCreater::GameObjectCreater()
 {
 }
 
-
 GameObjectCreater::~GameObjectCreater()
 {
 }
@@ -37,6 +37,8 @@ void GameObjectCreater::PlayerAndWallCreate(Game& game)
 {
     // Camera actor
     GameObject* mCameraActor = new PlayerObject(&game);
+    GameObject* box = new BoxObject(&game);
+
 
     for (int i = 0; i < 50; i++)
     {
@@ -46,4 +48,6 @@ void GameObjectCreater::PlayerAndWallCreate(Game& game)
         MeshComponent* mc = new MeshComponent(a);
         mc->SetMesh(game.GetRenderer()->GetMesh("Assets/Wall.gpmesh"));
     }
+
+
 }

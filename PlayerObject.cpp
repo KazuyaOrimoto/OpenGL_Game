@@ -13,7 +13,7 @@ PlayerObject::PlayerObject(Game* game)
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Sphere.gpmesh"));
-    SetPosition(Vector3(0.0f, -0.0f, 150.0f));
+    SetPosition(Vector3(0.0f, 0.0f, 150.0f));
     SetScale(10.0f);
 
 	RotateComponent* rotate = new RotateComponent(this);

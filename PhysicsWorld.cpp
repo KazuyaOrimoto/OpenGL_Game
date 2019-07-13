@@ -14,7 +14,8 @@ PhysicsWorld::PhysicsWorld(Game * argGame)
 void PhysicsWorld::HitCheck()
 {
 	SphereAndSphere();
-	
+    BoxAndBox();
+    SphereAndBox();
 }
 
 void PhysicsWorld::AddBox(BoxCollider * argBox)
