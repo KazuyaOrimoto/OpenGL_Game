@@ -6,9 +6,7 @@
 
 class FPS;
 class GameObject;
-class Renderer;
 class InputSystem;
-class PhysicsWorld;
 
 class Game
 {
@@ -28,18 +26,6 @@ public:
 	@brief  ゲームループ
 	*/
 	void GameLoop();
-
-	/**
-	@brief	レンダラーを取得する
-	@param	Redererクラスのポインタ
-	*/
-    Renderer* GetRenderer() { return renderer; }
-
-    /**
-    @brief	アタリ判定空間を取得する
-    @param	PhysicsWorldクラスのポインタ
-    */
-    PhysicsWorld* GetPhysicsWorld() { return physicsWorld; }
 
 private:
 	/**
@@ -69,8 +55,6 @@ private:
 	// クラスのインスタンス
 
 	FPS* fps;
-    Renderer* renderer;
-    PhysicsWorld* physicsWorld;
 	InputSystem* inputSystem;
 
 	//ゲームを続けるかどうか

@@ -12,7 +12,7 @@ PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)
 {
     meshComp = new MeshComponent(this);
-    meshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Sphere.gpmesh"));
+    meshComp->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
     SetPosition(Vector3(0.0f, 0.0f, 150.0f));
     SetScale(10.0f);
 

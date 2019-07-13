@@ -5,6 +5,9 @@
 #include "Math.h"
 #include "Collision.h"
 
+#define PHYSICS PhysicsWorld::GetInstance()
+
+
 class Game;
 class GameObject;
 class BoxCollider;
@@ -13,8 +16,11 @@ class SphereCollider;
 class PhysicsWorld
 {
 public:
-    PhysicsWorld(Game* argGame);
+	static PhysicsWorld* GetInstance() { return physics; }
+	static void CreateInstance();
+	static void DeleteInstance();
 
+	//当たり判定
     void HitCheck();
 
     void AddBox(BoxCollider* argBox);
@@ -23,12 +29,15 @@ public:
 	void RemoveSphere(SphereCollider* argSphere);
 
 private:
+	//コンストラクタの隠蔽
+	PhysicsWorld();
+
+	static PhysicsWorld* physics;
 
 	void SphereAndSphere();
 	void BoxAndBox();
 	void SphereAndBox();
 
-    Game * game;
     std::vector<BoxCollider*> boxes;
 	std::vector<SphereCollider*> spheres;
 

@@ -16,12 +16,12 @@ SpriteComponent::SpriteComponent(GameObject * argOwner, int argDrawOrder)
     ,textureWidth(0)
     ,textureHeight(0)
 {
-    owner->GetGame()->GetRenderer()->AddSprite(this);
+	RENDERER->AddSprite(this);
 }
 
 SpriteComponent::~SpriteComponent()
 {
-    owner->GetGame()->GetRenderer()->RemoveSprite(this);
+	RENDERER->RemoveSprite(this);
 }
 
 /**

@@ -5,11 +5,29 @@
 #include "BoxCollider.h"
 #include "GameObject.h"
 
-PhysicsWorld::PhysicsWorld(Game * argGame)
-	:game(argGame)
+PhysicsWorld* PhysicsWorld::physics = nullptr;
+
+PhysicsWorld::PhysicsWorld()
 {
 }
 
+
+void PhysicsWorld::CreateInstance()
+{
+	if (physics == nullptr)
+	{
+		physics = new PhysicsWorld();
+	}
+}
+
+void PhysicsWorld::DeleteInstance()
+{
+	if (physics != nullptr)
+	{
+		delete physics;
+		physics = nullptr;
+	}
+}
 
 void PhysicsWorld::HitCheck()
 {

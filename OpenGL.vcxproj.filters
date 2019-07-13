@@ -96,14 +96,24 @@
     <ClCompile Include="SphereObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="SceneBase.cpp" />
-    <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="GameObjectManager.cpp" />
-    <ClCompile Include="GameObjectCreater.cpp" />
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="BoxObject.cpp" />
+    <ClCompile Include="GameObjectCreater.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneBase.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -200,14 +210,24 @@
     <ClInclude Include="SphereObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="SceneBase.h" />
-    <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="GameObjectCreater.h" />
     <ClInclude Include="BoxCollider.h">
       <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="BoxObject.h" />
+    <ClInclude Include="GameObjectCreater.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneBase.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
@@ -239,6 +259,9 @@
     </Filter>
     <Filter Include="PlayerObject">
       <UniqueIdentifier>{e043dd64-5fbe-40fa-a067-148e66f6a8ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{df0532af-3c8b-4d63-8ea0-ddaca7007ebe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

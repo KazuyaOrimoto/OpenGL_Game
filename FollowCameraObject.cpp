@@ -10,7 +10,7 @@ FollowCameraObject::FollowCameraObject(Game* game)
 	:GameObject(game)
 {
 	mMeshComp = new MeshComponent(this);
-	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Sphere.gpmesh"));
+	mMeshComp->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
 	SetPosition(Vector3(0.0f, -0.0f, 100.0f));
 	//SetPosition(Vector3(200.0f, -75.0f, 0.0f));
 	SetScale(10.0f);

@@ -10,12 +10,12 @@ BoxCollider::BoxCollider(GameObject* argOwner, int argUpdateOrder, int argCollis
 	, objectBox({Vector3::Zero,Vector3::Zero})
 	, worldBox({ Vector3::Zero,Vector3::Zero})
 {
-	owner->GetGame()->GetPhysicsWorld()->AddBox(this);
+	PHYSICS->AddBox(this);
 }
 
 BoxCollider::~BoxCollider()
 {
-    owner->GetGame()->GetPhysicsWorld()->RemoveBox(this);
+	PHYSICS->RemoveBox(this);
 }
 
 void BoxCollider::OnUpdateWorldTransform()

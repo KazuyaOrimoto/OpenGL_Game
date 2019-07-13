@@ -9,7 +9,7 @@ BoxObject::BoxObject(Game* game)
     :GameObject(game)
 {
     meshComp = new MeshComponent(this);
-    meshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Cube.gpmesh"));
+    meshComp->SetMesh(RENDERER->GetMesh("Assets/Cube.gpmesh"));
     boxCollider = new BoxCollider(this);
     boxCollider->SetObjectBox(AABB(Vector3(-0.5f, -0.5f, -0.5f), Vector3(0.5f, 0.5f, 0.5f)));
     SetPosition(Vector3(2000.0f, -75.0f, 150.0f));

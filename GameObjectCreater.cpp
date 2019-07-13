@@ -46,7 +46,7 @@ void GameObjectCreater::PlayerAndWallCreate(Game& game)
         a->SetScale(1000.0f);
         a->SetPosition(Vector3(i*2000.0f, 0.0f, 0.0f));
         MeshComponent* mc = new MeshComponent(a);
-        mc->SetMesh(game.GetRenderer()->GetMesh("Assets/Wall.gpmesh"));
+        mc->SetMesh(RENDERER->GetMesh("Assets/Wall.gpmesh"));
     }
 
 

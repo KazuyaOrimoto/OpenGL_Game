@@ -9,7 +9,7 @@ SphereObject::SphereObject(Game* game)
 	:GameObject(game)
 {
 	meshComp = new MeshComponent(this);
-	meshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Sphere.gpmesh"));
+	meshComp->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
 	sphereCollider = new SphereCollider(this);
 	sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f,0.0f,0.0f),1.0f));
 	SetPosition(Vector3(200.0f,-75.0f,0.0f));

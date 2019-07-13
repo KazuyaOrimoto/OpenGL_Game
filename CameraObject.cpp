@@ -27,5 +27,5 @@ void CameraObject::UpdateGameObject(float deltaTime)
     Vector3 up = Vector3::UnitZ;
 
     Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
-    GetGame()->GetRenderer()->SetViewMatrix(view);
+	RENDERER->SetViewMatrix(view);
 }

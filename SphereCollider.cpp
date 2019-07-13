@@ -10,13 +10,13 @@ SphereCollider::SphereCollider(GameObject* argOwner, int argUpdateOrder, int arg
 	, objectSphere({ Vector3::Zero,0.0f })
 	, worldSphere ({ Vector3::Zero,0.0f })
 {
-	owner->GetGame()->GetPhysicsWorld()->AddSphere(this);
+	PHYSICS->AddSphere(this);
 }
 
 
 SphereCollider::~SphereCollider()
 {
-	owner->GetGame()->GetPhysicsWorld()->RemoveSphere(this);
+	PHYSICS->RemoveSphere(this);
 }
 
 void SphereCollider::OnUpdateWorldTransform()

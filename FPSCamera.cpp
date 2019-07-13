@@ -36,8 +36,7 @@ void FPSCamera::Update(float deltaTime)
 
 		Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
 
-		Game* game = owner->GetGame();
-		game->GetRenderer()->SetViewMatrix(view);
+		RENDERER->SetViewMatrix(view);
 	}
 
 	if (!Math::NearZero(angularSpeed))

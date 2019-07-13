@@ -1,10 +1,11 @@
 #pragma once
-
 #include <string>
 #include <vector>
 #include <unordered_map>
 #include <SDL.h>
 #include "Math.h"
+
+#define RENDERER Renderer::GetInstance()
 
 //平行光源用の構造体
 struct DirectionalLight
@@ -28,8 +29,9 @@ class VertexArray;
 class Renderer
 {
 public:
-    Renderer(Game* argGame);
-    ~Renderer();
+	static Renderer* GetInstance() { return renderer; }
+	static void CreateInstance();
+	static void DeleteInstance();
 
 	/**
 	@brief  初期化処理
@@ -120,6 +122,13 @@ public:
 	float GetScreenHeight() const { return screenHeight; }
 
 private:
+	//コンストラクタ、デストラクタの隠蔽
+	Renderer();
+	~Renderer();
+
+	//自分のインスタンス
+	static Renderer* renderer;
+
 	/**
 	@brief  シェーダーの読み込み
 	@return true : 成功 , false : 失敗
@@ -147,7 +156,6 @@ private:
 
 	//クラスのポインタ
 
-    Game* game;
     Shader* spriteShader;
     VertexArray* spriteVerts;
     Shader* meshShader;

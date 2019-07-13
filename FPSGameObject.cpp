@@ -21,7 +21,7 @@ FPSGameObject::FPSGameObject(Game* game)
 	mFPSModel = new GameObject(game);
 	mFPSModel->SetScale(0.75f);
 	mMeshComp = new MeshComponent(mFPSModel);
-	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/Rifle.gpmesh"));
+	mMeshComp->SetMesh(RENDERER->GetMesh("Assets/Rifle.gpmesh"));
 }
 
 void FPSGameObject::UpdateGameObject(float deltaTime)

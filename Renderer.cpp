@@ -8,9 +8,10 @@
 #include "MeshComponent.h"
 #include <glew.h>
 
-Renderer::Renderer(Game* argGame)
-    : game(argGame)
-    , spriteShader(nullptr)
+Renderer* Renderer::renderer = nullptr;
+
+Renderer::Renderer()
+    : spriteShader(nullptr)
 	, spriteVerts(nullptr)
     , meshShader(nullptr)
 	, view(Matrix4::Identity)
@@ -23,6 +24,23 @@ Renderer::Renderer(Game* argGame)
 
 Renderer::~Renderer()
 {
+}
+
+void Renderer::CreateInstance()
+{
+	if (renderer == nullptr)
+	{
+		renderer = new Renderer();
+	}
+}
+
+void Renderer::DeleteInstance()
+{
+	if (renderer != nullptr)
+	{
+		delete renderer;
+		renderer = nullptr;
+	}
 }
 
 /**

@@ -11,7 +11,6 @@
 
 Game::Game()
 	: fps(nullptr)
-	, renderer(nullptr)
     , isRunning(true)
 {
 }
@@ -35,16 +34,15 @@ bool Game::Initialize()
 	}
 
 	//ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»
-	renderer = new Renderer(this);
-	if (!renderer->Initialize(1024.0f, 768.0f))
+	Renderer::CreateInstance();
+	if (!RENDERER->Initialize(1024.0f, 768.0f))
 	{
 		SDL_Log("Failed to initialize renderer");
-		delete renderer;
-		renderer = nullptr;
+		Renderer::DeleteInstance();
 		return false;
 	}
 
-	physicsWorld = new PhysicsWorld(this);
+	PhysicsWorld::CreateInstance();
 
 	inputSystem = new InputSystem();
 	//inputSystem->SetRelativeMouseMode(true);
@@ -70,9 +68,11 @@ bool Game::Initialize()
 */
 void Game::Termination()
 {
+	UnloadData();
     GameObjectManager::DeleteInstance();
     GameObjectCreater::DeleteInstance();
-	UnloadData();
+	Renderer::DeleteInstance();
+	PhysicsWorld::DeleteInstance();
 	SDL_Quit();
 }
 
@@ -86,7 +86,7 @@ void Game::GameLoop()
 		ProcessInput();
 		fps->Update();
 		UpdateGame();
-		physicsWorld->HitCheck();
+		PHYSICS->HitCheck();
 		GenerateOutput();
 	}
 }
@@ -97,8 +97,8 @@ void Game::GameLoop()
 void Game::LoadData()
 {
 	  // Setup lights
-	renderer->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
-	DirectionalLight& dir = renderer->GetDirectionalLight();
+	RENDERER->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
@@ -111,9 +111,9 @@ void Game::LoadData()
 */
 void Game::UnloadData()
 {
-	if (renderer)
+	if (RENDERER != nullptr)
 	{
-		renderer->UnloadData();
+		RENDERER->UnloadData();
 	}
 }
 
@@ -156,7 +156,7 @@ void Game::ProcessInput()
 */
 void Game::GenerateOutput()
 {
-	renderer->Draw();
+	RENDERER->Draw();
 }
 
 /**
