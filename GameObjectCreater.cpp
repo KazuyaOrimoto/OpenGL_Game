@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "BoxObject.h"
+#include "ObstacleObject.h"
 
 GameObjectCreater* GameObjectCreater::creater = nullptr;
 
@@ -37,8 +38,8 @@ void GameObjectCreater::PlayerAndWallCreate(Game& game)
 {
     // Camera actor
     GameObject* mCameraActor = new PlayerObject(&game);
-    GameObject* box = new BoxObject(&game);
 
+    GameObject* box = new ObstacleObject(&game);
 
     for (int i = 0; i < 50; i++)
     {

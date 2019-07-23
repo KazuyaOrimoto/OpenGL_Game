@@ -114,6 +114,7 @@
     <ClCompile Include="SceneBase.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="ObstacleObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="SceneBase.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="ObstacleObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
