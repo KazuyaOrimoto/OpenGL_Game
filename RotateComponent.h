@@ -17,8 +17,14 @@ public:
 	*/
 	virtual void ProcessInput(const struct InputState& state);
 
+	int GetTorque() { return torque; }
+	void ResetTorque() { torque = 0; }
+
 private:
+	void AddTorque();
 
 	bool right;
+	//‰ñ“]‚Å“¾‚½—Í
+	int  torque;
 };
 

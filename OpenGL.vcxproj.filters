@@ -114,7 +114,12 @@
     <ClCompile Include="SceneBase.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ObstacleObject.cpp" />
+    <ClCompile Include="ObstacleManager.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleObject.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -229,7 +234,12 @@
     <ClInclude Include="SceneBase.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ObstacleObject.h" />
+    <ClInclude Include="ObstacleManager.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleObject.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
@@ -264,6 +274,9 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{df0532af-3c8b-4d63-8ea0-ddaca7007ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obstacle">
+      <UniqueIdentifier>{77fa87bd-9d0d-4030-a43a-f415dee437de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

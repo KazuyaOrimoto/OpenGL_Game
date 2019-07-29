@@ -3,7 +3,9 @@
 #include "InputSystem.h"
 
 RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
-	:Component(argOwner)
+	: Component(argOwner)
+	, right(true)
+	, torque(0)
 {
 }
 
@@ -24,6 +26,7 @@ void RotateComponent::Update(float argDeltaTime)
 		rot = Quaternion::Concatenate(rot,inc);
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x,850.0f,pos.z));
+		AddTorque();
 	}
 	//ç∂ÇÃï«Ç…Ç¬Ç¢ÇΩÇ∆Ç´
 	else if (pos.y < -850)
@@ -33,7 +36,7 @@ void RotateComponent::Update(float argDeltaTime)
 		rot = Quaternion::Concatenate(rot, inc);
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x, -850.0f, pos.z));
-
+		AddTorque();
 	}
 	//è„ÇÃï«Ç…Ç¬Ç¢ÇΩÇ∆Ç´
 	else if (pos.z > 1850)
@@ -43,7 +46,7 @@ void RotateComponent::Update(float argDeltaTime)
 		rot = Quaternion::Concatenate(rot, inc);
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x, pos.y, 1850));
-
+		AddTorque();
 	}
 	//â∫ÇÃï«Ç…Ç¬Ç¢ÇΩÇ∆Ç´
 	else if (pos.z < 150)
@@ -53,7 +56,9 @@ void RotateComponent::Update(float argDeltaTime)
 		rot = Quaternion::Concatenate(rot, inc);
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x, pos.y, 150));
+		AddTorque();
 	}
+
 }
 
 /**
@@ -71,3 +76,33 @@ void RotateComponent::ProcessInput(const InputState & state)
 		right = false;
 	}
 }
+
+
+void RotateComponent::AddTorque()
+{
+	if (right)
+	{
+		if (torque < 0)
+		{
+			torque = 0;
+			torque++;
+		}
+		else
+		{
+			torque++;
+		}
+	}
+	else
+	{
+		if (torque > 0)
+		{
+			torque = 0;
+			torque--;
+		}
+		else
+		{
+			torque--;
+		}
+	}
+}
+

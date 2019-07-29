@@ -7,7 +7,6 @@
 
 #define PHYSICS PhysicsWorld::GetInstance()
 
-
 class Game;
 class GameObject;
 class BoxCollider;

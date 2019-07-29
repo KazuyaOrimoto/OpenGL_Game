@@ -14,6 +14,7 @@ ObstacleObject::ObstacleObject(Game* game)
 	boxCollider = new BoxCollider(this);
 	boxCollider->SetObjectBox(AABB(Vector3(-0.5f, -0.5f, -0.5f), Vector3(0.5f, 0.5f, 0.5f)));
 	SetScale(250.0f);
+	SetPosition(Vector3(10000.0f, 1000.0f, 150.0f));
 }
 
 
