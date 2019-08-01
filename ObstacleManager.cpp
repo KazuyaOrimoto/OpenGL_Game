@@ -21,12 +21,12 @@ void ObstacleManager::DeleteInstance()
 	}
 }
 
-void ObstacleManager::AddOnstacle(ObstacleManager* argObstacle)
+void ObstacleManager::AddOnstacle(ObstacleObject* argObstacle)
 {
 	obstacles.emplace_back(argObstacle);
 }
 
-void ObstacleManager::RemoveObstacle(ObstacleManager* argObstacle)
+void ObstacleManager::RemoveObstacle(ObstacleObject* argObstacle)
 {
 	auto iter = std::find(obstacles.begin(), obstacles.end(), argObstacle);
 	if (iter != obstacles.end())
@@ -34,6 +34,11 @@ void ObstacleManager::RemoveObstacle(ObstacleManager* argObstacle)
 		std::iter_swap(iter, obstacles.end() - 1);
 		obstacles.pop_back();
 	}
+}
+
+void ObstacleManager::HitObstacle(ObstacleObject * argObstacle)
+{
+
 }
 
 ObstacleManager::ObstacleManager()

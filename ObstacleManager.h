@@ -16,8 +16,10 @@ public:
 
 	void AddPlayer(PlayerObject* argPlayer) { player = argPlayer; }
 	void RemovePlayer() { player = nullptr; }
-	void AddOnstacle(ObstacleManager* argObstacle);
-	void RemoveObstacle(ObstacleManager* argObstacle);
+	void AddOnstacle(ObstacleObject* argObstacle);
+	void RemoveObstacle(ObstacleObject* argObstacle);
+
+    void HitObstacle(ObstacleObject* argObstacle);
 
 private:
 	ObstacleManager();

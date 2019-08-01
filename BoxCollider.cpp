@@ -24,6 +24,3 @@ void BoxCollider::OnUpdateWorldTransform()
     worldBox.max = (objectBox.max * owner->GetScale()) + owner->GetPosition();
 }
 
-void BoxCollider::OnCollision(const GameObject & argHitObject)
-{
-}

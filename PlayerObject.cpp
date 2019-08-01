@@ -7,6 +7,7 @@
 #include "MainCamera.h"
 #include "AutoRunComponent.h"
 #include "RotateComponent.h"
+#include "ObstacleManager.h"
 
 PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)
@@ -16,6 +17,7 @@ PlayerObject::PlayerObject(Game* game)
     SetPosition(Vector3(0.0f, 0.0f, 150.0f));
     SetScale(10.0f);
 
+    OBSTACLE_MANAGER->AddPlayer(this);
 	RotateComponent* rotate = new RotateComponent(this);
 
     moveComp = new MoveComponent(this);
@@ -29,6 +31,8 @@ PlayerObject::PlayerObject(Game* game)
 
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
+
+    tag = "Player";
 }
 
 /**

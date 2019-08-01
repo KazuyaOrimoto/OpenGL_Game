@@ -12,9 +12,6 @@ public:
 
 	int GetCollisionOrder() const { return collisionOrder; }
 
-	virtual void OnCollision(const GameObject& argHitObject) {}
-
-	virtual void OnTrigger(const GameObject& argTriggerObject) {}
 
 	//オブジェクトが球に当たった時にめりこみからずらす処理
 	virtual void ShiftObject(const Sphere& argHirSphere) {}

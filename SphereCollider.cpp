@@ -28,6 +28,3 @@ void SphereCollider::OnUpdateWorldTransform()
 
 }
 
-void SphereCollider::OnCollision(const GameObject & argHitObject)
-{
-}

@@ -80,8 +80,8 @@ void PhysicsWorld::SphereAndSphere()
 				SphereCollider* sphereA = spheres[i];
 				SphereCollider* sphereB = spheres[j];
 
-				sphereA->OnCollision(*(sphereB->GetOwner()));
-				sphereB->OnCollision(*(sphereA->GetOwner()));
+				sphereA->GetOwner()->OnCollision(*(sphereB->GetOwner()));
+				sphereB->GetOwner()->OnCollision(*(sphereA->GetOwner()));
 			}
 		}
 	}
@@ -100,8 +100,8 @@ void PhysicsWorld::BoxAndBox()
 				BoxCollider* boxA = boxes[i];
 				BoxCollider* boxB = boxes[j];
 
-				boxA->OnCollision(*(boxB->GetOwner()));
-				boxB->OnCollision(*(boxA->GetOwner()));
+				boxA->GetOwner()->OnCollision(*(boxB->GetOwner()));
+				boxB->GetOwner()->OnCollision(*(boxA->GetOwner()));
 			}
 		}
 	}
@@ -117,8 +117,8 @@ void PhysicsWorld::SphereAndBox()
 
 			if (hit)
 			{
-				spheres[i]->OnCollision(*(boxes[j]->GetOwner()));
-				boxes[j]->OnCollision(*(spheres[i]->GetOwner()));
+				spheres[i]->GetOwner()->OnCollision(*(boxes[j]->GetOwner()));
+				boxes[j]->GetOwner()->OnCollision(*(spheres[i]->GetOwner()));
 			}
 		}
 	}

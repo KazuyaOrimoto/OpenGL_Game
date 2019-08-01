@@ -11,8 +11,6 @@ public:
 	
 	void OnUpdateWorldTransform() override;
 
-	virtual void OnCollision(const GameObject& argHitObject) override;
-
 	void SetObjectSphere(const Sphere& argSphere) { objectSphere = argSphere; }
 	Sphere GetWorldSphere() const { return worldSphere; }
 

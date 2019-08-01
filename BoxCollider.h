@@ -8,7 +8,6 @@ public:
 
 	void OnUpdateWorldTransform() override;
 
-	virtual void OnCollision(const GameObject& argHitObject) override;
 
 	void SetObjectBox(const AABB& argBox) { objectBox = argBox; }
 	AABB GetWorldBox() const { return worldBox; }

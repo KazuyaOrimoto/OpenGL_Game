@@ -49,6 +49,4 @@ void GameObjectCreater::PlayerAndWallCreate(Game& game)
         MeshComponent* mc = new MeshComponent(a);
         mc->SetMesh(RENDERER->GetMesh("Assets/Wall.gpmesh"));
     }
-
-
 }
