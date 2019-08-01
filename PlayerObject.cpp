@@ -8,6 +8,7 @@
 #include "AutoRunComponent.h"
 #include "RotateComponent.h"
 #include "ObstacleManager.h"
+#include "ObstacleObject.h"
 
 PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)
@@ -18,7 +19,7 @@ PlayerObject::PlayerObject(Game* game)
     SetScale(10.0f);
 
     OBSTACLE_MANAGER->AddPlayer(this);
-	RotateComponent* rotate = new RotateComponent(this);
+	rotate = new RotateComponent(this);
 
     moveComp = new MoveComponent(this);
     moveComp->SetRightKey(SDL_SCANCODE_D);
@@ -50,5 +51,29 @@ void PlayerObject::UpdateGameObject(float argDaltaTime)
 void PlayerObject::SetVisible(bool visible)
 {
     meshComp->SetVisible(visible);
+}
+
+void PlayerObject::OnCollision(GameObject & argHitObject)
+{
+	if (argHitObject.GetTag() == "Obstacle")
+	{
+		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
+		ObstacleObject* obstacle = dynamic_cast<ObstacleObject*>(&argHitObject);
+		HitObstacle(*obstacle);
+	}
+}
+
+void PlayerObject::HitObstacle(const ObstacleObject & argHitObstacle)
+{
+	//áŠQ•¨‚Ì•û‚ª‹­‚©‚Á‚½‚ç
+	if (rotate->GetTorque() < argHitObstacle.GetHardness)
+	{
+
+	}
+	//©•ª‚Ì•û‚ª—Í‚ª‹­‚©‚Á‚½‚ç
+	else
+	{
+
+	}
 }
 

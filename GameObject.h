@@ -143,9 +143,11 @@ public:
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
-    virtual void OnCollision(const GameObject& argHitObject) {}
+	std::string GetTag() const { return tag; }
 
-    virtual void OnTrigger(const GameObject& argTriggerObject) {}
+    virtual void OnCollision(GameObject& argHitObject) {}
+
+    virtual void OnTrigger(GameObject& argTriggerObject) {}
 
 protected:
 	//ゲームオブジェクトの状態

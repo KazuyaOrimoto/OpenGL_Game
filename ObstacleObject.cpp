@@ -5,10 +5,13 @@
 #include "Collision.h"
 #include "Renderer.h"
 #include "ObstacleManager.h"
+#include "PlayerObject.h"
+#include "RotateComponent.h"
 
 
 ObstacleObject::ObstacleObject(Game* game)
 	:GameObject(game)
+	,hardness(0)
 {
 	meshComp = new MeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/Obstacle.gpmesh"));
@@ -21,7 +24,33 @@ ObstacleObject::ObstacleObject(Game* game)
     tag = "Obstacle";
 }
 
-
 ObstacleObject::~ObstacleObject()
 {
+}
+
+void ObstacleObject::OnCollision(GameObject & argHitObject)
+{
+	if (argHitObject.GetTag() == "Player")
+	{
+		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
+		PlayerObject* obstacle = dynamic_cast<PlayerObject*>(&argHitObject);
+		HitPlayer(*obstacle);
+	}
+}
+
+void ObstacleObject::HitPlayer(const PlayerObject & argPlayerObject)
+{
+	//ƒvƒŒƒCƒ„[‚Ì•û‚ª‹­‚©‚Á‚½‚ç
+	if (argPlayerObject.GetRotate()->GetTorque() > hardness)
+	{
+
+
+	}
+	//©•ª‚Ì•û‚ª‹­‚©‚Á‚½‚ç
+	else
+	{
+
+	}
+
+
 }
