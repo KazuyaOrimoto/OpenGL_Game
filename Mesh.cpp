@@ -112,6 +112,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
         }
 
         Vector3 pos(vert[0].GetFloat(), vert[1].GetFloat(), vert[2].GetFloat());
+		verts.push_back(pos);
 		radius = Math::Max(radius, pos.LengthSq());
 
         // floatŒ^‚Å—v‘f‚ð’Ç‰Á

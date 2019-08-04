@@ -7,21 +7,29 @@
 #include "ObstacleManager.h"
 #include "PlayerObject.h"
 #include "RotateComponent.h"
+#include "Mesh.h"
 
 
 ObstacleObject::ObstacleObject(Game* game)
 	:GameObject(game)
-	,hardness(0)
+	, hardness(0)
 {
 	meshComp = new MeshComponent(this);
-	meshComp->SetMesh(RENDERER->GetMesh("Assets/Obstacle.gpmesh"));
+	Mesh* mesh = RENDERER->GetMesh("Assets/Obstacle.gpmesh");
+	meshComp->SetMesh(mesh);
 	boxCollider = new BoxCollider(this);
-	boxCollider->SetObjectBox(AABB(Vector3(-0.5f, -0.5f, -0.5f), Vector3(0.5f, 0.5f, 0.5f)));
+	AABB box = { Vector3::Zero , Vector3::Zero };
+	std::vector<Vector3> verts = mesh->GetVerts();
+	for (auto itr : verts)
+	{
+		box.UpdateMinMax(itr);
+	}
+	boxCollider->SetObjectBox(box);
 	SetScale(250.0f);
 	SetPosition(Vector3(10000.0f, 0.0f, 150.0f));
-    OBSTACLE_MANAGER->AddOnstacle(this);
+	OBSTACLE_MANAGER->AddOnstacle(this);
 
-    tag = "Obstacle";
+	tag = "Obstacle";
 }
 
 ObstacleObject::~ObstacleObject()

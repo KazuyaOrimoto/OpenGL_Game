@@ -66,14 +66,14 @@ void PlayerObject::OnCollision(GameObject & argHitObject)
 void PlayerObject::HitObstacle(const ObstacleObject & argHitObstacle)
 {
 	//áŠQ•¨‚Ì•û‚ª‹­‚©‚Á‚½‚ç
-	if (rotate->GetTorque() < argHitObstacle.GetHardness)
+	if (rotate->GetTorque() < argHitObstacle.GetHardness())
 	{
-
+		meshComp->SetVisible(false);
 	}
 	//Ž©•ª‚Ì•û‚ª—Í‚ª‹­‚©‚Á‚½‚ç
 	else
 	{
-
+		meshComp->SetVisible(true);
 	}
 }
 

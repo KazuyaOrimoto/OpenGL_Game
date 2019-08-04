@@ -11,7 +11,7 @@ public:
 	ObstacleObject(Game* game);
 	~ObstacleObject();
 
-	int GetHardness() { return hardness; }
+	int GetHardness() const { return hardness; }
 
 	virtual void OnCollision(GameObject& argHitObject) override;
 

@@ -8,6 +8,7 @@
 #include "PhysicsWorld.h"
 #include "GameObjectManager.h"
 #include "GameObjectCreater.h"
+#include "ObstacleManager.h"
 
 Game::Game()
 	: fps(nullptr)
@@ -57,6 +58,7 @@ bool Game::Initialize()
 
     GameObjectManager::CreateInstance();
     GameObjectCreater::CreateInstance();
+	ObstacleManager::CreateInstance();
 
 	LoadData();
 
@@ -73,6 +75,7 @@ void Game::Termination()
     GameObjectCreater::DeleteInstance();
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
+	ObstacleManager::DeleteInstance();
 	SDL_Quit();
 }
 

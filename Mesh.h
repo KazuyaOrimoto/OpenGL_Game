@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "Math.h"
 
 class Renderer;
 class VertexArray;
@@ -57,9 +58,13 @@ public:
 	*/
     float GetSpecPower() const { return specPower; }
 
+	std::vector<Vector3> GetVerts() {return verts;}
+
 private:
     //このメッシュに使うテクスチャのポインタの可変長コンテナ
     std::vector<Texture*> textures;
+	//このメッシュに使う頂点データ
+	std::vector<Vector3> verts;
 
 	//クラスのポインタ
 

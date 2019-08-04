@@ -27,12 +27,13 @@ public:
 	*/
     virtual void SetMesh(Mesh* argMesh) { mMesh = argMesh; }
 
+	virtual Mesh* GetMesh() { return mMesh; }
+
 	/**
 	@brief　メッシュコンポーネントが使うTextureインデックスの設定
 	@param	設定するTextureインデックスの数
 	*/
     void SetTextureIndex(size_t index) { mTextureIndex = index; }
-
 
 	/**
 	@brief　描画をするかどうかを設定
