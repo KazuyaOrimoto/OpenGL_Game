@@ -120,6 +120,8 @@
     <ClCompile Include="ObstacleObject.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
+    <ClCompile Include="WallManager.cpp" />
+    <ClCompile Include="WallObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -240,6 +242,8 @@
     <ClInclude Include="ObstacleObject.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
+    <ClInclude Include="WallManager.h" />
+    <ClInclude Include="WallObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">

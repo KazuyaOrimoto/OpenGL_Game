@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Obstacle.png"
+		"Assets/Obstacle.png"
 	],
 	"specularPower":100,
 	"vertices":[

@@ -9,7 +9,6 @@
 #include "RotateComponent.h"
 #include "Mesh.h"
 
-
 ObstacleObject::ObstacleObject(Game* game)
 	:GameObject(game)
 	, hardness(0)
@@ -25,8 +24,8 @@ ObstacleObject::ObstacleObject(Game* game)
 		box.UpdateMinMax(itr);
 	}
 	boxCollider->SetObjectBox(box);
-	SetScale(250.0f);
-	SetPosition(Vector3(10000.0f, 0.0f, 150.0f));
+	SetScale(200.0f);
+	SetPosition(Vector3(10000.0f, 0.0f, 1000.0f));
 	OBSTACLE_MANAGER->AddOnstacle(this);
 
 	tag = "Obstacle";
@@ -57,6 +56,7 @@ void ObstacleObject::HitPlayer(const PlayerObject & argPlayerObject)
 	//Ž©•ª‚Ì•û‚ª‹­‚©‚Á‚½‚ç
 	else
 	{
+
 
 	}
 

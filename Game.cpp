@@ -9,6 +9,7 @@
 #include "GameObjectManager.h"
 #include "GameObjectCreater.h"
 #include "ObstacleManager.h"
+#include "WallManager.h"
 
 Game::Game()
 	: fps(nullptr)
@@ -59,6 +60,7 @@ bool Game::Initialize()
     GameObjectManager::CreateInstance();
     GameObjectCreater::CreateInstance();
 	ObstacleManager::CreateInstance();
+	WallManager::CreateInstance();
 
 	LoadData();
 
@@ -76,6 +78,7 @@ void Game::Termination()
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
+	WallManager::DeleteInstance();
 	SDL_Quit();
 }
 
@@ -89,6 +92,7 @@ void Game::GameLoop()
 		ProcessInput();
 		fps->Update();
 		UpdateGame();
+		WALL_MANAGER->UpdateWall();
 		PHYSICS->HitCheck();
 		GenerateOutput();
 	}

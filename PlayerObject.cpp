@@ -9,6 +9,7 @@
 #include "RotateComponent.h"
 #include "ObstacleManager.h"
 #include "ObstacleObject.h"
+#include "WallManager.h"
 
 PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)
@@ -19,6 +20,7 @@ PlayerObject::PlayerObject(Game* game)
     SetScale(10.0f);
 
     OBSTACLE_MANAGER->AddPlayer(this);
+	WALL_MANAGER->AddPlayer(this);
 	rotate = new RotateComponent(this);
 
     moveComp = new MoveComponent(this);
@@ -76,4 +78,3 @@ void PlayerObject::HitObstacle(const ObstacleObject & argHitObstacle)
 		meshComp->SetVisible(true);
 	}
 }
-

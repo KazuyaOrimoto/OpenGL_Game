@@ -6,6 +6,7 @@
 #include "Renderer.h"
 #include "BoxObject.h"
 #include "ObstacleObject.h"
+#include "WallObject.h"
 
 GameObjectCreater* GameObjectCreater::creater = nullptr;
 
@@ -41,12 +42,8 @@ void GameObjectCreater::PlayerAndWallCreate(Game& game)
 
     GameObject* box = new ObstacleObject(&game);
 
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 20; i++)
     {
-        GameObject* a = new GameObject(&game);
-        a->SetScale(1000.0f);
-        a->SetPosition(Vector3(i*2000.0f, 0.0f, 0.0f));
-        MeshComponent* mc = new MeshComponent(a);
-        mc->SetMesh(RENDERER->GetMesh("Assets/Wall.gpmesh"));
+        GameObject* wall = new WallObject(&game,i);
     }
 }

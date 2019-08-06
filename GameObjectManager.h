@@ -1,5 +1,4 @@
                                                                                       #pragma once
-
 #define GAME_OBJECT_MANAGER GameObjectManager::GetInstance()
 
 #include "SDL.h"

@@ -11,7 +11,6 @@ PhysicsWorld::PhysicsWorld()
 {
 }
 
-
 void PhysicsWorld::CreateInstance()
 {
 	if (physics == nullptr)

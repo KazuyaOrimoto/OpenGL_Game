@@ -44,4 +44,3 @@ void ObstacleManager::HitObstacle(ObstacleObject * argObstacle)
 ObstacleManager::ObstacleManager()
 {
 }
-
