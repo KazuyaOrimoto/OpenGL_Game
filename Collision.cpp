@@ -268,12 +268,46 @@ bool AABB::Contains(const Vector3 & argPoint) const
 */
 float AABB::MinDistanceSquared(const Vector3 & argPoint) const
 {
-	float dx = Math::Max(min.x - argPoint.x, 0.0f);
-	dx = Math::Max(dx, max.x - max.x);
-	float dy = Math::Max(min.y - argPoint.y, 0.0f);
-	dy = Math::Max(dy, max.y - max.y);
-	float dz = Math::Max(min.z - argPoint.z, 0.0f);
-	dz = Math::Max(dz, max.z - max.z);
+	//float dx = Math::Max(min.x - argPoint.x, 0.0f);
+	//dx = Math::Max(dx, max.x - max.x);
+	//float dy = Math::Max(min.y - argPoint.y, 0.0f);
+	//dy = Math::Max(dy, max.y - max.y);
+	//float dz = Math::Max(min.z - argPoint.z, 0.0f);
+	//dz = Math::Max(dz, max.z - max.z);
+
+	float dx = 0, dy = 0, dz = 0;
+
+	if (argPoint.x < min.x)
+	{
+		dx += argPoint.x - min.x;
+	}
+	else if (argPoint.x > max.x)
+	{
+		dx += argPoint.x - max.x;
+	}
+
+	if (argPoint.y < min.y)
+	{
+		dy += argPoint.y - min.y;
+	}
+	else if (argPoint.y > max.y)
+	{
+		dy += argPoint.y - max.y;
+	}
+
+	if (argPoint.z < min.z)
+	{
+		dz += argPoint.z - min.z;
+	}
+	else if (argPoint.z > max.z)
+	{
+		dz += argPoint.z - max.z;
+	}
+
+	float ret = dx * dx + dy * dy + dz * dz;
+
+	printf("%f\n",ret);
+
 	return dx * dx + dy * dy + dz * dz;
 }
 

@@ -25,7 +25,7 @@ ObstacleObject::ObstacleObject(Game* game)
 	}
 	boxCollider->SetObjectBox(box);
 	SetScale(300.0f);
-	SetPosition(Vector3(5000.0f, -800.0f, 150.0f));
+	SetPosition(Vector3(5000.0f, -0.0f, 150.0f));
 	OBSTACLE_MANAGER->AddOnstacle(this);
 
 	tag = "Obstacle";

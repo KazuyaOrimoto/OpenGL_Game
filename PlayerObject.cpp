@@ -34,7 +34,7 @@ PlayerObject::PlayerObject(Game* game)
 	camera->SnapToIdeal();
 
     sphereCollider = new SphereCollider(this);
-    sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
+    sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 10.0f));
 
     tag = "Player";
 }
