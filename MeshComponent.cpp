@@ -14,6 +14,8 @@ MeshComponent::MeshComponent(GameObject* owner)
     :Component(owner)
     , mMesh(nullptr)
     , mTextureIndex(0)
+	, visible(true)
+	, shaderName(DEFAULT)
 {
 	RENDERER->AddMeshComponent(this);
 }

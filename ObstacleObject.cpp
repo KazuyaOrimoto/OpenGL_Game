@@ -11,10 +11,10 @@
 
 ObstacleObject::ObstacleObject(Game* game)
 	:GameObject(game)
-	, hardness(0)
+	, hardness(1)
 {
 	meshComp = new MeshComponent(this);
-	Mesh* mesh = RENDERER->GetMesh("Assets/Obstacle.gpmesh");
+	Mesh* mesh = RENDERER->GetMesh("Assets/Cube.gpmesh");
 	meshComp->SetMesh(mesh);
 	boxCollider = new BoxCollider(this);
 	AABB box = { Vector3::Zero , Vector3::Zero };
@@ -24,8 +24,8 @@ ObstacleObject::ObstacleObject(Game* game)
 		box.UpdateMinMax(itr);
 	}
 	boxCollider->SetObjectBox(box);
-	SetScale(200.0f);
-	SetPosition(Vector3(10000.0f, 0.0f, 1000.0f));
+	SetScale(300.0f);
+	SetPosition(Vector3(5000.0f, -800.0f, 150.0f));
 	OBSTACLE_MANAGER->AddOnstacle(this);
 
 	tag = "Obstacle";
@@ -50,8 +50,8 @@ void ObstacleObject::HitPlayer(const PlayerObject & argPlayerObject)
 	//ƒvƒŒƒCƒ„[‚Ì•û‚ª‹­‚©‚Á‚½‚ç
 	if (argPlayerObject.GetRotate()->GetTorque() > hardness)
 	{
-
-
+		meshComp->SetVisible(false);
+		SetState(Paused);
 	}
 	//Ž©•ª‚Ì•û‚ª‹­‚©‚Á‚½‚ç
 	else
@@ -59,6 +59,4 @@ void ObstacleObject::HitPlayer(const PlayerObject & argPlayerObject)
 
 
 	}
-
-
 }

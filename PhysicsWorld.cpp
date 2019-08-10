@@ -70,8 +70,16 @@ void PhysicsWorld::SphereAndSphere()
 {
 	for (size_t i = 0; i < spheres.size(); i++)
 	{
+		if (spheres[i]->GetOwner()->GetState() != Active)
+		{
+			continue;
+		}
 		for (size_t j = i + 1; j < spheres.size(); j++)
 		{
+			if (spheres[j]->GetOwner()->GetState() != Active)
+			{
+				continue;
+			}
 			bool hit = Intersect(spheres[i]->GetWorldSphere(), spheres[j]->GetWorldSphere());
 
 			if (hit)
@@ -90,8 +98,16 @@ void PhysicsWorld::BoxAndBox()
 {
 	for (size_t i = 0; i < boxes.size(); i++)
 	{
+		if (boxes[i]->GetOwner()->GetState() != Active)
+		{
+			continue;
+		}
 		for (size_t j = i + 1; j < boxes.size(); j++)
 		{
+			if (boxes[j]->GetOwner()->GetState() != Active)
+			{
+				continue;
+			}
 			bool hit = Intersect(boxes[i]->GetWorldBox(), boxes[j]->GetWorldBox());
 
 			if (hit)
@@ -110,8 +126,16 @@ void PhysicsWorld::SphereAndBox()
 {
 	for (size_t i = 0; i < spheres.size(); i++)
 	{
+		if (spheres[i]->GetOwner()->GetState() != Active)
+		{
+			continue;
+		}
 		for (size_t j = 0; j < boxes.size(); j++)
 		{
+			if (boxes[i]->GetOwner()->GetState() != Active)
+			{
+				continue;
+			}
 			bool hit = Intersect(spheres[i]->GetWorldSphere(), boxes[j]->GetWorldBox());
 
 			if (hit)

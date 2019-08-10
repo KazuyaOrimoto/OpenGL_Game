@@ -8,18 +8,20 @@ class Matrix4;
 class Component;
 struct InputState;
 
+/**
+@brief	ゲームオブジェクトの状態
+*/
+enum State
+{
+	Active,
+	Paused,
+	Dead
+};
+
 class GameObject
 {
 public:
-	/**
-	@brief	ゲームオブジェクトの状態
-	*/
-	enum State
-	{
-		Active,
-		Paused,
-		Dead
-	};
+
 
 	/**
 	@param	ゲームクラスのポインタ

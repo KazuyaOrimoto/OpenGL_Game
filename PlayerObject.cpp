@@ -10,6 +10,7 @@
 #include "ObstacleManager.h"
 #include "ObstacleObject.h"
 #include "WallManager.h"
+#include "Math.h"
 
 PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)

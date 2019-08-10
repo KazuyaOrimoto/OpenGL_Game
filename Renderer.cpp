@@ -172,7 +172,10 @@ void Renderer::Draw()
 	// すべてのメッシュの描画
     for (auto mc : meshComponents)
     {
-        mc->Draw(meshShader);
+		if (mc->GetVisible())
+		{
+			mc->Draw(meshShader);
+		}
     }
 
     // スプライトコンポーネントの描画

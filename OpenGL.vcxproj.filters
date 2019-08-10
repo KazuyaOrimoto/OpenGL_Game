@@ -122,6 +122,7 @@
     </ClCompile>
     <ClCompile Include="WallManager.cpp" />
     <ClCompile Include="WallObject.cpp" />
+    <ClCompile Include="Obstacle1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -244,11 +245,9 @@
     </ClInclude>
     <ClInclude Include="WallManager.h" />
     <ClInclude Include="WallObject.h" />
+    <ClInclude Include="Obstacle1.h" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Math">
-      <UniqueIdentifier>{6a202267-f302-460a-bad2-773b2329bbdd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{614f7629-f9b4-4e84-a619-9d3738c2e48a}</UniqueIdentifier>
     </Filter>
@@ -281,6 +280,9 @@
     </Filter>
     <Filter Include="Obstacle">
       <UniqueIdentifier>{77fa87bd-9d0d-4030-a43a-f415dee437de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{6a202267-f302-460a-bad2-773b2329bbdd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

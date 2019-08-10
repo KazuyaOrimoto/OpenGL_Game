@@ -19,7 +19,6 @@ Game::Game()
 
 Game::~Game()
 {
-	delete fps;
 }
 
 /**
@@ -80,6 +79,9 @@ void Game::Termination()
 	ObstacleManager::DeleteInstance();
 	WallManager::DeleteInstance();
 	SDL_Quit();
+	delete fps;
+	delete inputSystem;
+
 }
 
 /**
@@ -104,9 +106,9 @@ void Game::GameLoop()
 void Game::LoadData()
 {
 	  // Setup lights
-	RENDERER->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
+	dir.direction = Vector3(0.0f, -0.7f,-0.7f);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
@@ -121,6 +123,7 @@ void Game::UnloadData()
 	if (RENDERER != nullptr)
 	{
 		RENDERER->UnloadData();
+		RENDERER->Shutdown();
 	}
 }
 

@@ -6,6 +6,12 @@ class GameObject;
 class Shader;
 class Mesh;
 
+enum ShaderName
+{
+	DEFAULT,
+	PLANE
+};
+
 class MeshComponent : public Component
 {
 public:
@@ -28,6 +34,9 @@ public:
     virtual void SetMesh(Mesh* argMesh) { mMesh = argMesh; }
 
 	virtual Mesh* GetMesh() { return mMesh; }
+
+	ShaderName GetShaderName() { return shaderName; }
+	void SetShaderName(ShaderName argShaderName) { shaderName = argShaderName; }
 
 	/**
 	@brief　メッシュコンポーネントが使うTextureインデックスの設定
@@ -53,6 +62,8 @@ protected:
 
     Mesh* mMesh;
     size_t mTextureIndex;
+
+	ShaderName shaderName;
 
 	//描画をするかどうか
 	bool visible;

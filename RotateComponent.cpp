@@ -1,6 +1,7 @@
 #include "RotateComponent.h"
 #include "GameObject.h"
 #include "InputSystem.h"
+#include "Renderer.h"
 
 RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
 	: Component(argOwner)
@@ -27,6 +28,9 @@ void RotateComponent::Update(float argDeltaTime)
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x,850.0f,pos.z));
 		AddTorque();
+
+		DirectionalLight& dir = RENDERER->GetDirectionalLight();
+		dir.direction = Vector3::Transform(dir.direction,inc);
 	}
 	//¶‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
 	else if (pos.y < -850)
@@ -37,6 +41,9 @@ void RotateComponent::Update(float argDeltaTime)
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x, -850.0f, pos.z));
 		AddTorque();
+
+		DirectionalLight& dir = RENDERER->GetDirectionalLight();
+		dir.direction = Vector3::Transform(dir.direction, inc);
 	}
 	//ã‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
 	else if (pos.z > 1850)
@@ -47,6 +54,9 @@ void RotateComponent::Update(float argDeltaTime)
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x, pos.y, 1850));
 		AddTorque();
+
+		DirectionalLight& dir = RENDERER->GetDirectionalLight();
+		dir.direction = Vector3::Transform(dir.direction, inc);
 	}
 	//‰º‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
 	else if (pos.z < 150)
@@ -57,6 +67,9 @@ void RotateComponent::Update(float argDeltaTime)
 		owner->SetRotation(rot);
 		owner->SetPosition(Vector3(pos.x, pos.y, 150));
 		AddTorque();
+
+		DirectionalLight& dir = RENDERER->GetDirectionalLight();
+		dir.direction = Vector3::Transform(dir.direction, inc);
 	}
 
 }

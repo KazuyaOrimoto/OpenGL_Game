@@ -5,7 +5,7 @@
 MainCamera::MainCamera(GameObject* owner)
     :CameraComponent(owner)
     , horzDist(700.0f)
-    , vertDist(150.0f)
+    , vertDist(200.0f)
     , targetDist(100.0f)
     , springConstant(750.0f)
 {
