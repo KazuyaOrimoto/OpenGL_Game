@@ -14,16 +14,21 @@ Renderer::Renderer()
     : spriteShader(nullptr)
 	, spriteVerts(nullptr)
     , meshShader(nullptr)
+    , wallShader(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
 	, screenHeight(0)
 	, ambientLight(Vector3::Zero)
 {
+    wallDirLight.direction = Vector3(0.0f, -0.7f, -0.7f);
+    wallDirLight.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+    wallDirLight.specColor = Vector3(0.8f, 0.8f, 0.8f);
 }
 
 Renderer::~Renderer()
 {
+    SetWallDirLight();
 }
 
 /**
@@ -122,6 +127,8 @@ void Renderer::Shutdown()
     delete spriteShader;
     meshShader->Unload();
     delete meshShader;
+    wallShader->Unload();
+    delete wallShader;
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
 }
@@ -176,6 +183,19 @@ void Renderer::Draw()
 		{
 			mc->Draw(meshShader);
 		}
+    }
+
+    wallShader->SetActive();
+
+    wallShader->SetMatrixUniform("uViewProj", view * projection);
+
+    SetWallLightUniforms(wallShader);
+    for (auto mc : wallMeshComponents)
+    {
+        if (mc->GetVisible())
+        {
+            mc->Draw(wallShader);
+        }
     }
 
     // スプライトコンポーネントの描画
@@ -241,7 +261,14 @@ void Renderer::RemoveSprite(SpriteComponent* argSpriteComponent)
 */
 void Renderer::AddMeshComponent(MeshComponent* argMeshComponent)
 {
-	meshComponents.emplace_back(argMeshComponent);
+    if (argMeshComponent->GetShaderName() == DEFAULT)
+    {
+        meshComponents.emplace_back(argMeshComponent);
+    }
+    else if (argMeshComponent->GetShaderName() == WALL)
+    {
+        wallMeshComponents.emplace_back(argMeshComponent);
+    }
 }
 
 /**
@@ -250,8 +277,16 @@ void Renderer::AddMeshComponent(MeshComponent* argMeshComponent)
 */
 void Renderer::RemoveMeshComponent(MeshComponent* argMeshComponent)
 {
-    auto iter = std::find(meshComponents.begin(), meshComponents.end(), argMeshComponent);
-    meshComponents.erase(iter);
+    if (argMeshComponent->GetShaderName() == DEFAULT)
+    {
+        auto iter = std::find(meshComponents.begin(), meshComponents.end(), argMeshComponent);
+        meshComponents.erase(iter);
+    }
+    else if (argMeshComponent->GetShaderName() == WALL)
+    {
+        auto iter = std::find(wallMeshComponents.begin(), wallMeshComponents.end(), argMeshComponent);
+        wallMeshComponents.erase(iter);
+    }
 }
 
 /**
@@ -342,12 +377,21 @@ bool Renderer::LoadShaders()
         return false;
     }
 
+    wallShader = new Shader();
+    if (!wallShader->Load("Shaders/WallShader.vert", "Shaders/WallShader.frag"))
+    {
+        return false;
+    }
+
     meshShader->SetActive();
     // ビュー行列の設定
     view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
     projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
         screenWidth, screenHeight, 25.0f, 10000.0f);
     meshShader->SetMatrixUniform("uViewProj", view * projection);
+
+    wallShader->SetActive();
+    wallShader->SetMatrixUniform("uViewProj", view * projection);
     return true;
 }
 
@@ -391,4 +435,28 @@ void Renderer::SetLightUniforms(Shader* shader)
         dirLight.diffuseColor);
     shader->SetVectorUniform("uDirLight.mSpecColor",
         dirLight.specColor);
+}
+
+void Renderer::SetWallLightUniforms(Shader* shader)
+{
+    // ビュー行列を転置行列にする
+    Matrix4 invView = view;
+    invView.Invert();
+    shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
+    // 環境光の設定
+    shader->SetVectorUniform("uAmbientLight", ambientLight);
+    // 平行光源の設定
+    shader->SetVectorUniform("uDirLight.mDirection",
+        wallDirLight.direction);
+    shader->SetVectorUniform("uDirLight.mDiffuseColor",
+        wallDirLight.diffuseColor);
+    shader->SetVectorUniform("uDirLight.mSpecColor",
+        wallDirLight.specColor);
+}
+
+void Renderer::SetWallDirLight()
+{
+    wallDirLight.direction = Vector3(0.0f, -0.7f, -0.7f);
+    wallDirLight.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+    wallDirLight.specColor = Vector3(0.8f, 0.8f, 0.8f);
 }

@@ -50,7 +50,7 @@ void main()
 	// Surface normal
 	vec3 N = normalize(fragNormal);
 	// Vector from surface to light
-	vec3 L = normalize(vec3(0.0,-0.707,-0.707));
+	vec3 L = normalize(-uDirLight.mDirection);
 	// Vector from surface to camera
 	vec3 V = normalize(uCameraPos - fragWorldPos);
 	// Reflection of -L about N

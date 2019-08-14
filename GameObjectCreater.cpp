@@ -7,6 +7,7 @@
 #include "BoxObject.h"
 #include "ObstacleObject.h"
 #include "WallObject.h"
+#include "Obstacle1.h"
 
 GameObjectCreater* GameObjectCreater::creater = nullptr;
 
@@ -40,7 +41,7 @@ void GameObjectCreater::PlayerAndWallCreate(Game& game)
     // Camera actor
     GameObject* mCameraActor = new PlayerObject(&game);
 
-    GameObject* box = new ObstacleObject(&game);
+    Obstacle1* obstacle = new Obstacle1(&game);
 
     for (int i = 0; i < 20; i++)
     {

@@ -123,6 +123,9 @@
     <ClCompile Include="WallManager.cpp" />
     <ClCompile Include="WallObject.cpp" />
     <ClCompile Include="Obstacle1.cpp" />
+    <ClCompile Include="WallMeshComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -246,6 +249,9 @@
     <ClInclude Include="WallManager.h" />
     <ClInclude Include="WallObject.h" />
     <ClInclude Include="Obstacle1.h" />
+    <ClInclude Include="WallMeshComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

@@ -6,10 +6,10 @@ class GameObject;
 class Shader;
 class Mesh;
 
-enum ShaderName
+enum ShaderType
 {
 	DEFAULT,
-	PLANE
+	WALL
 };
 
 class MeshComponent : public Component
@@ -18,7 +18,7 @@ public:
 	/**
 	@param	アタッチするゲームオブジェクトのポインタ
 	*/
-    MeshComponent(GameObject* owner);
+    MeshComponent(GameObject* owner, ShaderType argShaderType = DEFAULT);
     ~MeshComponent();
 
 	/**
@@ -35,8 +35,8 @@ public:
 
 	virtual Mesh* GetMesh() { return mMesh; }
 
-	ShaderName GetShaderName() { return shaderName; }
-	void SetShaderName(ShaderName argShaderName) { shaderName = argShaderName; }
+    ShaderType GetShaderName() { return shaderName; }
+	void SetShaderName(ShaderType argShaderName) { shaderName = argShaderName; }
 
 	/**
 	@brief　メッシュコンポーネントが使うTextureインデックスの設定
@@ -63,7 +63,7 @@ protected:
     Mesh* mMesh;
     size_t mTextureIndex;
 
-	ShaderName shaderName;
+    ShaderType shaderName;
 
 	//描画をするかどうか
 	bool visible;

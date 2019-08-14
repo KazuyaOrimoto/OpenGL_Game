@@ -3,13 +3,13 @@
 #include "Renderer.h"
 #include "MeshComponent.h"
 #include "Mesh.h"
-
+#include "WallMeshComponent.h"
 
 PlaneObject::PlaneObject(Game* game)
     :GameObject(game)
 {
     SetScale(10.0f);
-    MeshComponent* mc = new MeshComponent(this);
+    WallMeshComponent* mc = new WallMeshComponent(this);
     mc->SetMesh(RENDERER->GetMesh("Assets/Plane.gpmesh"));
 }
 
