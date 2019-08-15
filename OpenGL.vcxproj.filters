@@ -120,14 +120,23 @@
     <ClCompile Include="ObstacleObject.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="WallManager.cpp" />
-    <ClCompile Include="WallObject.cpp" />
-    <ClCompile Include="Obstacle1.cpp" />
     <ClCompile Include="WallMeshComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacle2.cpp" />
-    <ClCompile Include="DrilObject.cpp" />
+    <ClCompile Include="DrilObject.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle1.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle2.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="WallManager.cpp" />
+    <ClCompile Include="WallObject.cpp" />
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -248,14 +257,23 @@
     <ClInclude Include="ObstacleObject.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="WallManager.h" />
-    <ClInclude Include="WallObject.h" />
-    <ClInclude Include="Obstacle1.h" />
     <ClInclude Include="WallMeshComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle2.h" />
-    <ClInclude Include="DrilObject.h" />
+    <ClInclude Include="DrilObject.h">
+      <Filter>PlayerObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle1.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle2.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="WallManager.h" />
+    <ClInclude Include="WallObject.h" />
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

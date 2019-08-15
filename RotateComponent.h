@@ -22,7 +22,6 @@ public:
 	virtual void ProcessInput(const struct InputState& state);
 
 	int GetTorque() { return torque; }
-	void ResetTorque() { torque = 0; }
 
     bool CanMove() { return canMove; }
 

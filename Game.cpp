@@ -10,10 +10,13 @@
 #include "GameObjectCreater.h"
 #include "ObstacleManager.h"
 #include "WallManager.h"
+#include "SceneBase.h"
 
 Game::Game()
 	: fps(nullptr)
     , isRunning(true)
+    , nowScene(nullptr)
+    , nextScene(nullptr)
 {
 }
 
@@ -61,7 +64,8 @@ bool Game::Initialize()
 	ObstacleManager::CreateInstance();
 	WallManager::CreateInstance();
 
-	LoadData();
+    nowScene = SceneBase::StartGame(this);
+
 
 	return true;
 }
@@ -98,21 +102,6 @@ void Game::GameLoop()
 		PHYSICS->HitCheck();
 		GenerateOutput();
 	}
-}
-
-/**
-@brief  ゲームに必要なデータのロード
-*/
-void Game::LoadData()
-{
-	  // Setup lights
-	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
-	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(0.0f, -0.7f,-0.7f);
-	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
-
-    GAME_OBJECT_CREATER->PlayerAndWallCreate(*this);
 }
 
 /**

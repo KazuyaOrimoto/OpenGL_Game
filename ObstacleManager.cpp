@@ -36,11 +36,6 @@ void ObstacleManager::RemoveObstacle(ObstacleObject* argObstacle)
 	}
 }
 
-void ObstacleManager::HitObstacle(ObstacleObject * argObstacle)
-{
-
-}
-
 ObstacleManager::ObstacleManager()
 {
 }

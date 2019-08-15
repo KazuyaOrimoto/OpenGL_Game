@@ -29,7 +29,7 @@ void DrilObject::UpdateGameObject(float argDeltaTime)
     int torque = ownerObject->GetTorque();
 
     Quaternion rot = rotation;
-    Quaternion inc(Vector3::UnitX, static_cast<float>(torque * -0.02));
+    Quaternion inc(Vector3::UnitX, static_cast<float>(torque * -0.01));
     rot = Quaternion::Concatenate(rot, inc);
     rotation = rot;
 
@@ -56,6 +56,5 @@ void DrilObject::HitObstacle(const ObstacleObject & argHitObstacle)
     else
     {
         meshComp->SetVisible(true);
-        ownerObject->ResetTorque();
     }
 }

@@ -7,6 +7,7 @@
 class FPS;
 class GameObject;
 class InputSystem;
+class SceneBase;
 
 class Game
 {
@@ -43,11 +44,6 @@ private:
 	void UpdateGame();
 
 	/**
-	@brief  ゲームに必要なデータのロード
-	*/
-	void LoadData();
-
-	/**
 	@brief   ロードしたデータの解放
 	*/
 	void UnloadData();
@@ -56,6 +52,8 @@ private:
 
 	FPS* fps;
 	InputSystem* inputSystem;
+    SceneBase* nowScene;
+    SceneBase* nextScene;
 
 	//ゲームを続けるかどうか
     bool isRunning;

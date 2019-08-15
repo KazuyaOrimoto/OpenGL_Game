@@ -24,7 +24,6 @@ public:
 
     int GetTorque();
 
-    void ResetTorque();
     bool CanMove();
 
 private:

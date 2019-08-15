@@ -19,8 +19,6 @@ public:
 	void AddOnstacle(ObstacleObject* argObstacle);
 	void RemoveObstacle(ObstacleObject* argObstacle);
 
-    void HitObstacle(ObstacleObject* argObstacle);
-
 private:
 	ObstacleManager();
 

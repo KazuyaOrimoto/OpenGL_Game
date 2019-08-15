@@ -6,7 +6,7 @@
 RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
 	: Component(argOwner)
 	, right(true)
-	, torque(0)
+	, torque(10)
     , f(1)
     , canMove(true)
 {
@@ -88,7 +88,7 @@ void RotateComponent::Update(float argDeltaTime)
     {
         if (f < 1.0)
         {
-            f += 0.05f;
+            f += 0.1f;
             Quaternion temp = Quaternion::Slerp(rot, target, f);
             owner->SetRotation(temp);
 
@@ -132,8 +132,7 @@ void RotateComponent::AddTorque()
 	{
 		if (torque < 0)
 		{
-			torque = 0;
-			torque++;
+			torque = -torque;
 		}
 		else
 		{
@@ -144,8 +143,7 @@ void RotateComponent::AddTorque()
 	{
 		if (torque > 0)
 		{
-			torque = 0;
-			torque--;
+			torque = -torque;
 		}
 		else
 		{

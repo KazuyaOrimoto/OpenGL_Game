@@ -7,7 +7,7 @@ MainCamera::MainCamera(GameObject* owner)
     , horzDist(700.0f)
     , vertDist(200.0f)
     , targetDist(100.0f)
-    , springConstant(750.0f)
+    , springConstant(500.0f)
 {
 }
 

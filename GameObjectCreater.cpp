@@ -36,15 +36,15 @@ GameObjectCreater::~GameObjectCreater()
 {
 }
 
-void GameObjectCreater::PlayerAndWallCreate(Game& game)
+void GameObjectCreater::PlayerAndWallCreate(Game* game)
 {
     // Camera actor
-    GameObject* mCameraActor = new PlayerObject(&game);
+    GameObject* mCameraActor = new PlayerObject(game);
 
-    Obstacle1* obstacle = new Obstacle1(&game);
+    Obstacle1* obstacle = new Obstacle1(game);
 
     for (int i = 0; i < 20; i++)
     {
-        GameObject* wall = new WallObject(&game,i);
+        GameObject* wall = new WallObject(game,i);
     }
 }
