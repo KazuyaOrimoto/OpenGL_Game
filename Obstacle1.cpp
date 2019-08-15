@@ -12,7 +12,6 @@ Obstacle1::Obstacle1(Game* game)
 
     box = new ObstacleObject(game);
     box->SetPosition(Vector3(5000.0f, -0.0f, 1850));
-
 }
 
 

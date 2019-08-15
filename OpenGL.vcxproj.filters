@@ -126,6 +126,8 @@
     <ClCompile Include="WallMeshComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Obstacle2.cpp" />
+    <ClCompile Include="DrilObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -252,6 +254,8 @@
     <ClInclude Include="WallMeshComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Obstacle2.h" />
+    <ClInclude Include="DrilObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

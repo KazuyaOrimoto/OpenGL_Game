@@ -2,12 +2,12 @@
 #include "GameObject.h"
 
 class MoveComponent;
-class MeshComponent;
 class MainCamera;
 class SphereCollider;
 class AutoRunComponent;
 class ObstacleObject;
 class RotateComponent;
+class DrilObject;
 
 class PlayerObject : public GameObject
 {
@@ -20,24 +20,19 @@ public:
 	*/
 	virtual void UpdateGameObject(float argDaltaTime);
 
-	/**
-	@brief	ï`âÊÇ∑ÇÈÇ©Ç«Ç§Ç©Çê›íËÇ∑ÇÈ
-	@param	true : ï`âÊÇ∑ÇÈ , false : ï`âÊÇµÇ»Ç¢
-	*/
-    void SetVisible(bool visible);
-
 	RotateComponent* GetRotate() const { return rotate; }
 
-	virtual void OnCollision(GameObject& argHitObject) override;
+    int GetTorque();
 
-	void HitObstacle(const ObstacleObject & argHitObstacle);
+    void ResetTorque();
+    bool CanMove();
 
 private:
     MoveComponent* moveComp;
-    MeshComponent* meshComp;
-    SphereCollider* sphereCollider;
     MainCamera* camera;
     AutoRunComponent* autoRun;
 	RotateComponent* rotate;
+    SphereCollider* sphereCollider;
+    DrilObject* dril;
 };
 

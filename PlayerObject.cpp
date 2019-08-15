@@ -1,5 +1,4 @@
 #include "PlayerObject.h"
-#include "MeshComponent.h"
 #include "Game.h"
 #include "Renderer.h"
 #include "MoveComponent.h"
@@ -10,15 +9,14 @@
 #include "ObstacleManager.h"
 #include "ObstacleObject.h"
 #include "WallManager.h"
+#include "DrilObject.h"
 #include "Math.h"
 
 PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)
 {
-    meshComp = new MeshComponent(this);
-    meshComp->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
+
     SetPosition(Vector3(0.0f, 0.0f, 150.0f));
-    SetScale(10.0f);
 
     OBSTACLE_MANAGER->AddPlayer(this);
 	WALL_MANAGER->AddPlayer(this);
@@ -33,10 +31,16 @@ PlayerObject::PlayerObject(Game* game)
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 
+
+    dril = new DrilObject(game, this);
+    autoRun->SetDrilObject(dril);
+
+    SetScale(10.0f);
+
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 10.0f));
-
     tag = "Player";
+
 }
 
 /**
@@ -47,35 +51,18 @@ void PlayerObject::UpdateGameObject(float argDaltaTime)
 {
 }
 
-/**
-@brief	•`‰æ‚·‚é‚©‚Ç‚¤‚©‚ğİ’è‚·‚é
-@param	true : •`‰æ‚·‚é , false : •`‰æ‚µ‚È‚¢
-*/
-void PlayerObject::SetVisible(bool visible)
+
+int PlayerObject::GetTorque()
 {
-    meshComp->SetVisible(visible);
+    return rotate->GetTorque();;
 }
 
-void PlayerObject::OnCollision(GameObject & argHitObject)
+void PlayerObject::ResetTorque()
 {
-	if (argHitObject.GetTag() == "Obstacle")
-	{
-		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
-		ObstacleObject* obstacle = dynamic_cast<ObstacleObject*>(&argHitObject);
-		HitObstacle(*obstacle);
-	}
+    rotate->ResetTorque();
 }
 
-void PlayerObject::HitObstacle(const ObstacleObject & argHitObstacle)
+bool PlayerObject::CanMove()
 {
-	//áŠQ•¨‚Ì•û‚ª‹­‚©‚Á‚½‚ç
-	if (rotate->GetTorque() < argHitObstacle.GetHardness())
-	{
-		meshComp->SetVisible(false);
-	}
-	//©•ª‚Ì•û‚ª—Í‚ª‹­‚©‚Á‚½‚ç
-	else
-	{
-		meshComp->SetVisible(true);
-	}
+    return rotate->CanMove();
 }

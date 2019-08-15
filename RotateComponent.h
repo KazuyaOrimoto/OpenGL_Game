@@ -1,5 +1,9 @@
 #pragma once
 #include "Component.h"
+#include "Math.h"
+
+class DrilObject;
+
 class RotateComponent : public Component
 {
 public:
@@ -20,11 +24,17 @@ public:
 	int GetTorque() { return torque; }
 	void ResetTorque() { torque = 0; }
 
+    bool CanMove() { return canMove; }
+
 private:
 	void AddTorque();
 
 	bool right;
 	//‰ñ“]‚Å“¾‚½—Í
 	int  torque;
+    Quaternion target;
+    float f;
+    bool canMove;
+    Quaternion rot;
 };
 

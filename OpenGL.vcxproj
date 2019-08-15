@@ -148,6 +148,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="DrilObject.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="FollowCameraObject.cpp" />
     <ClCompile Include="FPS.cpp" />
@@ -166,6 +167,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Obstacle1.cpp" />
+    <ClCompile Include="Obstacle2.cpp" />
     <ClCompile Include="ObstacleManager.cpp" />
     <ClCompile Include="ObstacleObject.cpp" />
     <ClCompile Include="PhysicsWorld.cpp" />
@@ -195,6 +197,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="DrilObject.h" />
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="FollowCameraObject.h" />
     <ClInclude Include="FPS.h" />
@@ -212,6 +215,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Obstacle1.h" />
+    <ClInclude Include="Obstacle2.h" />
     <ClInclude Include="ObstacleManager.h" />
     <ClInclude Include="ObstacleObject.h" />
     <ClInclude Include="PhysicsWorld.h" />

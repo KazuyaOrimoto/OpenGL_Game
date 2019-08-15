@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "InputSystem.h"
+#include "PlayerObject.h"
 
 MoveComponent::MoveComponent(GameObject* owner, int updateOrder)
 	:Component(owner, updateOrder)
@@ -11,18 +12,22 @@ MoveComponent::MoveComponent(GameObject* owner, int updateOrder)
 	, maxForwardSpeed(0.0f)
 	, maxStrafeSpeed(0.0f)
 {
-
+    player = dynamic_cast<PlayerObject*>(owner);
 }
 
 void MoveComponent::Update(float deltaTime)
 {
-	if (!Math::NearZero(forwardSpeed) || !Math::NearZero(starafeSpeed))
-	{
-		Vector3 pos = owner->GetPosition();
-		pos += owner->GetForward() * forwardSpeed * deltaTime;
-		pos += owner->GetRight() * starafeSpeed * deltaTime;
-		owner->SetPosition(pos);
-	}
+    if (player->CanMove())
+    {
+        if (!Math::NearZero(forwardSpeed) || !Math::NearZero(starafeSpeed))
+        {
+            Vector3 pos = owner->GetPosition();
+            pos += owner->GetForward() * forwardSpeed * deltaTime;
+            pos += owner->GetRight() * starafeSpeed * deltaTime;
+            owner->SetPosition(pos);
+        }
+    }
+
 }
 
 void MoveComponent::ProcessInput(const InputState & state)

@@ -2,6 +2,7 @@
 #include "Component.h"
 
 class GameObject;
+class PlayerObject;
 
 class MoveComponent : public Component
 {
@@ -35,5 +36,7 @@ private:
 	int mBackKey;
 	int rightKey;
 	int leftKey;
+
+    PlayerObject* player;
 };
 

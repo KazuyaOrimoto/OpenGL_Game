@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "Renderer.h"
-
+#include "DrilObject.h"
 
 AutoRunComponent::AutoRunComponent(GameObject* owner, int updateOrder)
 	: Component(owner, updateOrder)
@@ -19,4 +19,5 @@ void AutoRunComponent::Update(float deltaTime)
 	Vector3 pos = owner->GetPosition();
 	pos += owner->GetForward() * forwardSpeed * deltaTime;
 	owner->SetPosition(pos);
+    dril->SetPosition(pos);
 }

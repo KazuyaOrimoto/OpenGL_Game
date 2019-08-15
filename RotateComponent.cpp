@@ -7,6 +7,8 @@ RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
 	: Component(argOwner)
 	, right(true)
 	, torque(0)
+    , f(1)
+    , canMove(true)
 {
 }
 
@@ -20,57 +22,88 @@ void RotateComponent::Update(float argDeltaTime)
 	//このフレームで入力されたのが右なら右回転、左なら左回転用の角度を代入する
 	float rad = right ? Math::ToRadians(90.0f) : Math::ToRadians(-90.0f);
 	//右の壁についたとき
-	if (pos.y > 850)
-	{
-		Quaternion rot = owner->GetRotation();
-		Quaternion inc(Vector3::UnitX, rad);
-		rot = Quaternion::Concatenate(rot,inc);
-		owner->SetRotation(rot);
-		owner->SetPosition(Vector3(pos.x,850.0f,pos.z));
-		AddTorque();
+    if (canMove)
+    {
+        if (pos.y > 850)
+        {
+            rot = owner->GetRotation();
+            Quaternion inc(Vector3::UnitX, rad);
+            target = Quaternion::Concatenate(rot, inc);
+            owner->SetPosition(Vector3(pos.x, 850.0f, pos.z));
+            AddTorque();
+            f = 0;
+            canMove = false;
 
-		DirectionalLight& dir = RENDERER->GetDirectionalLight();
-		dir.direction = Vector3::Transform(dir.direction,inc);
-	}
-	//左の壁についたとき
-	else if (pos.y < -850)
-	{
-		Quaternion rot = owner->GetRotation();
-		Quaternion inc(Vector3::UnitX, rad);
-		rot = Quaternion::Concatenate(rot, inc);
-		owner->SetRotation(rot);
-		owner->SetPosition(Vector3(pos.x, -850.0f, pos.z));
-		AddTorque();
+            DirectionalLight& dir = RENDERER->GetDirectionalLight();
+            dir.direction = Vector3::Transform(dir.direction, inc);
+        }
+        //左の壁についたとき
+        else if (pos.y < -850)
+        {
+            rot = owner->GetRotation();
+            Quaternion inc(Vector3::UnitX, rad);
+            target = Quaternion::Concatenate(rot, inc);
+            owner->SetPosition(Vector3(pos.x, -850.0f, pos.z));
+            AddTorque();
+            f = 0;
+            canMove = false;
 
-		DirectionalLight& dir = RENDERER->GetDirectionalLight();
-		dir.direction = Vector3::Transform(dir.direction, inc);
-	}
-	//上の壁についたとき
-	else if (pos.z > 1850)
-	{
-		Quaternion rot = owner->GetRotation();
-		Quaternion inc(Vector3::UnitX, rad);
-		rot = Quaternion::Concatenate(rot, inc);
-		owner->SetRotation(rot);
-		owner->SetPosition(Vector3(pos.x, pos.y, 1850));
-		AddTorque();
 
-		DirectionalLight& dir = RENDERER->GetDirectionalLight();
-		dir.direction = Vector3::Transform(dir.direction, inc);
-	}
-	//下の壁についたとき
-	else if (pos.z < 150)
-	{
-		Quaternion rot = owner->GetRotation();
-		Quaternion inc(Vector3::UnitX, rad);
-		rot = Quaternion::Concatenate(rot, inc);
-		owner->SetRotation(rot);
-		owner->SetPosition(Vector3(pos.x, pos.y, 150));
-		AddTorque();
+            DirectionalLight& dir = RENDERER->GetDirectionalLight();
+            dir.direction = Vector3::Transform(dir.direction, inc);
+        }
+        //上の壁についたとき
+        else if (pos.z > 1850)
+        {
+            rot = owner->GetRotation();
+            Quaternion inc(Vector3::UnitX, rad);
+            target = Quaternion::Concatenate(rot, inc);
+            owner->SetPosition(Vector3(pos.x, pos.y, 1850));
+            AddTorque();
+            f = 0;
+            canMove = false;
 
-		DirectionalLight& dir = RENDERER->GetDirectionalLight();
-		dir.direction = Vector3::Transform(dir.direction, inc);
-	}
+
+            DirectionalLight& dir = RENDERER->GetDirectionalLight();
+            dir.direction = Vector3::Transform(dir.direction, inc);
+        }
+        //下の壁についたとき
+        else if (pos.z < 150)
+        {
+            rot = owner->GetRotation();
+            Quaternion inc(Vector3::UnitX, rad);
+            target = Quaternion::Concatenate(rot, inc);
+            owner->SetPosition(Vector3(pos.x, pos.y, 150));
+            AddTorque();
+            f = 0;
+            canMove = false;
+
+
+            DirectionalLight& dir = RENDERER->GetDirectionalLight();
+            dir.direction = Vector3::Transform(dir.direction, inc);
+        }
+    }
+
+    if (!canMove)
+    {
+        if (f < 1.0)
+        {
+            f += 0.05f;
+            Quaternion temp = Quaternion::Slerp(rot, target, f);
+            owner->SetRotation(temp);
+
+        }
+        else if (f > 1.0)
+        {
+            f = 1.0f;
+            owner->SetRotation(target);
+        }
+        else
+        {
+            canMove = true;
+        }
+        
+    }
 
 }
 
@@ -90,7 +123,9 @@ void RotateComponent::ProcessInput(const InputState & state)
 	}
 }
 
-
+/**
+@brief	回転したときの回転力の加算
+*/
 void RotateComponent::AddTorque()
 {
 	if (right)
