@@ -132,7 +132,7 @@ void PhysicsWorld::SphereAndBox()
 		}
 		for (size_t j = 0; j < boxes.size(); j++)
 		{
-			if (boxes[i]->GetOwner()->GetState() != Active)
+			if (boxes[j]->GetOwner()->GetState() != Active)
 			{
 				continue;
 			}

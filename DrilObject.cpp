@@ -5,6 +5,7 @@
 #include "PlayerObject.h"
 #include "SphereCollider.h"
 #include "ObstacleBox.h"
+#include "RotateComponent.h"
 
 DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
     : GameObject(game)
@@ -26,7 +27,7 @@ DrilObject::~DrilObject()
 
 void DrilObject::UpdateGameObject(float argDeltaTime)
 {
-    int torque = ownerObject->GetTorque();
+    int torque = ownerObject->GetRotate()->GetTorque();
 
     Quaternion rot = rotation;
     Quaternion inc(Vector3::UnitX, static_cast<float>(torque * -0.01));
@@ -47,14 +48,5 @@ void DrilObject::OnCollision(GameObject & argHitObject)
 
 void DrilObject::HitObstacle(const ObstacleBox & argHitObstacle)
 {
-    //áŠQ•¨‚Ì•û‚ª‹­‚©‚Á‚½‚ç
-    if (ownerObject->GetTorque() < argHitObstacle.GetHardness())
-    {
-        meshComp->SetVisible(false);
-    }
-    //Ž©•ª‚Ì•û‚ª—Í‚ª‹­‚©‚Á‚½‚ç
-    else
-    {
-        meshComp->SetVisible(true);
-    }
+	ownerObject->GetRotate()->SubTorque();
 }

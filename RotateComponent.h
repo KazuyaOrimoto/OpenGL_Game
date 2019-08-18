@@ -24,9 +24,9 @@ public:
 	int GetTorque() { return torque; }
 
     bool CanMove() { return canMove; }
-
-private:
 	void AddTorque();
+	void SubTorque();
+private:
 
 	bool right;
 	//‰ñ“]‚Å“¾‚½—Í

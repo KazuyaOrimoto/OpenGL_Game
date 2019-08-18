@@ -36,6 +36,19 @@ void ObstacleManager::RemoveObstacle(ObstacleBox* argObstacle)
 	}
 }
 
+ObstacleBox * ObstacleManager::GetObstacle()
+{
+	for (auto itr : obstacles)
+	{
+		if (itr->GetState() == Paused)
+		{
+			return itr;
+		}
+	}
+	return nullptr;
+}
+
 ObstacleManager::ObstacleManager()
 {
+
 }

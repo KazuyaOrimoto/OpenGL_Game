@@ -43,7 +43,6 @@ void GameObject::Update(float argDaltaTime)
 		UpdateGameObject(argDaltaTime);
 
 		ComputeWorldTransform();
-
 	}
 }
 

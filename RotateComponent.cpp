@@ -152,3 +152,15 @@ void RotateComponent::AddTorque()
 	}
 }
 
+void RotateComponent::SubTorque()
+{
+	if (torque < 0)
+	{
+		torque++;
+	}
+	else if (torque > 0)
+	{
+		torque--;
+	}
+}
+

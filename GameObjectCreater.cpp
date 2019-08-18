@@ -7,24 +7,25 @@
 #include "BoxObject.h"
 #include "ObstacleObject.h"
 #include "WallObject.h"
+#include "ObstacleBox.h"
 
 GameObjectCreater* GameObjectCreater::creater = nullptr;
 
 void GameObjectCreater::CreateInstance()
 {
-    if (creater == nullptr)
-    {
-        creater = new GameObjectCreater();
-    }
+	if (creater == nullptr)
+	{
+		creater = new GameObjectCreater();
+	}
 }
 
 void GameObjectCreater::DeleteInstance()
 {
-    if (creater != nullptr)
-    {
-        delete creater;
-        creater = nullptr;
-    }
+	if (creater != nullptr)
+	{
+		delete creater;
+		creater = nullptr;
+	}
 }
 
 GameObjectCreater::GameObjectCreater()
@@ -37,12 +38,22 @@ GameObjectCreater::~GameObjectCreater()
 
 void GameObjectCreater::PlayerAndWallCreate(Game* game)
 {
-    GameObject* mCameraActor = new PlayerObject(game);
+	GameObject* mCameraActor = new PlayerObject(game);
 
-	ObstacleObject* obstacle = new ObstacleObject(game);
+	ObstacleBox* box;
+	for (int i = 0; i < 100; i++)
+	{
+		box = new ObstacleBox(game);
+	}
 
-    for (int i = 0; i < 20; i++)
-    {
-        GameObject* wall = new WallObject(game,i);
-    }
+	for (int i = 0; i < 20; i++)
+	{
+		ObstacleObject* obstacle = new ObstacleObject(game,i);
+	}
+
+
+	for (int i = 0; i < 20; i++)
+	{
+		GameObject* wall = new WallObject(game, i);
+	}
 }

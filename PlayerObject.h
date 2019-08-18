@@ -22,7 +22,7 @@ public:
 
 	RotateComponent* GetRotate() const { return rotate; }
 
-    int GetTorque();
+	RotateComponent* GetRotate() { return rotate; }
 
     bool CanMove();
 

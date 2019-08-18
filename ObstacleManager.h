@@ -19,6 +19,8 @@ public:
 	void AddOnstacle(ObstacleBox* argObstacle);
 	void RemoveObstacle(ObstacleBox* argObstacle);
 
+	ObstacleBox* GetObstacle();
+
 private:
 	ObstacleManager();
 

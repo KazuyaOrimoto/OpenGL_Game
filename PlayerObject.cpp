@@ -49,13 +49,6 @@ void PlayerObject::UpdateGameObject(float argDaltaTime)
 {
 }
 
-
-int PlayerObject::GetTorque()
-{
-    return rotate->GetTorque();;
-}
-
-
 bool PlayerObject::CanMove()
 {
     return rotate->CanMove();

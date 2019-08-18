@@ -8,11 +8,13 @@
 #include "PlayerObject.h"
 #include "RotateComponent.h"
 #include "Mesh.h"
+#include "GameObjectManager.h"
 
 
 ObstacleBox::ObstacleBox(Game* game)
 	:GameObject(game)
 	, hardness(1)
+	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);
 	Mesh* mesh = RENDERER->GetMesh("Assets/Cube.gpmesh");
@@ -26,15 +28,18 @@ ObstacleBox::ObstacleBox(Game* game)
 	}
 	boxCollider->SetObjectBox(box);
 	SetScale(300.0f);
-	//SetPosition(Vector3(5000.0f, -0.0f, 150.0f));
 	OBSTACLE_MANAGER->AddOnstacle(this);
 
 	tag = "Obstacle";
+
+	state = Paused;
+	player = GAME_OBJECT_MANAGER->FindGameObject("Player");
 }
 
 
 ObstacleBox::~ObstacleBox()
 {
+	OBSTACLE_MANAGER->RemoveObstacle(this);
 }
 
 void ObstacleBox::OnCollision(GameObject & argHitObject)
@@ -49,21 +54,20 @@ void ObstacleBox::OnCollision(GameObject & argHitObject)
 
 void ObstacleBox::HitPlayer(const PlayerObject & argPlayerObject)
 {
-	//ƒvƒŒƒCƒ„[‚Ì•û‚ª‹­‚©‚Á‚½‚ç
-	if (argPlayerObject.GetRotate()->GetTorque() > hardness)
-	{
-		meshComp->SetVisible(false);
-		ResetObstacle();
-	}
-	//Ž©•ª‚Ì•û‚ª‹­‚©‚Á‚½‚ç
-	else
-	{
-
-	}
+	meshComp->SetVisible(false);
+	ResetObstacle();
 }
 
 void ObstacleBox::ResetObstacle()
 {
 	SetPosition(Vector3::Zero);
 	state = Paused;
+}
+
+void ObstacleBox::UpdateGameObject(float argDaltaTime)
+{
+	if (player->GetPosition().x - 500.0f > position.x)
+	{
+		ResetObstacle();
+	}
 }
