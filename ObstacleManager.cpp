@@ -1,6 +1,6 @@
 #include "ObstacleManager.h"
 #include "PlayerObject.h"
-#include "ObstacleObject.h"
+#include "ObstacleBox.h"
 
 ObstacleManager* ObstacleManager::obstacle = nullptr;
 
@@ -21,12 +21,12 @@ void ObstacleManager::DeleteInstance()
 	}
 }
 
-void ObstacleManager::AddOnstacle(ObstacleObject* argObstacle)
+void ObstacleManager::AddOnstacle(ObstacleBox* argObstacle)
 {
 	obstacles.emplace_back(argObstacle);
 }
 
-void ObstacleManager::RemoveObstacle(ObstacleObject* argObstacle)
+void ObstacleManager::RemoveObstacle(ObstacleBox* argObstacle)
 {
 	auto iter = std::find(obstacles.begin(), obstacles.end(), argObstacle);
 	if (iter != obstacles.end())

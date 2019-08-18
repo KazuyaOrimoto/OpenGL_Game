@@ -5,7 +5,7 @@
 #define OBSTACLE_MANAGER ObstacleManager::GetInstance()
 
 class PlayerObject;
-class ObstacleObject;
+class ObstacleBox;
 
 class ObstacleManager
 {
@@ -16,8 +16,8 @@ public:
 
 	void AddPlayer(PlayerObject* argPlayer) { player = argPlayer; }
 	void RemovePlayer() { player = nullptr; }
-	void AddOnstacle(ObstacleObject* argObstacle);
-	void RemoveObstacle(ObstacleObject* argObstacle);
+	void AddOnstacle(ObstacleBox* argObstacle);
+	void RemoveObstacle(ObstacleBox* argObstacle);
 
 private:
 	ObstacleManager();
@@ -25,7 +25,7 @@ private:
 	static ObstacleManager* obstacle;
 
 	PlayerObject* player;
-	std::vector<ObstacleObject*> obstacles;
+	std::vector<ObstacleBox*> obstacles;
 
 };
 

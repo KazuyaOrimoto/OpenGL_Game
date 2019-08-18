@@ -4,7 +4,7 @@
 #include "Renderer.h"
 #include "PlayerObject.h"
 #include "SphereCollider.h"
-#include "ObstacleObject.h"
+#include "ObstacleBox.h"
 
 DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
     : GameObject(game)
@@ -40,12 +40,12 @@ void DrilObject::OnCollision(GameObject & argHitObject)
     if (argHitObject.GetTag() == "Obstacle")
     {
         //è·äQï®Ç∆ìñÇΩÇ¡ÇΩéûÇÃèàóù
-        ObstacleObject* obstacle = dynamic_cast<ObstacleObject*>(&argHitObject);
+        ObstacleBox* obstacle = dynamic_cast<ObstacleBox*>(&argHitObject);
         HitObstacle(*obstacle);
     }
 }
 
-void DrilObject::HitObstacle(const ObstacleObject & argHitObstacle)
+void DrilObject::HitObstacle(const ObstacleBox & argHitObstacle)
 {
     //è·äQï®ÇÃï˚Ç™ã≠Ç©Ç¡ÇΩÇÁ
     if (ownerObject->GetTorque() < argHitObstacle.GetHardness())

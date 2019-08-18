@@ -4,7 +4,7 @@
 class PlayerObject;
 class MeshComponent;
 class SphereCollider;
-class ObstacleObject;
+class ObstacleBox;
 
 class DrilObject : public GameObject
 {
@@ -20,7 +20,7 @@ public:
 
     virtual void OnCollision(GameObject& argHitObject) override;
 
-    void HitObstacle(const ObstacleObject & argHitObstacle);
+    void HitObstacle(const ObstacleBox & argHitObstacle);
 
 private:
     MeshComponent* meshComp;

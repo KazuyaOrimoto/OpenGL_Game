@@ -26,6 +26,5 @@ void WallObject::UpdateGameObject(float argDaltaTime)
 	if (moveRequired)
 	{
 		SetPosition(Vector3(position.x + 2000.0f * 20,position.y,position.z));;
-		printf("%f\n",position.x);
 	}
 }
