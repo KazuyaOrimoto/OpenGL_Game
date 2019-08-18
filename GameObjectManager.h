@@ -38,6 +38,9 @@ public:
 	*/
 	void RemoveGameObject(GameObject* argObj);
 
+	GameObject* FindGameObject(std::string tag);
+	std::vector<GameObject*> FindGameObjects(std::string tag);
+
 private:
 	GameObjectManager();
 	~GameObjectManager();
@@ -51,4 +54,6 @@ private:
 
 	//Update’†‚©‚Ç‚¤‚©
 	bool updatingGameObject;
+
+
 };

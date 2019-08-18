@@ -8,7 +8,6 @@
 #include "RotateComponent.h"
 #include "ObstacleManager.h"
 #include "ObstacleObject.h"
-#include "WallManager.h"
 #include "DrilObject.h"
 #include "Math.h"
 
@@ -19,7 +18,6 @@ PlayerObject::PlayerObject(Game* game)
     SetPosition(Vector3(0.0f, 0.0f, 150.0f));
 
     OBSTACLE_MANAGER->AddPlayer(this);
-	WALL_MANAGER->AddPlayer(this);
 	rotate = new RotateComponent(this);
 
     moveComp = new MoveComponent(this);
@@ -27,7 +25,7 @@ PlayerObject::PlayerObject(Game* game)
     moveComp->SetLeftKey(SDL_SCANCODE_A);
     moveComp->SetMaxStrafeSpeed(2400.0f);
     autoRun = new AutoRunComponent(this);
-    autoRun->SetForwardSpeed(1200.0f);
+    autoRun->SetForwardSpeed(2400.0f);
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 

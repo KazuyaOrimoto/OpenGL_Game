@@ -9,7 +9,6 @@
 #include "GameObjectManager.h"
 #include "GameObjectCreater.h"
 #include "ObstacleManager.h"
-#include "WallManager.h"
 #include "SceneBase.h"
 
 Game::Game()
@@ -62,7 +61,6 @@ bool Game::Initialize()
     GameObjectManager::CreateInstance();
     GameObjectCreater::CreateInstance();
 	ObstacleManager::CreateInstance();
-	WallManager::CreateInstance();
 
     nowScene = SceneBase::StartGame(this);
 
@@ -81,7 +79,6 @@ void Game::Termination()
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
-	WallManager::DeleteInstance();
 	SDL_Quit();
 	delete fps;
 	delete inputSystem;
@@ -98,7 +95,6 @@ void Game::GameLoop()
 		ProcessInput();
 		fps->Update();
 		UpdateGame();
-		WALL_MANAGER->UpdateWall();
 		PHYSICS->HitCheck();
 		GenerateOutput();
 	}

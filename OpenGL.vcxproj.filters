@@ -132,7 +132,6 @@
     <ClCompile Include="Obstacle2.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="WallManager.cpp" />
     <ClCompile Include="WallObject.cpp" />
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
@@ -269,7 +268,6 @@
     <ClInclude Include="Obstacle2.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="WallManager.h" />
     <ClInclude Include="WallObject.h" />
     <ClInclude Include="TitleScene.h">
       <Filter>Scene</Filter>
