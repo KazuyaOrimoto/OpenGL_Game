@@ -64,6 +64,14 @@ void ObstacleBox::ResetObstacle()
 	state = Paused;
 }
 
+void ObstacleBox::UseObstacle()
+{
+	meshComp->SetVisible(true);
+	state = Active;
+	GAME_OBJECT_MANAGER->RemoveGameObject(this);
+	GAME_OBJECT_MANAGER->AddGameObject(this);
+}
+
 void ObstacleBox::UpdateGameObject(float argDaltaTime)
 {
 	if (player->GetPosition().x - 500.0f > position.x)

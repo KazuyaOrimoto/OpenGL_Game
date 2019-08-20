@@ -22,8 +22,6 @@ public:
 
 	RotateComponent* GetRotate() const { return rotate; }
 
-	RotateComponent* GetRotate() { return rotate; }
-
     bool CanMove();
 
 private:

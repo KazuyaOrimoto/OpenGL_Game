@@ -1,5 +1,7 @@
 #pragma once
 #include "CameraComponent.h"
+
+class RotateComponent;
 class MainCamera : public CameraComponent
 {
 public:
@@ -28,5 +30,7 @@ private:
     float targetDist;
 
     float springConstant;
+
+	RotateComponent* rotate;
 };
 

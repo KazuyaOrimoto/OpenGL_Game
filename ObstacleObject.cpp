@@ -26,13 +26,13 @@ void ObstacleObject::UpdateGameObject(float argDaltaTime)
 
 void ObstacleObject::CreateObstacle(float depth)
 {
-	GameObject* box = OBSTACLE_MANAGER->GetObstacle();
-	box->SetState(Active);
+	ObstacleBox* box = dynamic_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle());
 	box->SetPosition(Vector3(depth, -0.0f, 150.0f));
+	box->UseObstacle();
 
 	box = OBSTACLE_MANAGER->GetObstacle();
-	box->SetState(Active);
 	box->SetPosition(Vector3(depth, -0.0f, 1850.0f));
+	box->UseObstacle();
 	SetPosition(Vector3(depth, -0.0f, 0.0f));
 	player = GAME_OBJECT_MANAGER->FindGameObject("Player");
 }

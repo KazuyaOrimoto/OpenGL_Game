@@ -14,7 +14,6 @@
 PlayerObject::PlayerObject(Game* game)
 	:GameObject(game)
 {
-
     SetPosition(Vector3(0.0f, 0.0f, 150.0f));
 
     OBSTACLE_MANAGER->AddPlayer(this);
@@ -29,7 +28,6 @@ PlayerObject::PlayerObject(Game* game)
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 
-
     dril = new DrilObject(game, this);
     autoRun->SetDrilObject(dril);
 
@@ -38,7 +36,6 @@ PlayerObject::PlayerObject(Game* game)
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 10.0f));
     tag = "Player";
-
 }
 
 /**

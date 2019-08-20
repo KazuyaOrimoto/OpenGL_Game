@@ -21,19 +21,24 @@ public:
 	*/
 	virtual void ProcessInput(const struct InputState& state);
 
-	int GetTorque() { return torque; }
-
     bool CanMove() { return canMove; }
-	void AddTorque();
-	void SubTorque();
+	Vector3 GetCameraUp() const { return Vector3::Transform(Vector3::UnitZ, cameraQuat); }
+	Vector3 GetCameraForward() const { return Vector3::Transform(Vector3::UnitX, cameraQuat); }
 private:
 
+	void MoveWall();
+	void HitRightWall();
+	void HitLeftWall();
+	void HitTopWall();
+	void HitUnderWall();
+
 	bool right;
-	//‰ñ“]‚Å“¾‚½—Í
-	int  torque;
     Quaternion target;
     float f;
+	float moveTorque;
     bool canMove;
     Quaternion rot;
+	Quaternion cameraQuat;
+	Vector3 ownerPos;
 };
 

@@ -5,20 +5,17 @@
 #include "PlayerObject.h"
 #include "SphereCollider.h"
 #include "ObstacleBox.h"
-#include "RotateComponent.h"
 
 DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
     : GameObject(game)
     , ownerObject(argOwnerObject)
 {
-
     meshComp = new MeshComponent(this);
-    meshComp->SetMesh(RENDERER->GetMesh("Assets/dril.gpmesh"));
+    meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
     SetScale(10.0f);
 
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 10.0f));
-
 }
 
 DrilObject::~DrilObject()
@@ -27,13 +24,7 @@ DrilObject::~DrilObject()
 
 void DrilObject::UpdateGameObject(float argDeltaTime)
 {
-    int torque = ownerObject->GetRotate()->GetTorque();
-
-    Quaternion rot = rotation;
-    Quaternion inc(Vector3::UnitX, static_cast<float>(torque * -0.01));
-    rot = Quaternion::Concatenate(rot, inc);
-    rotation = rot;
-
+	SetRotation(ownerObject->GetRotation());
 }
 
 void DrilObject::OnCollision(GameObject & argHitObject)
@@ -48,5 +39,4 @@ void DrilObject::OnCollision(GameObject & argHitObject)
 
 void DrilObject::HitObstacle(const ObstacleBox & argHitObstacle)
 {
-	ownerObject->GetRotate()->SubTorque();
 }

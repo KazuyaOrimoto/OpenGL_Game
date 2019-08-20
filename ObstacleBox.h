@@ -17,6 +17,7 @@ public:
 
 	void HitPlayer(const PlayerObject& argPlayerObject);
 	void ResetObstacle();
+	void UseObstacle();
 
 	/**
 	@brief	ゲームオブジェクトのアップデート

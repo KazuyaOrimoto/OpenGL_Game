@@ -1,14 +1,18 @@
 #include "MainCamera.h"
 #include "GameObject.h"
 #include "SDL.h"
+#include "RotateComponent.h"
+#include "PlayerObject.h"
 
 MainCamera::MainCamera(GameObject* owner)
-    :CameraComponent(owner)
-    , horzDist(700.0f)
-    , vertDist(200.0f)
-    , targetDist(100.0f)
-    , springConstant(500.0f)
+	:CameraComponent(owner)
+	, horzDist(700.0f)
+	, vertDist(200.0f)
+	, targetDist(100.0f)
+	, springConstant(500.0f)
+	, rotate(nullptr)
 {
+	rotate = (dynamic_cast<PlayerObject*>(owner)->GetRotate());
 }
 
 void MainCamera::Update(float deltaTime)
@@ -27,9 +31,9 @@ void MainCamera::Update(float deltaTime)
 
     actualPos += velocity * deltaTime;
 
-    Vector3 target = owner->GetPosition() + owner->GetForward() * targetDist;
+    Vector3 target = owner->GetPosition() + rotate->GetCameraForward() * targetDist;
 
-    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, owner->GetUp());
+    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, rotate->GetCameraUp());
 
     SetViewMatrix(view);
 }
@@ -40,9 +44,9 @@ void MainCamera::SnapToIdeal()
 
     velocity = Vector3::Zero;
 
-    Vector3 target = owner->GetPosition() + owner->GetForward() * targetDist;
+    Vector3 target = owner->GetPosition() + rotate->GetCameraForward() * targetDist;
 
-    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, owner->GetUp());
+    Matrix4 view = Matrix4::CreateLookAt(actualPos, target, rotate->GetCameraUp());
 
     SetViewMatrix(view);
 }
@@ -51,9 +55,9 @@ Vector3 MainCamera::ComputeCameraPos() const
 {
     Vector3 cameraPos = owner->GetPosition();
 
-    cameraPos -= owner->GetForward() * horzDist;
+    cameraPos -= rotate->GetCameraForward() * horzDist;
 
-    cameraPos += owner->GetUp() * vertDist;
+    cameraPos += rotate->GetCameraUp() * vertDist;
 
     return cameraPos;
 }
