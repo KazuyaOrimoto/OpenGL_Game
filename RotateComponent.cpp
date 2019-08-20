@@ -8,7 +8,7 @@ RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
 	, right(true)
 	, f(1)
 	, canMove(true)
-	, moveTorque(10)
+	, moveTorque(3)
 {
 }
 
@@ -70,7 +70,7 @@ void RotateComponent::ProcessInput(const InputState & state)
 	{
 		right = true;
 
-		float rad = Math::ToRadians(10.0f);
+		float rad = Math::ToRadians(moveTorque);
 		Quaternion inc(Vector3::UnitX, rad);
 		target = Quaternion::Concatenate(rot, inc);
 	}
@@ -78,7 +78,7 @@ void RotateComponent::ProcessInput(const InputState & state)
 	{
 		right = false;
 
-		float rad = Math::ToRadians(-10.0f);
+		float rad = Math::ToRadians(-moveTorque);
 		Quaternion inc(Vector3::UnitX, rad);
 		target = Quaternion::Concatenate(rot, inc);
 	}
