@@ -45,7 +45,17 @@ void RotateComponent::Update(float argDeltaTime)
 		//Ç«ÇÃï«Ç…Ç‡Ç¬Ç¢ÇƒÇ¢Ç»Ç¢Ç∆Ç´
 		else
 		{
-			cameraQuat = Quaternion::Slerp(rot, target, f);
+			if (f < 1.0)
+			{
+				f += 0.2f;
+				cameraQuat = Quaternion::Slerp(moveRot, target, f);
+
+			}
+			else if (f > 1.0)
+			{
+				f = 1.0f;
+				cameraQuat = Quaternion::Slerp(moveRot, target, f);
+			}
 		}
     }
 	//à⁄ìÆÇ™Ç≈Ç´Ç»Ç¢èÛë‘
@@ -68,23 +78,34 @@ void RotateComponent::ProcessInput(const InputState & state)
 	}
 	if (state.Keyboard.GetKeyState(SDL_SCANCODE_D))
 	{
-		right = true;
-
+		if (state.Keyboard.GetKeyState(SDL_SCANCODE_D) == ButtonState::Pressed)
+		{
+			f = 0.0f;
+		}
 		float rad = Math::ToRadians(moveTorque);
 		Quaternion inc(Vector3::UnitX, rad);
 		target = Quaternion::Concatenate(rot, inc);
+		moveRot = cameraQuat;
 	}
 	else if (state.Keyboard.GetKeyState(SDL_SCANCODE_A))
 	{
-		right = false;
-
+		if (state.Keyboard.GetKeyState(SDL_SCANCODE_A) == ButtonState::Pressed)
+		{
+			f = 0.0f;
+		}
 		float rad = Math::ToRadians(-moveTorque);
 		Quaternion inc(Vector3::UnitX, rad);
 		target = Quaternion::Concatenate(rot, inc);
+		moveRot = cameraQuat;
 	}
 	else
 	{
+		if (state.Keyboard.GetKeyState(SDL_SCANCODE_D) == ButtonState::Released || state.Keyboard.GetKeyState(SDL_SCANCODE_A) == ButtonState::Released)
+		{
+			f = 0.0f;
+		}
 		target = rot;
+		moveRot = cameraQuat;
 	}
 }
 

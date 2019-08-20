@@ -39,6 +39,7 @@ private:
     bool canMove;
     Quaternion rot;
 	Quaternion cameraQuat;
+	Quaternion moveRot;
 	Vector3 ownerPos;
 };
 
