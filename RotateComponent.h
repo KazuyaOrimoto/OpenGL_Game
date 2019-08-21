@@ -35,6 +35,7 @@ private:
 	bool right;
     Quaternion target;
     float f;
+    float addF;
 	float moveTorque;
     bool canMove;
     Quaternion rot;

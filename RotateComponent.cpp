@@ -7,8 +7,9 @@ RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
 	: Component(argOwner)
 	, right(true)
 	, f(1)
+    , addF(0.2f)
 	, canMove(true)
-	, moveTorque(3)
+	, moveTorque(2)
 {
 }
 
@@ -47,14 +48,14 @@ void RotateComponent::Update(float argDeltaTime)
 		{
 			if (f < 1.0)
 			{
-				f += 0.2f;
+				f += addF;
 				cameraQuat = Quaternion::Slerp(moveRot, target, f);
 
 			}
 			else if (f > 1.0)
 			{
 				f = 1.0f;
-				cameraQuat = Quaternion::Slerp(moveRot, target, f);
+				cameraQuat = target;
 			}
 		}
     }
@@ -81,30 +82,32 @@ void RotateComponent::ProcessInput(const InputState & state)
 		if (state.Keyboard.GetKeyState(SDL_SCANCODE_D) == ButtonState::Pressed)
 		{
 			f = 0.0f;
+            addF = 0.02f;
 		}
 		float rad = Math::ToRadians(moveTorque);
 		Quaternion inc(Vector3::UnitX, rad);
 		target = Quaternion::Concatenate(rot, inc);
 		moveRot = cameraQuat;
+        right = true;
 	}
 	else if (state.Keyboard.GetKeyState(SDL_SCANCODE_A))
 	{
 		if (state.Keyboard.GetKeyState(SDL_SCANCODE_A) == ButtonState::Pressed)
 		{
 			f = 0.0f;
-		}
+            addF = 0.02f;
+        }
 		float rad = Math::ToRadians(-moveTorque);
 		Quaternion inc(Vector3::UnitX, rad);
 		target = Quaternion::Concatenate(rot, inc);
 		moveRot = cameraQuat;
-	}
+        right = false;
+    }
 	else
 	{
-		if (state.Keyboard.GetKeyState(SDL_SCANCODE_D) == ButtonState::Released || state.Keyboard.GetKeyState(SDL_SCANCODE_A) == ButtonState::Released)
-		{
-			f = 0.0f;
-		}
-		target = rot;
+		f = 0.0f;
+        addF = 0.2f;
+        target = rot;
 		moveRot = cameraQuat;
 	}
 }
@@ -140,6 +143,7 @@ void RotateComponent::HitRightWall()
 	target = Quaternion::Concatenate(rot, inc);
 	owner->SetPosition(Vector3(ownerPos.x, 850.0f, ownerPos.z));
 	f = 0;
+    addF = 0.2f;
 	canMove = false;
 
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
@@ -155,7 +159,8 @@ void RotateComponent::HitLeftWall()
 	target = Quaternion::Concatenate(rot, inc);
 	owner->SetPosition(Vector3(ownerPos.x, -850.0f, ownerPos.z));
 	f = 0;
-	canMove = false;
+    addF = 0.2f;
+    canMove = false;
 
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.direction = Vector3::Transform(dir.direction, inc);
@@ -170,7 +175,8 @@ void RotateComponent::HitTopWall()
 	target = Quaternion::Concatenate(rot, inc);
 	owner->SetPosition(Vector3(ownerPos.x, ownerPos.y, 1850));
 	f = 0;
-	canMove = false;
+    addF = 0.2f;
+    canMove = false;
 
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.direction = Vector3::Transform(dir.direction, inc);
@@ -185,7 +191,8 @@ void RotateComponent::HitUnderWall()
 	target = Quaternion::Concatenate(rot, inc);
 	owner->SetPosition(Vector3(ownerPos.x, ownerPos.y, 150));
 	f = 0;
-	canMove = false;
+    addF = 0.2f;
+    canMove = false;
 
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.direction = Vector3::Transform(dir.direction, inc);
