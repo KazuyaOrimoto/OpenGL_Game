@@ -10,7 +10,6 @@
 #include "Mesh.h"
 #include "GameObjectManager.h"
 
-
 ObstacleBox::ObstacleBox(Game* game)
 	:GameObject(game)
 	, hardness(1)
@@ -30,10 +29,10 @@ ObstacleBox::ObstacleBox(Game* game)
 	SetScale(300.0f);
 	OBSTACLE_MANAGER->AddOnstacle(this);
 
-	tag = "Obstacle";
+	tag = Tag::Obstacle;
 
 	state = Paused;
-	player = GAME_OBJECT_MANAGER->FindGameObject("Player");
+	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
 }
 
 
@@ -44,7 +43,7 @@ ObstacleBox::~ObstacleBox()
 
 void ObstacleBox::OnCollision(GameObject & argHitObject)
 {
-	if (argHitObject.GetTag() == "Player")
+	if (argHitObject.GetTag() == Tag::Player)
 	{
 		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
 		PlayerObject* obstacle = dynamic_cast<PlayerObject*>(&argHitObject);

@@ -17,7 +17,7 @@ DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
 
-	tag = "Player";
+	tag = Tag::Player;
 }
 
 DrilObject::~DrilObject()
@@ -31,7 +31,7 @@ void DrilObject::UpdateGameObject(float argDeltaTime)
 
 void DrilObject::OnCollision(GameObject & argHitObject)
 {
-    if (argHitObject.GetTag() == "Obstacle")
+    if (argHitObject.GetTag() == Tag::Obstacle)
     {
         //è·äQï®Ç∆ìñÇΩÇ¡ÇΩéûÇÃèàóù
         ObstacleBox* obstacle = dynamic_cast<ObstacleBox*>(&argHitObject);

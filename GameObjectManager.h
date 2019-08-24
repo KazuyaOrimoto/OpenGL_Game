@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include "GameObject.h"
 
 class GameObject;
 struct InputState;
@@ -38,8 +39,8 @@ public:
 	*/
 	void RemoveGameObject(GameObject* argObj);
 
-	GameObject* FindGameObject(std::string tag);
-	std::vector<GameObject*> FindGameObjects(std::string tag);
+	GameObject* FindGameObject(Tag tag);
+	std::vector<GameObject*> FindGameObjects(Tag tag);
 
 private:
 	GameObjectManager();

@@ -34,5 +34,5 @@ void ObstacleObject::CreateObstacle(float depth)
 	box->SetPosition(Vector3(depth, -0.0f, 1850.0f));
 	box->UseObstacle();
 	SetPosition(Vector3(depth, -0.0f, 0.0f));
-	player = GAME_OBJECT_MANAGER->FindGameObject("Player");
+	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
 }

@@ -8,6 +8,13 @@ class Matrix4;
 class Component;
 struct InputState;
 
+enum Tag
+{
+	Player,
+	Obstacle,
+	Wall
+};
+
 /**
 @brief	ゲームオブジェクトの状態
 */
@@ -21,8 +28,6 @@ enum State
 class GameObject
 {
 public:
-
-
 	/**
 	@param	ゲームクラスのポインタ
 	*/
@@ -145,7 +150,7 @@ public:
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
-	std::string GetTag() const { return tag; }
+	Tag GetTag() const { return tag; }
 
     virtual void OnCollision(GameObject& argHitObject) {}
 
@@ -155,7 +160,7 @@ protected:
 	//ゲームオブジェクトの状態
 	State state;
 	//ゲームオブジェクトのタグ
-	std::string tag;
+	Tag tag;
 
 	//Transform
 	Vector3 position;

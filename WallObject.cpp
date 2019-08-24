@@ -12,8 +12,8 @@ WallObject::WallObject(Game* game, int i)
 	SetPosition(Vector3(i*2000.0f, 0.0f, 0.0f));
 	MeshComponent* mc = new WallMeshComponent(this);
 	mc->SetMesh(RENDERER->GetMesh("Assets/Wall.gpmesh"));
-	player = GAME_OBJECT_MANAGER->FindGameObject("Player");
-	tag = "Wall";
+	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
+	tag = Tag::Wall;
 }
 
 WallObject::~WallObject()

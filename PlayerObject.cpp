@@ -35,7 +35,7 @@ PlayerObject::PlayerObject(Game* game)
 
     //sphereCollider = new SphereCollider(this);
     //sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 10.0f));
-    tag = "Player";
+    tag = Tag::Player;
 }
 
 /**

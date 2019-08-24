@@ -88,7 +88,7 @@ void GameObjectManager::RemoveGameObject(GameObject * argObj)
 	}
 }
 
-GameObject * GameObjectManager::FindGameObject(std::string tag)
+GameObject * GameObjectManager::FindGameObject(Tag tag)
 {
 	for (auto itr : gameObjects)
 	{
@@ -100,7 +100,7 @@ GameObject * GameObjectManager::FindGameObject(std::string tag)
 	return nullptr;
 }
 
-std::vector<GameObject*> GameObjectManager::FindGameObjects(std::string tag)
+std::vector<GameObject*> GameObjectManager::FindGameObjects(Tag tag)
 {
 	std::vector<GameObject*> ret;
 	for (auto itr : gameObjects)
