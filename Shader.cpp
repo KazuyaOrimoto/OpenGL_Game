@@ -111,6 +111,7 @@ bool Shader::CompileShader(const std::string & fileName, GLenum shaderType, GLui
 	{
 		std::stringstream sstream;
 		sstream << shaderFile.rdbuf();
+		std::ifstream().swap(shaderFile);
 		std::string contents = sstream.str();
 		const char* contentsChar = contents.c_str();
 

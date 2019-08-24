@@ -12,10 +12,12 @@ DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
-    SetScale(10.0f);
+    SetScale(5.0f);
 
     sphereCollider = new SphereCollider(this);
-    sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 10.0f));
+    sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
+
+	tag = "Player";
 }
 
 DrilObject::~DrilObject()

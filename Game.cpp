@@ -82,7 +82,7 @@ void Game::Termination()
 	SDL_Quit();
 	delete fps;
 	delete inputSystem;
-
+	delete nowScene;
 }
 
 /**
