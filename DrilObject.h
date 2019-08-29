@@ -22,6 +22,12 @@ public:
 
     void HitObstacle(const ObstacleBox & argHitObstacle);
 
+    /**
+    @brief	“ü—Íˆ—
+    @param	InputState\‘¢‘Ì
+    */
+    virtual void GameObjectInput(const InputState& keyState)override;
+
 private:
     MeshComponent* meshComp;
     PlayerObject* ownerObject;

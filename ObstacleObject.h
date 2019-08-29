@@ -1,5 +1,8 @@
 #pragma once
 #include "GameObject.h"
+#include <fstream>
+#include <sstream>
+#include <document.h>
 
 class MeshComponent;
 class BoxCollider;
@@ -19,7 +22,10 @@ public:
 
 private:
 
-	void CreateObstacle(float depth);
+    rapidjson::Value& LoadMap(const std::string & argFileName);
+
+    void CreateObstacle(float depth);
 	GameObject* player;
+
 };
 

@@ -4,7 +4,6 @@
 #include <fstream>
 #include <sstream>
 
-
 Shader::Shader()
 	:vertexShader(0)
 	, fragShader(0)

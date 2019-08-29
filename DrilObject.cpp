@@ -5,6 +5,7 @@
 #include "PlayerObject.h"
 #include "SphereCollider.h"
 #include "ObstacleBox.h"
+#include "InputSystem.h"
 
 DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
     : GameObject(game)
@@ -26,7 +27,7 @@ DrilObject::~DrilObject()
 
 void DrilObject::UpdateGameObject(float argDeltaTime)
 {
-	SetRotation(ownerObject->GetRotation());
+	//SetRotation(ownerObject->GetRotation());
 }
 
 void DrilObject::OnCollision(GameObject & argHitObject)
@@ -42,3 +43,28 @@ void DrilObject::OnCollision(GameObject & argHitObject)
 void DrilObject::HitObstacle(const ObstacleBox & argHitObstacle)
 {
 }
+
+void DrilObject::GameObjectInput(const InputState & keyState)
+{
+    if (keyState.Keyboard.GetKeyState(SDL_SCANCODE_D))
+    {
+        Quaternion rot = ownerObject->GetRotation();
+        float rad = Math::ToRadians(-10);
+        Quaternion inc(Vector3::UnitX, rad);
+        rot = Quaternion::Concatenate(rot, inc);
+        SetRotation(rot);
+    }
+    else if (keyState.Keyboard.GetKeyState(SDL_SCANCODE_A))
+    {
+        Quaternion rot = ownerObject->GetRotation();
+        float rad = Math::ToRadians(10);
+        Quaternion inc(Vector3::UnitX, rad);
+        rot = Quaternion::Concatenate(rot, inc);
+        SetRotation(rot);
+    }
+    else
+    {
+        SetRotation(ownerObject->GetRotation());
+    }
+}
+
