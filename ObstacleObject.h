@@ -22,7 +22,7 @@ public:
 
 private:
 
-    rapidjson::Value& LoadMap(const std::string & argFileName);
+	rapidjson::Document LoadMap(const std::string & argFileName);
 
     void CreateObstacle(float depth);
 	GameObject* player;

@@ -24,22 +24,22 @@ void RotateComponent::Update(float argDeltaTime)
     if (canMove)
     {
 		//‰E‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
-        if (ownerPos.y > 850)
+        if (ownerPos.y > 950)
         {
 			HitRightWall();
         }
         //¶‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
-        else if (ownerPos.y < -850)
+        else if (ownerPos.y < -950)
         {
 			HitLeftWall();
         }
         //ã‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
-        else if (ownerPos.z > 1850)
+        else if (ownerPos.z > 1950)
         {
 			HitTopWall();
         }
         //‰º‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
-        else if (ownerPos.z < 150)
+        else if (ownerPos.z < 50)
         {
 			HitUnderWall();
         }
@@ -141,7 +141,7 @@ void RotateComponent::HitRightWall()
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);
 	target = Quaternion::Concatenate(rot, inc);
-	owner->SetPosition(Vector3(ownerPos.x, 850.0f, ownerPos.z));
+	owner->SetPosition(Vector3(ownerPos.x, 950.0f, ownerPos.z));
 	f = 0;
     addF = 0.2f;
 	canMove = false;
@@ -157,7 +157,7 @@ void RotateComponent::HitLeftWall()
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);
 	target = Quaternion::Concatenate(rot, inc);
-	owner->SetPosition(Vector3(ownerPos.x, -850.0f, ownerPos.z));
+	owner->SetPosition(Vector3(ownerPos.x, -950.0f, ownerPos.z));
 	f = 0;
     addF = 0.2f;
     canMove = false;
@@ -173,7 +173,7 @@ void RotateComponent::HitTopWall()
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);
 	target = Quaternion::Concatenate(rot, inc);
-	owner->SetPosition(Vector3(ownerPos.x, ownerPos.y, 1850));
+	owner->SetPosition(Vector3(ownerPos.x, ownerPos.y, 1950));
 	f = 0;
     addF = 0.2f;
     canMove = false;
@@ -189,7 +189,7 @@ void RotateComponent::HitUnderWall()
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);
 	target = Quaternion::Concatenate(rot, inc);
-	owner->SetPosition(Vector3(ownerPos.x, ownerPos.y, 150));
+	owner->SetPosition(Vector3(ownerPos.x, ownerPos.y, 50));
 	f = 0;
     addF = 0.2f;
     canMove = false;

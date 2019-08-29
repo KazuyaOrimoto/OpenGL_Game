@@ -13,7 +13,7 @@ DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
-    SetScale(5.0f);
+    SetScale(7.0f);
 
     sphereCollider = new SphereCollider(this);
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));

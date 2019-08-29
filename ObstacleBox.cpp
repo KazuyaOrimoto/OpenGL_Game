@@ -26,7 +26,7 @@ ObstacleBox::ObstacleBox(Game* game)
 		box.UpdateMinMax(itr);
 	}
 	boxCollider->SetObjectBox(box);
-	SetScale(300.0f);
+	SetScale(200.0f);
 	OBSTACLE_MANAGER->AddOnstacle(this);
 
 	tag = Tag::Obstacle;

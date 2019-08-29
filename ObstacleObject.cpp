@@ -28,13 +28,13 @@ void ObstacleObject::UpdateGameObject(float argDaltaTime)
     }
 }
 
-rapidjson::Value& ObstacleObject::LoadMap(const std::string & argFileName)
+rapidjson::Document ObstacleObject::LoadMap(const std::string & argFileName)
 {
     std::ifstream file(argFileName);
     if (!file.is_open())
     {
         SDL_Log("File not found: Map %s", argFileName.c_str());
-        return;
+        return nullptr;
     }
 
     std::stringstream fileStream;
@@ -44,35 +44,32 @@ rapidjson::Value& ObstacleObject::LoadMap(const std::string & argFileName)
     rapidjson::Document doc;
     doc.ParseStream(jsonStr);
 
-    rapidjson::Value& mapJson = doc["map"];
-    return mapJson;
+    return doc;
 }
 
 void ObstacleObject::CreateObstacle(float depth)
 {
-    rapidjson::Value& mapJson = LoadMap("MapData/map.json");
+	rapidjson::Document doc = LoadMap("MapData/map.json");
+	rapidjson::Value& mapJson = doc["map"];
     int ten;
     int one;
-    for (int i = 0; i < mapJson.Size(); i++)
+	int size;
+    for (Uint16 i = 0; i < mapJson.Size(); i++)
     {
-        if (mapJson[i].GetInt() == 2)
+		size = mapJson[i].GetUint();
+        if (size != 0)
         {
             ten = i / 10;
             one = i % 10;
             ObstacleBox* box = dynamic_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle());
-            box->SetPosition(Vector3(depth, -0.0f, 150.0f));
+			if (box == nullptr)
+			{
+				return;
+			}
+            box->SetPosition(Vector3(depth, -1000.0f + (200.0f * (one)) + (size * 50.0f), 2000.0f - (200.0f * (ten + 1)) + (size * 50.0f)));
             box->UseObstacle();
+			box->SetScale(size * 100.0f);
             SetPosition(Vector3(depth, -0.0f, 0.0f));
-            player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
         }
     }
-
-    ObstacleBox* box = dynamic_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle());
-    box->SetPosition(Vector3(depth, -0.0f, 150.0f));
-    box->UseObstacle();
-
-    box = OBSTACLE_MANAGER->GetObstacle();
-    box->SetPosition(Vector3(depth, -0.0f, 1850.0f));
-    box->UseObstacle();
-    SetPosition(Vector3(depth, -0.0f, 0.0f));
 }
