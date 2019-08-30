@@ -7,13 +7,22 @@
 #include <fstream>
 #include <sstream>
 #include <document.h>
+#include <string>
+#include "ObstacleMapLoder.h"
+
+ObstacleMapLoder* ObstacleObject::mapLoder = nullptr;
 
 ObstacleObject::ObstacleObject(Game* game, int i)
     :GameObject(game)
     , player(nullptr)
 {
+	if (mapLoder == nullptr)
+	{
+		mapLoder = new ObstacleMapLoder();
+	}
     player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
     CreateObstacle(5000.0f + i * 2000.0f);
+
 }
 
 ObstacleObject::~ObstacleObject()
@@ -28,29 +37,10 @@ void ObstacleObject::UpdateGameObject(float argDaltaTime)
     }
 }
 
-rapidjson::Document ObstacleObject::LoadMap(const std::string & argFileName)
-{
-    std::ifstream file(argFileName);
-    if (!file.is_open())
-    {
-        SDL_Log("File not found: Map %s", argFileName.c_str());
-        return nullptr;
-    }
-
-    std::stringstream fileStream;
-    fileStream << file.rdbuf();
-    std::string contents = fileStream.str();
-    rapidjson::StringStream jsonStr(contents.c_str());
-    rapidjson::Document doc;
-    doc.ParseStream(jsonStr);
-
-    return doc;
-}
-
 void ObstacleObject::CreateObstacle(float depth)
 {
-	rapidjson::Document doc = LoadMap("MapData/map.json");
-	rapidjson::Value& mapJson = doc["map"];
+	rapidjson::Document* doc = mapLoder->GetRandamMap();
+	rapidjson::Value& mapJson = (*doc)["map"];
     int ten;
     int one;
 	int size;

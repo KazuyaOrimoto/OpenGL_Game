@@ -3,10 +3,12 @@
 #include <fstream>
 #include <sstream>
 #include <document.h>
+#include <vector>
 
 class MeshComponent;
 class BoxCollider;
 class PlayerObject;
+class ObstacleMapLoder;
 
 class ObstacleObject : public GameObject
 {
@@ -22,8 +24,7 @@ public:
 
 private:
 
-	rapidjson::Document LoadMap(const std::string & argFileName);
-
+	static ObstacleMapLoder* mapLoder;
     void CreateObstacle(float depth);
 	GameObject* player;
 
