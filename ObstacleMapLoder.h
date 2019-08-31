@@ -4,7 +4,7 @@
 
 namespace ObstacleMap
 {
-	const int MAP_QTY = 2;
+	const int MAP_QTY = 4;
 }
 
 class ObstacleMapLoder
