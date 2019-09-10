@@ -20,16 +20,16 @@ Texture::~Texture()
 @param	テクスチャのファイル名
 @return	true : 成功 , false : 失敗
 */
-bool Texture::Load(const std::string& fileName)
+bool Texture::Load(const std::string& _fileName)
 {
 	int channels = 0;
 
-	unsigned char* image = SOIL_load_image(fileName.c_str(),
+	unsigned char* image = SOIL_load_image(_fileName.c_str(),
 											&width,&height,&channels,SOIL_LOAD_AUTO);
 
 	if (image == nullptr)
 	{
-		SDL_Log("SOIL failed to load image %s: %s", fileName.c_str(), SOIL_last_result());
+		SDL_Log("SOIL failed to load image %s: %s", _fileName.c_str(), SOIL_last_result());
 		return false;
 	}
 

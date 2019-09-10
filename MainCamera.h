@@ -5,16 +5,16 @@ class RotateComponent;
 class MainCamera : public CameraComponent
 {
 public:
-    MainCamera(GameObject* owner);
+    MainCamera(GameObject* _owner);
 
-    void Update(float deltaTime) override;
+    void Update(float _deltaTime) override;
 
     void SnapToIdeal();
 
-    void SetHorzDist(float dist) { horzDist = dist; }
-    void SetVertDist(float dist) { vertDist = dist; }
-    void SetTargetDist(float dist) { targetDist = dist; }
-    void SetSpringConstant(float spring) { springConstant = spring; }
+    void SetHorzDist(float _dist) { horzDist = _dist; }
+    void SetVertDist(float _dist) { vertDist = _dist; }
+    void SetTargetDist(float _dist) { targetDist = _dist; }
+    void SetSpringConstant(float _spring) { springConstant = _spring; }
 
 private:
     Vector3 ComputeCameraPos() const;

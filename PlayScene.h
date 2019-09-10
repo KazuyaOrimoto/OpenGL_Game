@@ -4,7 +4,7 @@ class Game;
 class PlayScene : public SceneBase
 {
 public:
-	PlayScene(Game* game);
+	PlayScene(Game* _game);
 	~PlayScene();
 
 	SceneBase* Update()override;

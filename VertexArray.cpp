@@ -7,10 +7,10 @@
 @param	インデックスバッファの配列のポインタ
 @param	インデックスの数
 */
-VertexArray::VertexArray(const float* argVerts, unsigned int argNumVerts,
-	const unsigned int* argIndices, unsigned int argNumIndices)
-	:numVerts(argNumVerts)
-	,numIndices(argNumIndices)
+VertexArray::VertexArray(const float* _verts, unsigned int _numVerts,
+	const unsigned int* _indices, unsigned int _numIndices)
+	:numVerts(_numVerts)
+	,numIndices(_numIndices)
 {
 	// 頂点配列の作成
 	glGenVertexArrays(1, &vertexArray);
@@ -19,12 +19,12 @@ VertexArray::VertexArray(const float* argVerts, unsigned int argNumVerts,
 	// 頂点バッファの作成
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, argNumVerts * 8 * sizeof(float), argVerts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, _numVerts * 8 * sizeof(float), _verts, GL_STATIC_DRAW);
 
 	// インデクスバッファの作成
 	glGenBuffers(1, &indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, argNumIndices * sizeof(unsigned int), argIndices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _numIndices * sizeof(unsigned int), _indices, GL_STATIC_DRAW);
 
 	//最初の頂点属性を有効に（位置座標）
 	glEnableVertexAttribArray(0);

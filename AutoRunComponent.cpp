@@ -4,20 +4,20 @@
 #include "Renderer.h"
 #include "DrilObject.h"
 
-AutoRunComponent::AutoRunComponent(GameObject* owner, int updateOrder)
-	: Component(owner, updateOrder)
+AutoRunComponent::AutoRunComponent(GameObject* _owner, int _updateOrder)
+	: Component(_owner, _updateOrder)
 	, forwardSpeed(0.0f)
 {
 }
 
-void AutoRunComponent::Update(float deltaTime)
+void AutoRunComponent::Update(float _deltaTime)
 {
-	if (deltaTime > 0.03)
+	if (_deltaTime > 0.03)
 	{
 		return;
 	}
 	Vector3 pos = owner->GetPosition();
-	pos += owner->GetForward() * forwardSpeed * deltaTime;
+	pos += owner->GetForward() * forwardSpeed * _deltaTime;
 	owner->SetPosition(pos);
     dril->SetPosition(pos);
 }

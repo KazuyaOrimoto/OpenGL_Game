@@ -12,7 +12,7 @@ public:
 	@param	テクスチャのファイル名
 	@return	true : 成功 , false : 失敗
 	*/
-	bool Load(const std::string& fileName);
+	bool Load(const std::string& _fileName);
 	/**
 	@brief	ロードしたテクスチャの解放
 	*/

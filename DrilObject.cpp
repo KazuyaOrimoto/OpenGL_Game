@@ -7,9 +7,9 @@
 #include "ObstacleBox.h"
 #include "InputSystem.h"
 
-DrilObject::DrilObject(Game* game, PlayerObject* argOwnerObject)
-    : GameObject(game)
-    , ownerObject(argOwnerObject)
+DrilObject::DrilObject(Game* _game, PlayerObject* _ownerObject)
+    : GameObject(_game)
+    , ownerObject(_ownerObject)
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
@@ -25,28 +25,28 @@ DrilObject::~DrilObject()
 {
 }
 
-void DrilObject::UpdateGameObject(float argDeltaTime)
+void DrilObject::UpdateGameObject(float _deltaTime)
 {
 	//SetRotation(ownerObject->GetRotation());
 }
 
-void DrilObject::OnCollision(GameObject & argHitObject)
+void DrilObject::OnCollision(GameObject & _hitObject)
 {
-    if (argHitObject.GetTag() == Tag::Obstacle)
+    if (_hitObject.GetTag() == Tag::Obstacle)
     {
         //è·äQï®Ç∆ìñÇΩÇ¡ÇΩéûÇÃèàóù
-        ObstacleBox* obstacle = dynamic_cast<ObstacleBox*>(&argHitObject);
+        ObstacleBox* obstacle = dynamic_cast<ObstacleBox*>(&_hitObject);
         HitObstacle(*obstacle);
     }
 }
 
-void DrilObject::HitObstacle(const ObstacleBox & argHitObstacle)
+void DrilObject::HitObstacle(const ObstacleBox & _hitObstacle)
 {
 }
 
-void DrilObject::GameObjectInput(const InputState & keyState)
+void DrilObject::GameObjectInput(const InputState & _state)
 {
-    if (keyState.Keyboard.GetKeyState(SDL_SCANCODE_D))
+    if (_state.Keyboard.GetKeyState(SDL_SCANCODE_D))
     {
         Quaternion rot = ownerObject->GetRotation();
         float rad = Math::ToRadians(-10);
@@ -54,7 +54,7 @@ void DrilObject::GameObjectInput(const InputState & keyState)
         rot = Quaternion::Concatenate(rot, inc);
         SetRotation(rot);
     }
-    else if (keyState.Keyboard.GetKeyState(SDL_SCANCODE_A))
+    else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_A))
     {
         Quaternion rot = ownerObject->GetRotation();
         float rad = Math::ToRadians(10);

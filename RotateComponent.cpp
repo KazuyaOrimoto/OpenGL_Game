@@ -3,8 +3,8 @@
 #include "InputSystem.h"
 #include "Renderer.h"
 
-RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
-	: Component(argOwner)
+RotateComponent::RotateComponent(GameObject* _owner, int _updateOrder)
+	: Component(_owner,_updateOrder)
 	, right(true)
 	, f(1)
     , addF(0.2f)
@@ -17,7 +17,7 @@ RotateComponent::RotateComponent(GameObject* argOwner, int argUpdateOrder)
 @brief	フレーム毎の処理
 @param	最後のフレームを完了するのに要した時間
 */
-void RotateComponent::Update(float argDeltaTime)
+void RotateComponent::Update(float _deltaTime)
 {
 	ownerPos = owner->GetPosition();
 	cameraQuat = owner->GetRotation();
@@ -71,15 +71,15 @@ void RotateComponent::Update(float argDeltaTime)
 @brief	入力処理
 @param	InputState構造体
 */
-void RotateComponent::ProcessInput(const InputState & state)
+void RotateComponent::ProcessInput(const InputState & _state)
 {
 	if (!canMove)
 	{
 		return;
 	}
-	if (state.Keyboard.GetKeyState(SDL_SCANCODE_D))
+	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_D))
 	{
-		if (state.Keyboard.GetKeyState(SDL_SCANCODE_D) == ButtonState::Pressed)
+		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_D) == ButtonState::Pressed)
 		{
 			f = 0.0f;
             addF = 0.02f;
@@ -90,9 +90,9 @@ void RotateComponent::ProcessInput(const InputState & state)
 		moveRot = cameraQuat;
         right = true;
 	}
-	else if (state.Keyboard.GetKeyState(SDL_SCANCODE_A))
+	else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_A))
 	{
-		if (state.Keyboard.GetKeyState(SDL_SCANCODE_A) == ButtonState::Pressed)
+		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_A) == ButtonState::Pressed)
 		{
 			f = 0.0f;
             addF = 0.02f;

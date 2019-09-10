@@ -5,7 +5,7 @@ class TitleScene :
     public SceneBase
 {
 public:
-    TitleScene(Game* game);
+    TitleScene(Game* _game);
     ~TitleScene();
     SceneBase* Update()override;
 

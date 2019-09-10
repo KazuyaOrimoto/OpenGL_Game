@@ -13,19 +13,19 @@ class ObstacleMapLoder;
 class ObstacleObject : public GameObject
 {
 public:
-	ObstacleObject(Game* game,int i);
+	ObstacleObject(Game* _game,int _i);
 	~ObstacleObject();
 
 	/**
 	@brief	ゲームオブジェクトのアップデート
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	void UpdateGameObject(float argDaltaTime) override;
+	void UpdateGameObject(float _daltaTime) override;
 
 private:
 
 	static ObstacleMapLoder* mapLoder;
-    void CreateObstacle(float depth);
+    void CreateObstacle(float _depth);
 	GameObject* player;
 
 };

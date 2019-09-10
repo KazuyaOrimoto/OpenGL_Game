@@ -4,20 +4,20 @@
 #include "RotateComponent.h"
 #include "PlayerObject.h"
 
-MainCamera::MainCamera(GameObject* owner)
-	:CameraComponent(owner)
+MainCamera::MainCamera(GameObject* _owner)
+	:CameraComponent(_owner)
 	, horzDist(700.0f)
 	, vertDist(250.0f)
 	, targetDist(200.0f)
 	, springConstant(500.0f)
 	, rotate(nullptr)
 {
-	rotate = (dynamic_cast<PlayerObject*>(owner)->GetRotate());
+	rotate = (dynamic_cast<PlayerObject*>(_owner)->GetRotate());
 }
 
-void MainCamera::Update(float deltaTime)
+void MainCamera::Update(float _deltaTime)
 {
-    CameraComponent::Update(deltaTime);
+    CameraComponent::Update(_deltaTime);
 
     float dampening = 2.0f * Math::Sqrt(springConstant);
 
@@ -27,9 +27,9 @@ void MainCamera::Update(float deltaTime)
 
     Vector3 acel = -springConstant * diff - dampening * velocity;
 
-    velocity += acel * deltaTime;
+    velocity += acel * _deltaTime;
 
-    actualPos += velocity * deltaTime;
+    actualPos += velocity * _deltaTime;
 
     Vector3 target = owner->GetPosition() + rotate->GetCameraForward() * targetDist;
 

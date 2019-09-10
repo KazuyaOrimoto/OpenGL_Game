@@ -49,7 +49,7 @@ public:
 	@brief  初期化処理
 	@return true : 成功 , false : 失敗
 	*/
-    bool Initialize(float argScreenWidth, float argScreenHeight);
+    bool Initialize(float _screenWidth, float _screenHeight);
 	/**
 	@brief  終了処理
 	*/
@@ -69,51 +69,51 @@ public:
 	@brief  スプライトの追加
 	@param	追加するSpriteComponentクラスのポインタ
 	*/
-	void AddSprite(SpriteComponent* argSpriteComponent);
+	void AddSprite(SpriteComponent* _spriteComponent);
 
 	/**
 	@brief  スプライトの削除
 	@param	削除するSpriteComponentクラスのポインタ
 	*/
-	void RemoveSprite(SpriteComponent* argSpriteComponent);
+	void RemoveSprite(SpriteComponent* _spriteComponent);
 
 	/**
 	@brief  テクスチャの取得
 	@param	取得したいテクスチャのファイル名
 	@return Textureクラスのポインタ
 	*/
-	Texture* GetTexture(const std::string& argFileName);
+	Texture* GetTexture(const std::string& _fileName);
 
 	/**
 	@brief  メッシュコンポーネントの追加
 	@param	追加するMeshComponentクラスのポインタ
 	*/
-    void AddMeshComponent(MeshComponent* argMeshComponent);
+    void AddMeshComponent(MeshComponent* _meshComponent);
 
 	/**
 	@brief  メッシュコンポーネントの削除
 	@param	削除するMeshComponentクラスのポインタ
 	*/
-    void RemoveMeshComponent(MeshComponent* argMeshComponent);
+    void RemoveMeshComponent(MeshComponent* _meshComponent);
 
 	/**
 	@brief  メッシュの取得
 	@param	取得したいメッシュのファイル名
 	@return Meshクラスのポインタ
 	*/
-    Mesh* GetMesh(const std::string& argFileName);
+    Mesh* GetMesh(const std::string& _fileName);
 
 	/**
 	@brief	ビュー行列を設定する
 	@param	ビュー行列
 	*/
-    void SetViewMatrix(const Matrix4& argView) { view = argView; }
+    void SetViewMatrix(const Matrix4& _view) { view = _view; }
 
 	/**
 	@brief	環境光を設定する
 	@param	Vector3（環境光を表す）
 	*/
-    void SetAmbientLight(const Vector3& argAmbient) { ambientLight = argAmbient; }
+    void SetAmbientLight(const Vector3& _ambient) { ambientLight = _ambient; }
 
 	/**
 	@brief	平行光源の構造体を取得する
@@ -155,13 +155,13 @@ private:
 	@brief  光源情報をシェーダーの変数にセットする
 	@param  セットするShaderクラスのポインタ
 	*/
-    void SetLightUniforms(Shader* argShader);
+    void SetLightUniforms(Shader* _shader);
 
     /**
     @brief  光源情報をシェーダーの変数にセットする
     @param  セットするShaderクラスのポインタ
     */
-    void SetWallLightUniforms(Shader* argShader);
+    void SetWallLightUniforms(Shader* _shader);
 
     void SetWallDirLight();
 

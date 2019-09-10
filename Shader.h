@@ -15,7 +15,7 @@ public:
 	@param	頂点シェーダーのファイル名
 	@return	true : 成功 , false : 失敗
 	*/
-	bool Load(const std::string& vertName,const std::string& fragName);
+	bool Load(const std::string& _vertName,const std::string& _fragName);
 	/**
 	@brief	ロードしたシェーダーの解放
 	*/
@@ -31,21 +31,21 @@ public:
 	@param	設定するUniform変数名
 	@param	設定する行列
 	*/
-	void SetMatrixUniform(const char* name , const Matrix4& matrix);
+	void SetMatrixUniform(const char* _name , const Matrix4& _matrix);
 
     /**
     @brief	Vector3のUniform変数を設定する
     @param	設定するUniform変数名
     @param	設定するVector3
     */
-    void SetVectorUniform(const char* name, const Vector3& vector);
+    void SetVectorUniform(const char* _name, const Vector3& _vector);
 
     /**
     @brief	floatのUniform変数を設定する
     @param	設定するUniform変数名
     @param	設定するfloat
     */
-    void SetFloatUniform(const char* name, const float& value);
+    void SetFloatUniform(const char* _name, const float& _value);
 
 private:
 	/**
@@ -55,14 +55,14 @@ private:
 	@param	シェーダーのID用の参照変数
 	@return	true : 成功 , false : 失敗
 	*/
-	bool CompileShader(const std::string& fileName,GLenum shaderType,GLuint& outShader);
+	bool CompileShader(const std::string& _fileName,GLenum _shaderType,GLuint& _outShader);
 
 	/**
 	@brief	シェーダーがコンパイル出来ているか確認
 	@param	シェーダーのID
 	@return	true : 成功 , false : 失敗
 	*/
-	bool IsCompiled(GLuint shader);
+	bool IsCompiled(GLuint _shader);
 	/**
 	@brief	シェーダーがリンク出来ているか確認
 	@param	シェーダーのID

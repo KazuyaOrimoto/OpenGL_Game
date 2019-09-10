@@ -21,14 +21,14 @@ void ObstacleManager::DeleteInstance()
 	}
 }
 
-void ObstacleManager::AddOnstacle(ObstacleBox* argObstacle)
+void ObstacleManager::AddOnstacle(ObstacleBox* _obstacle)
 {
-	obstacles.emplace_back(argObstacle);
+	obstacles.emplace_back(_obstacle);
 }
 
-void ObstacleManager::RemoveObstacle(ObstacleBox* argObstacle)
+void ObstacleManager::RemoveObstacle(ObstacleBox* _obstacle)
 {
-	auto iter = std::find(obstacles.begin(), obstacles.end(), argObstacle);
+	auto iter = std::find(obstacles.begin(), obstacles.end(), _obstacle);
 	if (iter != obstacles.end())
 	{
 		std::iter_swap(iter, obstacles.end() - 1);

@@ -8,8 +8,8 @@ public:
 	@param	インデックスバッファの配列のポインタ
 	@param	インデックスの数
 	*/
-	VertexArray(const float* argVerts, unsigned int argNumVerts,
-		const unsigned int* argIndices, unsigned int argNumIndices);
+	VertexArray(const float* _verts, unsigned int _numVerts,
+		const unsigned int* _indices, unsigned int _numIndices);
 	~VertexArray();
 
 	/**

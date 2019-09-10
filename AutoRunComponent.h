@@ -7,13 +7,13 @@ class AutoRunComponent :
     public Component
 {
 public:
-    AutoRunComponent(GameObject* owner, int updateOrder = 10);
+    AutoRunComponent(GameObject* _owner, int _updateOrder = 10);
 
 
-    void Update(float deltaTime) override;
-    void SetForwardSpeed(float value) { forwardSpeed = value; }
+    void Update(float _deltaTime) override;
+    void SetForwardSpeed(float _value) { forwardSpeed = _value; }
     float GetForwardSpeed() const { return forwardSpeed; }
-    void SetDrilObject(DrilObject* argDril) { dril = argDril; }
+    void SetDrilObject(DrilObject* _dril) { dril = _dril; }
 
 private:
 

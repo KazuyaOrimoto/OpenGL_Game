@@ -19,7 +19,7 @@ public:
 	@param	Rendererクラスのポインタ
 	@return true : 成功 , false : 失敗
 	*/
-    bool Load(const std::string& argFileName, Renderer* argRenderer);
+    bool Load(const std::string& _fileName, Renderer* _renderer);
 
 	/**
 	@brief  ロードしたメッシュデータの解放
@@ -37,7 +37,7 @@ public:
 	@param	テクスチャのインデックス
 	@return Textureクラスのポインタ
 	*/
-    Texture* GetTexture(size_t argIndex);
+    Texture* GetTexture(size_t _index);
 
 	/**
 	@brief	インデクスからメッシュに使っているテクスチャを取得する

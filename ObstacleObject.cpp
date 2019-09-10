@@ -12,8 +12,8 @@
 
 ObstacleMapLoder* ObstacleObject::mapLoder = nullptr;
 
-ObstacleObject::ObstacleObject(Game* game, int i)
-    :GameObject(game)
+ObstacleObject::ObstacleObject(Game* _game, int _i)
+    :GameObject(_game)
     , player(nullptr)
 {
 	if (mapLoder == nullptr)
@@ -21,7 +21,7 @@ ObstacleObject::ObstacleObject(Game* game, int i)
 		mapLoder = new ObstacleMapLoder();
 	}
     player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
-    CreateObstacle(5000.0f + i * 2000.0f);
+    CreateObstacle(5000.0f + _i * 2000.0f);
 
 }
 
@@ -29,7 +29,7 @@ ObstacleObject::~ObstacleObject()
 {
 }
 
-void ObstacleObject::UpdateGameObject(float argDaltaTime)
+void ObstacleObject::UpdateGameObject(float _daltaTime)
 {
     if (player->GetPosition().x - 500.0f > position.x)
     {
@@ -37,7 +37,7 @@ void ObstacleObject::UpdateGameObject(float argDaltaTime)
     }
 }
 
-void ObstacleObject::CreateObstacle(float depth)
+void ObstacleObject::CreateObstacle(float _depth)
 {
 	rapidjson::Document* doc = mapLoder->GetRandamMap();
 	rapidjson::Value& mapJson = (*doc)["map"];
@@ -56,10 +56,10 @@ void ObstacleObject::CreateObstacle(float depth)
 			{
 				return;
 			}
-            box->SetPosition(Vector3(depth, -1000.0f + (200.0f * (one)) + (size * 50.0f), 2000.0f - (200.0f * (ten + 1)) + (size * 50.0f)));
+            box->SetPosition(Vector3(_depth, -1000.0f + (200.0f * (one)) + (size * 50.0f), 2000.0f - (200.0f * (ten + 1)) + (size * 50.0f)));
             box->UseObstacle();
 			box->SetScale(size * 100.0f);
-            SetPosition(Vector3(depth, -0.0f, 0.0f));
+            SetPosition(Vector3(_depth, -0.0f, 0.0f));
         }
     }
 }

@@ -5,7 +5,7 @@ class Game;
 class SceneBase
 {
 public:
-	SceneBase(Game* game);
+	SceneBase(Game* _game);
 	virtual ~SceneBase();
 
 	/**
@@ -14,7 +14,7 @@ public:
 	*/
 	virtual SceneBase* Update() = 0;
 
-    static SceneBase* StartGame(Game* game);
+    static SceneBase* StartGame(Game* _game);
 
 private:
     Game* game;

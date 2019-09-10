@@ -12,13 +12,13 @@ class DrilObject;
 class PlayerObject : public GameObject
 {
 public:
-	PlayerObject(Game* game);
+	PlayerObject(Game* _game);
 
 	/**
 	@brief	ゲームオブジェクトのアップデート
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	virtual void UpdateGameObject(float argDaltaTime);
+	virtual void UpdateGameObject(float _deltaTime);
 
 	RotateComponent* GetRotate() const { return rotate; }
 

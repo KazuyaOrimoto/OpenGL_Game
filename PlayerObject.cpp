@@ -11,8 +11,8 @@
 #include "DrilObject.h"
 #include "Math.h"
 
-PlayerObject::PlayerObject(Game* game)
-	:GameObject(game)
+PlayerObject::PlayerObject(Game* _game)
+	:GameObject(_game)
 {
     SetPosition(Vector3(0.0f, 0.0f, 50.0f));
 
@@ -42,7 +42,7 @@ PlayerObject::PlayerObject(Game* game)
 @brief	ゲームオブジェクトのアップデート
 @param	最後のフレームを完了するのに要した時間
 */
-void PlayerObject::UpdateGameObject(float argDaltaTime)
+void PlayerObject::UpdateGameObject(float _deltaTime)
 {
 }
 

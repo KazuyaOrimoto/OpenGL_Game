@@ -8,14 +8,14 @@ class PlayerObject;
 class ObstacleBox :public GameObject
 {
 public:
-	ObstacleBox(Game* game);
+	ObstacleBox(Game* _game);
 	~ObstacleBox();
 
 	int GetHardness() const { return hardness; }
 
-	virtual void OnCollision(GameObject& argHitObject) override;
+	virtual void OnCollision(GameObject& _hitObject) override;
 
-	void HitPlayer(const PlayerObject& argPlayerObject);
+	void HitPlayer(const PlayerObject& _playerObject);
 	void ResetObstacle();
 	void UseObstacle();
 
@@ -23,7 +23,7 @@ public:
 	@brief	ゲームオブジェクトのアップデート
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	void UpdateGameObject(float argDaltaTime) override;
+	void UpdateGameObject(float _daltaTime) override;
 
 private:
 	MeshComponent* meshComp;

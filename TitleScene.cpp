@@ -2,8 +2,8 @@
 #include "Game.h"
 
 
-TitleScene::TitleScene(Game* game)
-    :SceneBase(game)
+TitleScene::TitleScene(Game* _game)
+    :SceneBase(_game)
 {
 }
 

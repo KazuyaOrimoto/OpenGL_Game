@@ -14,10 +14,10 @@ public:
 	static void CreateInstance();
 	static void DeleteInstance();
 
-	void AddPlayer(PlayerObject* argPlayer) { player = argPlayer; }
+	void AddPlayer(PlayerObject* _player) { player = _player; }
 	void RemovePlayer() { player = nullptr; }
-	void AddOnstacle(ObstacleBox* argObstacle);
-	void RemoveObstacle(ObstacleBox* argObstacle);
+	void AddOnstacle(ObstacleBox* _obstacle);
+	void RemoveObstacle(ObstacleBox* _obstacle);
 
 	ObstacleBox* GetObstacle();
 

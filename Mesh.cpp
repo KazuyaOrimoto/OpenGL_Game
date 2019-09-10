@@ -25,12 +25,12 @@ Mesh::~Mesh()
 @param	Rendererクラスのポインタ
 @return true : 成功 , false : 失敗
 */
-bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
+bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 {
-    std::ifstream file(argFileName);
+    std::ifstream file(_fileName);
     if (!file.is_open())
     {
-        SDL_Log("File not found: Mesh %s", argFileName.c_str());
+        SDL_Log("File not found: Mesh %s", _fileName.c_str());
         return false;
     }
 
@@ -43,7 +43,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
 
     if (!doc.IsObject())
     {
-        SDL_Log("Mesh %s is not valid json", argFileName.c_str());
+        SDL_Log("Mesh %s is not valid json", _fileName.c_str());
         return false;
     }
 
@@ -52,7 +52,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
     // バージョンのチェック
     if (ver != 1)
     {
-        SDL_Log("Mesh %s not version 1", argFileName.c_str());
+        SDL_Log("Mesh %s not version 1", _fileName.c_str());
         return false;
     }
 
@@ -66,7 +66,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
     const rapidjson::Value& readTextures = doc["textures"];
     if (!readTextures.IsArray() || readTextures.Size() < 1)
     {
-        SDL_Log("Mesh %s has no textures, there should be at least one", argFileName.c_str());
+        SDL_Log("Mesh %s has no textures, there should be at least one", _fileName.c_str());
         return false;
     }
 
@@ -76,15 +76,15 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
     {
         // すでにロードされたテクスチャじゃないか調べる
         std::string texName = readTextures[i].GetString();
-        Texture* t = argRenderer->GetTexture(texName);
+        Texture* t = _renderer->GetTexture(texName);
         if (t == nullptr)
         {
             // テクスチャをロードする
-            t = argRenderer->GetTexture(texName);
+            t = _renderer->GetTexture(texName);
             if (t == nullptr)
             {
                 // テクスチャがロードできなかった場合、デフォルトのテクスチャを使用
-                t = argRenderer->GetTexture("Assets/Default.png");
+                t = _renderer->GetTexture("Assets/Default.png");
             }
         }
 		textures.emplace_back(t);
@@ -94,7 +94,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
     const rapidjson::Value& vertsJson = doc["vertices"];
     if (!vertsJson.IsArray() || vertsJson.Size() < 1)
     {
-        SDL_Log("Mesh %s has no vertices", argFileName.c_str());
+        SDL_Log("Mesh %s has no vertices", _fileName.c_str());
         return false;
     }
 
@@ -107,7 +107,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
         const rapidjson::Value& vert = vertsJson[i];
         if (!vert.IsArray() || vert.Size() != 8)
         {
-            SDL_Log("Unexpected vertex format for %s", argFileName.c_str());
+            SDL_Log("Unexpected vertex format for %s", _fileName.c_str());
             return false;
         }
 
@@ -129,7 +129,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
     const rapidjson::Value& indJson = doc["indices"];
     if (!indJson.IsArray() || indJson.Size() < 1)
     {
-        SDL_Log("Mesh %s has no indices", argFileName.c_str());
+        SDL_Log("Mesh %s has no indices", _fileName.c_str());
         return false;
     }
 
@@ -140,7 +140,7 @@ bool Mesh::Load(const std::string & argFileName, Renderer* argRenderer)
         const rapidjson::Value& ind = indJson[i];
         if (!ind.IsArray() || ind.Size() != 3)
         {
-            SDL_Log("Invalid indices for %s", argFileName.c_str());
+            SDL_Log("Invalid indices for %s", _fileName.c_str());
             return false;
         }
 
@@ -167,11 +167,11 @@ void Mesh::Unload()
 /**
 @brief  テクスチャのGetter
 */
-Texture* Mesh::GetTexture(size_t argIndex)
+Texture* Mesh::GetTexture(size_t _index)
 {
-    if (argIndex < textures.size())
+    if (_index < textures.size())
     {
-        return textures[argIndex];
+        return textures[_index];
     }
     else
     {

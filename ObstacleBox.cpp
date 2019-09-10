@@ -10,8 +10,8 @@
 #include "Mesh.h"
 #include "GameObjectManager.h"
 
-ObstacleBox::ObstacleBox(Game* game)
-	:GameObject(game)
+ObstacleBox::ObstacleBox(Game* _game)
+	:GameObject(_game)
 	, hardness(1)
 	, player(nullptr)
 {
@@ -41,17 +41,17 @@ ObstacleBox::~ObstacleBox()
 	OBSTACLE_MANAGER->RemoveObstacle(this);
 }
 
-void ObstacleBox::OnCollision(GameObject & argHitObject)
+void ObstacleBox::OnCollision(GameObject & _hitObject)
 {
-	if (argHitObject.GetTag() == Tag::Player)
+	if (_hitObject.GetTag() == Tag::Player)
 	{
 		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
-		PlayerObject* obstacle = dynamic_cast<PlayerObject*>(&argHitObject);
+		PlayerObject* obstacle = dynamic_cast<PlayerObject*>(&_hitObject);
 		HitPlayer(*obstacle);
 	}
 }
 
-void ObstacleBox::HitPlayer(const PlayerObject & argPlayerObject)
+void ObstacleBox::HitPlayer(const PlayerObject & _playerObject)
 {
 	meshComp->SetVisible(false);
 	ResetObstacle();
@@ -71,7 +71,7 @@ void ObstacleBox::UseObstacle()
 	GAME_OBJECT_MANAGER->AddGameObject(this);
 }
 
-void ObstacleBox::UpdateGameObject(float argDaltaTime)
+void ObstacleBox::UpdateGameObject(float _daltaTime)
 {
 	if (player->GetPosition().x - 500.0f > position.x)
 	{

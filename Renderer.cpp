@@ -59,10 +59,10 @@ void Renderer::DeleteInstance()
 @brief  初期化処理
 @return true : 成功 , false : 失敗
 */
-bool Renderer::Initialize(float argScreenWidth, float argScreenHeight)
+bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 {
-    screenWidth = argScreenWidth;
-    screenHeight = argScreenHeight;
+    screenWidth = _screenWidth;
+    screenHeight = _screenHeight;
 
     // OpenGLの各属性を設定する
     // コアOpenGLプロファイルを使う
@@ -225,11 +225,11 @@ void Renderer::Draw()
 @brief  スプライトの削除
 @param	削除するSpriteComponentクラスのポインタ
 */
-void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
+void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 {
     // 今あるスプライトから挿入する場所の検索
     // (DrawOrderが小さい順番に描画するため)
-	int myDrawOrder = argSpriteComponent->GetDrawOrder();
+	int myDrawOrder = _spriteComponent->GetDrawOrder();
     auto iter = sprites.begin();
     for (;
         iter != sprites.end();
@@ -242,16 +242,16 @@ void Renderer::AddSprite(SpriteComponent* argSpriteComponent)
     }
 
     // 検索した場所のiterの場所に挿入
-	sprites.insert(iter, argSpriteComponent);
+	sprites.insert(iter, _spriteComponent);
 }
 
 /**
 @brief  スプライトの削除
 @param	削除するSpriteComponentクラスのポインタ
 */
-void Renderer::RemoveSprite(SpriteComponent* argSpriteComponent)
+void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 {
-    auto iter = std::find(sprites.begin(), sprites.end(), argSpriteComponent);
+    auto iter = std::find(sprites.begin(), sprites.end(), _spriteComponent);
 	sprites.erase(iter);
 }
 
@@ -259,15 +259,15 @@ void Renderer::RemoveSprite(SpriteComponent* argSpriteComponent)
 @brief  メッシュコンポーネントの追加
 @param	追加するMeshComponentクラスのポインタ
 */
-void Renderer::AddMeshComponent(MeshComponent* argMeshComponent)
+void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 {
-    if (argMeshComponent->GetShaderName() == DEFAULT)
+    if (_meshComponent->GetShaderName() == DEFAULT)
     {
-        meshComponents.emplace_back(argMeshComponent);
+        meshComponents.emplace_back(_meshComponent);
     }
-    else if (argMeshComponent->GetShaderName() == WALL)
+    else if (_meshComponent->GetShaderName() == WALL)
     {
-        wallMeshComponents.emplace_back(argMeshComponent);
+        wallMeshComponents.emplace_back(_meshComponent);
     }
 }
 
@@ -275,16 +275,16 @@ void Renderer::AddMeshComponent(MeshComponent* argMeshComponent)
 @brief  メッシュコンポーネントの削除
 @param	削除するMeshComponentクラスのポインタ
 */
-void Renderer::RemoveMeshComponent(MeshComponent* argMeshComponent)
+void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 {
-    if (argMeshComponent->GetShaderName() == DEFAULT)
+    if (_meshComponent->GetShaderName() == DEFAULT)
     {
-        auto iter = std::find(meshComponents.begin(), meshComponents.end(), argMeshComponent);
+        auto iter = std::find(meshComponents.begin(), meshComponents.end(), _meshComponent);
         meshComponents.erase(iter);
     }
-    else if (argMeshComponent->GetShaderName() == WALL)
+    else if (_meshComponent->GetShaderName() == WALL)
     {
-        auto iter = std::find(wallMeshComponents.begin(), wallMeshComponents.end(), argMeshComponent);
+        auto iter = std::find(wallMeshComponents.begin(), wallMeshComponents.end(), _meshComponent);
         wallMeshComponents.erase(iter);
     }
 }
@@ -294,11 +294,11 @@ void Renderer::RemoveMeshComponent(MeshComponent* argMeshComponent)
 @param	取得したいテクスチャのファイル名
 @return Textureクラスのポインタ
 */
-Texture* Renderer::GetTexture(const std::string& argFileName)
+Texture* Renderer::GetTexture(const std::string& _fileName)
 {
 	Texture* texture = nullptr;
 	//すでに作成されてないか調べる
-	auto itr = textures.find(argFileName);
+	auto itr = textures.find(_fileName);
 	if (itr != textures.end())
 	{
 		texture = itr->second;
@@ -307,9 +307,9 @@ Texture* Renderer::GetTexture(const std::string& argFileName)
 	else
 	{
 		texture = new Texture();
-		if (texture->Load(argFileName))
+		if (texture->Load(_fileName))
 		{
-			textures.emplace(argFileName, texture);
+			textures.emplace(_fileName, texture);
 		}
 		else
 		{
@@ -326,11 +326,11 @@ Texture* Renderer::GetTexture(const std::string& argFileName)
 @param	取得したいメッシュのファイル名
 @return Meshクラスのポインタ
 */
-Mesh* Renderer::GetMesh(const std::string &argFfileName)
+Mesh* Renderer::GetMesh(const std::string &_fileName)
 {
     Mesh* m = nullptr;
 	//すでに作成されてないか調べる
-    auto iter = meshes.find(argFfileName);
+    auto iter = meshes.find(_fileName);
     if (iter != meshes.end())
     {
         m = iter->second;
@@ -339,9 +339,9 @@ Mesh* Renderer::GetMesh(const std::string &argFfileName)
     else
     {
         m = new Mesh();
-        if (m->Load(argFfileName, this))
+        if (m->Load(_fileName, this))
         {
-			meshes.emplace(argFfileName, m);
+			meshes.emplace(_fileName, m);
         }
         else
         {
@@ -420,37 +420,37 @@ void Renderer::CreateSpriteVerts()
 @brief  光源情報をシェーダーの変数にセットする
 @param  セットするShaderクラスのポインタ
 */
-void Renderer::SetLightUniforms(Shader* shader)
+void Renderer::SetLightUniforms(Shader* _shader)
 {
 	// ビュー行列を転置行列にする
     Matrix4 invView = view;
     invView.Invert();
-    shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
+	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
     // 環境光の設定
-    shader->SetVectorUniform("uAmbientLight", ambientLight);
+	_shader->SetVectorUniform("uAmbientLight", ambientLight);
     // 平行光源の設定
-    shader->SetVectorUniform("uDirLight.mDirection",
+	_shader->SetVectorUniform("uDirLight.mDirection",
         dirLight.direction);
-    shader->SetVectorUniform("uDirLight.mDiffuseColor",
+	_shader->SetVectorUniform("uDirLight.mDiffuseColor",
         dirLight.diffuseColor);
-    shader->SetVectorUniform("uDirLight.mSpecColor",
+	_shader->SetVectorUniform("uDirLight.mSpecColor",
         dirLight.specColor);
 }
 
-void Renderer::SetWallLightUniforms(Shader* shader)
+void Renderer::SetWallLightUniforms(Shader* _shader)
 {
     // ビュー行列を転置行列にする
     Matrix4 invView = view;
     invView.Invert();
-    shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
+	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
     // 環境光の設定
-    shader->SetVectorUniform("uAmbientLight", ambientLight);
+	_shader->SetVectorUniform("uAmbientLight", ambientLight);
     // 平行光源の設定
-    shader->SetVectorUniform("uDirLight.mDirection",
+	_shader->SetVectorUniform("uDirLight.mDirection",
         wallDirLight.direction);
-    shader->SetVectorUniform("uDirLight.mDiffuseColor",
+	_shader->SetVectorUniform("uDirLight.mDiffuseColor",
         wallDirLight.diffuseColor);
-    shader->SetVectorUniform("uDirLight.mSpecColor",
+	_shader->SetVectorUniform("uDirLight.mSpecColor",
         wallDirLight.specColor);
 }
 

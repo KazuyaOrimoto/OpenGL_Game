@@ -2,8 +2,8 @@
 #include "PlayScene.h"
 #include "Game.h"
 
-SceneBase::SceneBase(Game* argGame)
-    :game(argGame)
+SceneBase::SceneBase(Game* _game)
+    :game(_game)
 {
 }
 
@@ -12,7 +12,7 @@ SceneBase::~SceneBase()
 {
 }
 
-SceneBase* SceneBase::StartGame(Game* game)
+SceneBase* SceneBase::StartGame(Game* _game)
 {
-    return new PlayScene(game);
+    return new PlayScene(_game);
 }
