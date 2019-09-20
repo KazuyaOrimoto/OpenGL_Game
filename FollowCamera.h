@@ -7,23 +7,23 @@ class GameObject;
 class FollowCamera : public CameraComponent
 {
 public:
-	FollowCamera(GameObject* owner);
+	FollowCamera(GameObject* _owner);
 
-	void Update(float deltaTime) override;
+	void Update(float _deltaTime) override;
 
-	void ProcessInput(const struct InputState& state) override;
+	void ProcessInput(const struct InputState& _state) override;
 
 	void SnapToIdeal();
 
-	void SetHorzDist(float dist) { horzDist = dist; }
-	void SetVertDist(float dist) { vertDist = dist; }
-	void SetTargetDist(float dist) { targetDist = dist; }
-	void SetSpringConstant(float spring) { springConstant = spring; }
+	void SetHorzDist(float _dist) { horzDist = _dist; }
+	void SetVertDist(float _dist) { vertDist = _dist; }
+	void SetTargetDist(float _dist) { targetDist = _dist; }
+	void SetSpringConstant(float _spring) { springConstant = _spring; }
 
-	void SetForwardKey(int key) { mForwardKey = key; }
-	void SetBackKey(int key) { mBackKey = key; }
-	void SetRightKey(int key) { rightKey = key; }
-	void SetLeftKey(int key) { leftKey = key; }
+	void SetForwardKey(int _key) { mForwardKey = _key; }
+	void SetBackKey(int _key) { mBackKey = _key; }
+	void SetRightKey(int _key) { rightKey = _key; }
+	void SetLeftKey(int _key) { leftKey = _key; }
 
 private:
 	Vector3 ComputeCameraPos() const;

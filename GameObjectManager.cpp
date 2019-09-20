@@ -24,12 +24,12 @@ void GameObjectManager::DeleteInstance()
 /**
 @brief  ゲームオブジェクトのアップデート処理
 */
-void GameObjectManager::UpdateGameObject(float argDeltaTime)
+void GameObjectManager::UpdateGameObject(float _deltaTime)
 {
 	updatingGameObject = true;
 	for (auto gameObject : gameObjects)
 	{
-		gameObject->Update(argDeltaTime);
+		gameObject->Update(_deltaTime);
 	}
 	updatingGameObject = false;
 
@@ -41,12 +41,12 @@ void GameObjectManager::UpdateGameObject(float argDeltaTime)
 	pendingGameObjects.clear();
 }
 
-void GameObjectManager::ProcessInput(const InputState& state)
+void GameObjectManager::ProcessInput(const InputState& _state)
 {
 	updatingGameObject = true;
 	for (auto gameObject : gameObjects)
 	{
-		gameObject->ProcessInput(state);
+		gameObject->ProcessInput(_state);
 	}
 	updatingGameObject = false;
 }
@@ -55,15 +55,15 @@ void GameObjectManager::ProcessInput(const InputState& state)
 @brief  ゲームオブジェクトの追加
 @param	追加するGameObjectクラスのポインタ
 */
-void GameObjectManager::AddGameObject(GameObject* argObj)
+void GameObjectManager::AddGameObject(GameObject* _object)
 {
 	if (updatingGameObject)
 	{
-		pendingGameObjects.emplace_back(argObj);
+		pendingGameObjects.emplace_back(_object);
 	}
 	else
 	{
-		gameObjects.emplace_back(argObj);
+		gameObjects.emplace_back(_object);
 	}
 }
 
@@ -71,16 +71,16 @@ void GameObjectManager::AddGameObject(GameObject* argObj)
 @brief  ゲームオブジェクトの削除
 @param	削除するGameObjectクラスのポインタ
 */
-void GameObjectManager::RemoveGameObject(GameObject * argObj)
+void GameObjectManager::RemoveGameObject(GameObject * _object)
 {
-	auto iter = std::find(pendingGameObjects.begin(), pendingGameObjects.end(), argObj);
+	auto iter = std::find(pendingGameObjects.begin(), pendingGameObjects.end(), _object);
 	if (iter != pendingGameObjects.end())
 	{
 		std::iter_swap(iter, pendingGameObjects.end() - 1);
 		pendingGameObjects.pop_back();
 	}
 
-	iter = std::find(gameObjects.begin(), gameObjects.end(), argObj);
+	iter = std::find(gameObjects.begin(), gameObjects.end(), _object);
 	if (iter != gameObjects.end())
 	{
 		std::iter_swap(iter, gameObjects.end() - 1);
@@ -88,11 +88,11 @@ void GameObjectManager::RemoveGameObject(GameObject * argObj)
 	}
 }
 
-GameObject * GameObjectManager::FindGameObject(Tag tag)
+GameObject * GameObjectManager::FindGameObject(Tag _tag)
 {
 	for (auto itr : gameObjects)
 	{
-		if (itr->GetTag() == tag)
+		if (itr->GetTag() == _tag)
 		{
 			return itr;
 		}
@@ -100,12 +100,12 @@ GameObject * GameObjectManager::FindGameObject(Tag tag)
 	return nullptr;
 }
 
-std::vector<GameObject*> GameObjectManager::FindGameObjects(Tag tag)
+std::vector<GameObject*> GameObjectManager::FindGameObjects(Tag _tag)
 {
 	std::vector<GameObject*> ret;
 	for (auto itr : gameObjects)
 	{
-		if (itr->GetTag() == tag)
+		if (itr->GetTag() == _tag)
 		{
 			ret.push_back(itr);
 		}

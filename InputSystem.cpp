@@ -7,9 +7,9 @@
 @param	SDL_Scancodeのキーコード
 @return	true : 押されている , false : 押されていない
 */
-bool KeyboardState::GetKeyValue(SDL_Scancode keyCode) const
+bool KeyboardState::GetKeyValue(SDL_Scancode _keyCode) const
 {
-	return currState[keyCode] == 1;
+	return currState[_keyCode] == 1;
 }
 
 /**
@@ -17,11 +17,11 @@ bool KeyboardState::GetKeyValue(SDL_Scancode keyCode) const
 @param	SDL_Scancodeのキーコード
 @return	ButtonState型の現在の状態
 */
-ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
+ButtonState KeyboardState::GetKeyState(SDL_Scancode _keyCode) const
 {
-	if (prevState[keyCode] == 0)
+	if (prevState[_keyCode] == 0)
 	{
-		if (currState[keyCode] == 0)
+		if (currState[_keyCode] == 0)
 		{
 			return None;
 		}
@@ -32,7 +32,7 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
 	}
 	else // Prev state must be 1
 	{
-		if (currState[keyCode] == 0)
+		if (currState[_keyCode] == 0)
 		{
 			return Released;
 		}
@@ -48,9 +48,9 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode keyCode) const
 @param	SDL_BUTTON定数
 @return	true : 押されている , false : 押されていない
 */
-bool MouseState::GetButtonValue(int button) const
+bool MouseState::GetButtonValue(int _button) const
 {
-	return (SDL_BUTTON(button) & currButtons) == 1;
+	return (SDL_BUTTON(_button) & currButtons) == 1;
 }
 
 /**
@@ -58,9 +58,9 @@ bool MouseState::GetButtonValue(int button) const
 @param	SDL_BUTTON定数
 @return	ButtonState型の現在の状態
 */
-ButtonState MouseState::GetButtonState(int button) const
+ButtonState MouseState::GetButtonState(int _button) const
 {
-	int mask = SDL_BUTTON(button);
+	int mask = SDL_BUTTON(_button);
 	if ((mask & prevButtons) == 0)
 	{
 		if ((mask & currButtons) == 0)
@@ -90,9 +90,9 @@ ButtonState MouseState::GetButtonState(int button) const
 @param	SDL_GameControllerButtonのボタンコード
 @return	true : 押されている , false : 押されていない
 */
-bool ControllerState::GetButtonValue(SDL_GameControllerButton button) const
+bool ControllerState::GetButtonValue(SDL_GameControllerButton _button) const
 {
-	return currButtons[button] == 1;
+	return currButtons[_button] == 1;
 }
 
 /**
@@ -100,11 +100,11 @@ bool ControllerState::GetButtonValue(SDL_GameControllerButton button) const
 @param	SDL_GameControllerButtonのボタンコード
 @return	ButtonState型の現在の状態
 */
-ButtonState ControllerState::GetButtonState(SDL_GameControllerButton button) const
+ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) const
 {
-	if (prevButtons[button] == 0)
+	if (prevButtons[_button] == 0)
 	{
-		if (currButtons[button] == 0)
+		if (currButtons[_button] == 0)
 		{
 			return None;
 		}
@@ -115,7 +115,7 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton button) con
 	}
 	else // Prev state must be 1
 	{
-		if (currButtons[button] == 0)
+		if (currButtons[_button] == 0)
 		{
 			return Released;
 		}
@@ -240,14 +240,14 @@ void InputSystem::Update()
 /**
 @brief  SDLイベントをInputSystemに渡す
 */
-void InputSystem::ProcessEvent(SDL_Event& event)
+void InputSystem::ProcessEvent(SDL_Event& _event)
 {
-	switch (event.type)
+	switch (_event.type)
 	{
 	case SDL_MOUSEWHEEL:
 		state.Mouse.scrollWheel = Vector2(
-			static_cast<float>(event.wheel.x),
-			static_cast<float>(event.wheel.y));
+			static_cast<float>(_event.wheel.x),
+			static_cast<float>(_event.wheel.y));
 		break;
 	default:
 		break;
@@ -258,12 +258,12 @@ void InputSystem::ProcessEvent(SDL_Event& event)
 @brief  マウスのモードを設定する
 @param	true : 相対モード , false : デフォルトモード
 */
-void InputSystem::SetRelativeMouseMode(bool value)
+void InputSystem::SetRelativeMouseMode(bool _value)
 {
-	SDL_bool set = value ? SDL_TRUE : SDL_FALSE;
+	SDL_bool set = _value ? SDL_TRUE : SDL_FALSE;
 	SDL_SetRelativeMouseMode(set);
 
-	state.Mouse.isRelative = value;
+	state.Mouse.isRelative = _value;
 }
 
 /**
@@ -271,7 +271,7 @@ void InputSystem::SetRelativeMouseMode(bool value)
 @param	入力された値（int）
 @return	フィルタリングされた値
 */
-float InputSystem::Filter1D(int input)
+float InputSystem::Filter1D(int _input)
 {
 	//デッドゾーン（この値より小さいなら0.0にする）
 	const int deadZone = 250;
@@ -281,7 +281,7 @@ float InputSystem::Filter1D(int input)
 	float retVal = 0.0f;
 
 	//入力値の絶対値を取る
-	int absValue = input > 0 ? input : -input;
+	int absValue = _input > 0 ? _input : -_input;
 	//入力値がデッドゾーンより小さいなら
 	if (absValue > deadZone)
 	{
@@ -289,7 +289,7 @@ float InputSystem::Filter1D(int input)
 		retVal = static_cast<float>(absValue - deadZone) /
 			(maxValue - deadZone);
 		//符号を元の値と同じにする
-		retVal = input > 0 ? retVal : -1.0f * retVal;
+		retVal = _input > 0 ? retVal : -1.0f * retVal;
 		//-1.0~1.0の間に収める
 		retVal = Math::Clamp(retVal, -1.0f, 1.0f);
 	}
@@ -303,7 +303,7 @@ float InputSystem::Filter1D(int input)
 @param	入力された値のy（int）
 @return	フィルタリングされた値
 */
-Vector2 InputSystem::Filter2D(int inputX, int inputY)
+Vector2 InputSystem::Filter2D(int _inputX, int _inputY)
 {
 	//デッドゾーン（この値より小さいなら0.0にする）
 	const float deadZone = 8000.0f;
@@ -312,8 +312,8 @@ Vector2 InputSystem::Filter2D(int inputX, int inputY)
 
 	//2次元ベクトルにする
 	Vector2 dir;
-	dir.x = static_cast<float>(inputX);
-	dir.y = static_cast<float>(inputY);
+	dir.x = static_cast<float>(_inputX);
+	dir.y = static_cast<float>(_inputY);
 
 	float length = dir.Length();
 

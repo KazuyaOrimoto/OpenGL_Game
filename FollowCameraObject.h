@@ -9,9 +9,9 @@ class MeshComponent;
 class FollowCameraObject : public GameObject
 {
 public:
-	FollowCameraObject(Game* game);
+	FollowCameraObject(Game* _game);
 
-	void SetVisible(bool visible);
+	void SetVisible(bool _visible);
 
 private:
 	class MoveComponent* mMoveComp;

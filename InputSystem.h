@@ -26,14 +26,14 @@ public:
 	@param	SDL_Scancodeのキーコード
 	@return	true : 押されている , false : 押されていない
 	*/
-	bool GetKeyValue(SDL_Scancode keyCode) const;
+	bool GetKeyValue(SDL_Scancode _keyCode) const;
 
 	/**
 	@brief	現在と1フレーム前の状態からButtonStateを返す
 	@param	SDL_Scancodeのキーコード
 	@return	ButtonState型の現在の状態
 	*/
-	ButtonState GetKeyState(SDL_Scancode keyCode) const;
+	ButtonState GetKeyState(SDL_Scancode _keyCode) const;
 private:
 	//現在のキーボードの入力状態
 	const Uint8* currState;
@@ -71,14 +71,14 @@ public:
 	@param	SDL_BUTTON定数
 	@return	true : 押されている , false : 押されていない
 	*/
-	bool GetButtonValue(int button) const;
+	bool GetButtonValue(int _button) const;
 
 	/**
 	@brief	現在と1フレーム前の状態からButtonStateを返す
 	@param	SDL_BUTTON定数
 	@return	ButtonState型の現在の状態
 	*/
-	ButtonState GetButtonState(int button) const;
+	ButtonState GetButtonState(int _button) const;
 private:
 	//マウスのポジション
 	Vector2 mousePos;
@@ -104,14 +104,14 @@ public:
 	@param	SDL_GameControllerButtonのボタンコード
 	@return	true : 押されている , false : 押されていない
 	*/
-	bool GetButtonValue(SDL_GameControllerButton button) const;
+	bool GetButtonValue(SDL_GameControllerButton _button) const;
 
 	/**
 	@brief	現在と1フレーム前の状態からButtonStateを返す
 	@param	SDL_GameControllerButtonのボタンコード
 	@return	ButtonState型の現在の状態
 	*/
-	ButtonState GetButtonState(SDL_GameControllerButton button) const;
+	ButtonState GetButtonState(SDL_GameControllerButton _button) const;
 
 	/**
 	@brief	左のスティックの入力値を取得する
@@ -194,7 +194,7 @@ public:
 	/**
 	@brief  SDLイベントをInputSystemに渡す
 	*/
-	void ProcessEvent(union SDL_Event& event);
+	void ProcessEvent(union SDL_Event& _event);
 
 	/**
 	@brief  現在の入力状態を取得する
@@ -206,14 +206,14 @@ public:
 	@brief  マウスのモードを設定する
 	@param	true : 相対モード , false : デフォルトモード
 	*/
-	void SetRelativeMouseMode(bool value);
+	void SetRelativeMouseMode(bool _value);
 private:
 	/**
 	@brief  入力された値（int）をフィルタリングする（範囲内に収めて-1.0~1.0にまとめる）
 	@param	入力された値（int）
 	@return	フィルタリングされた値
 	*/
-	float Filter1D(int input);
+	float Filter1D(int _input);
 
 	/**
 	@brief  入力された値（int）をフィルタリングする（範囲内に収めて0.0~1.0にまとめる）
@@ -221,7 +221,7 @@ private:
 	@param	入力された値のy（int）
 	@return	フィルタリングされた値
 	*/
-	Vector2 Filter2D(int inputX, int inputY);
+	Vector2 Filter2D(int _inputX, int _inputY);
 
 	//各入力機器の入力状態をまとめたラッパー構造体
 	InputState state;

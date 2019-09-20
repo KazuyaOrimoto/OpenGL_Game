@@ -6,8 +6,8 @@
 #include "FPSCamera.h"
 #include "MeshComponent.h"
 
-FPSGameObject::FPSGameObject(Game* game)
-	:GameObject(game)
+FPSGameObject::FPSGameObject(Game* _game)
+	:GameObject(_game)
 {
 	//mCameraComp = new FPSCamera(this);
 	moveComponent = new MoveComponent(this);
@@ -18,15 +18,15 @@ FPSGameObject::FPSGameObject(Game* game)
 	moveComponent->SetLeftKey(SDL_SCANCODE_A);
 	moveComponent->SetRightKey(SDL_SCANCODE_D);
 
-	mFPSModel = new GameObject(game);
+	mFPSModel = new GameObject(_game);
 	mFPSModel->SetScale(0.75f);
 	mMeshComp = new MeshComponent(mFPSModel);
 	mMeshComp->SetMesh(RENDERER->GetMesh("Assets/Rifle.gpmesh"));
 }
 
-void FPSGameObject::UpdateGameObject(float deltaTime)
+void FPSGameObject::UpdateGameObject(float _deltaTime)
 {
-	GameObject::UpdateGameObject(deltaTime);
+	GameObject::UpdateGameObject(_deltaTime);
 
 	// Update position of FPS model relative to actor position
 	const Vector3 modelOffset(Vector3(10.0f, 10.0f, -10.0f));
@@ -43,7 +43,7 @@ void FPSGameObject::UpdateGameObject(float deltaTime)
 }
 
 
-void FPSGameObject::SetVisible(bool visible)
+void FPSGameObject::SetVisible(bool _visible)
 {
-	mMeshComp->SetVisible(visible);
+	mMeshComp->SetVisible(_visible);
 }

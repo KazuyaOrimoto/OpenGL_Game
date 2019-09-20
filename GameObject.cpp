@@ -8,14 +8,14 @@
 /**
 @param	ゲームクラスのポインタ
 */
-GameObject::GameObject(Game * argGame)
+GameObject::GameObject(Game * _game)
 	: state(Active)
 	, worldTransform()
 	, position(Vector3::Zero)
 	, scale(1.0f)
 	, rotation(Quaternion::Identity)
 	, recomputeWorldTransform(true)
-	, game(argGame)
+	, game(_game)
 {
 	GAME_OBJECT_MANAGER->AddGameObject(this);
 }
@@ -33,14 +33,14 @@ GameObject::~GameObject()
 @brief	フレーム毎の処理
 @param	最後のフレームを完了するのに要した時間
 */
-void GameObject::Update(float argDaltaTime)
+void GameObject::Update(float _deltaTime)
 {
 	if (state == Active)
 	{
 		ComputeWorldTransform();
 
-		UpdateComponents(argDaltaTime);
-		UpdateGameObject(argDaltaTime);
+		UpdateComponents(_deltaTime);
+		UpdateGameObject(_deltaTime);
 
 		ComputeWorldTransform();
 	}
@@ -50,11 +50,11 @@ void GameObject::Update(float argDaltaTime)
 @brief	アタッチされてるコンポーネントのアップデート
 @param	最後のフレームを完了するのに要した時間
 */
-void GameObject::UpdateComponents(float argDaltaTime)
+void GameObject::UpdateComponents(float _deltaTime)
 {
 	for (auto itr : components)
 	{
-		itr->Update(argDaltaTime);
+		itr->Update(_deltaTime);
 	}
 }
 
@@ -62,24 +62,24 @@ void GameObject::UpdateComponents(float argDaltaTime)
 @brief	ゲームオブジェクトのアップデート
 @param	最後のフレームを完了するのに要した時間
 */
-void GameObject::UpdateGameObject(float argDaltaTime)
+void GameObject::UpdateGameObject(float _deltaTime)
 {
 }
 
-void GameObject::ProcessInput(const InputState& keyState)
+void GameObject::ProcessInput(const InputState& _keyState)
 {
 	if (state == Active)
 	{
 		// First process input for components
 		for (auto comp : components)
 		{
-			comp->ProcessInput(keyState);
+			comp->ProcessInput(_keyState);
 		}
-		GameObjectInput(keyState);
+		GameObjectInput(_keyState);
 	}
 }
 
-void GameObject::GameObjectInput(const InputState& keyState)
+void GameObject::GameObjectInput(const InputState& _keyState)
 {
 }
 
@@ -87,9 +87,9 @@ void GameObject::GameObjectInput(const InputState& keyState)
 @brief	コンポーネントを追加する
 @param	追加するコンポーネントのポインタ
 */
-void GameObject::AddComponent(Component * argComponent)
+void GameObject::AddComponent(Component * _component)
 {
-	int order = argComponent->GetUpdateOder();
+	int order = _component->GetUpdateOder();
 	auto itr = components.begin();
 	for (;
 		itr != components.end();
@@ -100,16 +100,16 @@ void GameObject::AddComponent(Component * argComponent)
 			break;
 		}
 	}
-	components.insert(itr,argComponent);
+	components.insert(itr, _component);
 }
 
 /**
 @brief	コンポーネントを削除する
 @param	削除するコンポーネントのポインタ
 */
-void GameObject::RemoveComponent(Component * argComponent)
+void GameObject::RemoveComponent(Component * _component)
 {
-	auto itr = std::find(components.begin(),components.end(),argComponent);
+	auto itr = std::find(components.begin(),components.end(), _component);
 	if (itr != components.end())
 	{
 		components.erase(itr);

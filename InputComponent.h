@@ -7,9 +7,9 @@ class InputComponent : public MoveComponent
 {
 public:
 	// Lower update order to update first
-	InputComponent(class GameObject* owner);
+	InputComponent(class GameObject* _owner);
 
-	void ProcessInput(const struct InputState& state) override;
+	void ProcessInput(const struct InputState& _state) override;
 
 	// Getters/setters for private variables
 	float GetMaxForward() const { return mMaxForwardSpeed; }
@@ -19,12 +19,12 @@ public:
 	int GetClockwiseKey() const { return mClockwiseKey; }
 	int GetCounterClockwiseKey() const { return mCounterClockwiseKey; }
 
-	void SetMaxForwardSpeed(float speed) { mMaxForwardSpeed = speed; }
-	void SetMaxAngularSpeed(float speed) { mMaxAngularSpeed = speed; }
-	void SetForwardKey(int key) { mForwardKey = key; }
-	void SetBackKey(int key) { mBackKey = key; }
-	void SetClockwiseKey(int key) { mClockwiseKey = key; }
-	void SetCounterClockwiseKey(int key) { mCounterClockwiseKey = key; }
+	void SetMaxForwardSpeed(float _speed) { mMaxForwardSpeed = _speed; }
+	void SetMaxAngularSpeed(float _speed) { mMaxAngularSpeed = _speed; }
+	void SetForwardKey(int _key) { mForwardKey = _key; }
+	void SetBackKey(int _key) { mBackKey = _key; }
+	void SetClockwiseKey(int _key) { mClockwiseKey = _key; }
+	void SetCounterClockwiseKey(int _key) { mCounterClockwiseKey = _key; }
 private:
 	// The maximum forward/angular speeds
 	float mMaxForwardSpeed;

@@ -12,19 +12,19 @@ namespace Math
     const float Infinity = std::numeric_limits<float>::infinity();
     const float NegInfinity = -std::numeric_limits<float>::infinity();
 
-    inline float ToRadians(float degrees)
+    inline float ToRadians(float _degrees)
     {
-        return degrees * Pi / 180.0f;
+        return _degrees * Pi / 180.0f;
     }
 
-    inline float ToDegrees(float radians)
+    inline float ToDegrees(float _radians)
     {
-        return radians * 180.0f / Pi;
+        return _radians * 180.0f / Pi;
     }
 
-    inline bool NearZero(float val, float epsilon = 0.001f)
+    inline bool NearZero(float _val, float _epsilon = 0.001f)
     {
-        if (fabs(val) <= epsilon)
+        if (fabs(_val) <= _epsilon)
         {
             return true;
         }
@@ -35,71 +35,71 @@ namespace Math
     }
 
     template <typename T>
-    T Max(const T& a, const T& b)
+    T Max(const T& _a, const T& _b)
     {
-        return (a < b ? b : a);
+        return (_a < _b ? _b : _a);
     }
 
     template <typename T>
-    T Min(const T& a, const T& b)
+    T Min(const T& _a, const T& _b)
     {
-        return (a < b ? a : b);
+        return (_a < _b ? _a : _b);
     }
 
     template <typename T>
-    T Clamp(const T& value, const T& lower, const T& upper)
+    T Clamp(const T& _value, const T& _lower, const T& _upper)
     {
-        return Min(upper, Max(lower, value));
+        return Min(_upper, Max(_lower, _value));
     }
 
-    inline float Abs(float value)
+    inline float Abs(float _value)
     {
-        return fabs(value);
+        return fabs(_value);
     }
 
-    inline float Cos(float angle)
+    inline float Cos(float _angle)
     {
-        return cosf(angle);
+        return cosf(_angle);
     }
 
-    inline float Sin(float angle)
+    inline float Sin(float _angle)
     {
-        return sinf(angle);
+        return sinf(_angle);
     }
 
-    inline float Tan(float angle)
+    inline float Tan(float _angle)
     {
-        return tanf(angle);
+        return tanf(_angle);
     }
 
-    inline float Acos(float value)
+    inline float Acos(float _value)
     {
-        return acosf(value);
+        return acosf(_value);
     }
 
-    inline float Atan2(float y, float x)
+    inline float Atan2(float _y, float _x)
     {
-        return atan2f(y, x);
+        return atan2f(_y, _x);
     }
 
-    inline float Cot(float angle)
+    inline float Cot(float _angle)
     {
-        return 1.0f / Tan(angle);
+        return 1.0f / Tan(_angle);
     }
 
-    inline float Lerp(float a, float b, float f)
+    inline float Lerp(float _a, float _b, float _f)
     {
-        return a + f * (b - a);
+        return _a + _f * (_b - _a);
     }
 
-    inline float Sqrt(float value)
+    inline float Sqrt(float _value)
     {
-        return sqrtf(value);
+        return sqrtf(_value);
     }
 
-    inline float Fmod(float numer, float denom)
+    inline float Fmod(float _numer, float _denom)
     {
-        return fmod(numer, denom);
+        return fmod(_numer, _denom);
     }
 }
 
@@ -114,71 +114,71 @@ public:
         :x(0.0f)
         , y(0.0f)
     {}
-
-    explicit Vector2(float inX, float inY)
-        :x(inX)
-        , y(inY)
+    
+    explicit Vector2(float _inX, float _inY)
+        :x(_inX)
+        , y(_inY)
     {}
 
     // Set both components in one line
-    void Set(float inX, float inY)
+    void Set(float _inX, float _inY)
     {
-        x = inX;
-        y = inY;
+        x = _inX;
+        y = _inY;
     }
 
     // Vector addition (a + b)
-    friend Vector2 operator+(const Vector2& a, const Vector2& b)
+    friend Vector2 operator+(const Vector2& _a, const Vector2& _b)
     {
-        return Vector2(a.x + b.x, a.y + b.y);
+        return Vector2(_a.x + _b.x, _a.y + _b.y);
     }
 
     // Vector subtraction (a - b)
-    friend Vector2 operator-(const Vector2& a, const Vector2& b)
+    friend Vector2 operator-(const Vector2& _a, const Vector2& _b)
     {
-        return Vector2(a.x - b.x, a.y - b.y);
+        return Vector2(_a.x - _b.x, _a.y - _b.y);
     }
 
     // Component-wise multiplication
     // (a.x * b.x, ...)
-    friend Vector2 operator*(const Vector2& a, const Vector2& b)
+    friend Vector2 operator*(const Vector2& _a, const Vector2& _b)
     {
-        return Vector2(a.x * b.x, a.y * b.y);
+        return Vector2(_a.x * _b.x, _a.y * _b.y);
     }
 
     // Scalar multiplication
-    friend Vector2 operator*(const Vector2& vec, float scalar)
+    friend Vector2 operator*(const Vector2& _vec, float _scalar)
     {
-        return Vector2(vec.x * scalar, vec.y * scalar);
+        return Vector2(_vec.x * _scalar, _vec.y * _scalar);
     }
 
     // Scalar multiplication
-    friend Vector2 operator*(float scalar, const Vector2& vec)
+    friend Vector2 operator*(float _scalar, const Vector2& _vec)
     {
-        return Vector2(vec.x * scalar, vec.y * scalar);
+        return Vector2(_vec.x * _scalar, _vec.y * _scalar);
     }
 
     // Scalar *=
-    Vector2& operator*=(float scalar)
+    Vector2& operator*=(float _scalar)
     {
-        x *= scalar;
-        y *= scalar;
+        x *= _scalar;
+        y *= _scalar;
         return *this;
     }
 
     // Vector +=
-    Vector2& operator+=(const Vector2& right)
+    Vector2& operator+=(const Vector2& _right)
     {
-        x += right.x;
-        y += right.y;
+        x += _right.x;
+        y += _right.y;
         return *this;
     }
 
     // Vector -=
-    Vector2& operator-=(const Vector2& right)
+    Vector2& operator-=(const Vector2& _right)
     {
-        x -= right.x;
-        y -= right.y;
+        x -= _right.x;
+        y -= _right.y;
         return *this;
     }
 
@@ -203,33 +203,33 @@ public:
     }
 
     // Normalize the provided vector
-    static Vector2 Normalize(const Vector2& vec)
+    static Vector2 Normalize(const Vector2& _vec)
     {
-        Vector2 temp = vec;
+        Vector2 temp = _vec;
         temp.Normalize();
         return temp;
     }
 
     // Dot product between two vectors (a dot b)
-    static float Dot(const Vector2& a, const Vector2& b)
+    static float Dot(const Vector2& _a, const Vector2& _b)
     {
-        return (a.x * b.x + a.y * b.y);
+        return (_a.x * _b.x + _a.y * _b.y);
     }
 
     // Lerp from A to B by f
-    static Vector2 Lerp(const Vector2& a, const Vector2& b, float f)
+    static Vector2 Lerp(const Vector2& _a, const Vector2& _b, float _f)
     {
-        return Vector2(a + f * (b - a));
+        return Vector2(_a + _f * (_b - _a));
     }
 
     // Reflect V about (normalized) N
-    static Vector2 Reflect(const Vector2& v, const Vector2& n)
+    static Vector2 Reflect(const Vector2& _v, const Vector2& _n)
     {
-        return v - 2.0f * Vector2::Dot(v, n) * n;
+        return _v - 2.0f * Vector2::Dot(_v, _n) * _n;
     }
 
     // Transform vector by matrix
-    static Vector2 Transform(const Vector2& vec, const class Matrix3& mat, float w = 1.0f);
+    static Vector2 Transform(const Vector2& _vec, const class Matrix3& _mat, float _w = 1.0f);
 
     static const Vector2 Zero;
     static const Vector2 UnitX;
@@ -252,10 +252,10 @@ public:
         , z(0.0f)
     {}
 
-    explicit Vector3(float inX, float inY, float inZ)
-        :x(inX)
-        , y(inY)
-        , z(inZ)
+    explicit Vector3(float _inX, float _inY, float _inZ)
+        :x(_inX)
+        , y(_inY)
+        , z(_inZ)
     {}
 
     // Cast to a const float pointer
@@ -265,67 +265,67 @@ public:
     }
 
     // Set all three components in one line
-    void Set(float inX, float inY, float inZ)
+    void Set(float _inX, float _inY, float _inZ)
     {
-        x = inX;
-        y = inY;
-        z = inZ;
+        x = _inX;
+        y = _inY;
+        z = _inZ;
     }
 
     // Vector addition (a + b)
-    friend Vector3 operator+(const Vector3& a, const Vector3& b)
+    friend Vector3 operator+(const Vector3& _a, const Vector3& _b)
     {
-        return Vector3(a.x + b.x, a.y + b.y, a.z + b.z);
+        return Vector3(_a.x + _b.x, _a.y + _b.y, _a.z + _b.z);
     }
 
     // Vector subtraction (a - b)
-    friend Vector3 operator-(const Vector3& a, const Vector3& b)
+    friend Vector3 operator-(const Vector3& _a, const Vector3& _b)
     {
-        return Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
+        return Vector3(_a.x - _b.x, _a.y - _b.y, _a.z - _b.z);
     }
 
     // Component-wise multiplication
-    friend Vector3 operator*(const Vector3& left, const Vector3& right)
+    friend Vector3 operator*(const Vector3& _left, const Vector3& _right)
     {
-        return Vector3(left.x * right.x, left.y * right.y, left.z * right.z);
+        return Vector3(_left.x * _right.x, _left.y * _right.y, _left.z * _right.z);
     }
 
     // Scalar multiplication
-    friend Vector3 operator*(const Vector3& vec, float scalar)
+    friend Vector3 operator*(const Vector3& _vec, float _scalar)
     {
-        return Vector3(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+        return Vector3(_vec.x * _scalar, _vec.y * _scalar, _vec.z * _scalar);
     }
 
     // Scalar multiplication
-    friend Vector3 operator*(float scalar, const Vector3& vec)
+    friend Vector3 operator*(float _scalar, const Vector3& _vec)
     {
-        return Vector3(vec.x * scalar, vec.y * scalar, vec.z * scalar);
+        return Vector3(_vec.x * _scalar, _vec.y * _scalar, _vec.z * _scalar);
     }
 
     // Scalar *=
-    Vector3& operator*=(float scalar)
+    Vector3& operator*=(float _scalar)
     {
-        x *= scalar;
-        y *= scalar;
-        z *= scalar;
+        x *= _scalar;
+        y *= _scalar;
+        z *= _scalar;
         return *this;
     }
 
     // Vector +=
-    Vector3& operator+=(const Vector3& right)
+    Vector3& operator+=(const Vector3& _right)
     {
-        x += right.x;
-        y += right.y;
-        z += right.z;
+        x += _right.x;
+        y += _right.y;
+        z += _right.z;
         return *this;
     }
 
     // Vector -=
-    Vector3& operator-=(const Vector3& right)
+    Vector3& operator-=(const Vector3& _right)
     {
-        x -= right.x;
-        y -= right.y;
-        z -= right.z;
+        x -= _right.x;
+        y -= _right.y;
+        z -= _right.z;
         return *this;
     }
 
@@ -351,47 +351,47 @@ public:
     }
 
     // Normalize the provided vector
-    static Vector3 Normalize(const Vector3& vec)
+    static Vector3 Normalize(const Vector3& _vec)
     {
-        Vector3 temp = vec;
+        Vector3 temp = _vec;
         temp.Normalize();
         return temp;
     }
 
     // Dot product between two vectors (a dot b)
-    static float Dot(const Vector3& a, const Vector3& b)
+    static float Dot(const Vector3& _a, const Vector3& _b)
     {
-        return (a.x * b.x + a.y * b.y + a.z * b.z);
+        return (_a.x * _b.x + _a.y * _b.y + _a.z * _b.z);
     }
 
     // Cross product between two vectors (a cross b)
-    static Vector3 Cross(const Vector3& a, const Vector3& b)
+    static Vector3 Cross(const Vector3& _a, const Vector3& _b)
     {
         Vector3 temp;
-        temp.x = a.y * b.z - a.z * b.y;
-        temp.y = a.z * b.x - a.x * b.z;
-        temp.z = a.x * b.y - a.y * b.x;
+        temp.x = _a.y * _b.z - _a.z * _b.y;
+        temp.y = _a.z * _b.x - _a.x * _b.z;
+        temp.z = _a.x * _b.y - _a.y * _b.x;
         return temp;
     }
 
     // Lerp from A to B by f
-    static Vector3 Lerp(const Vector3& a, const Vector3& b, float f)
+    static Vector3 Lerp(const Vector3& _a, const Vector3& _b, float _f)
     {
-        return Vector3(a + f * (b - a));
+        return Vector3(_a + _f * (_b - _a));
     }
 
     // Reflect V about (normalized) N
-    static Vector3 Reflect(const Vector3& v, const Vector3& n)
+    static Vector3 Reflect(const Vector3& _v, const Vector3& _n)
     {
-        return v - 2.0f * Vector3::Dot(v, n) * n;
+        return _v - 2.0f * Vector3::Dot(_v, _n) * _n;
     }
 
-    static Vector3 Transform(const Vector3& vec, const class Matrix4& mat, float w = 1.0f);
+    static Vector3 Transform(const Vector3& _vec, const class Matrix4& _mat, float _w = 1.0f);
     // This will transform the vector and renormalize the w component
-    static Vector3 TransformWithPerspDiv(const Vector3& vec, const class Matrix4& mat, float w = 1.0f);
+    static Vector3 TransformWithPerspDiv(const Vector3& _vec, const class Matrix4& _mat, float _w = 1.0f);
 
     // Transform a Vector3 by a quaternion
-    static Vector3 Transform(const Vector3& v, const class Quaternion& q);
+    static Vector3 Transform(const Vector3& _v, const class Quaternion& _q);
 
     static const Vector3 Zero;
     static const Vector3 UnitX;
@@ -415,9 +415,9 @@ public:
         *this = Matrix3::Identity;
     }
 
-    explicit Matrix3(float inMat[3][3])
+    explicit Matrix3(float _inMat[3][3])
     {
-        memcpy(mat, inMat, 9 * sizeof(float));
+        memcpy(mat, _inMat, 9 * sizeof(float));
     }
 
     // Cast to a const float pointer
@@ -427,110 +427,110 @@ public:
     }
 
     // Matrix multiplication
-    friend Matrix3 operator*(const Matrix3& left, const Matrix3& right)
+    friend Matrix3 operator*(const Matrix3& _left, const Matrix3& _right)
     {
         Matrix3 retVal;
         // row 0
         retVal.mat[0][0] =
-            left.mat[0][0] * right.mat[0][0] +
-            left.mat[0][1] * right.mat[1][0] +
-            left.mat[0][2] * right.mat[2][0];
+            _left.mat[0][0] * _right.mat[0][0] +
+            _left.mat[0][1] * _right.mat[1][0] +
+            _left.mat[0][2] * _right.mat[2][0];
 
         retVal.mat[0][1] =
-            left.mat[0][0] * right.mat[0][1] +
-            left.mat[0][1] * right.mat[1][1] +
-            left.mat[0][2] * right.mat[2][1];
+            _left.mat[0][0] * _right.mat[0][1] +
+            _left.mat[0][1] * _right.mat[1][1] +
+            _left.mat[0][2] * _right.mat[2][1];
 
         retVal.mat[0][2] =
-            left.mat[0][0] * right.mat[0][2] +
-            left.mat[0][1] * right.mat[1][2] +
-            left.mat[0][2] * right.mat[2][2];
+            _left.mat[0][0] * _right.mat[0][2] +
+            _left.mat[0][1] * _right.mat[1][2] +
+            _left.mat[0][2] * _right.mat[2][2];
 
         // row 1
         retVal.mat[1][0] =
-            left.mat[1][0] * right.mat[0][0] +
-            left.mat[1][1] * right.mat[1][0] +
-            left.mat[1][2] * right.mat[2][0];
+            _left.mat[1][0] * _right.mat[0][0] +
+            _left.mat[1][1] * _right.mat[1][0] +
+            _left.mat[1][2] * _right.mat[2][0];
 
         retVal.mat[1][1] =
-            left.mat[1][0] * right.mat[0][1] +
-            left.mat[1][1] * right.mat[1][1] +
-            left.mat[1][2] * right.mat[2][1];
+            _left.mat[1][0] * _right.mat[0][1] +
+            _left.mat[1][1] * _right.mat[1][1] +
+            _left.mat[1][2] * _right.mat[2][1];
 
         retVal.mat[1][2] =
-            left.mat[1][0] * right.mat[0][2] +
-            left.mat[1][1] * right.mat[1][2] +
-            left.mat[1][2] * right.mat[2][2];
+            _left.mat[1][0] * _right.mat[0][2] +
+            _left.mat[1][1] * _right.mat[1][2] +
+            _left.mat[1][2] * _right.mat[2][2];
 
         // row 2
         retVal.mat[2][0] =
-            left.mat[2][0] * right.mat[0][0] +
-            left.mat[2][1] * right.mat[1][0] +
-            left.mat[2][2] * right.mat[2][0];
+            _left.mat[2][0] * _right.mat[0][0] +
+            _left.mat[2][1] * _right.mat[1][0] +
+            _left.mat[2][2] * _right.mat[2][0];
 
         retVal.mat[2][1] =
-            left.mat[2][0] * right.mat[0][1] +
-            left.mat[2][1] * right.mat[1][1] +
-            left.mat[2][2] * right.mat[2][1];
+            _left.mat[2][0] * _right.mat[0][1] +
+            _left.mat[2][1] * _right.mat[1][1] +
+            _left.mat[2][2] * _right.mat[2][1];
 
         retVal.mat[2][2] =
-            left.mat[2][0] * right.mat[0][2] +
-            left.mat[2][1] * right.mat[1][2] +
-            left.mat[2][2] * right.mat[2][2];
+            _left.mat[2][0] * _right.mat[0][2] +
+            _left.mat[2][1] * _right.mat[1][2] +
+            _left.mat[2][2] * _right.mat[2][2];
 
         return retVal;
     }
 
-    Matrix3& operator*=(const Matrix3& right)
+    Matrix3& operator*=(const Matrix3& _right)
     {
-        *this = *this * right;
+        *this = *this * _right;
         return *this;
     }
 
     // Create a scale matrix with x and y scales
-    static Matrix3 CreateScale(float xScale, float yScale)
+    static Matrix3 CreateScale(float _xScale, float _yScale)
     {
         float temp[3][3] =
         {
-            { xScale, 0.0f, 0.0f },
-        { 0.0f, yScale, 0.0f },
+            { _xScale, 0.0f, 0.0f },
+        { 0.0f, _yScale, 0.0f },
         { 0.0f, 0.0f, 1.0f },
         };
         return Matrix3(temp);
     }
 
-    static Matrix3 CreateScale(const Vector2& scaleVector)
+    static Matrix3 CreateScale(const Vector2& _scaleVector)
     {
-        return CreateScale(scaleVector.x, scaleVector.y);
+        return CreateScale(_scaleVector.x, _scaleVector.y);
     }
 
     // Create a scale matrix with a uniform factor
-    static Matrix3 CreateScale(float scale)
+    static Matrix3 CreateScale(float _scale)
     {
-        return CreateScale(scale, scale);
+        return CreateScale(_scale, _scale);
     }
 
     // Create a rotation matrix about the Z axis
     // theta is in radians
-    static Matrix3 CreateRotation(float theta)
+    static Matrix3 CreateRotation(float _theta)
     {
         float temp[3][3] =
         {
-            { Math::Cos(theta), Math::Sin(theta), 0.0f },
-        { -Math::Sin(theta), Math::Cos(theta), 0.0f },
+            { Math::Cos(_theta), Math::Sin(_theta), 0.0f },
+        { -Math::Sin(_theta), Math::Cos(_theta), 0.0f },
         { 0.0f, 0.0f, 1.0f },
         };
         return Matrix3(temp);
     }
 
     // Create a translation matrix (on the xy-plane)
-    static Matrix3 CreateTranslation(const Vector2& trans)
+    static Matrix3 CreateTranslation(const Vector2& _trans)
     {
         float temp[3][3] =
         {
             { 1.0f, 0.0f, 0.0f },
         { 0.0f, 1.0f, 0.0f },
-        { trans.x, trans.y, 1.0f },
+        { _trans.x, _trans.y, 1.0f },
         };
         return Matrix3(temp);
     }
@@ -549,9 +549,9 @@ public:
         *this = Matrix4::Identity;
     }
 
-    explicit Matrix4(float inMat[4][4])
+    explicit Matrix4(float _inMat[4][4])
     {
-        memcpy(mat, inMat, 16 * sizeof(float));
+        memcpy(mat, _inMat, 16 * sizeof(float));
     }
 
     // Cast to a const float pointer
@@ -561,115 +561,115 @@ public:
     }
 
     // Matrix multiplication (a * b)
-    friend Matrix4 operator*(const Matrix4& a, const Matrix4& b)
+    friend Matrix4 operator*(const Matrix4& _a, const Matrix4& _b)
     {
         Matrix4 retVal;
         // row 0
         retVal.mat[0][0] =
-            a.mat[0][0] * b.mat[0][0] +
-            a.mat[0][1] * b.mat[1][0] +
-            a.mat[0][2] * b.mat[2][0] +
-            a.mat[0][3] * b.mat[3][0];
+            _a.mat[0][0] * _b.mat[0][0] +
+            _a.mat[0][1] * _b.mat[1][0] +
+            _a.mat[0][2] * _b.mat[2][0] +
+            _a.mat[0][3] * _b.mat[3][0];
 
         retVal.mat[0][1] =
-            a.mat[0][0] * b.mat[0][1] +
-            a.mat[0][1] * b.mat[1][1] +
-            a.mat[0][2] * b.mat[2][1] +
-            a.mat[0][3] * b.mat[3][1];
+            _a.mat[0][0] * _b.mat[0][1] +
+            _a.mat[0][1] * _b.mat[1][1] +
+            _a.mat[0][2] * _b.mat[2][1] +
+            _a.mat[0][3] * _b.mat[3][1];
 
         retVal.mat[0][2] =
-            a.mat[0][0] * b.mat[0][2] +
-            a.mat[0][1] * b.mat[1][2] +
-            a.mat[0][2] * b.mat[2][2] +
-            a.mat[0][3] * b.mat[3][2];
+            _a.mat[0][0] * _b.mat[0][2] +
+            _a.mat[0][1] * _b.mat[1][2] +
+            _a.mat[0][2] * _b.mat[2][2] +
+            _a.mat[0][3] * _b.mat[3][2];
 
         retVal.mat[0][3] =
-            a.mat[0][0] * b.mat[0][3] +
-            a.mat[0][1] * b.mat[1][3] +
-            a.mat[0][2] * b.mat[2][3] +
-            a.mat[0][3] * b.mat[3][3];
+            _a.mat[0][0] * _b.mat[0][3] +
+            _a.mat[0][1] * _b.mat[1][3] +
+            _a.mat[0][2] * _b.mat[2][3] +
+            _a.mat[0][3] * _b.mat[3][3];
 
         // row 1
         retVal.mat[1][0] =
-            a.mat[1][0] * b.mat[0][0] +
-            a.mat[1][1] * b.mat[1][0] +
-            a.mat[1][2] * b.mat[2][0] +
-            a.mat[1][3] * b.mat[3][0];
+            _a.mat[1][0] * _b.mat[0][0] +
+            _a.mat[1][1] * _b.mat[1][0] +
+            _a.mat[1][2] * _b.mat[2][0] +
+            _a.mat[1][3] * _b.mat[3][0];
 
         retVal.mat[1][1] =
-            a.mat[1][0] * b.mat[0][1] +
-            a.mat[1][1] * b.mat[1][1] +
-            a.mat[1][2] * b.mat[2][1] +
-            a.mat[1][3] * b.mat[3][1];
+            _a.mat[1][0] * _b.mat[0][1] +
+            _a.mat[1][1] * _b.mat[1][1] +
+            _a.mat[1][2] * _b.mat[2][1] +
+            _a.mat[1][3] * _b.mat[3][1];
 
         retVal.mat[1][2] =
-            a.mat[1][0] * b.mat[0][2] +
-            a.mat[1][1] * b.mat[1][2] +
-            a.mat[1][2] * b.mat[2][2] +
-            a.mat[1][3] * b.mat[3][2];
+            _a.mat[1][0] * _b.mat[0][2] +
+            _a.mat[1][1] * _b.mat[1][2] +
+            _a.mat[1][2] * _b.mat[2][2] +
+            _a.mat[1][3] * _b.mat[3][2];
 
         retVal.mat[1][3] =
-            a.mat[1][0] * b.mat[0][3] +
-            a.mat[1][1] * b.mat[1][3] +
-            a.mat[1][2] * b.mat[2][3] +
-            a.mat[1][3] * b.mat[3][3];
+            _a.mat[1][0] * _b.mat[0][3] +
+            _a.mat[1][1] * _b.mat[1][3] +
+            _a.mat[1][2] * _b.mat[2][3] +
+            _a.mat[1][3] * _b.mat[3][3];
 
         // row 2
         retVal.mat[2][0] =
-            a.mat[2][0] * b.mat[0][0] +
-            a.mat[2][1] * b.mat[1][0] +
-            a.mat[2][2] * b.mat[2][0] +
-            a.mat[2][3] * b.mat[3][0];
+            _a.mat[2][0] * _b.mat[0][0] +
+            _a.mat[2][1] * _b.mat[1][0] +
+            _a.mat[2][2] * _b.mat[2][0] +
+            _a.mat[2][3] * _b.mat[3][0];
 
         retVal.mat[2][1] =
-            a.mat[2][0] * b.mat[0][1] +
-            a.mat[2][1] * b.mat[1][1] +
-            a.mat[2][2] * b.mat[2][1] +
-            a.mat[2][3] * b.mat[3][1];
+            _a.mat[2][0] * _b.mat[0][1] +
+            _a.mat[2][1] * _b.mat[1][1] +
+            _a.mat[2][2] * _b.mat[2][1] +
+            _a.mat[2][3] * _b.mat[3][1];
 
         retVal.mat[2][2] =
-            a.mat[2][0] * b.mat[0][2] +
-            a.mat[2][1] * b.mat[1][2] +
-            a.mat[2][2] * b.mat[2][2] +
-            a.mat[2][3] * b.mat[3][2];
+            _a.mat[2][0] * _b.mat[0][2] +
+            _a.mat[2][1] * _b.mat[1][2] +
+            _a.mat[2][2] * _b.mat[2][2] +
+            _a.mat[2][3] * _b.mat[3][2];
 
         retVal.mat[2][3] =
-            a.mat[2][0] * b.mat[0][3] +
-            a.mat[2][1] * b.mat[1][3] +
-            a.mat[2][2] * b.mat[2][3] +
-            a.mat[2][3] * b.mat[3][3];
+            _a.mat[2][0] * _b.mat[0][3] +
+            _a.mat[2][1] * _b.mat[1][3] +
+            _a.mat[2][2] * _b.mat[2][3] +
+            _a.mat[2][3] * _b.mat[3][3];
 
         // row 3
         retVal.mat[3][0] =
-            a.mat[3][0] * b.mat[0][0] +
-            a.mat[3][1] * b.mat[1][0] +
-            a.mat[3][2] * b.mat[2][0] +
-            a.mat[3][3] * b.mat[3][0];
+            _a.mat[3][0] * _b.mat[0][0] +
+            _a.mat[3][1] * _b.mat[1][0] +
+            _a.mat[3][2] * _b.mat[2][0] +
+            _a.mat[3][3] * _b.mat[3][0];
 
         retVal.mat[3][1] =
-            a.mat[3][0] * b.mat[0][1] +
-            a.mat[3][1] * b.mat[1][1] +
-            a.mat[3][2] * b.mat[2][1] +
-            a.mat[3][3] * b.mat[3][1];
+            _a.mat[3][0] * _b.mat[0][1] +
+            _a.mat[3][1] * _b.mat[1][1] +
+            _a.mat[3][2] * _b.mat[2][1] +
+            _a.mat[3][3] * _b.mat[3][1];
 
         retVal.mat[3][2] =
-            a.mat[3][0] * b.mat[0][2] +
-            a.mat[3][1] * b.mat[1][2] +
-            a.mat[3][2] * b.mat[2][2] +
-            a.mat[3][3] * b.mat[3][2];
+            _a.mat[3][0] * _b.mat[0][2] +
+            _a.mat[3][1] * _b.mat[1][2] +
+            _a.mat[3][2] * _b.mat[2][2] +
+            _a.mat[3][3] * _b.mat[3][2];
 
         retVal.mat[3][3] =
-            a.mat[3][0] * b.mat[0][3] +
-            a.mat[3][1] * b.mat[1][3] +
-            a.mat[3][2] * b.mat[2][3] +
-            a.mat[3][3] * b.mat[3][3];
+            _a.mat[3][0] * _b.mat[0][3] +
+            _a.mat[3][1] * _b.mat[1][3] +
+            _a.mat[3][2] * _b.mat[2][3] +
+            _a.mat[3][3] * _b.mat[3][3];
 
         return retVal;
     }
 
-    Matrix4& operator*=(const Matrix4& right)
+    Matrix4& operator*=(const Matrix4& _right)
     {
-        *this = *this * right;
+        *this = *this * _right;
         return *this;
     }
 
@@ -711,62 +711,62 @@ public:
     }
 
     // Create a scale matrix with x, y, and z scales
-    static Matrix4 CreateScale(float xScale, float yScale, float zScale)
+    static Matrix4 CreateScale(float _xScale, float _yScale, float _zScale)
     {
         float temp[4][4] =
         {
-            { xScale, 0.0f, 0.0f, 0.0f },
-        { 0.0f, yScale, 0.0f, 0.0f },
-        { 0.0f, 0.0f, zScale, 0.0f },
+            { _xScale, 0.0f, 0.0f, 0.0f },
+        { 0.0f, _yScale, 0.0f, 0.0f },
+        { 0.0f, 0.0f, _zScale, 0.0f },
         { 0.0f, 0.0f, 0.0f, 1.0f }
         };
         return Matrix4(temp);
     }
 
-    static Matrix4 CreateScale(const Vector3& scaleVector)
+    static Matrix4 CreateScale(const Vector3& _scaleVector)
     {
-        return CreateScale(scaleVector.x, scaleVector.y, scaleVector.z);
+        return CreateScale(_scaleVector.x, _scaleVector.y, _scaleVector.z);
     }
 
     // Create a scale matrix with a uniform factor
-    static Matrix4 CreateScale(float scale)
+    static Matrix4 CreateScale(float _scale)
     {
-        return CreateScale(scale, scale, scale);
+        return CreateScale(_scale, _scale, _scale);
     }
 
     // Rotation about x-axis
-    static Matrix4 CreateRotationX(float theta)
+    static Matrix4 CreateRotationX(float _theta)
     {
         float temp[4][4] =
         {
             { 1.0f, 0.0f, 0.0f , 0.0f },
-        { 0.0f, Math::Cos(theta), Math::Sin(theta), 0.0f },
-        { 0.0f, -Math::Sin(theta), Math::Cos(theta), 0.0f },
+        { 0.0f, Math::Cos(_theta), Math::Sin(_theta), 0.0f },
+        { 0.0f, -Math::Sin(_theta), Math::Cos(_theta), 0.0f },
         { 0.0f, 0.0f, 0.0f, 1.0f },
         };
         return Matrix4(temp);
     }
 
     // Rotation about y-axis
-    static Matrix4 CreateRotationY(float theta)
+    static Matrix4 CreateRotationY(float _theta)
     {
         float temp[4][4] =
         {
-            { Math::Cos(theta), 0.0f, -Math::Sin(theta), 0.0f },
+            { Math::Cos(_theta), 0.0f, -Math::Sin(_theta), 0.0f },
         { 0.0f, 1.0f, 0.0f, 0.0f },
-        { Math::Sin(theta), 0.0f, Math::Cos(theta), 0.0f },
+        { Math::Sin(_theta), 0.0f, Math::Cos(_theta), 0.0f },
         { 0.0f, 0.0f, 0.0f, 1.0f },
         };
         return Matrix4(temp);
     }
 
     // Rotation about z-axis
-    static Matrix4 CreateRotationZ(float theta)
+    static Matrix4 CreateRotationZ(float _theta)
     {
         float temp[4][4] =
         {
-            { Math::Cos(theta), Math::Sin(theta), 0.0f, 0.0f },
-        { -Math::Sin(theta), Math::Cos(theta), 0.0f, 0.0f },
+            { Math::Cos(_theta), Math::Sin(_theta), 0.0f, 0.0f },
+        { -Math::Sin(_theta), Math::Cos(_theta), 0.0f, 0.0f },
         { 0.0f, 0.0f, 1.0f, 0.0f },
         { 0.0f, 0.0f, 0.0f, 1.0f },
         };
@@ -774,29 +774,29 @@ public:
     }
 
     // Create a rotation matrix from a quaternion
-    static Matrix4 CreateFromQuaternion(const class Quaternion& q);
+    static Matrix4 CreateFromQuaternion(const class Quaternion& _q);
 
-    static Matrix4 CreateTranslation(const Vector3& trans)
+    static Matrix4 CreateTranslation(const Vector3& _trans)
     {
         float temp[4][4] =
         {
             { 1.0f, 0.0f, 0.0f, 0.0f },
         { 0.0f, 1.0f, 0.0f, 0.0f },
         { 0.0f, 0.0f, 1.0f, 0.0f },
-        { trans.x, trans.y, trans.z, 1.0f }
+        { _trans.x, _trans.y, _trans.z, 1.0f }
         };
         return Matrix4(temp);
     }
 
-    static Matrix4 CreateLookAt(const Vector3& eye, const Vector3& target, const Vector3& up)
+    static Matrix4 CreateLookAt(const Vector3& _eye, const Vector3& _target, const Vector3& _up)
     {
-        Vector3 zaxis = Vector3::Normalize(target - eye);
-        Vector3 xaxis = Vector3::Normalize(Vector3::Cross(up, zaxis));
+        Vector3 zaxis = Vector3::Normalize(_target - _eye);
+        Vector3 xaxis = Vector3::Normalize(Vector3::Cross(_up, zaxis));
         Vector3 yaxis = Vector3::Normalize(Vector3::Cross(zaxis, xaxis));
         Vector3 trans;
-        trans.x = -Vector3::Dot(xaxis, eye);
-        trans.y = -Vector3::Dot(yaxis, eye);
-        trans.z = -Vector3::Dot(zaxis, eye);
+        trans.x = -Vector3::Dot(xaxis, _eye);
+        trans.y = -Vector3::Dot(yaxis, _eye);
+        trans.z = -Vector3::Dot(zaxis, _eye);
 
         float temp[4][4] =
         {
@@ -808,39 +808,39 @@ public:
         return Matrix4(temp);
     }
 
-    static Matrix4 CreateOrtho(float width, float height, float near, float far)
+    static Matrix4 CreateOrtho(float _width, float _height, float _near, float _far)
     {
         float temp[4][4] =
         {
-            { 2.0f / width, 0.0f, 0.0f, 0.0f },
-        { 0.0f, 2.0f / height, 0.0f, 0.0f },
-        { 0.0f, 0.0f, 1.0f / (far - near), 0.0f },
-        { 0.0f, 0.0f, near / (near - far), 1.0f }
+            { 2.0f / _width, 0.0f, 0.0f, 0.0f },
+        { 0.0f, 2.0f / _height, 0.0f, 0.0f },
+        { 0.0f, 0.0f, 1.0f / (_far - _near), 0.0f },
+        { 0.0f, 0.0f, _near / (_near - _far), 1.0f }
         };
         return Matrix4(temp);
     }
 
-    static Matrix4 CreatePerspectiveFOV(float fovY, float width, float height, float near, float far)
+    static Matrix4 CreatePerspectiveFOV(float _fovY, float _width, float _height, float _near, float _far)
     {
-        float yScale = Math::Cot(fovY / 2.0f);
-        float xScale = yScale * height / width;
+        float yScale = Math::Cot(_fovY / 2.0f);
+        float xScale = yScale * _height / _width;
         float temp[4][4] =
         {
             { xScale, 0.0f, 0.0f, 0.0f },
         { 0.0f, yScale, 0.0f, 0.0f },
-        { 0.0f, 0.0f, far / (far - near), 1.0f },
-        { 0.0f, 0.0f, -near * far / (far - near), 0.0f }
+        { 0.0f, 0.0f, _far / (_far - _near), 1.0f },
+        { 0.0f, 0.0f, -_near * _far / (_far - _near), 0.0f }
         };
         return Matrix4(temp);
     }
 
     // Create "Simple" View-Projection Matrix from Chapter 6
-    static Matrix4 CreateSimpleViewProj(float width, float height)
+    static Matrix4 CreateSimpleViewProj(float _width, float _height)
     {
         float temp[4][4] =
         {
-            { 2.0f / width, 0.0f, 0.0f, 0.0f },
-        { 0.0f, 2.0f / height, 0.0f, 0.0f },
+            { 2.0f / _width, 0.0f, 0.0f, 0.0f },
+        { 0.0f, 2.0f / _height, 0.0f, 0.0f },
         { 0.0f, 0.0f, 1.0f, 0.0f },
         { 0.0f, 0.0f, 1.0f, 1.0f }
         };
@@ -866,30 +866,30 @@ public:
 
     // This directly sets the quaternion components --
     // don't use for axis/angle
-    explicit Quaternion(float inX, float inY, float inZ, float inW)
+    explicit Quaternion(float _inX, float _inY, float _inZ, float _inW)
     {
-        Set(inX, inY, inZ, inW);
+        Set(_inX, _inY, _inZ, _inW);
     }
 
     // Construct the quaternion from an axis and angle
     // It is assumed that axis is already normalized,
     // and the angle is in radians
-    explicit Quaternion(const Vector3& axis, float angle)
+    explicit Quaternion(const Vector3& _axis, float _angle)
     {
-        float scalar = Math::Sin(angle / 2.0f);
-        x = axis.x * scalar;
-        y = axis.y * scalar;
-        z = axis.z * scalar;
-        w = Math::Cos(angle / 2.0f);
+        float scalar = Math::Sin(_angle / 2.0f);
+        x = _axis.x * scalar;
+        y = _axis.y * scalar;
+        z = _axis.z * scalar;
+        w = Math::Cos(_angle / 2.0f);
     }
 
     // Directly set the internal components
-    void Set(float inX, float inY, float inZ, float inW)
+    void Set(float _inX, float _inY, float _inZ, float _inW)
     {
-        x = inX;
-        y = inY;
-        z = inZ;
-        w = inW;
+        x = _inX;
+        y = _inY;
+        z = _inZ;
+        w = _inW;
     }
 
     void Conjugate()
@@ -919,34 +919,34 @@ public:
     }
 
     // Normalize the provided quaternion
-    static Quaternion Normalize(const Quaternion& q)
+    static Quaternion Normalize(const Quaternion& _q)
     {
-        Quaternion retVal = q;
+        Quaternion retVal = _q;
         retVal.Normalize();
         return retVal;
     }
 
     // Linear interpolation
-    static Quaternion Lerp(const Quaternion& a, const Quaternion& b, float f)
+    static Quaternion Lerp(const Quaternion& _a, const Quaternion& _b, float _f)
     {
         Quaternion retVal;
-        retVal.x = Math::Lerp(a.x, b.x, f);
-        retVal.y = Math::Lerp(a.y, b.y, f);
-        retVal.z = Math::Lerp(a.z, b.z, f);
-        retVal.w = Math::Lerp(a.w, b.w, f);
+        retVal.x = Math::Lerp(_a.x, _b.x, _f);
+        retVal.y = Math::Lerp(_a.y, _b.y, _f);
+        retVal.z = Math::Lerp(_a.z, _b.z, _f);
+        retVal.w = Math::Lerp(_a.w, _b.w, _f);
         retVal.Normalize();
         return retVal;
     }
 
-    static float Dot(const Quaternion& a, const Quaternion& b)
+    static float Dot(const Quaternion& _a, const Quaternion& _b)
     {
-        return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+        return _a.x * _b.x + _a.y * _b.y + _a.z * _b.z + _a.w * _b.w;
     }
 
     // Spherical Linear Interpolation
-    static Quaternion Slerp(const Quaternion& a, const Quaternion& b, float f)
+    static Quaternion Slerp(const Quaternion& _a, const Quaternion& _b, float _f)
     {
-        float rawCosm = Quaternion::Dot(a, b);
+        float rawCosm = Quaternion::Dot(_a, _b);
 
         float cosom = -rawCosm;
         if (rawCosm >= 0.0f)
@@ -960,15 +960,15 @@ public:
         {
             const float omega = Math::Acos(cosom);
             const float invSin = 1.f / Math::Sin(omega);
-            scale0 = Math::Sin((1.f - f) * omega) * invSin;
-            scale1 = Math::Sin(f * omega) * invSin;
+            scale0 = Math::Sin((1.f - _f) * omega) * invSin;
+            scale1 = Math::Sin(_f * omega) * invSin;
         }
         else
         {
             // Use linear interpolation if the quaternions
             // are collinear
-            scale0 = 1.0f - f;
-            scale1 = f;
+            scale0 = 1.0f - _f;
+            scale1 = _f;
         }
 
         if (rawCosm < 0.0f)
@@ -977,32 +977,32 @@ public:
         }
 
         Quaternion retVal;
-        retVal.x = scale0 * a.x + scale1 * b.x;
-        retVal.y = scale0 * a.y + scale1 * b.y;
-        retVal.z = scale0 * a.z + scale1 * b.z;
-        retVal.w = scale0 * a.w + scale1 * b.w;
+        retVal.x = scale0 * _a.x + scale1 * _b.x;
+        retVal.y = scale0 * _a.y + scale1 * _b.y;
+        retVal.z = scale0 * _a.z + scale1 * _b.z;
+        retVal.w = scale0 * _a.w + scale1 * _b.w;
         retVal.Normalize();
         return retVal;
     }
 
     // Concatenate
     // Rotate by q FOLLOWED BY p
-    static Quaternion Concatenate(const Quaternion& q, const Quaternion& p)
+    static Quaternion Concatenate(const Quaternion& _q, const Quaternion& _p)
     {
         Quaternion retVal;
 
         // Vector component is:
         // ps * qv + qs * pv + pv x qv
-        Vector3 qv(q.x, q.y, q.z);
-        Vector3 pv(p.x, p.y, p.z);
-        Vector3 newVec = p.w * qv + q.w * pv + Vector3::Cross(pv, qv);
+        Vector3 qv(_q.x, _q.y, _q.z);
+        Vector3 pv(_p.x, _p.y, _p.z);
+        Vector3 newVec = _p.w * qv + _q.w * pv + Vector3::Cross(pv, qv);
         retVal.x = newVec.x;
         retVal.y = newVec.y;
         retVal.z = newVec.z;
 
         // Scalar component is:
         // ps * qs - pv . qv
-        retVal.w = p.w * q.w - Vector3::Dot(pv, qv);
+        retVal.w = _p.w * _q.w - Vector3::Dot(pv, qv);
 
         return retVal;
     }

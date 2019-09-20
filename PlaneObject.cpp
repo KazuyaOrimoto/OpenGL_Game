@@ -5,8 +5,8 @@
 #include "Mesh.h"
 #include "WallMeshComponent.h"
 
-PlaneObject::PlaneObject(Game* game)
-    :GameObject(game)
+PlaneObject::PlaneObject(Game* _game)
+    :GameObject(_game)
 {
     SetScale(10.0f);
     WallMeshComponent* mc = new WallMeshComponent(this);

@@ -22,10 +22,10 @@ public:
 	//当たり判定
     void HitCheck();
 
-    void AddBox(BoxCollider* argBox);
-    void RemoveBox(BoxCollider* argBox);
-	void AddSphere(SphereCollider* argSphere);
-	void RemoveSphere(SphereCollider* argSphere);
+    void AddBox(BoxCollider* _box);
+    void RemoveBox(BoxCollider* _box);
+	void AddSphere(SphereCollider* _sphere);
+	void RemoveSphere(SphereCollider* _sphere);
 
 private:
 	//コンストラクタの隠蔽

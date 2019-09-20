@@ -13,20 +13,20 @@ public:
 	@param	アタッチするゲームオブジェクトのポインタ
 	@param	コンポーネントの更新順番（数値が小さいほど早く更新される）
 	*/
-    SpriteComponent(GameObject* argOwner, int argDrawOrder = 100);
+    SpriteComponent(GameObject* _owner, int _drawOrder = 100);
     ~SpriteComponent();
 
 	/**
 	@brief	描画処理
 	@param	使用するシェーダークラスのポインタ
 	*/
-    virtual void Draw(Shader* shader);
+    virtual void Draw(Shader* _shader);
 
 	/**
 	@brief	使用するテクスチャの設定
 	@param	使用するテクスチャのポインタ
 	*/
-    virtual void SetTexture(Texture* argTexture);
+    virtual void SetTexture(Texture* _texture);
 
 	/**
 	@brief	テクスチャの横幅を取得する

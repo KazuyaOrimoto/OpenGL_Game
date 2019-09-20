@@ -29,7 +29,7 @@ ObstacleObject::~ObstacleObject()
 {
 }
 
-void ObstacleObject::UpdateGameObject(float _daltaTime)
+void ObstacleObject::UpdateGameObject(float _deltaTime)
 {
     if (player->GetPosition().x - 500.0f > position.x)
     {

@@ -31,41 +31,41 @@ public:
 	/**
 	@param	ゲームクラスのポインタ
 	*/
-	GameObject(Game* argGame);
+	GameObject(Game* _game);
 	virtual ~GameObject();
 
 	/**
 	@brief	フレーム毎の処理
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	void Update(float argDaltaTime);
+	void Update(float _deltaTime);
 
 	/**
 	@brief	アタッチされてるコンポーネントのアップデート
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	void UpdateComponents(float argDaltaTime);
+	void UpdateComponents(float _deltaTime);
 
 	/**
 	@brief	ゲームオブジェクトのアップデート
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	virtual void UpdateGameObject(float argDaltaTime);
+	virtual void UpdateGameObject(float _deltaTime);
 
-	void ProcessInput(const InputState& keyState);
-	virtual void GameObjectInput(const InputState& keyState);
+	void ProcessInput(const InputState& _keyState);
+	virtual void GameObjectInput(const InputState& _keyState);
 
 	/**
 	@brief	コンポーネントを追加する
 	@param	追加するコンポーネントのポインタ
 	*/
-	void AddComponent(Component* argComponent);
+	void AddComponent(Component* _component);
 
 	/**
 	@brief	コンポーネントを削除する
 	@param	削除するコンポーネントのポインタ
 	*/
-	void RemoveComponent(Component* argComponent);
+	void RemoveComponent(Component* _component);
 
 	/**
 	@brief	Transformのワールド変換
@@ -82,7 +82,7 @@ public:
 	@brief　オブジェクトのポジションを設定する
 	@param	position
 	*/
-    void SetPosition(const Vector3& argPos) { position = argPos; recomputeWorldTransform = true; }
+    void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
 
 	/**
 	@brief　オブジェクトのスケールを取得する
@@ -94,7 +94,7 @@ public:
 	@brief　オブジェクトのスケールを設定する
 	@param	scale
 	*/
-    void SetScale(float argScale) { scale = argScale;  recomputeWorldTransform = true; }
+    void SetScale(float _scale) { scale = _scale;  recomputeWorldTransform = true; }
 
 	/**
 	@brief　オブジェクトのクォータニオンを取得する
@@ -106,7 +106,7 @@ public:
 	@brief　オブジェクトのクォータニオンを設定する
 	@param	rotation（Quaternion型）
 	*/
-    void SetRotation(const Quaternion& argQotation) { rotation = argQotation;  recomputeWorldTransform = true; }
+    void SetRotation(const Quaternion& _qotation) { rotation = _qotation;  recomputeWorldTransform = true; }
 
 	/**
 	@brief　オブジェクトの状態を取得する
@@ -118,7 +118,7 @@ public:
 	@brief　オブジェクトの状態を設定する
 	@param	state
 	*/
-	void SetState(State argState) { state = argState; }
+	void SetState(State _state) { state = _state; }
 
 	/**
 	@brief　オブジェクトのワールド行列を取得する
@@ -152,9 +152,9 @@ public:
 
 	Tag GetTag() const { return tag; }
 
-    virtual void OnCollision(GameObject& argHitObject) {}
+    virtual void OnCollision(GameObject& _hitObject) {}
 
-    virtual void OnTrigger(GameObject& argTriggerObject) {}
+    virtual void OnTrigger(GameObject& _triggerObject) {}
 
 protected:
 	//ゲームオブジェクトの状態

@@ -2,8 +2,8 @@
 #include "GameObject.h"
 #include "InputSystem.h"
 
-InputComponent::InputComponent(GameObject* owner)
-	:MoveComponent(owner)
+InputComponent::InputComponent(GameObject* _owner)
+	:MoveComponent(_owner)
 	, mForwardKey(0)
 	, mBackKey(0)
 	, mClockwiseKey(0)
@@ -11,27 +11,27 @@ InputComponent::InputComponent(GameObject* owner)
 {
 }
 
-void InputComponent::ProcessInput(const InputState& state)
+void InputComponent::ProcessInput(const InputState& _state)
 {
 	// Calculate forward speed for MoveComponent
 	float forwardSpeed = 0.0f;
 
-	if (state.Keyboard.GetKeyValue(SDL_Scancode(mForwardKey)))
+	if (_state.Keyboard.GetKeyValue(SDL_Scancode(mForwardKey)))
 	{
 		forwardSpeed += mMaxForwardSpeed;
 	}
-	if (state.Keyboard.GetKeyValue(SDL_Scancode(mBackKey)))
+	if (_state.Keyboard.GetKeyValue(SDL_Scancode(mBackKey)))
 	{
 		forwardSpeed -= mMaxForwardSpeed;
 	}
 
 	// Calculate angular speed for MoveComponent
 	float angularSpeed = 0.0f;
-	if (state.Keyboard.GetKeyValue(SDL_Scancode(mClockwiseKey)))
+	if (_state.Keyboard.GetKeyValue(SDL_Scancode(mClockwiseKey)))
 	{
 		angularSpeed += mMaxAngularSpeed;
 	}
-	if (state.Keyboard.GetKeyValue(SDL_Scancode(mCounterClockwiseKey)))
+	if (_state.Keyboard.GetKeyValue(SDL_Scancode(mCounterClockwiseKey)))
 	{
 		angularSpeed -= mMaxAngularSpeed;
 	}

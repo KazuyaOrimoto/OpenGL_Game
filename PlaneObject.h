@@ -7,6 +7,6 @@ class PlaneObject :
     public GameObject
 {
 public:
-    PlaneObject(Game* game);
+    PlaneObject(Game* _game);
 };
 

@@ -9,10 +9,10 @@
 @param	アタッチするゲームオブジェクトのポインタ
 @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
 */
-SpriteComponent::SpriteComponent(GameObject * argOwner, int argDrawOrder)
-    :Component(argOwner)
+SpriteComponent::SpriteComponent(GameObject * _owner, int _drawOrder)
+    :Component(_owner)
     ,texture(nullptr)
-    ,drawOrder(argDrawOrder)
+    ,drawOrder(_drawOrder)
     ,textureWidth(0)
     ,textureHeight(0)
 {
@@ -28,7 +28,7 @@ SpriteComponent::~SpriteComponent()
 @brief	描画処理
 @param	使用するシェーダークラスのポインタ
 */
-void SpriteComponent::Draw(Shader * shader)
+void SpriteComponent::Draw(Shader * _shader)
 {
 	if (texture)
 	{
@@ -39,7 +39,7 @@ void SpriteComponent::Draw(Shader * shader)
 
 		Matrix4 world = scaleMatrix * owner->GetWorldTransform();
 
-		shader->SetMatrixUniform("uWorldTransform",world);
+		_shader->SetMatrixUniform("uWorldTransform",world);
 		
 		texture->SetActive();
 
@@ -52,9 +52,9 @@ void SpriteComponent::Draw(Shader * shader)
 @brief	使用するテクスチャの設定
 @param	使用するテクスチャのポインタ
 */
-void SpriteComponent::SetTexture(Texture * argTexture)
+void SpriteComponent::SetTexture(Texture * _texture)
 {
-	texture = argTexture;
+	texture = _texture;
 	textureWidth = texture->GetWidth();
 	textureHeight = texture->GetHeight();
 }

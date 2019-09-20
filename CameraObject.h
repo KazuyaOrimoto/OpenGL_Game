@@ -8,9 +8,9 @@ class InputComponent;
 class CameraObject : public GameObject
 {
 public:
-    CameraObject(Game* game);
+    CameraObject(Game* _game);
 
-    void UpdateGameObject(float deltaTime) override;
+    void UpdateGameObject(float _deltaTime) override;
 private:
 	InputComponent* inputComponent;
 };

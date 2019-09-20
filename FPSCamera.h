@@ -7,21 +7,21 @@ class GameObject;
 class FPSCamera : public CameraComponent
 {
 public:
-	FPSCamera(GameObject* argOwner);
+	FPSCamera(GameObject* _owner);
 
-	void Update(float deltaTime) override;
-	void ProcessInput(const struct InputState& state) override;
+	void Update(float _deltaTime) override;
+	void ProcessInput(const struct InputState& _state) override;
 
 	float GetPitch() const { return pitch; }
 	float GetPitchSpeed() const { return pitchSpeed; }
 	float GetMaxPitch() const { return maxPitchSpeed; }
 	//void SetPitchSpeed(float speed) { pitchSpeed = speed; }
-	void SetMaxPitch(float pitch) { maxPitchSpeed = pitch; }
+	void SetMaxPitch(float _pitch) { maxPitchSpeed = _pitch; }
 
 	float GetAngularSpeed() const { return angularSpeed; }
 	float GetMaxAngular() const { return maxAngularSpeed; }
-	void SetAngularSpeed(float speed) { angularSpeed = speed; }
-	void SetMaxAngular(float angular) { maxAngularSpeed = pitch; }
+	void SetAngularSpeed(float _speed) { angularSpeed = _speed; }
+	void SetMaxAngular(float _angular) { maxAngularSpeed = pitch; }
 private:
 
 	float angularSpeed;

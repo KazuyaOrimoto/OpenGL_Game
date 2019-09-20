@@ -5,8 +5,8 @@
 #include "Game.h"
 #include "PhysicsWorld.h"
 
-BoxCollider::BoxCollider(GameObject* argOwner, int argUpdateOrder, int argCollisionOrder)
-	: ColliderComponent(argOwner, argUpdateOrder, argCollisionOrder)
+BoxCollider::BoxCollider(GameObject* _owner, int _updateOrder, int _collisionOrder)
+	: ColliderComponent(_owner, _updateOrder, _collisionOrder)
 	, objectBox({Vector3::Zero,Vector3::Zero})
 	, worldBox({ Vector3::Zero,Vector3::Zero})
 {

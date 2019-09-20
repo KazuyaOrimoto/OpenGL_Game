@@ -5,8 +5,8 @@
 #include "InputComponent.h"
 #include "InputSystem.h"
 
-CameraObject::CameraObject(Game * game)
-    :GameObject(game)
+CameraObject::CameraObject(Game * _game)
+    :GameObject(_game)
 {
 	inputComponent = new InputComponent(this);
 	inputComponent->SetMaxAngularSpeed(Math::Pi);
@@ -17,9 +17,9 @@ CameraObject::CameraObject(Game * game)
 	inputComponent->SetCounterClockwiseKey(SDL_SCANCODE_A);
 }
 
-void CameraObject::UpdateGameObject(float deltaTime)
+void CameraObject::UpdateGameObject(float _deltaTime)
 {
-    GameObject::UpdateGameObject(deltaTime);
+    GameObject::UpdateGameObject(_deltaTime);
 
 	// このオブジェクトのポジションからビュー行列を計算
     Vector3 cameraPos = GetPosition();

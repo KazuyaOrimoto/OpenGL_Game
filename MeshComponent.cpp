@@ -10,12 +10,12 @@
 /**
 @param	アタッチするゲームオブジェクトのポインタ
 */
-MeshComponent::MeshComponent(GameObject* owner, ShaderType argShaderType)
+MeshComponent::MeshComponent(GameObject* _owner, ShaderType _shaderType)
     :Component(owner)
     , mMesh(nullptr)
     , mTextureIndex(0)
 	, visible(true)
-	, shaderName(argShaderType)
+	, shaderName(_shaderType)
 {
 	RENDERER->AddMeshComponent(this);
 }
@@ -29,15 +29,15 @@ MeshComponent::~MeshComponent()
 @brief　描画処理
 @param	使用するシェーダークラスのポインタ
 */
-void MeshComponent::Draw(Shader* shader)
+void MeshComponent::Draw(Shader* _shader)
 {
     if (mMesh)
     {
         // Set the world transform
-        shader->SetMatrixUniform("uWorldTransform",
+        _shader->SetMatrixUniform("uWorldTransform",
             owner->GetWorldTransform());
         // Set specular power
-        shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
+        _shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
         // Set the active texture
         Texture* t = mMesh->GetTexture(mTextureIndex);
         if (t)

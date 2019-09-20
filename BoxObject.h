@@ -7,7 +7,7 @@ class BoxCollider;
 class BoxObject : public GameObject
 {
 public:
-    BoxObject(Game* game);
+    BoxObject(Game* _game);
     ~BoxObject();
 
 private:

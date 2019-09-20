@@ -5,8 +5,8 @@
 #include "Game.h"
 #include "PhysicsWorld.h"
 
-SphereCollider::SphereCollider(GameObject* argOwner, int argUpdateOrder, int argCollisionOrder)
-	: ColliderComponent(argOwner, argUpdateOrder, argCollisionOrder)
+SphereCollider::SphereCollider(GameObject* _owner, int _updateOrder, int _collisionOrder)
+	: ColliderComponent(_owner, _updateOrder, _collisionOrder)
 	, objectSphere({ Vector3::Zero,0.0f })
 	, worldSphere ({ Vector3::Zero,0.0f })
 {

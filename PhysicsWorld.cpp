@@ -35,14 +35,14 @@ void PhysicsWorld::HitCheck()
     SphereAndBox();
 }
 
-void PhysicsWorld::AddBox(BoxCollider * argBox)
+void PhysicsWorld::AddBox(BoxCollider * _box)
 {
-	boxes.emplace_back(argBox);
+	boxes.emplace_back(_box);
 }
 
-void PhysicsWorld::RemoveBox(BoxCollider * argBox)
+void PhysicsWorld::RemoveBox(BoxCollider * _box)
 {
-	auto iter = std::find(boxes.begin(), boxes.end(), argBox);
+	auto iter = std::find(boxes.begin(), boxes.end(), _box);
 	if (iter != boxes.end())
 	{
 		std::iter_swap(iter, boxes.end() - 1);
@@ -50,14 +50,14 @@ void PhysicsWorld::RemoveBox(BoxCollider * argBox)
 	}
 }
 
-void PhysicsWorld::AddSphere(SphereCollider * argSphere)
+void PhysicsWorld::AddSphere(SphereCollider * _sphere)
 {
-	spheres.emplace_back(argSphere);
+	spheres.emplace_back(_sphere);
 }
 
-void PhysicsWorld::RemoveSphere(SphereCollider * argSphere)
+void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 {
-	auto iter = std::find(spheres.begin(), spheres.end(), argSphere);
+	auto iter = std::find(spheres.begin(), spheres.end(), _sphere);
 	if (iter != spheres.end())
 	{
 		std::iter_swap(iter, spheres.end() - 1);

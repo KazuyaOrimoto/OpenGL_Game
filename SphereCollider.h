@@ -6,12 +6,12 @@ class SphereCollider :
 	public ColliderComponent
 {
 public:
-	SphereCollider(GameObject* argOwner, int argUpdateOrder = 100, int argCollisionOrder = 100);
+	SphereCollider(GameObject* _owner, int _updateOrder = 100, int _collisionOrder = 100);
 	~SphereCollider();
 	
 	void OnUpdateWorldTransform() override;
 
-	void SetObjectSphere(const Sphere& argSphere) { objectSphere = argSphere; }
+	void SetObjectSphere(const Sphere& _sphere) { objectSphere = _sphere; }
 	Sphere GetWorldSphere() const { return worldSphere; }
 
 private:

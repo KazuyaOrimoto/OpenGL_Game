@@ -20,27 +20,27 @@ public:
 	/**
 	@brief  ゲームオブジェクトのアップデート処理
 	*/
-	void UpdateGameObject(float argDeltaTime);
+	void UpdateGameObject(float _deltaTime);
 
 	/**
 	@brief  ゲームオブジェクトの入力処理
 	*/
-	void ProcessInput(const InputState& state);
+	void ProcessInput(const InputState& _state);
 
 	/**
 	@brief  ゲームオブジェクトの追加
 	@param	追加するGameObjectクラスのポインタ
 	*/
-	void AddGameObject(GameObject* argObj);
+	void AddGameObject(GameObject* _object);
 
 	/**
 	@brief  ゲームオブジェクトの削除
 	@param	削除するGameObjectクラスのポインタ
 	*/
-	void RemoveGameObject(GameObject* argObj);
+	void RemoveGameObject(GameObject* _object);
 
-	GameObject* FindGameObject(Tag tag);
-	std::vector<GameObject*> FindGameObjects(Tag tag);
+	GameObject* FindGameObject(Tag _tag);
+	std::vector<GameObject*> FindGameObjects(Tag _tag);
 
 private:
 	GameObjectManager();

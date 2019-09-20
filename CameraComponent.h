@@ -8,11 +8,11 @@ class GameObject;
 class CameraComponent : public Component
 {
 public:
-	CameraComponent(GameObject* argOwner,int argUpdateOrder = 200);
-	void Update(float deltaTime) override;
+	CameraComponent(GameObject* _owner,int _updateOrder = 200);
+	void Update(float _deltaTime) override;
 protected:
 	
-	void SetViewMatrix(const Matrix4& view);
+	void SetViewMatrix(const Matrix4& _view);
 };
 
 

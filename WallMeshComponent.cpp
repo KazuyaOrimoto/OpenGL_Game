@@ -2,8 +2,8 @@
 
 
 
-WallMeshComponent::WallMeshComponent(GameObject* owner)
-    :MeshComponent(owner,WALL)
+WallMeshComponent::WallMeshComponent(GameObject* _owner)
+    :MeshComponent(_owner,WALL)
 {
 }
 

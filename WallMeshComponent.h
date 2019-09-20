@@ -4,7 +4,7 @@ class WallMeshComponent :
     public MeshComponent
 {
 public:
-    WallMeshComponent(GameObject* owner);
+    WallMeshComponent(GameObject* _owner);
     ~WallMeshComponent();
 };
 

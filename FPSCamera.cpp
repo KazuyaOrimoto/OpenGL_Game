@@ -4,8 +4,8 @@
 #include "Game.h"
 #include "Renderer.h"
 
-FPSCamera::FPSCamera(GameObject * argOwner)
-	:CameraComponent(argOwner)
+FPSCamera::FPSCamera(GameObject * _owner)
+	:CameraComponent(_owner)
 	, angularSpeed(0.0f)
 	, maxAngularSpeed(Math::Pi * 4)
 	, pitch(0.0f)
@@ -15,14 +15,14 @@ FPSCamera::FPSCamera(GameObject * argOwner)
 {
 }
 
-void FPSCamera::Update(float deltaTime)
+void FPSCamera::Update(float _deltaTime)
 {
-	CameraComponent::Update(deltaTime);
+	CameraComponent::Update(_deltaTime);
 	if (!Math::NearZero(pitchSpeed))
 	{
 		Vector3 cameraPos = owner->GetPosition();
 
-		pitch += pitchSpeed * deltaTime;
+		pitch += pitchSpeed * _deltaTime;
 
 		pitch = Math::Clamp(pitch, -maxPitch, maxPitch);
 
@@ -42,7 +42,7 @@ void FPSCamera::Update(float deltaTime)
 	if (!Math::NearZero(angularSpeed))
 	{
 		Quaternion rot = owner->GetRotation();
-		float angle = angularSpeed * deltaTime;
+		float angle = angularSpeed * _deltaTime;
 		// Create quaternion for incremental rotation
 		// (Rotate about up axis)
 		Quaternion inc(Vector3::UnitZ, angle);
@@ -52,10 +52,10 @@ void FPSCamera::Update(float deltaTime)
 	}
 }
 
-void FPSCamera::ProcessInput(const InputState & state)
+void FPSCamera::ProcessInput(const InputState & _state)
 {
 	// Calculate angular speed for MoveComponent
-	const Vector2 mouse = state.Mouse.GetPosition();
+	const Vector2 mouse = _state.Mouse.GetPosition();
 	const int maxMouseSpeed = 500;
 	angularSpeed = 0.0f;
 	if (mouse.x != 0)

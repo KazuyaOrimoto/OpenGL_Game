@@ -6,8 +6,8 @@
 #include "MoveComponent.h"
 #include "SphereCollider.h"
 
-FollowCameraObject::FollowCameraObject(Game* game)
-	:GameObject(game)
+FollowCameraObject::FollowCameraObject(Game* _game)
+	:GameObject(_game)
 {
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));
@@ -30,7 +30,7 @@ FollowCameraObject::FollowCameraObject(Game* game)
 	sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
 }
 
-void FollowCameraObject::SetVisible(bool visible)
+void FollowCameraObject::SetVisible(bool _visible)
 {
-	mMeshComp->SetVisible(visible);
+	mMeshComp->SetVisible(_visible);
 }

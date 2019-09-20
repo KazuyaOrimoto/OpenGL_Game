@@ -71,7 +71,7 @@ void ObstacleBox::UseObstacle()
 	GAME_OBJECT_MANAGER->AddGameObject(this);
 }
 
-void ObstacleBox::UpdateGameObject(float _daltaTime)
+void ObstacleBox::UpdateGameObject(float _deltaTime)
 {
 	if (player->GetPosition().x - 500.0f > position.x)
 	{

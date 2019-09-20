@@ -20,7 +20,7 @@ public:
 	@brief	ゲームオブジェクトのアップデート
 	@param	最後のフレームを完了するのに要した時間
 	*/
-	void UpdateGameObject(float _daltaTime) override;
+	void UpdateGameObject(float _deltaTime) override;
 
 private:
 

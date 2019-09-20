@@ -4,12 +4,12 @@
 #include "GameObject.h"
 
 
-CameraComponent::CameraComponent(GameObject* argOwner, int argUpdateOrder)
-	:Component(argOwner,argUpdateOrder)
+CameraComponent::CameraComponent(GameObject* _owner, int _updateOrder)
+	:Component(_owner,_updateOrder)
 {
 }
 
-void CameraComponent::Update(float deltaTime)
+void CameraComponent::Update(float _deltaTime)
 {
 	Vector3 cameraPos = owner->GetPosition();
 
@@ -26,10 +26,10 @@ void CameraComponent::Update(float deltaTime)
 	RENDERER->SetViewMatrix(view);
 }
 
-void CameraComponent::SetViewMatrix(const Matrix4 & view)
+void CameraComponent::SetViewMatrix(const Matrix4 & _view)
 {
 	Game* game = owner->GetGame();
-	RENDERER->SetViewMatrix(view);
+	RENDERER->SetViewMatrix(_view);
 }
 
 

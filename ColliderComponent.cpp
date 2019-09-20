@@ -3,10 +3,10 @@
 #include "Game.h"
 #include "PhysicsWorld.h"
 
-ColliderComponent::ColliderComponent(GameObject* argOwner, int argUpdateOrder, int argCollisionOrder)
-	: Component(argOwner,argUpdateOrder)
+ColliderComponent::ColliderComponent(GameObject* _owner, int _updateOrder, int _collisionOrder)
+	: Component(_owner, _updateOrder)
 	, isTrigger(false)
-	, collisionOrder(argCollisionOrder)
+	, collisionOrder(_collisionOrder)
 {
 }
 

@@ -3,13 +3,13 @@
 class BoxCollider : public ColliderComponent
 {
 public:
-	BoxCollider(GameObject* argOwner, int argUpdateOrder = 100, int argCollisionOrder = 100);
+	BoxCollider(GameObject* _owner, int _updateOrder = 100, int _collisionOrder = 100);
 	~BoxCollider();
 
 	void OnUpdateWorldTransform() override;
 
 
-	void SetObjectBox(const AABB& argBox) { objectBox = argBox; }
+	void SetObjectBox(const AABB& _box) { objectBox = _box; }
 	AABB GetWorldBox() const { return worldBox; }
 
 private:

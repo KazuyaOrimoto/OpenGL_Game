@@ -20,6 +20,6 @@ Ship::~Ship()
 @brief	ゲームオブジェクトのアップデート
 @param	最後のフレームを完了するのに要した時間
 */
-void Ship::UpdateGameObject(float argDeltaTime)
+void Ship::UpdateGameObject(float _deltaTime)
 {
 }

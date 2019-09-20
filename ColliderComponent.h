@@ -7,20 +7,19 @@ class GameObject;
 class ColliderComponent : public Component
 {
 public:
-	ColliderComponent(GameObject* argOwner, int argUpdateOrder = 100,int argCollisionOrder = 100);
+	ColliderComponent(GameObject* _owner, int _updateOrder = 100,int _collisionOrder = 100);
 	virtual ~ColliderComponent();
 
 	int GetCollisionOrder() const { return collisionOrder; }
 
-
 	//オブジェクトが球に当たった時にめりこみからずらす処理
-	virtual void ShiftObject(const Sphere& argHirSphere) {}
+	virtual void ShiftObject(const Sphere& _hirSphere) {}
 	//オブジェクトが平面に当たった時にめりこみからずらす処理
-	virtual void ShiftObject(const Plane& argHitPlane) {}
+	virtual void ShiftObject(const Plane& _hitPlane) {}
 	//オブジェクトがAABBに当たった時にめりこみからずらす処理
-	virtual void ShiftObject(const AABB& argHitBox) {}
+	virtual void ShiftObject(const AABB& _hitBox) {}
 	//オブジェクトがカプセルに当たった時にめりこみからずらす処理
-	virtual void ShiftObject(const Capsule& argHitCapsule) {}
+	virtual void ShiftObject(const Capsule& _hitCapsule) {}
 
 private:
 	bool isTrigger;

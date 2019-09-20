@@ -7,11 +7,11 @@ class Game;
 class FPSGameObject : public GameObject
 {
 public:
-	FPSGameObject(Game* game);
+	FPSGameObject(Game* _game);
 
-	void UpdateGameObject(float deltaTime) override;
+	void UpdateGameObject(float _deltaTime) override;
 
-	void SetVisible(bool visible);
+	void SetVisible(bool _visible);
 private:
 	class MoveComponent* moveComponent;
 	class MeshComponent* mMeshComp;

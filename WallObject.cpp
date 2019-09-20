@@ -5,11 +5,11 @@
 #include "WallMeshComponent.h"
 #include "GameObjectManager.h"
 
-WallObject::WallObject(Game* game, int i)
-	:GameObject(game)
+WallObject::WallObject(Game* _game, int _i)
+	:GameObject(_game)
 {
 	SetScale(1000.0f);
-	SetPosition(Vector3(i*2000.0f, 0.0f, 0.0f));
+	SetPosition(Vector3(_i*2000.0f, 0.0f, 0.0f));
 	MeshComponent* mc = new WallMeshComponent(this);
 	mc->SetMesh(RENDERER->GetMesh("Assets/Wall.gpmesh"));
 	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
@@ -20,7 +20,7 @@ WallObject::~WallObject()
 {
 }
 
-void WallObject::UpdateGameObject(float argDaltaTime)
+void WallObject::UpdateGameObject(float _deltaTime)
 {
 	bool moveRequired = player->GetPosition().x - 2000.0f > position.x;
 	if (moveRequired)
