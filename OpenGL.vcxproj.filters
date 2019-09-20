@@ -135,7 +135,9 @@
     <ClCompile Include="ObstacleBox.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="ObstacleMapLoder.cpp" />
+    <ClCompile Include="ObstacleMapLoder.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -271,7 +273,9 @@
     <ClInclude Include="ObstacleBox.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="ObstacleMapLoder.h" />
+    <ClInclude Include="ObstacleMapLoder.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

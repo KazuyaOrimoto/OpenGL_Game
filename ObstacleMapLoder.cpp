@@ -37,12 +37,12 @@ void ObstacleMapLoder::Initialize()
 	}
 }
 
-void ObstacleMapLoder::LoadMap(const std::string & argFileName, rapidjson::Document* doc)
+void ObstacleMapLoder::LoadMap(const std::string & _fileName, rapidjson::Document* _doc)
 {
-	std::ifstream file(argFileName);
+	std::ifstream file(_fileName);
 	if (!file.is_open())
 	{
-		SDL_Log("File not found: Map %s", argFileName.c_str());
+		SDL_Log("File not found: Map %s", _fileName.c_str());
 		return ;
 	}
 
@@ -50,6 +50,6 @@ void ObstacleMapLoder::LoadMap(const std::string & argFileName, rapidjson::Docum
 	fileStream << file.rdbuf();
 	std::string contents = fileStream.str();
 	rapidjson::StringStream jsonStr(contents.c_str());
-	(*doc).ParseStream(jsonStr);
+	(*_doc).ParseStream(jsonStr);
 
 }
