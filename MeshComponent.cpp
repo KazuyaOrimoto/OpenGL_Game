@@ -11,7 +11,7 @@
 @param	アタッチするゲームオブジェクトのポインタ
 */
 MeshComponent::MeshComponent(GameObject* _owner, ShaderType _shaderType)
-    :Component(owner)
+    :Component(_owner)
     , mMesh(nullptr)
     , mTextureIndex(0)
 	, visible(true)

@@ -7,7 +7,6 @@ SceneBase::SceneBase(Game* _game)
 {
 }
 
-
 SceneBase::~SceneBase()
 {
 }
