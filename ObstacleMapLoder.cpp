@@ -18,7 +18,7 @@ ObstacleMapLoder::~ObstacleMapLoder()
 rapidjson::Document* ObstacleMapLoder::GetRandamMap()
 {
 	int i = rand() % ObstacleMap::MAP_QTY;
-	return mapDocments[i];
+	return mapDocments[0];
 }
 
 void ObstacleMapLoder::Initialize()
