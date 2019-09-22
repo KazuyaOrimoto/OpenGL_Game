@@ -12,7 +12,6 @@
 
 ObstacleBox::ObstacleBox(Game* _game)
 	:GameObject(_game)
-	, hardness(1)
 	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);
@@ -35,6 +34,30 @@ ObstacleBox::ObstacleBox(Game* _game)
 	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
 }
 
+ObstacleBox::ObstacleBox(Game * _game, int _debug)
+	:GameObject(_game)
+	, player(nullptr)
+	, debug(_debug)
+{
+	meshComp = new MeshComponent(this);
+	Mesh* mesh = RENDERER->GetMesh("Assets/Cube.gpmesh");
+	meshComp->SetMesh(mesh);
+	boxCollider = new BoxCollider(this);
+	AABB box = { Vector3::Zero , Vector3::Zero };
+	std::vector<Vector3> verts = mesh->GetVerts();
+	for (auto itr : verts)
+	{
+		box.UpdateMinMax(itr);
+	}
+	boxCollider->SetObjectBox(box);
+	SetScale(200.0f);
+	OBSTACLE_MANAGER->AddOnstacle(this);
+
+	tag = Tag::Obstacle;
+
+	state = Paused;
+	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
+}
 
 ObstacleBox::~ObstacleBox()
 {
@@ -76,5 +99,6 @@ void ObstacleBox::UpdateGameObject(float _deltaTime)
 	if (player->GetPosition().x - 500.0f > position.x)
 	{
 		ResetObstacle();
+		printf("%d\n",debug);
 	}
 }

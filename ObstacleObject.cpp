@@ -40,34 +40,16 @@ void ObstacleObject::UpdateGameObject(float _deltaTime)
 void ObstacleObject::CreateObstacle(float _depth)
 {
 	rapidjson::Document* doc = mapLoder->GetRandamMap();
-	rapidjson::Value& mapJson = (*doc)["Obstacles"];
-    for (Uint16 i = 0; i < mapJson.Size(); i++)
+	rapidjson::Value& Obstacles = (*doc)["Obstacles"];
+    for (Uint16 i = 0; i < Obstacles.Size(); i++)
     {
-
         ObstacleBox* box = dynamic_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle());
         if (box == nullptr)
         {
             return;
         }
-        box->SetPosition(Vector3(_depth, mapJson[i]["x"].GetFloat(), mapJson[i]["y"].GetFloat()));
+        box->SetPosition(Vector3(_depth, Obstacles[i]["x"].GetFloat(), Obstacles[i]["y"].GetFloat()));
         box->UseObstacle();
         SetPosition(Vector3(_depth, -0.0f, 0.0f));
-
-
-		//size = mapJson[i].GetUint();
-  //      if (size != 0)
-  //      {
-  //          ten = i / 10;
-  //          one = i % 10;
-  //          ObstacleBox* box = dynamic_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle());
-		//	if (box == nullptr)
-		//	{
-		//		return;
-		//	}
-  //          box->SetPosition(Vector3(_depth, one * 200.0f, ten * 200.0f));
-  //          box->UseObstacle();
-		//	box->SetScale(2 * 100.0f);
-  //          
-  //      }
     }
 }
