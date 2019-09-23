@@ -1,4 +1,4 @@
-#include "DrilObject.h"
+#include "BikeObject.h"
 #include "MeshComponent.h"
 #include "Game.h"
 #include "Renderer.h"
@@ -7,7 +7,7 @@
 #include "ObstacleBox.h"
 #include "InputSystem.h"
 
-DrilObject::DrilObject(Game* _game, PlayerObject* _ownerObject)
+BikeObject::BikeObject(Game* _game, PlayerObject* _ownerObject)
     : GameObject(_game)
     , ownerObject(_ownerObject)
 {
@@ -21,16 +21,16 @@ DrilObject::DrilObject(Game* _game, PlayerObject* _ownerObject)
 	tag = Tag::Player;
 }
 
-DrilObject::~DrilObject()
+BikeObject::~BikeObject()
 {
 }
 
-void DrilObject::UpdateGameObject(float _deltaTime)
+void BikeObject::UpdateGameObject(float _deltaTime)
 {
 	//SetRotation(ownerObject->GetRotation());
 }
 
-void DrilObject::OnCollision(GameObject & _hitObject)
+void BikeObject::OnCollision(GameObject & _hitObject)
 {
     if (_hitObject.GetTag() == Tag::Obstacle)
     {
@@ -40,11 +40,11 @@ void DrilObject::OnCollision(GameObject & _hitObject)
     }
 }
 
-void DrilObject::HitObstacle(const ObstacleBox & _hitObstacle)
+void BikeObject::HitObstacle(const ObstacleBox & _hitObstacle)
 {
 }
 
-void DrilObject::GameObjectInput(const InputState & _state)
+void BikeObject::GameObjectInput(const InputState & _state)
 {
     if (_state.Keyboard.GetKeyState(SDL_SCANCODE_D))
     {

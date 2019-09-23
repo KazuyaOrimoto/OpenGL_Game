@@ -6,11 +6,11 @@ class MeshComponent;
 class SphereCollider;
 class ObstacleBox;
 
-class DrilObject : public GameObject
+class BikeObject : public GameObject
 {
 public:
-    DrilObject(Game* _game, PlayerObject* _ownerObject);
-    ~DrilObject();
+	BikeObject(Game* _game, PlayerObject* _ownerObject);
+    ~BikeObject();
 
     /**
     @brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—

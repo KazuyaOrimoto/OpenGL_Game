@@ -123,9 +123,6 @@
     <ClCompile Include="WallMeshComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="DrilObject.cpp">
-      <Filter>PlayerObject</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -137,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="ObstacleMapLoder.cpp">
       <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="BikeObject.cpp">
+      <Filter>PlayerObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -261,9 +261,6 @@
     <ClInclude Include="WallMeshComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="DrilObject.h">
-      <Filter>PlayerObject</Filter>
-    </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -275,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="ObstacleMapLoder.h">
       <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="BikeObject.h">
+      <Filter>PlayerObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
