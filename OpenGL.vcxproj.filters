@@ -138,6 +138,10 @@
     <ClCompile Include="BikeObject.cpp">
       <Filter>PlayerObject</Filter>
     </ClCompile>
+    <ClCompile Include="SlidingObject.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="SlidingArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -276,6 +280,10 @@
     <ClInclude Include="BikeObject.h">
       <Filter>PlayerObject</Filter>
     </ClInclude>
+    <ClInclude Include="SlidingObject.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="SlidingArea.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

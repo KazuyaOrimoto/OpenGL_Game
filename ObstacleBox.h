@@ -9,7 +9,6 @@ class ObstacleBox :public GameObject
 {
 public:
 	ObstacleBox(Game* _game);
-	ObstacleBox(Game* _game,int _debug);
 	~ObstacleBox();
 
 	virtual void OnCollision(GameObject& _hitObject) override;
@@ -28,6 +27,5 @@ private:
 	MeshComponent* meshComp;
 	BoxCollider* boxCollider;
 	GameObject* player;
-	int debug;
 };
 

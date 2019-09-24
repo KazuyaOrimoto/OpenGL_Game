@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 
-class DrilObject;
+class BikeObject;
 
 class AutoRunComponent :
     public Component
@@ -13,12 +13,12 @@ public:
     void Update(float _deltaTime) override;
     void SetForwardSpeed(float _value) { forwardSpeed = _value; }
     float GetForwardSpeed() const { return forwardSpeed; }
-    void SetDrilObject(DrilObject* _dril) { dril = _dril; }
+    void SetDrilObject(BikeObject* _dril) { dril = _dril; }
 
 private:
 
     float forwardSpeed;
-    DrilObject* dril;
+	BikeObject* dril;
 
 };
 

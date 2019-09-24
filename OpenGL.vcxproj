@@ -181,6 +181,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="SlidingArea.cpp" />
+    <ClCompile Include="SlidingObject.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="SphereObject.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
@@ -231,6 +233,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="SlidingArea.h" />
+    <ClInclude Include="SlidingObject.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="SphereObject.h" />
     <ClInclude Include="SpriteComponent.h" />

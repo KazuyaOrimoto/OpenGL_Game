@@ -1,4 +1,7 @@
-#include "ObstacleBox.h"
+#include "SlidingObject.h"
+#include "MeshComponent.h"
+#include "Game.h"
+#include "Renderer.h"
 #include "BoxCollider.h"
 #include "MeshComponent.h"
 #include "Game.h"
@@ -10,8 +13,8 @@
 #include "Mesh.h"
 #include "GameObjectManager.h"
 
-ObstacleBox::ObstacleBox(Game* _game)
-	:GameObject(_game)
+SlidingObject::SlidingObject(Game* _game)
+	: ObstacleBox(_game)
 	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);
@@ -34,14 +37,20 @@ ObstacleBox::ObstacleBox(Game* _game)
 	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
 }
 
-
-
-ObstacleBox::~ObstacleBox()
+SlidingObject::~SlidingObject()
 {
 	OBSTACLE_MANAGER->RemoveObstacle(this);
 }
 
-void ObstacleBox::OnCollision(GameObject & _hitObject)
+void SlidingObject::UpdateGameObject(float _deltaTime)
+{
+	if (player->GetPosition().x - 500.0f > position.x)
+	{
+		ResetObstacle();
+	}
+}
+
+void SlidingObject::OnCollision(GameObject & _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Player)
 	{
@@ -51,30 +60,9 @@ void ObstacleBox::OnCollision(GameObject & _hitObject)
 	}
 }
 
-void ObstacleBox::HitPlayer(const PlayerObject & _playerObject)
+void SlidingObject::HitObstacle(const ObstacleBox & _hitObstacle)
 {
 	meshComp->SetVisible(false);
 	ResetObstacle();
 }
 
-void ObstacleBox::ResetObstacle()
-{
-	SetPosition(Vector3::Zero);
-	state = Paused;
-}
-
-void ObstacleBox::UseObstacle()
-{
-	meshComp->SetVisible(true);
-	state = Active;
-	GAME_OBJECT_MANAGER->RemoveGameObject(this);
-	GAME_OBJECT_MANAGER->AddGameObject(this);
-}
-
-void ObstacleBox::UpdateGameObject(float _deltaTime)
-{
-	if (player->GetPosition().x - 500.0f > position.x)
-	{
-		ResetObstacle();
-	}
-}

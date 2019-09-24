@@ -16,7 +16,7 @@ public:
 
 	void AddPlayer(PlayerObject* _player) { player = _player; }
 	void RemovePlayer() { player = nullptr; }
-	void AddOnstacle(ObstacleBox* _obstacle);
+	void AddObstacle(ObstacleBox* _obstacle);
 	void RemoveObstacle(ObstacleBox* _obstacle);
 
 	ObstacleBox* GetObstacle();

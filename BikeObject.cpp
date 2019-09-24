@@ -42,6 +42,7 @@ void BikeObject::OnCollision(GameObject & _hitObject)
 
 void BikeObject::HitObstacle(const ObstacleBox & _hitObstacle)
 {
+	meshComp->SetVisible(false);
 }
 
 void BikeObject::GameObjectInput(const InputState & _state)

@@ -21,7 +21,7 @@ void ObstacleManager::DeleteInstance()
 	}
 }
 
-void ObstacleManager::AddOnstacle(ObstacleBox* _obstacle)
+void ObstacleManager::AddObstacle(ObstacleBox* _obstacle)
 {
 	obstacles.emplace_back(_obstacle);
 }

@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "Renderer.h"
-#include "DrilObject.h"
+#include "BikeObject.h"
 
 AutoRunComponent::AutoRunComponent(GameObject* _owner, int _updateOrder)
 	: Component(_owner, _updateOrder)

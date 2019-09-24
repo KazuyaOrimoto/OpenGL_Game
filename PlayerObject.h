@@ -7,7 +7,7 @@ class SphereCollider;
 class AutoRunComponent;
 class ObstacleObject;
 class RotateComponent;
-class DrilObject;
+class BikeObject;
 
 class PlayerObject : public GameObject
 {
@@ -30,6 +30,6 @@ private:
     AutoRunComponent* autoRun;
 	RotateComponent* rotate;
     SphereCollider* sphereCollider;
-    DrilObject* dril;
+	BikeObject* dril;
 };
 

@@ -43,7 +43,7 @@ void GameObjectCreater::PlayerAndWallCreate(Game* _game)
 	ObstacleBox* box;
 	for (int i = 0; i < 100; i++)
 	{
-		box = new ObstacleBox(_game,i);
+		box = new ObstacleBox(_game);
 	}
 
 	for (int i = 0; i < 50; i++)

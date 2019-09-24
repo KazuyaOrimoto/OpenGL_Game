@@ -8,7 +8,7 @@
 #include "RotateComponent.h"
 #include "ObstacleManager.h"
 #include "ObstacleObject.h"
-#include "DrilObject.h"
+#include "BikeObject.h"
 #include "Math.h"
 
 PlayerObject::PlayerObject(Game* _game)
@@ -28,7 +28,7 @@ PlayerObject::PlayerObject(Game* _game)
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 
-    dril = new DrilObject(game, this);
+    dril = new BikeObject(game, this);
     autoRun->SetDrilObject(dril);
 
     SetScale(10.0f);
