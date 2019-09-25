@@ -8,6 +8,7 @@
 #include "ObstacleObject.h"
 #include "WallObject.h"
 #include "ObstacleBox.h"
+#include "JumpingObject.h"
 
 GameObjectCreater* GameObjectCreater::creater = nullptr;
 
@@ -44,6 +45,10 @@ void GameObjectCreater::PlayerAndWallCreate(Game* _game)
 	for (int i = 0; i < 100; i++)
 	{
 		box = new ObstacleBox(_game);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		box = new JumpingObject(_game);
 	}
 
 	for (int i = 0; i < 50; i++)

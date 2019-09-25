@@ -1,17 +1,17 @@
 {
   "Obstacles": [
     {
-      "type": "cube",
+      "type": "Obstacle",
       "x": 0,
       "y": 100
     },
     {
-      "type": "cube",
+      "type": "Obstacle",
       "x": 200,
       "y": 100
     },
     {
-      "type": "cube",
+      "type": "JumpingObstacle",
       "x": 200,
       "y": 1900
     }

@@ -12,6 +12,7 @@ enum Tag
 {
 	Player,
 	Obstacle,
+	JumpingObstacle,
 	Wall
 };
 
@@ -82,7 +83,7 @@ public:
 	@brief　オブジェクトのポジションを設定する
 	@param	position
 	*/
-    void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
+    virtual void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
 
 	/**
 	@brief　オブジェクトのスケールを取得する
@@ -94,7 +95,7 @@ public:
 	@brief　オブジェクトのスケールを設定する
 	@param	scale
 	*/
-    void SetScale(float _scale) { scale = _scale;  recomputeWorldTransform = true; }
+	virtual void SetScale(float _scale) { scale = _scale;  recomputeWorldTransform = true; }
 
 	/**
 	@brief　オブジェクトのクォータニオンを取得する
@@ -106,7 +107,7 @@ public:
 	@brief　オブジェクトのクォータニオンを設定する
 	@param	rotation（Quaternion型）
 	*/
-    void SetRotation(const Quaternion& _qotation) { rotation = _qotation;  recomputeWorldTransform = true; }
+	virtual void SetRotation(const Quaternion& _qotation) { rotation = _qotation;  recomputeWorldTransform = true; }
 
 	/**
 	@brief　オブジェクトの状態を取得する
@@ -118,7 +119,7 @@ public:
 	@brief　オブジェクトの状態を設定する
 	@param	state
 	*/
-	void SetState(State _state) { state = _state; }
+	virtual void SetState(State _state) { state = _state; }
 
 	/**
 	@brief　オブジェクトのワールド行列を取得する

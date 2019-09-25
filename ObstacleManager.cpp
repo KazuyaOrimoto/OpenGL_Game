@@ -1,6 +1,7 @@
 #include "ObstacleManager.h"
 #include "PlayerObject.h"
 #include "ObstacleBox.h"
+#include "GameObject.h"
 
 ObstacleManager* ObstacleManager::obstacle = nullptr;
 
@@ -36,13 +37,26 @@ void ObstacleManager::RemoveObstacle(ObstacleBox* _obstacle)
 	}
 }
 
-ObstacleBox * ObstacleManager::GetObstacle()
+ObstacleBox* ObstacleManager::GetObstacle(std::string _type)
 {
 	for (auto itr : obstacles)
 	{
 		if (itr->GetState() == Paused)
 		{
-			return itr;
+			if (_type == "Obstacle")
+			{
+				if (itr->GetTag() == Tag::Obstacle)
+				{
+					return itr;
+				}
+			}
+			if (_type == "JumpingObstacle")
+			{
+				if (itr->GetTag() == Tag::JumpingObstacle)
+				{
+					return itr;
+				}
+			}
 		}
 	}
 	return nullptr;

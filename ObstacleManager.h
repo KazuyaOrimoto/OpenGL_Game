@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #define OBSTACLE_MANAGER ObstacleManager::GetInstance()
 
@@ -19,7 +20,7 @@ public:
 	void AddObstacle(ObstacleBox* _obstacle);
 	void RemoveObstacle(ObstacleBox* _obstacle);
 
-	ObstacleBox* GetObstacle();
+	ObstacleBox* GetObstacle(std::string _type);
 
 private:
 	ObstacleManager();

@@ -142,6 +142,8 @@
       <Filter>Obstacle</Filter>
     </ClCompile>
     <ClCompile Include="SlidingArea.cpp" />
+    <ClCompile Include="JumpingObject.cpp" />
+    <ClCompile Include="JumpingArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -284,6 +286,8 @@
       <Filter>Obstacle</Filter>
     </ClInclude>
     <ClInclude Include="SlidingArea.h" />
+    <ClInclude Include="JumpingObject.h" />
+    <ClInclude Include="JumpingArea.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

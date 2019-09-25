@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "FPS.h"
+#include "stdio.h"
 
 FPS::FPS()
 	: setFps(60)
@@ -22,6 +23,7 @@ FPS::~FPS()
 */
 void FPS::Update()
 {
+	Wait();
 	deltaTime = (SDL_GetTicks() - beforetickCount) / 1000.0f;
 	beforetickCount = SDL_GetTicks();
 	//1ÉtÉåÅ[ÉÄñ⁄ÇÃéûçèÇï€ë∂
@@ -40,7 +42,6 @@ void FPS::Update()
 	{
 		fpsCount++;
 	}
-	Wait();
 }
 
 /**
@@ -48,6 +49,5 @@ void FPS::Update()
 */
 void FPS::Wait()
 {
-	int nowTickTime = SDL_GetTicks();
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), nowTickTime + oneFrameTickCount));
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), beforetickCount + oneFrameTickCount));
 }

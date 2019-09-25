@@ -93,10 +93,10 @@ void Game::GameLoop()
 	while (isRunning)
 	{
 		ProcessInput();
-		fps->Update();
 		UpdateGame();
 		PHYSICS->HitCheck();
 		GenerateOutput();
+		fps->Update();
 	}
 }
 
