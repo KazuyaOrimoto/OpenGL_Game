@@ -12,6 +12,9 @@ public:
 	void SetObjectBox(const AABB& _box) { objectBox = _box; }
 	AABB GetWorldBox() const { return worldBox; }
 
+	virtual void CollisionPause() override;
+	virtual void CollisionActive() override;
+
 private:
 	//オブジェクトに設定する用のボックス（中心をオブジェクトの中心にする）
 	AABB objectBox;

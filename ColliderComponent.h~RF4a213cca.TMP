@@ -21,12 +21,13 @@ public:
 	//オブジェクトがカプセルに当たった時にめりこみからずらす処理
 	virtual void ShiftObject(const Capsule& _hitCapsule) {}
 
-	virtual void CollisionPause() = 0;
-	virtual void CollisionActive() = 0;
+	void SetActive(bool _active) {active = _active;}
 
 private:
 	bool isTrigger;
 	//数値が大きい方を優先してめり込みから動かす処理をする（0以下は動かさない）
 	int collisionOrder;
+
+	bool active;
 };
 

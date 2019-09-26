@@ -29,9 +29,14 @@ public:
     virtual void GameObjectInput(const InputState& _state)override;
 
 private:
+
+	void Animation();
+
     MeshComponent* meshComp;
     PlayerObject* ownerObject;
     SphereCollider* sphereCollider;
 
+	bool animation;
+	int animNum;
 };
 

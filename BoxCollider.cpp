@@ -24,3 +24,13 @@ void BoxCollider::OnUpdateWorldTransform()
     worldBox.max = (objectBox.max * owner->GetScale()) + owner->GetPosition();
 }
 
+void BoxCollider::CollisionPause()
+{
+	//PHYSICS->RemoveBox(this);
+}
+
+void BoxCollider::CollisionActive()
+{
+	//PHYSICS->AddBox(this);
+}
+

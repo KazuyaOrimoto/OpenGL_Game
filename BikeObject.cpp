@@ -10,6 +10,8 @@
 BikeObject::BikeObject(Game* _game, PlayerObject* _ownerObject)
     : GameObject(_game)
     , ownerObject(_ownerObject)
+	, animation(false)
+	, animNum(0)
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
@@ -27,7 +29,7 @@ BikeObject::~BikeObject()
 
 void BikeObject::UpdateGameObject(float _deltaTime)
 {
-	//SetRotation(ownerObject->GetRotation());
+	Animation();
 }
 
 void BikeObject::OnCollision(GameObject & _hitObject)
@@ -42,6 +44,7 @@ void BikeObject::OnCollision(GameObject & _hitObject)
 
 void BikeObject::HitObstacle(const ObstacleBox & _hitObstacle)
 {
+	animation = true;
 	meshComp->SetVisible(false);
 }
 
@@ -67,5 +70,27 @@ void BikeObject::GameObjectInput(const InputState & _state)
     {
         SetRotation(ownerObject->GetRotation());
     }
+}
+
+void BikeObject::Animation()
+{
+	if (animation)
+	{
+		animNum++;
+		if (animNum > 20)
+		{
+			meshComp->SetVisible(true);
+		}
+		if (animNum > 20 * 2)
+		{
+			meshComp->SetVisible(false);
+		}
+		if (animNum > 20 * 3)
+		{
+			animation = false;
+			meshComp->SetVisible(true);
+			animNum = 0;
+		}
+	}
 }
 

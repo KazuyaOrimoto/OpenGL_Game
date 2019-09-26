@@ -14,7 +14,7 @@
 PlayerObject::PlayerObject(Game* _game)
 	:GameObject(_game)
 {
-    SetPosition(Vector3(0.0f, 0.0f, 50.0f));
+    SetPosition(Vector3(0.0f, 0.0f, 60.0f));
 
     OBSTACLE_MANAGER->AddPlayer(this);
 	rotate = new RotateComponent(this);

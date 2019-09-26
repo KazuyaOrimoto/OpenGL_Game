@@ -9,13 +9,36 @@
 #include "RotateComponent.h"
 #include "Mesh.h"
 #include "GameObjectManager.h"
+#include <stdlib.h>
+#include "SDL.h"
 
 ObstacleBox::ObstacleBox(Game* _game)
 	:GameObject(_game)
 	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);
-	Mesh* mesh = RENDERER->GetMesh("Assets/Cube.gpmesh");
+	
+	srand((unsigned)(SDL_GetTicks() + rand()));
+	int randNum = rand() % 3;
+	Mesh* mesh = nullptr;
+	switch (randNum)
+	{
+	case 0:
+		mesh = RENDERER->GetMesh("Assets/Cube1.gpmesh");
+		break;
+
+	case 1:
+		mesh = RENDERER->GetMesh("Assets/Cube2.gpmesh");
+		break;
+
+	case 2:
+		mesh = RENDERER->GetMesh("Assets/Cube3.gpmesh");
+		break;
+
+	default:
+		break;
+	}
+
 	meshComp->SetMesh(mesh);
 	boxCollider = new BoxCollider(this);
 	AABB box = { Vector3::Zero , Vector3::Zero };
@@ -61,12 +84,15 @@ void ObstacleBox::ResetObstacle()
 {
 	SetPosition(Vector3::Zero);
 	state = Paused;
+	boxCollider->CollisionPause();
+	meshComp->SetVisible(false);
 }
 
 void ObstacleBox::UseObstacle()
 {
 	meshComp->SetVisible(true);
 	state = Active;
+	boxCollider->CollisionActive();
 	GAME_OBJECT_MANAGER->RemoveGameObject(this);
 	GAME_OBJECT_MANAGER->AddGameObject(this);
 }

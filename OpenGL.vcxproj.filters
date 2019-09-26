@@ -141,9 +141,15 @@
     <ClCompile Include="SlidingObject.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="SlidingArea.cpp" />
-    <ClCompile Include="JumpingObject.cpp" />
-    <ClCompile Include="JumpingArea.cpp" />
+    <ClCompile Include="JumpingArea.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpingObject.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="SlidingArea.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -285,9 +291,15 @@
     <ClInclude Include="SlidingObject.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="SlidingArea.h" />
-    <ClInclude Include="JumpingObject.h" />
-    <ClInclude Include="JumpingArea.h" />
+    <ClInclude Include="JumpingArea.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpingObject.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="SlidingArea.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

@@ -24,7 +24,15 @@ JumpingArea::~JumpingArea()
 
 void JumpingArea::SetBoxCollider(AABB _box)
 {
-	_box.min.x -= 0.5f;
+	_box.min.x -= 3.0f;
 	boxCollider->SetObjectBox(_box);
+}
+
+void JumpingArea::OnCollision(GameObject & _hitObject)
+{
+	if (_hitObject.GetTag() == Tag::Player)
+	{
+		printf("CanJump!");
+	}
 }
 

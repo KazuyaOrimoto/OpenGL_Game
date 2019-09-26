@@ -29,4 +29,3 @@ private:
 	GameObject* player;
 	JumpingArea* jumpingArea;
 };
-

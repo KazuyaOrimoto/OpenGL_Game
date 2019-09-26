@@ -46,10 +46,10 @@ void GameObjectCreater::PlayerAndWallCreate(Game* _game)
 	{
 		box = new ObstacleBox(_game);
 	}
-	for (int i = 0; i < 20; i++)
-	{
-		box = new JumpingObject(_game);
-	}
+	//for (int i = 0; i < 20; i++)
+	//{
+	//	box = new JumpingObject(_game);
+	//}
 
 	for (int i = 0; i < 50; i++)
 	{

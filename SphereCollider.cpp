@@ -28,3 +28,13 @@ void SphereCollider::OnUpdateWorldTransform()
 
 }
 
+void SphereCollider::CollisionPause()
+{
+	PHYSICS->RemoveSphere(this);
+}
+
+void SphereCollider::CollisionActive()
+{
+	PHYSICS->AddSphere(this);
+}
+

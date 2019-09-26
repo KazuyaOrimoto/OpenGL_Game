@@ -14,8 +14,8 @@ public:
 	virtual void OnCollision(GameObject& _hitObject) override;
 
 	void HitPlayer(const PlayerObject& _playerObject);
-	void ResetObstacle();
-	void UseObstacle();
+	virtual void ResetObstacle();
+	virtual void UseObstacle();
 
 	/**
 	@brief	ゲームオブジェクトのアップデート

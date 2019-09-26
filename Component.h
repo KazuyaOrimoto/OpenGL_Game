@@ -39,6 +39,7 @@ public:
 
     GameObject* GetOwner() { return owner; };
 
+
 protected:
 
 	//アタッチしているゲームオブジェクトのポインタ

@@ -13,6 +13,8 @@
 #include "Mesh.h"
 #include "GameObjectManager.h"
 #include "JumpingArea.h"
+#include <stdlib.h>
+#include "SDL.h"
 
 JumpingObject::JumpingObject(Game* _game)
 	: ObstacleBox(_game)
@@ -20,7 +22,28 @@ JumpingObject::JumpingObject(Game* _game)
 {
 	//オブジェクトに使うメッシュデータを設定
 	meshComp = new MeshComponent(this);
-	Mesh* mesh = RENDERER->GetMesh("Assets/Cube.gpmesh");
+
+	srand((unsigned)(SDL_GetTicks() + rand()));
+	int randNum = rand() % 3;
+	Mesh* mesh = nullptr;
+	switch (randNum)
+	{
+	case 0:
+		mesh = RENDERER->GetMesh("Assets/Cube1.gpmesh");
+		break;
+
+	case 1:
+		mesh = RENDERER->GetMesh("Assets/Cube2.gpmesh");
+		break;
+
+	case 2:
+		mesh = RENDERER->GetMesh("Assets/Cube3.gpmesh");
+		break;
+
+	default:
+		break;
+	}
+	
 	meshComp->SetMesh(mesh);
 
 	//当たり判定用のコライダーを設定

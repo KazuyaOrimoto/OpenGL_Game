@@ -14,6 +14,9 @@ public:
 	void SetObjectSphere(const Sphere& _sphere) { objectSphere = _sphere; }
 	Sphere GetWorldSphere() const { return worldSphere; }
 
+	virtual void CollisionPause() override;
+	virtual void CollisionActive() override;
+
 private:
 	//オブジェクトに設定する用の球（中心をオブジェクトの中心にする）
 	Sphere objectSphere;
