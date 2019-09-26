@@ -2,13 +2,13 @@
   "Obstacles": [
     {
       "type": "Obstacle",
-      "x": 0,
-      "y": 100
+      "x": 900,
+      "y": 500
     },
     {
       "type": "Obstacle",
-      "x": 200,
-      "y": 100
+      "x": -900,
+      "y": 500
     },
     {
       "type": "Obstacle",
