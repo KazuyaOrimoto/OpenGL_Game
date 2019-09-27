@@ -82,8 +82,9 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 	//ウィンドウの作成
-    window = SDL_CreateWindow("Game Programming in C++ (Chapter 6)", 100, 100,
+    window = SDL_CreateWindow("OpenGL Game", 0, 0,
         static_cast<int>(screenWidth), static_cast<int>(screenHeight), SDL_WINDOW_OPENGL);
+
     if (!window)
     {
         SDL_Log("Failed to create window: %s", SDL_GetError());

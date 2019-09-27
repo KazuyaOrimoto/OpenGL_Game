@@ -21,8 +21,8 @@ ObstacleObject::ObstacleObject(Game* _game, int _i)
 		mapLoder = new ObstacleMapLoder();
 	}
     player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
-    CreateObstacle(5000.0f + _i * 3000.0f);
-
+    CreateObstacle(5000.0f + _i * StaticObstacle::ObstacleDistanceNum);
+	i = _i;
 }
 
 ObstacleObject::~ObstacleObject()
@@ -33,7 +33,7 @@ void ObstacleObject::UpdateGameObject(float _deltaTime)
 {
     if (player->GetPosition().x - 500.0f > position.x)
     {
-        CreateObstacle(position.x + 20 * 3000.0f);
+        CreateObstacle(position.x + StaticObstacle::ObstacleMaxNum * StaticObstacle::ObstacleDistanceNum);
     }
 }
 
@@ -50,6 +50,6 @@ void ObstacleObject::CreateObstacle(float _depth)
         }
         box->SetPosition(Vector3(_depth, Obstacles[i]["x"].GetFloat(), Obstacles[i]["y"].GetFloat()));
         box->UseObstacle();
-        SetPosition(Vector3(_depth, -0.0f, 0.0f));
     }
+    SetPosition(Vector3(_depth, 0.0f, 0.0f));
 }

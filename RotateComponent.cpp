@@ -77,9 +77,9 @@ void RotateComponent::ProcessInput(const InputState & _state)
 	{
 		return;
 	}
-	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_D))
+	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT))
 	{
-		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_D) == ButtonState::Pressed)
+		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT) == ButtonState::Pressed)
 		{
 			f = 0.0f;
             addF = 0.02f;
@@ -90,9 +90,9 @@ void RotateComponent::ProcessInput(const InputState & _state)
 		moveRot = cameraQuat;
         right = true;
 	}
-	else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_A))
+	else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT))
 	{
-		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_A) == ButtonState::Pressed)
+		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT) == ButtonState::Pressed)
 		{
 			f = 0.0f;
             addF = 0.02f;

@@ -20,8 +20,8 @@ PlayerObject::PlayerObject(Game* _game)
 	rotate = new RotateComponent(this);
 
     moveComp = new MoveComponent(this);
-    moveComp->SetRightKey(SDL_SCANCODE_D);
-    moveComp->SetLeftKey(SDL_SCANCODE_A);
+    moveComp->SetRightKey(SDL_SCANCODE_RIGHT);
+    moveComp->SetLeftKey(SDL_SCANCODE_LEFT);
     moveComp->SetMaxStrafeSpeed(2400.0f);
     autoRun = new AutoRunComponent(this);
     autoRun->SetForwardSpeed(2400.0f);

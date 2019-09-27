@@ -50,7 +50,11 @@ void BikeObject::HitObstacle(const ObstacleBox & _hitObstacle)
 
 void BikeObject::GameObjectInput(const InputState & _state)
 {
-    if (_state.Keyboard.GetKeyState(SDL_SCANCODE_D))
+	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT) && _state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT))
+	{
+		SetRotation(ownerObject->GetRotation());
+	}
+    else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT))
     {
         Quaternion rot = ownerObject->GetRotation();
         float rad = Math::ToRadians(-10);
@@ -58,7 +62,7 @@ void BikeObject::GameObjectInput(const InputState & _state)
         rot = Quaternion::Concatenate(rot, inc);
         SetRotation(rot);
     }
-    else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_A))
+    else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT))
     {
         Quaternion rot = ownerObject->GetRotation();
         float rad = Math::ToRadians(10);

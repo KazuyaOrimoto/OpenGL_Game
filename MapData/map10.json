@@ -2,28 +2,28 @@
   "Obstacles": [
     {
       "type": "Obstacle",
-      "x": 100,
-      "y": 100
-    },
-    {
-      "type": "Obstacle",
-      "x": 300,
-      "y": 100
-    },
-    {
-      "type": "Obstacle",
-      "x": 500,
-      "y": 100
-    },
-    {
-      "type": "Obstacle",
-      "x": 700,
+      "x": 900,
       "y": 100
     },
     {
       "type": "Obstacle",
       "x": 900,
-      "y": 100
+      "y": 500
+    },
+    {
+      "type": "Obstacle",
+      "x": 900,
+      "y": 900
+    },
+    {
+      "type": "Obstacle",
+      "x": 900,
+      "y": 1300
+    },
+    {
+      "type": "Obstacle",
+      "x": 900,
+      "y": 1700
     }
   ]
 }
