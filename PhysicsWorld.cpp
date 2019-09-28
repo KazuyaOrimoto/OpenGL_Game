@@ -4,6 +4,7 @@
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 #include "GameObject.h"
+#include "ColliderComponent.h"
 
 PhysicsWorld* PhysicsWorld::physics = nullptr;
 
@@ -35,9 +36,20 @@ void PhysicsWorld::HitCheck()
     SphereAndBox();
 }
 
+void PhysicsWorld::HitCheck(BoxCollider * _box)
+{
+
+}
+
+void PhysicsWorld::HitCheck(SphereCollider * _sphere)
+{
+}
+
 void PhysicsWorld::AddBox(BoxCollider * _box)
 {
 	boxes.emplace_back(_box);
+    //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
+    collisionFunction.insert(std::make_pair(dynamic_cast<ColliderComponent*>(_box),_box->GetOwner()->GetFunc()));
 }
 
 void PhysicsWorld::RemoveBox(BoxCollider * _box)
@@ -48,11 +60,14 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 		std::iter_swap(iter, boxes.end() - 1);
 		boxes.pop_back();
 	}
+    collisionFunction.erase(_box);
 }
 
 void PhysicsWorld::AddSphere(SphereCollider * _sphere)
 {
 	spheres.emplace_back(_sphere);
+    //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
+    collisionFunction.insert(std::make_pair(dynamic_cast<ColliderComponent*>(_sphere), _sphere->GetOwner()->GetFunc()));
 }
 
 void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
@@ -63,7 +78,7 @@ void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
 		std::iter_swap(iter, spheres.end() - 1);
 		spheres.pop_back();
 	}
-
+    collisionFunction.erase(_sphere);
 }
 
 void PhysicsWorld::SphereAndSphere()
@@ -87,8 +102,8 @@ void PhysicsWorld::SphereAndSphere()
 				SphereCollider* sphereA = spheres[i];
 				SphereCollider* sphereB = spheres[j];
 
-				sphereA->GetOwner()->OnCollision(*(sphereB->GetOwner()));
-				sphereB->GetOwner()->OnCollision(*(sphereA->GetOwner()));
+				//sphereA->GetOwner()->OnCollision(*(sphereB->GetOwner()));
+				//sphereB->GetOwner()->OnCollision(*(sphereA->GetOwner()));
 			}
 		}
 	}
@@ -115,8 +130,8 @@ void PhysicsWorld::BoxAndBox()
 				BoxCollider* boxA = boxes[i];
 				BoxCollider* boxB = boxes[j];
 
-				boxA->GetOwner()->OnCollision(*(boxB->GetOwner()));
-				boxB->GetOwner()->OnCollision(*(boxA->GetOwner()));
+				//boxA->GetOwner()->OnCollision(*(boxB->GetOwner()));
+				//boxB->GetOwner()->OnCollision(*(boxA->GetOwner()));
 			}
 		}
 	}
@@ -140,8 +155,8 @@ void PhysicsWorld::SphereAndBox()
 
 			if (hit)
 			{
-				spheres[i]->GetOwner()->OnCollision(*(boxes[j]->GetOwner()));
-				boxes[j]->GetOwner()->OnCollision(*(spheres[i]->GetOwner()));
+				//spheres[i]->GetOwner()->OnCollision(*(boxes[j]->GetOwner()));
+				//boxes[j]->GetOwner()->OnCollision(*(spheres[i]->GetOwner()));
 			}
 		}
 	}

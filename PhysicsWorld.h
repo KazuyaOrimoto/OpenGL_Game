@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include <functional>
 #include "Math.h"
 #include "Collision.h"
@@ -11,6 +12,7 @@ class Game;
 class GameObject;
 class BoxCollider;
 class SphereCollider;
+class ColliderComponent;
 
 class PhysicsWorld
 {
@@ -21,6 +23,8 @@ public:
 
 	//“–‚½‚è”»’è
     void HitCheck();
+    void HitCheck(BoxCollider* _box);
+    void HitCheck(SphereCollider* _sphere);
 
     void AddBox(BoxCollider* _box);
     void RemoveBox(BoxCollider* _box);
@@ -39,6 +43,7 @@ private:
 
     std::vector<BoxCollider*> boxes;
 	std::vector<SphereCollider*> spheres;
+    std::map<ColliderComponent*, std::function<void(GameObject&)>> collisionFunction;
 
 };
 

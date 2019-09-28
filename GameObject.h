@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 #include "Math.h"
 
 class Game;
@@ -151,13 +152,15 @@ public:
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
+    std::function<void(GameObject&)> GetFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
+
 	Tag GetTag() const { return tag; }
 
+
+protected:
     virtual void OnCollision(GameObject& _hitObject) {}
 
     virtual void OnTrigger(GameObject& _triggerObject) {}
-
-protected:
 	//ゲームオブジェクトの状態
 	State state;
 	//ゲームオブジェクトのタグ
