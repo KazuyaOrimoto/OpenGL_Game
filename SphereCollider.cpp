@@ -3,14 +3,13 @@
 #include "GameObject.h"
 #include "Collision.h"
 #include "Game.h"
-#include "PhysicsWorld.h"
 
-SphereCollider::SphereCollider(GameObject* _owner, int _updateOrder, int _collisionOrder)
+SphereCollider::SphereCollider(GameObject* _owner, onCollisionFunc _func, int _updateOrder, int _collisionOrder)
 	: ColliderComponent(_owner, _updateOrder, _collisionOrder)
 	, objectSphere({ Vector3::Zero,0.0f })
-	, worldSphere ({ Vector3::Zero,0.0f })
+	, worldSphere({ Vector3::Zero,0.0f })
 {
-	PHYSICS->AddSphere(this);
+	PHYSICS->AddSphere(this, _func);
 }
 
 
@@ -35,6 +34,6 @@ void SphereCollider::CollisionPause()
 
 void SphereCollider::CollisionActive()
 {
-	PHYSICS->AddSphere(this);
+	//PHYSICS->AddSphere(this);
 }
 

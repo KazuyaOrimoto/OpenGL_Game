@@ -26,7 +26,7 @@ FollowCameraObject::FollowCameraObject(Game* _game)
 	mCameraComp->SetLeftKey(SDL_SCANCODE_A);
 	mCameraComp->SnapToIdeal();
 
-	sphereCollider = new SphereCollider(this);
+	sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
 	sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
 }
 

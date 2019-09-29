@@ -17,7 +17,7 @@ BikeObject::BikeObject(Game* _game, PlayerObject* _ownerObject)
     meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
     SetScale(7.0f);
 
-    sphereCollider = new SphereCollider(this);
+    sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
 
 	tag = Tag::Player;

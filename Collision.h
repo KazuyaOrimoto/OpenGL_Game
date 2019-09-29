@@ -1,6 +1,9 @@
 #pragma once
 #include "Math.h"
 #include <vector>
+#include <map>
+
+
 
 //ü•ª
 struct LineSegment

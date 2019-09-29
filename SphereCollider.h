@@ -1,12 +1,13 @@
 #pragma once
-#include "ColliderComponent.h"
 
+#include "ColliderComponent.h"
+#include "PhysicsWorld.h"
 
 class SphereCollider :
 	public ColliderComponent
 {
 public:
-	SphereCollider(GameObject* _owner, int _updateOrder = 100, int _collisionOrder = 100);
+	SphereCollider(GameObject* _owner, onCollisionFunc _func, int _updateOrder = 100, int _collisionOrder = 100);
 	~SphereCollider();
 	
 	void OnUpdateWorldTransform() override;

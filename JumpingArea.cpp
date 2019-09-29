@@ -7,7 +7,7 @@ JumpingArea::JumpingArea(Game* _game)
 	:GameObject(_game)
 	,boxCollider(nullptr)
 {
-	boxCollider = new BoxCollider(this);
+	boxCollider = new BoxCollider(this, GetOnCollisionFunc());
 	SetScale(200.0f);
 	tag = Tag::JumpingObstacle;
 

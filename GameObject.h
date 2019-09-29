@@ -152,12 +152,12 @@ public:
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
-    std::function<void(GameObject&)> GetFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
 
 	Tag GetTag() const { return tag; }
 
 
 protected:
+    std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
     virtual void OnCollision(GameObject& _hitObject) {}
 
     virtual void OnTrigger(GameObject& _triggerObject) {}

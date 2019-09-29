@@ -20,7 +20,7 @@ SlidingObject::SlidingObject(Game* _game)
 	meshComp = new MeshComponent(this);
 	Mesh* mesh = RENDERER->GetMesh("Assets/Cube.gpmesh");
 	meshComp->SetMesh(mesh);
-	boxCollider = new BoxCollider(this);
+	boxCollider = new BoxCollider(this, GetOnCollisionFunc());
 	AABB box = { Vector3::Zero , Vector3::Zero };
 	std::vector<Vector3> verts = mesh->GetVerts();
 	for (auto itr : verts)

@@ -6,6 +6,7 @@
 #include "Math.h"
 #include "Collision.h"
 
+
 #define PHYSICS PhysicsWorld::GetInstance()
 
 class Game;
@@ -13,6 +14,9 @@ class GameObject;
 class BoxCollider;
 class SphereCollider;
 class ColliderComponent;
+
+typedef std::function<void(GameObject&)> onCollisionFunc;
+typedef std::map<ColliderComponent*, std::function<void(GameObject&)>> onCollisionMap;
 
 class PhysicsWorld
 {
@@ -26,9 +30,9 @@ public:
     void HitCheck(BoxCollider* _box);
     void HitCheck(SphereCollider* _sphere);
 
-    void AddBox(BoxCollider* _box);
+    void AddBox(BoxCollider* _box, onCollisionFunc _func);
     void RemoveBox(BoxCollider* _box);
-	void AddSphere(SphereCollider* _sphere);
+	void AddSphere(SphereCollider* _sphere, onCollisionFunc _func);
 	void RemoveSphere(SphereCollider* _sphere);
 
 private:
@@ -43,7 +47,7 @@ private:
 
     std::vector<BoxCollider*> boxes;
 	std::vector<SphereCollider*> spheres;
-    std::map<ColliderComponent*, std::function<void(GameObject&)>> collisionFunction;
+	onCollisionMap collisionFunction;
 
 };
 
