@@ -25,11 +25,9 @@ void BoxCollider::OnUpdateWorldTransform()
 
 void BoxCollider::CollisionPause()
 {
-	//PHYSICS->RemoveBox(this);
 }
 
 void BoxCollider::CollisionActive()
 {
-	//PHYSICS->AddBox(this);
 }
 

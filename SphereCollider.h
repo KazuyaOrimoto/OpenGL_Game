@@ -3,13 +3,12 @@
 #include "ColliderComponent.h"
 #include "PhysicsWorld.h"
 
-class SphereCollider :
-	public ColliderComponent
+class SphereCollider final : public ColliderComponent
 {
 public:
 	SphereCollider(GameObject* _owner, onCollisionFunc _func, int _updateOrder = 100, int _collisionOrder = 100);
 	~SphereCollider();
-	
+
 	void OnUpdateWorldTransform() override;
 
 	void SetObjectSphere(const Sphere& _sphere) { objectSphere = _sphere; }

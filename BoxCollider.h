@@ -3,7 +3,7 @@
 #include "PhysicsWorld.h"
 #include "ColliderComponent.h"
 
-class BoxCollider : public ColliderComponent
+class BoxCollider final : public ColliderComponent
 {
 public:
 	BoxCollider(GameObject* _owner, onCollisionFunc _func, int _updateOrder = 100, int _collisionOrder = 100);

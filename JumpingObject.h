@@ -19,7 +19,7 @@ public:
 	*/
 	virtual void UpdateGameObject(float _deltaTime) override;
 
-	virtual void OnCollision(GameObject& _hitObject) override;
+	virtual void OnCollision(const GameObject& _hitObject) override;
 
 	inline virtual void SetPosition(const Vector3& _pos)override;
 

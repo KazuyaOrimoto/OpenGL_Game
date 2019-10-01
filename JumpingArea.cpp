@@ -28,7 +28,7 @@ void JumpingArea::SetBoxCollider(AABB _box)
 	boxCollider->SetObjectBox(_box);
 }
 
-void JumpingArea::OnCollision(GameObject & _hitObject)
+void JumpingArea::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Player)
 	{

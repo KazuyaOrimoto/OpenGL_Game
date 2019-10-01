@@ -50,19 +50,11 @@ void SlidingObject::UpdateGameObject(float _deltaTime)
 	}
 }
 
-void SlidingObject::OnCollision(GameObject & _hitObject)
+void SlidingObject::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Player)
 	{
 		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
-		PlayerObject* obstacle = dynamic_cast<PlayerObject*>(&_hitObject);
-		HitPlayer(*obstacle);
 	}
-}
-
-void SlidingObject::HitObstacle(const ObstacleBox & _hitObstacle)
-{
-	meshComp->SetVisible(false);
-	ResetObstacle();
 }
 

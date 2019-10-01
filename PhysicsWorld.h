@@ -6,7 +6,6 @@
 #include "Math.h"
 #include "Collision.h"
 
-
 #define PHYSICS PhysicsWorld::GetInstance()
 
 class Game;

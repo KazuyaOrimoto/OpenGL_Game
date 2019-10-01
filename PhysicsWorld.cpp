@@ -36,9 +36,45 @@ void PhysicsWorld::HitCheck()
     SphereAndBox();
 }
 
-void PhysicsWorld::HitCheck(BoxCollider * _box)
+void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
-
+	//コライダーの親オブジェクトがActiveじゃなければ終了する
+	if (_box->GetOwner()->GetState() != State::Active)
+	{
+		return;
+	}
+	for (auto itr : spheres)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+		bool hit = Intersect(itr->GetWorldSphere(),_box->GetWorldBox());
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+		}
+	}
+	for (auto itr : boxes)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+		bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_box);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_box->GetOwner()));
+		}
+	}
 }
 
 void PhysicsWorld::HitCheck(SphereCollider * _sphere)

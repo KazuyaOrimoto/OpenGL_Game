@@ -64,20 +64,14 @@ ObstacleBox::~ObstacleBox()
 	OBSTACLE_MANAGER->RemoveObstacle(this);
 }
 
-void ObstacleBox::OnCollision(GameObject & _hitObject)
+void ObstacleBox::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Player)
 	{
 		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
-		PlayerObject* obstacle = dynamic_cast<PlayerObject*>(&_hitObject);
-		HitPlayer(*obstacle);
+		meshComp->SetVisible(false);
+		ResetObstacle();
 	}
-}
-
-void ObstacleBox::HitPlayer(const PlayerObject & _playerObject)
-{
-	meshComp->SetVisible(false);
-	ResetObstacle();
 }
 
 void ObstacleBox::ResetObstacle()

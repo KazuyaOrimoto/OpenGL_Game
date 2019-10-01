@@ -11,9 +11,8 @@ public:
 	ObstacleBox(Game* _game);
 	~ObstacleBox();
 
-	virtual void OnCollision(GameObject& _hitObject) override;
+	virtual void OnCollision(const GameObject& _hitObject) override;
 
-	void HitPlayer(const PlayerObject& _playerObject);
 	virtual void ResetObstacle();
 	virtual void UseObstacle();
 

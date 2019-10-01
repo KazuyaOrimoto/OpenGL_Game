@@ -88,13 +88,12 @@ void JumpingObject::UpdateGameObject(float _deltaTime)
 	}
 }
 
-void JumpingObject::OnCollision(GameObject & _hitObject)
+void JumpingObject::OnCollision(const GameObject & _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Player)
 	{
 		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
-		PlayerObject* obstacle = dynamic_cast<PlayerObject*>(&_hitObject);
-		HitPlayer(*obstacle);
+		
 	}
 }
 

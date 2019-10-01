@@ -18,9 +18,7 @@ public:
     */
     virtual void UpdateGameObject(float _deltaTime) override;
 
-    virtual void OnCollision(GameObject& _hitObject) override;
-
-    void HitObstacle(const ObstacleBox & _hitObstacle);
+    virtual void OnCollision(const GameObject& _hitObject) override;
 
     /**
     @brief	“ü—Íˆ—

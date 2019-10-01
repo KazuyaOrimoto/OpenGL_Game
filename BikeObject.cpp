@@ -32,20 +32,14 @@ void BikeObject::UpdateGameObject(float _deltaTime)
 	Animation();
 }
 
-void BikeObject::OnCollision(GameObject & _hitObject)
+void BikeObject::OnCollision(const GameObject& _hitObject)
 {
     if (_hitObject.GetTag() == Tag::Obstacle)
     {
         //áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
-        ObstacleBox* obstacle = dynamic_cast<ObstacleBox*>(&_hitObject);
-        HitObstacle(*obstacle);
+		animation = true;
+		meshComp->SetVisible(false);
     }
-}
-
-void BikeObject::HitObstacle(const ObstacleBox & _hitObstacle)
-{
-	animation = true;
-	meshComp->SetVisible(false);
 }
 
 void BikeObject::GameObjectInput(const InputState & _state)
