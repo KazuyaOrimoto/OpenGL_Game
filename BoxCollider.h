@@ -6,11 +6,10 @@
 class BoxCollider final : public ColliderComponent
 {
 public:
-	BoxCollider(GameObject* _owner, onCollisionFunc _func, int _updateOrder = 100, int _collisionOrder = 100);
+	BoxCollider(GameObject* _owner, onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
 	~BoxCollider();
 
 	void OnUpdateWorldTransform() override;
-
 
 	void SetObjectBox(const AABB& _box) { objectBox = _box; }
 	AABB GetWorldBox() const { return worldBox; }

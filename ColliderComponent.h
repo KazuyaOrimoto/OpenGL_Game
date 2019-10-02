@@ -29,6 +29,7 @@ public:
 	virtual void CollisionPause() = 0;
 	virtual void CollisionActive() = 0;
 
+
 private:
     //ŽÀ‘Ì‚ð”º‚¤“–‚½‚è”»’è‚ð‚·‚é‚©‚Ç‚¤‚©
 	bool isTrigger;

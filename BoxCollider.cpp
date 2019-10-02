@@ -21,6 +21,8 @@ void BoxCollider::OnUpdateWorldTransform()
 {
     worldBox.min = (objectBox.min * owner->GetScale()) + owner->GetPosition();
     worldBox.max = (objectBox.max * owner->GetScale()) + owner->GetPosition();
+
+	PHYSICS->HitCheck(this);
 }
 
 void BoxCollider::CollisionPause()

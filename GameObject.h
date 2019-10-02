@@ -152,9 +152,7 @@ public:
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
-
 	Tag GetTag() const { return tag; }
-
 
 protected:
     std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }

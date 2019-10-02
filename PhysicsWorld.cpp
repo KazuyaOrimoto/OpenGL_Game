@@ -61,6 +61,10 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 	}
 	for (auto itr : boxes)
 	{
+		if (itr == _box)
+		{
+			continue;
+		}
 		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
 		{
@@ -79,6 +83,47 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 {
+	//コライダーの親オブジェクトがActiveじゃなければ終了する
+	if (_sphere->GetOwner()->GetState() != State::Active)
+	{
+		return;
+	}
+	for (auto itr : spheres)
+	{
+		if (itr == _sphere)
+		{
+			continue;
+		}
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+		bool hit = Intersect(itr->GetWorldSphere(), _sphere->GetWorldSphere());
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_sphere);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_sphere->GetOwner()));
+		}
+	}
+	for (auto itr : boxes)
+	{
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
+		if (itr->GetOwner()->GetState() != State::Active)
+		{
+			continue;
+		}
+		bool hit = Intersect(_sphere->GetWorldSphere(),itr->GetWorldBox());
+		if (hit)
+		{
+			onCollisionFunc func = collisionFunction.at(_sphere);
+			func(*(itr->GetOwner()));
+			func = collisionFunction.at(itr);
+			func(*(_sphere->GetOwner()));
+		}
+	}
 }
 
 void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)

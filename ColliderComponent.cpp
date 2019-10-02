@@ -18,3 +18,4 @@ ColliderComponent::ColliderComponent(GameObject* _owner, int _updateOrder, int _
 ColliderComponent::~ColliderComponent()
 {
 }
+

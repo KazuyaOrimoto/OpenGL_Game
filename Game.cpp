@@ -94,7 +94,7 @@ void Game::GameLoop()
 	{
 		ProcessInput();
 		UpdateGame();
-		PHYSICS->HitCheck();
+		//PHYSICS->HitCheck();
 		GenerateOutput();
 		fps->Update();
 	}

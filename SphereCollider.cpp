@@ -25,6 +25,7 @@ void SphereCollider::OnUpdateWorldTransform()
 	//ワールド空間での球の大きさを更新する
 	worldSphere.radius = objectSphere.radius * owner->GetScale();
 
+	PHYSICS->HitCheck(this);
 }
 
 void SphereCollider::CollisionPause()
