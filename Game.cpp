@@ -1,3 +1,13 @@
+//=============================================================================
+//	@file	Game.cpp
+//	@brief	ゲーム全体の進行をまとめる
+//	@autor	居本 和哉
+//	@date	2019/10/3
+//=============================================================================
+
+//-----------------------------------------------------------------------------
+//	@brief	インクルード
+//-----------------------------------------------------------------------------
 #include "Game.h"
 #include "SDL.h"
 #include <glew.h>
@@ -11,6 +21,9 @@
 #include "ObstacleManager.h"
 #include "SceneBase.h"
 
+/**
+@brief  コンストラクタ
+*/
 Game::Game()
 	: fps(nullptr)
     , isRunning(true)
@@ -19,6 +32,9 @@ Game::Game()
 {
 }
 
+/**
+@brief  デストラクタ
+*/
 Game::~Game()
 {
 }
@@ -45,10 +61,11 @@ bool Game::Initialize()
 		return false;
 	}
 
+    //当たり判定用クラスの初期化
 	PhysicsWorld::CreateInstance();
 
+    //入力管理クラスの初期化
 	inputSystem = new InputSystem();
-	//inputSystem->SetRelativeMouseMode(true);
 	if (!inputSystem->Initialize())
 	{
 		SDL_Log("Failed to initialize input system");
@@ -58,12 +75,15 @@ bool Game::Initialize()
 	//FPS管理クラスの初期化
 	fps = new FPS();
 
+    //ゲームオブジェクト管理クラスの初期化
     GameObjectManager::CreateInstance();
+    //ゲームオブジェクト生成クラスの初期化
     GameObjectCreater::CreateInstance();
-	ObstacleManager::CreateInstance();
+	//障害物管理クラスの初期化
+    ObstacleManager::CreateInstance();
 
+    //現在のシーンの初期化
     nowScene = SceneBase::StartGame(this);
-
 
 	return true;
 }
@@ -73,16 +93,20 @@ bool Game::Initialize()
 */
 void Game::Termination()
 {
+    //データのアンロード
 	UnloadData();
+    //シングルトンクラスの解放処理
     GameObjectManager::DeleteInstance();
     GameObjectCreater::DeleteInstance();
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
+    //クラスの解放処理
+    delete fps;
+    delete inputSystem;
+    delete nowScene;
+    //サブシステムの終了
 	SDL_Quit();
-	delete fps;
-	delete inputSystem;
-	delete nowScene;
 }
 
 /**
@@ -94,7 +118,6 @@ void Game::GameLoop()
 	{
 		ProcessInput();
 		UpdateGame();
-		//PHYSICS->HitCheck();
 		GenerateOutput();
 		fps->Update();
 	}
