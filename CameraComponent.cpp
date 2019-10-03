@@ -28,7 +28,6 @@ void CameraComponent::Update(float _deltaTime)
 
 void CameraComponent::SetViewMatrix(const Matrix4 & _view)
 {
-	Game* game = owner->GetGame();
 	RENDERER->SetViewMatrix(_view);
 }
 

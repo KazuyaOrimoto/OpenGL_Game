@@ -83,7 +83,7 @@ bool Game::Initialize()
     ObstacleManager::CreateInstance();
 
     //Œ»İ‚ÌƒV[ƒ“‚Ì‰Šú‰»
-    nowScene = SceneBase::StartGame(this);
+    nowScene = SceneBase::StartGame();
 
 	return true;
 }

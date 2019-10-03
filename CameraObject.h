@@ -8,7 +8,7 @@ class InputComponent;
 class CameraObject : public GameObject
 {
 public:
-    CameraObject(Game* _game);
+    CameraObject();
 
     void UpdateGameObject(float _deltaTime) override;
 private:

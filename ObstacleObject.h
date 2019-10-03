@@ -19,7 +19,7 @@ namespace StaticObstacle
 class ObstacleObject : public GameObject
 {
 public:
-	ObstacleObject(Game* _game,int _i);
+	ObstacleObject(int _i);
 	~ObstacleObject();
 
 	/**

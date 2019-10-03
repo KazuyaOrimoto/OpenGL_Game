@@ -8,14 +8,13 @@
 /**
 @param	ゲームクラスのポインタ
 */
-GameObject::GameObject(Game * _game)
+GameObject::GameObject()
 	: state(Active)
 	, worldTransform()
 	, position(Vector3::Zero)
 	, scale(1.0f)
 	, rotation(Quaternion::Identity)
 	, recomputeWorldTransform(true)
-	, game(_game)
 {
 	GAME_OBJECT_MANAGER->AddGameObject(this);
 }

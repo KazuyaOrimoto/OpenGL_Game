@@ -3,8 +3,8 @@
 #include "MeshComponent.h"
 #include "Renderer.h"
 
-JumpingArea::JumpingArea(Game* _game)
-	:GameObject(_game)
+JumpingArea::JumpingArea()
+	:GameObject()
 	,boxCollider(nullptr)
 {
 	boxCollider = new BoxCollider(this, GetOnCollisionFunc());

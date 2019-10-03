@@ -13,8 +13,8 @@
 #include "Mesh.h"
 #include "GameObjectManager.h"
 
-SlidingObject::SlidingObject(Game* _game)
-	: ObstacleBox(_game)
+SlidingObject::SlidingObject()
+	: ObstacleBox()
 	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);

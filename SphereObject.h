@@ -7,7 +7,7 @@ class SphereCollider;
 class SphereObject : public GameObject
 {
 public:
-	SphereObject(Game* _game);
+	SphereObject();
 	~SphereObject();
 
 private:

@@ -7,8 +7,8 @@
 #include "ObstacleBox.h"
 #include "InputSystem.h"
 
-BikeObject::BikeObject(Game* _game, PlayerObject* _ownerObject)
-    : GameObject(_game)
+BikeObject::BikeObject(PlayerObject* _ownerObject)
+    : GameObject()
     , ownerObject(_ownerObject)
 	, animation(false)
 	, animNum(0)

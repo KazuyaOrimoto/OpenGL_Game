@@ -6,8 +6,8 @@
 #include "FPSCamera.h"
 #include "MeshComponent.h"
 
-FPSGameObject::FPSGameObject(Game* _game)
-	:GameObject(_game)
+FPSGameObject::FPSGameObject()
+	:GameObject()
 {
 	//mCameraComp = new FPSCamera(this);
 	moveComponent = new MoveComponent(this);
@@ -18,7 +18,7 @@ FPSGameObject::FPSGameObject(Game* _game)
 	moveComponent->SetLeftKey(SDL_SCANCODE_A);
 	moveComponent->SetRightKey(SDL_SCANCODE_D);
 
-	mFPSModel = new GameObject(_game);
+	mFPSModel = new GameObject();
 	mFPSModel->SetScale(0.75f);
 	mMeshComp = new MeshComponent(mFPSModel);
 	mMeshComp->SetMesh(RENDERER->GetMesh("Assets/Rifle.gpmesh"));

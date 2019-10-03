@@ -5,8 +5,8 @@
 #include "WallMeshComponent.h"
 #include "GameObjectManager.h"
 
-WallObject::WallObject(Game* _game, int _i)
-	:GameObject(_game)
+WallObject::WallObject(int _i)
+	:GameObject()
 {
 	SetScale(1000.0f);
 	SetPosition(Vector3(_i*2000.0f, 0.0f, 0.0f));

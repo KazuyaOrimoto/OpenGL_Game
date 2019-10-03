@@ -9,7 +9,7 @@ class ObstacleBox;
 class BikeObject : public GameObject
 {
 public:
-	BikeObject(Game* _game, PlayerObject* _ownerObject);
+	BikeObject(PlayerObject* _ownerObject);
     ~BikeObject();
 
     /**

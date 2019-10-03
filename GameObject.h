@@ -33,7 +33,7 @@ public:
 	/**
 	@param	ゲームクラスのポインタ
 	*/
-	GameObject(Game* _game);
+	GameObject();
 	virtual ~GameObject();
 
 	/**
@@ -129,12 +129,6 @@ public:
 	const Matrix4& GetWorldTransform() const { return worldTransform; }
 
 	/**
-	@brief　Gameクラスのインスタンスを取得する
-	@return	Gameクラスのポインタ
-	*/
-    Game* GetGame() { return game; }
-
-	/**
 	@brief　オブジェクトの前方を表すベクトルを取得する
 	@param	forward(Vector3型)
 	*/
@@ -174,8 +168,6 @@ protected:
 
 	//アタッチされているコンポーネント
 	std::vector<class Component*>components;
-	//ゲームクラスのインスタンス
-	Game* game;
 
 };
 

@@ -8,7 +8,7 @@ public:
 	/**
 	@param	ゲームクラスのポインタ
 	*/
-	Ship(Game* _game);
+	Ship();
 	~Ship();
 
 	/**

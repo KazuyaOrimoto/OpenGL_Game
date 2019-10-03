@@ -9,7 +9,7 @@ class MeshComponent;
 class FollowCameraObject : public GameObject
 {
 public:
-	FollowCameraObject(Game* _game);
+	FollowCameraObject();
 
 	void SetVisible(bool _visible);
 

@@ -9,7 +9,7 @@ class JumpingArea :
 	public GameObject
 {
 public:
-	JumpingArea(Game* _game);
+	JumpingArea();
 	~JumpingArea();
 	void SetBoxCollider(AABB _box);
 	virtual void OnCollision(const GameObject& _hitObject) override;

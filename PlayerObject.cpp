@@ -11,8 +11,8 @@
 #include "BikeObject.h"
 #include "Math.h"
 
-PlayerObject::PlayerObject(Game* _game)
-	:GameObject(_game)
+PlayerObject::PlayerObject()
+	:GameObject()
 {
     SetPosition(Vector3(0.0f, 0.0f, 60.0f));
 
@@ -28,7 +28,7 @@ PlayerObject::PlayerObject(Game* _game)
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 
-    dril = new BikeObject(game, this);
+    dril = new BikeObject(this);
     autoRun->SetDrilObject(dril);
 
     SetScale(10.0f);

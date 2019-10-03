@@ -10,7 +10,7 @@ class JumpingObject :
 	public ObstacleBox
 {
 public:
-	JumpingObject(Game* _game);
+	JumpingObject();
 	~JumpingObject();
 
 	/**

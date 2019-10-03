@@ -12,8 +12,8 @@
 
 ObstacleMapLoder* ObstacleObject::mapLoder = nullptr;
 
-ObstacleObject::ObstacleObject(Game* _game, int _i)
-    :GameObject(_game)
+ObstacleObject::ObstacleObject(int _i)
+    :GameObject()
     , player(nullptr)
 {
 	if (mapLoder == nullptr)

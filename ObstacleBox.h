@@ -8,7 +8,7 @@ class PlayerObject;
 class ObstacleBox :public GameObject
 {
 public:
-	ObstacleBox(Game* _game);
+	ObstacleBox();
 	~ObstacleBox();
 
 	virtual void OnCollision(const GameObject& _hitObject) override;

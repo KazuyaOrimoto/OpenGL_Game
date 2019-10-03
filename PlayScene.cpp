@@ -4,8 +4,8 @@
 #include "Renderer.h"
 #include "Math.h"
 
-PlayScene::PlayScene(Game* _game)
-    :SceneBase(_game)
+PlayScene::PlayScene()
+    :SceneBase()
 {
     // Setup lights
     RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
@@ -14,7 +14,7 @@ PlayScene::PlayScene(Game* _game)
     dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
     dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-    GAME_OBJECT_CREATER->PlayerAndWallCreate(_game);
+    GAME_OBJECT_CREATER->PlayerAndWallCreate();
 }
 
 

@@ -5,8 +5,8 @@
 #include "Collision.h"
 #include "Renderer.h"
 
-BoxObject::BoxObject(Game* _game)
-    :GameObject(_game)
+BoxObject::BoxObject()
+    :GameObject()
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(RENDERER->GetMesh("Assets/Obstacle.gpmesh"));

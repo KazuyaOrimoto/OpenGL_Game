@@ -5,8 +5,8 @@
 /**
 @param	ゲームクラスのポインタ
 */
-Ship::Ship(Game* game)
-	:GameObject(game)
+Ship::Ship()
+	:GameObject()
 {
 	//SpriteComponent* sprite = new SpriteComponent(this,100);
 	//sprite->SetTexture(game->GetTexture("Assets/Ship.png"));

@@ -12,8 +12,8 @@
 #include <stdlib.h>
 #include "SDL.h"
 
-ObstacleBox::ObstacleBox(Game* _game)
-	:GameObject(_game)
+ObstacleBox::ObstacleBox()
+	:GameObject()
 	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);

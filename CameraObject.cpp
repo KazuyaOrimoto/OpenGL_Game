@@ -5,8 +5,8 @@
 #include "InputComponent.h"
 #include "InputSystem.h"
 
-CameraObject::CameraObject(Game * _game)
-    :GameObject(_game)
+CameraObject::CameraObject()
+    :GameObject()
 {
 	inputComponent = new InputComponent(this);
 	inputComponent->SetMaxAngularSpeed(Math::Pi);

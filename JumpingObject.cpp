@@ -16,8 +16,8 @@
 #include <stdlib.h>
 #include "SDL.h"
 
-JumpingObject::JumpingObject(Game* _game)
-	: ObstacleBox(_game)
+JumpingObject::JumpingObject()
+	: ObstacleBox()
 	, player(nullptr)
 {
 	//オブジェクトに使うメッシュデータを設定
@@ -71,7 +71,7 @@ JumpingObject::JumpingObject(Game* _game)
 	//プレイヤーのポインタを保存
 	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
 
-	jumpingArea = new JumpingArea(game);
+	jumpingArea = new JumpingArea();
 	jumpingArea->SetBoxCollider(box);
 }
 

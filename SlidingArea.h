@@ -7,7 +7,7 @@ class BoxCollider;
 class SlidingArea : public GameObject
 {
 public:
-	SlidingArea(Game* _game);
+	SlidingArea();
 	~SlidingArea();
 
 

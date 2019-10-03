@@ -9,7 +9,7 @@ class PlayerObject;
 class SlidingObject : public ObstacleBox
 {
 public:
-	SlidingObject(Game* _game);
+	SlidingObject();
 	~SlidingObject();
 
 	/**

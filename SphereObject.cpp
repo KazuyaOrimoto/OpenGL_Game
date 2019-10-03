@@ -5,8 +5,8 @@
 #include "Renderer.h"
 #include "Collision.h"
 
-SphereObject::SphereObject(Game* _game)
-	:GameObject(_game)
+SphereObject::SphereObject()
+	:GameObject()
 {
 	meshComp = new MeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));

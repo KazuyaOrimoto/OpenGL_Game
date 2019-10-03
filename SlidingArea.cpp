@@ -4,8 +4,8 @@
 
 
 
-SlidingArea::SlidingArea(Game* _game)
-	: GameObject(_game)
+SlidingArea::SlidingArea()
+	: GameObject()
 {
 }
 

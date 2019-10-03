@@ -11,7 +11,7 @@ public:
     static void CreateInstance();
     static void DeleteInstance();
 
-    void PlayerAndWallCreate(Game* _game);
+    void PlayerAndWallCreate();
 
 
 private:

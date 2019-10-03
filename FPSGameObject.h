@@ -7,7 +7,7 @@ class Game;
 class FPSGameObject : public GameObject
 {
 public:
-	FPSGameObject(Game* _game);
+	FPSGameObject();
 
 	void UpdateGameObject(float _deltaTime) override;
 

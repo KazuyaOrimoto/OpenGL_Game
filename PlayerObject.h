@@ -12,7 +12,7 @@ class BikeObject;
 class PlayerObject : public GameObject
 {
 public:
-	PlayerObject(Game* _game);
+	PlayerObject();
 
 	/**
 	@brief	ゲームオブジェクトのアップデート

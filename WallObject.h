@@ -4,7 +4,7 @@ class WallObject :
 	public GameObject
 {
 public:
-	WallObject(Game* _game,int _i);
+	WallObject(int _i);
 	~WallObject();
 
 	/**

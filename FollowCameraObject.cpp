@@ -6,8 +6,8 @@
 #include "MoveComponent.h"
 #include "SphereCollider.h"
 
-FollowCameraObject::FollowCameraObject(Game* _game)
-	:GameObject(_game)
+FollowCameraObject::FollowCameraObject()
+	:GameObject()
 {
 	mMeshComp = new MeshComponent(this);
 	mMeshComp->SetMesh(RENDERER->GetMesh("Assets/Sphere.gpmesh"));

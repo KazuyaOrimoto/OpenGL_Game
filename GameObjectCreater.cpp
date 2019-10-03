@@ -37,14 +37,14 @@ GameObjectCreater::~GameObjectCreater()
 {
 }
 
-void GameObjectCreater::PlayerAndWallCreate(Game* _game)
+void GameObjectCreater::PlayerAndWallCreate()
 {
-	GameObject* mCameraActor = new PlayerObject(_game);
+	GameObject* mCameraActor = new PlayerObject();
 
 	ObstacleBox* box;
 	for (int i = 0; i < 200; i++)
 	{
-		box = new ObstacleBox(_game);
+		box = new ObstacleBox();
 	}
 	//for (int i = 0; i < 20; i++)
 	//{
@@ -53,11 +53,11 @@ void GameObjectCreater::PlayerAndWallCreate(Game* _game)
 
 	for (int i = 0; i < StaticObstacle::ObstacleMaxNum; i++)
 	{
-		ObstacleObject* obstacle = new ObstacleObject(_game,i);
+		ObstacleObject* obstacle = new ObstacleObject(i);
 	}
 
 	for (int i = 0; i < 20; i++)
 	{
-		GameObject* wall = new WallObject(_game, i);
+		GameObject* wall = new WallObject(i);
 	}
 }
