@@ -141,15 +141,10 @@
     <ClCompile Include="SlidingObject.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="JumpingArea.cpp">
-      <Filter>Obstacle</Filter>
-    </ClCompile>
     <ClCompile Include="JumpingObject.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="SlidingArea.cpp">
-      <Filter>Obstacle</Filter>
-    </ClCompile>
+    <ClCompile Include="JumpCheck.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -291,15 +286,10 @@
     <ClInclude Include="SlidingObject.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="JumpingArea.h">
-      <Filter>Obstacle</Filter>
-    </ClInclude>
     <ClInclude Include="JumpingObject.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="SlidingArea.h">
-      <Filter>Obstacle</Filter>
-    </ClInclude>
+    <ClInclude Include="JumpCheck.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

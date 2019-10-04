@@ -70,9 +70,6 @@ JumpingObject::JumpingObject()
 
 	//プレイヤーのポインタを保存
 	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
-
-	jumpingArea = new JumpingArea();
-	jumpingArea->SetBoxCollider(box);
 }
 
 JumpingObject::~JumpingObject()

@@ -5,6 +5,7 @@ class PlayerObject;
 class MeshComponent;
 class SphereCollider;
 class ObstacleBox;
+class JumpCheck;
 
 class BikeObject : public GameObject
 {
@@ -36,5 +37,6 @@ private:
 
 	bool animation;
 	int animNum;
+
 };
 
