@@ -6,6 +6,7 @@
 #include "SphereCollider.h"
 #include "ObstacleBox.h"
 #include "InputSystem.h"
+#include "jumpCheck.h"
 
 BikeObject::BikeObject(PlayerObject* _ownerObject)
     : GameObject()
@@ -20,7 +21,10 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
     sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
     sphereCollider->SetObjectSphere(Sphere(Vector3(0.0f, 0.0f, 0.0f), 1.0f));
 
+	SetPosition(ownerObject->GetPosition());
+
 	tag = Tag::Player;
+	new JumpCheck(this);
 }
 
 BikeObject::~BikeObject()

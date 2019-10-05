@@ -32,4 +32,3 @@ void BoxCollider::CollisionPause()
 void BoxCollider::CollisionActive()
 {
 }
-

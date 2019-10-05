@@ -11,10 +11,12 @@ struct InputState;
 
 enum Tag
 {
+	NoneTag,
 	Player,
 	Obstacle,
 	JumpingObstacle,
-	Wall
+	Wall,
+	CheckArea
 };
 
 /**

@@ -3,11 +3,11 @@
 
 class BikeObject;
 
-class JumpCheck : public GameObject
+class ObstacleCheck : public GameObject
 {
 public:
-	JumpCheck(BikeObject* _bike);
-	~JumpCheck();
+	ObstacleCheck(BikeObject* _bike);
+	~ObstacleCheck();
 
 	/**
 	@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
@@ -17,12 +17,12 @@ public:
 
 	virtual void OnCollision(const GameObject& _hitObject) override;
 
-	bool CanJump() { return canJump; }
+	bool OnObstacle() { return onObstacle; }
 
 private:
 	BikeObject* bike;
 
-	bool canJump;
+	bool onObstacle;
 	//áŠQ•¨‚ÆÕ“Ë‚µ‚Ä‚¢‚½‚©‚Ç‚¤‚©
 	bool wasCollidedObstacle;
 };

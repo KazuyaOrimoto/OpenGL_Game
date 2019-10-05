@@ -364,9 +364,9 @@ bool Intersect(const AABB & _AABB1, const AABB & _AABB2)
         _AABB1.max.x < _AABB2.min.x ||
         _AABB1.max.y < _AABB2.min.y ||
         _AABB1.max.z < _AABB2.min.z ||
-        _AABB2.max.x > _AABB1.min.x ||
-        _AABB2.max.y > _AABB1.min.y ||
-        _AABB2.max.z > _AABB1.min.z;
+        _AABB2.max.x < _AABB1.min.x ||
+        _AABB2.max.y < _AABB1.min.y ||
+        _AABB2.max.z < _AABB1.min.z;
 
 	return !no;
 }

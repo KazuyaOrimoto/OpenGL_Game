@@ -7,6 +7,9 @@ class SphereCollider;
 class ObstacleBox;
 class JumpCheck;
 
+static Vector3 CHECK_AREA_MIN = Vector3(1500.0f, -1.0f, -1.0f);
+static Vector3 CHECK_AREA_MAX = Vector3(2500.0f, 1.0f, 1.0f);
+
 class BikeObject : public GameObject
 {
 public:
@@ -27,8 +30,8 @@ public:
     */
     virtual void GameObjectInput(const InputState& _state)override;
 
-private:
 
+private:
 	void Animation();
 
     MeshComponent* meshComp;
@@ -37,6 +40,5 @@ private:
 
 	bool animation;
 	int animNum;
-
 };
 
