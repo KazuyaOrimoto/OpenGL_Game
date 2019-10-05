@@ -7,12 +7,14 @@
 #include "ObstacleBox.h"
 #include "InputSystem.h"
 #include "jumpCheck.h"
+#include "ObstacleCheck.h"
 
 BikeObject::BikeObject(PlayerObject* _ownerObject)
     : GameObject()
     , ownerObject(_ownerObject)
 	, animation(false)
 	, animNum(0)
+	, jumping(false)
 {
     meshComp = new MeshComponent(this);
     meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
@@ -24,7 +26,8 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	SetPosition(ownerObject->GetPosition());
 
 	tag = Tag::Player;
-	new JumpCheck(this);
+	jumpCheck = new JumpCheck(this);
+	obstacleCheck = new ObstacleCheck(this);
 }
 
 BikeObject::~BikeObject()
@@ -33,6 +36,7 @@ BikeObject::~BikeObject()
 
 void BikeObject::UpdateGameObject(float _deltaTime)
 {
+	ActionDetermining();
 	Animation();
 }
 
@@ -94,5 +98,28 @@ void BikeObject::Animation()
 			animNum = 0;
 		}
 	}
+}
+
+/**
+@brief	アクションを決定する
+*/
+void BikeObject::ActionDetermining()
+{
+	if (!jumping)
+	{
+		bool canJump = jumpCheck->CanJump() && obstacleCheck->OnObstacle();
+		if (canJump)
+		{
+			jumping = true;
+			printf("CanJump!\n");
+		}
+	}
+}
+
+/**
+@brief	アクションを実行する
+*/
+void BikeObject::ActionExecution()
+{
 }
 

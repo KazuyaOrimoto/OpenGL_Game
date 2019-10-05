@@ -37,7 +37,6 @@ void JumpCheck::UpdateGameObject(float _deltaTime)
 	{
 		//ƒWƒƒƒ“ƒv‰Â”\
 		canJump = true;
-		printf("‚Ô‚Â‚©‚Á‚Ä‚È‚¢\n");
 	}
 	else
 	{
@@ -52,6 +51,5 @@ void JumpCheck::OnCollision(const GameObject & _hitObject)
 	{
 		canJump = false;
 		wasCollidedObstacle = true;
-		printf("‚Ô‚Â‚©‚Á‚½\n");
 	}
 }

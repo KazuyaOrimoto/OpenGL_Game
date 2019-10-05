@@ -6,6 +6,7 @@ class MeshComponent;
 class SphereCollider;
 class ObstacleBox;
 class JumpCheck;
+class ObstacleCheck;
 
 static Vector3 CHECK_AREA_MIN = Vector3(1500.0f, -1.0f, -1.0f);
 static Vector3 CHECK_AREA_MAX = Vector3(2500.0f, 1.0f, 1.0f);
@@ -30,15 +31,26 @@ public:
     */
     virtual void GameObjectInput(const InputState& _state)override;
 
-
 private:
 	void Animation();
+	/**
+	@brief	アクションを決定する
+	*/
+	void ActionDetermining();
+	/**
+	@brief	アクションを実行する
+	*/
+	void ActionExecution();
 
     MeshComponent* meshComp;
     PlayerObject* ownerObject;
     SphereCollider* sphereCollider;
 
+	JumpCheck* jumpCheck;
+	ObstacleCheck* obstacleCheck;
+
 	bool animation;
 	int animNum;
+	bool jumping;
 };
 

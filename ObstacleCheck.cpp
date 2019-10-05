@@ -14,6 +14,7 @@ ObstacleCheck::ObstacleCheck(BikeObject* _bike)
 	sphereCollider->SetObjectBox(box);
 	SetScale(1.0f);
 	tag = Tag::CheckArea;
+	
 }
 
 ObstacleCheck::~ObstacleCheck()
