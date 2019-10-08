@@ -17,7 +17,6 @@ PlayScene::PlayScene()
     GAME_OBJECT_CREATER->PlayerAndWallCreate();
 }
 
-
 PlayScene::~PlayScene()
 {
 }
