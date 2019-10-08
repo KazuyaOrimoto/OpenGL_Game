@@ -7,14 +7,14 @@
 
 #define RENDERER Renderer::GetInstance()
 
-//•½sŒõŒ¹—p‚Ì\‘¢‘Ì
+//å¹³è¡Œå…‰æºç”¨ã®æ§‹é€ ä½“
 struct DirectionalLight
 {
-    // Œõ‚Ì•ûŒü
+    // å…‰ã®æ–¹å‘
     Vector3 direction;
-    // ŠgU”½ËF
+    // æ‹¡æ•£åå°„è‰²
     Vector3 diffuseColor;
-    // ‹¾–Ê”½ËF
+    // é¡é¢åå°„è‰²
     Vector3 specColor;
 };
 
@@ -30,174 +30,174 @@ class Renderer
 {
 public:
 	/**
-	@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
-	@return RendererƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
+	@return Rendererã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	*/
 	static Renderer* GetInstance() { return renderer; }
 
 	/**
-	@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬‚·‚é
+	@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹
 	*/
 	static void CreateInstance();
 
 	/**
-	@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğíœ‚·‚é
+	@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
 	*/
 	static void DeleteInstance();
 
 	/**
-	@brief  ‰Šú‰»ˆ—
-	@return true : ¬Œ÷ , false : ¸”s
+	@brief  åˆæœŸåŒ–å‡¦ç†
+	@return true : æˆåŠŸ , false : å¤±æ•—
 	*/
     bool Initialize(float _screenWidth, float _screenHeight);
 	/**
-	@brief  I—¹ˆ—
+	@brief  çµ‚äº†å‡¦ç†
 	*/
     void Shutdown();
 
 	/**
-	@brief  ƒ[ƒh‚µ‚½ƒf[ƒ^‚Ì‰ğ•ú
+	@brief  ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ‡ãƒ¼ã‚¿ã®è§£æ”¾
 	*/
     void UnloadData();
 
 	/**
-	@brief  •`‰æˆ—
+	@brief  æç”»å‡¦ç†
 	*/
     void Draw();
 
 	/**
-	@brief  ƒXƒvƒ‰ƒCƒg‚Ì’Ç‰Á
-	@param	’Ç‰Á‚·‚éSpriteComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®è¿½åŠ 
+	@param	è¿½åŠ ã™ã‚‹SpriteComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	void AddSprite(SpriteComponent* _spriteComponent);
 
 	/**
-	@brief  ƒXƒvƒ‰ƒCƒg‚Ìíœ
-	@param	íœ‚·‚éSpriteComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å‰Šé™¤
+	@param	å‰Šé™¤ã™ã‚‹SpriteComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	void RemoveSprite(SpriteComponent* _spriteComponent);
 
 	/**
-	@brief  ƒeƒNƒXƒ`ƒƒ‚Ìæ“¾
-	@param	æ“¾‚µ‚½‚¢ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹–¼
-	@return TextureƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å–å¾—
+	@param	å–å¾—ã—ãŸã„ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+	@return Textureã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	Texture* GetTexture(const std::string& _fileName);
 
 	/**
-	@brief  ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì’Ç‰Á
-	@param	’Ç‰Á‚·‚éMeshComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è¿½åŠ 
+	@param	è¿½åŠ ã™ã‚‹MeshComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     void AddMeshComponent(MeshComponent* _meshComponent);
 
 	/**
-	@brief  ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìíœ
-	@param	íœ‚·‚éMeshComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å‰Šé™¤
+	@param	å‰Šé™¤ã™ã‚‹MeshComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     void RemoveMeshComponent(MeshComponent* _meshComponent);
 
 	/**
-	@brief  ƒƒbƒVƒ…‚Ìæ“¾
-	@param	æ“¾‚µ‚½‚¢ƒƒbƒVƒ…‚Ìƒtƒ@ƒCƒ‹–¼
-	@return MeshƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ãƒ¡ãƒƒã‚·ãƒ¥ã®å–å¾—
+	@param	å–å¾—ã—ãŸã„ãƒ¡ãƒƒã‚·ãƒ¥ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+	@return Meshã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     Mesh* GetMesh(const std::string& _fileName);
 
 	/**
-	@brief	ƒrƒ…[s—ñ‚ğİ’è‚·‚é
-	@param	ƒrƒ…[s—ñ
+	@brief	ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’è¨­å®šã™ã‚‹
+	@param	ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 	*/
     void SetViewMatrix(const Matrix4& _view) { view = _view; }
 
 	/**
-	@brief	ŠÂ‹«Œõ‚ğİ’è‚·‚é
-	@param	Vector3iŠÂ‹«Œõ‚ğ•\‚·j
+	@brief	ç’°å¢ƒå…‰ã‚’è¨­å®šã™ã‚‹
+	@param	Vector3ï¼ˆç’°å¢ƒå…‰ã‚’è¡¨ã™ï¼‰
 	*/
     void SetAmbientLight(const Vector3& _ambient) { ambientLight = _ambient; }
 
 	/**
-	@brief	•½sŒõŒ¹‚Ì\‘¢‘Ì‚ğæ“¾‚·‚é
-	@return	DirectionalLighti•½sŒõŒ¹‚Ì\‘¢‘Ìj
+	@brief	å¹³è¡Œå…‰æºã®æ§‹é€ ä½“ã‚’å–å¾—ã™ã‚‹
+	@return	DirectionalLightï¼ˆå¹³è¡Œå…‰æºã®æ§‹é€ ä½“ï¼‰
 	*/
     DirectionalLight& GetDirectionalLight() { return dirLight; }
 
 	/**
-	@brief	ƒXƒNƒŠ[ƒ“‚Ì‰¡•‚ğæ“¾‚·‚é
-	@return	ƒXƒNƒŠ[ƒ“‚Ì‰¡•
+	@brief	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æ¨ªå¹…ã‚’å–å¾—ã™ã‚‹
+	@return	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æ¨ªå¹…
 	*/
     float GetScreenWidth() const { return screenWidth; }
 	
 	/**
-	@brief	ƒXƒNƒŠ[ƒ“‚Ìc•‚ğæ“¾‚·‚é
-	@return	ƒXƒNƒŠ[ƒ“‚Ìc•
+	@brief	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ç¸¦å¹…ã‚’å–å¾—ã™ã‚‹
+	@return	ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ç¸¦å¹…
 	*/
 	float GetScreenHeight() const { return screenHeight; }
 
 private:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^AƒfƒXƒgƒ‰ƒNƒ^‚Ì‰B•Á
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®éš è”½
 	Renderer();
 	~Renderer();
 
-	//©•ª‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	//è‡ªåˆ†ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	static Renderer* renderer;
 
 	/**
-	@brief  ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
-	@return true : ¬Œ÷ , false : ¸”s
+	@brief  ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®èª­ã¿è¾¼ã¿
+	@return true : æˆåŠŸ , false : å¤±æ•—
 	*/
     bool LoadShaders();
 	/**
-	@brief  Sprite—p‚Ì’¸“_ƒoƒbƒtƒ@‚ÆƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬
+	@brief  Spriteç”¨ã®é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	*/
     void CreateSpriteVerts();
 
 	/**
-	@brief  ŒõŒ¹î•ñ‚ğƒVƒF[ƒ_[‚Ì•Ï”‚ÉƒZƒbƒg‚·‚é
-	@param  ƒZƒbƒg‚·‚éShaderƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  å…‰æºæƒ…å ±ã‚’ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å¤‰æ•°ã«ã‚»ãƒƒãƒˆã™ã‚‹
+	@param  ã‚»ãƒƒãƒˆã™ã‚‹Shaderã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     void SetLightUniforms(Shader* _shader);
 
     /**
-    @brief  ŒõŒ¹î•ñ‚ğƒVƒF[ƒ_[‚Ì•Ï”‚ÉƒZƒbƒg‚·‚é
-    @param  ƒZƒbƒg‚·‚éShaderƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+    @brief  å…‰æºæƒ…å ±ã‚’ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å¤‰æ•°ã«ã‚»ãƒƒãƒˆã™ã‚‹
+    @param  ã‚»ãƒƒãƒˆã™ã‚‹Shaderã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
     */
     void SetWallLightUniforms(Shader* _shader);
 
     void SetWallDirLight();
 
-    //ƒtƒ@ƒCƒ‹–¼‚ÅƒƒbƒVƒ…‚ğæ“¾‚·‚é‚½‚ß‚Ì‰Â•Ï’·ƒRƒ“ƒeƒi
+    //ãƒ•ã‚¡ã‚¤ãƒ«åã§ãƒ¡ãƒƒã‚·ãƒ¥ã‚’å–å¾—ã™ã‚‹ãŸã‚ã®å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
     std::unordered_map<std::string, Mesh*> meshes;
-    //ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ|ƒCƒ“ƒ^‚Ì‰Â•Ï’·ƒRƒ“ƒeƒi
+    //ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
     std::vector<MeshComponent*> meshComponents;
-	//ƒXƒvƒ‰ƒCƒgƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ|ƒCƒ“ƒ^‚Ì‰Â•Ï’·ƒRƒ“ƒeƒi
+	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
 	std::vector<SpriteComponent*> sprites;
-	//ƒtƒ@ƒCƒ‹–¼‚ÅƒeƒNƒXƒ`ƒƒ‚ğæ“¾‚·‚é‚½‚ß‚Ì‰Â•Ï’·ƒRƒ“ƒeƒi
+	//ãƒ•ã‚¡ã‚¤ãƒ«åã§ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—ã™ã‚‹ãŸã‚ã®å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
 	std::unordered_map<std::string, Texture*>textures;
 
     std::vector<MeshComponent*> wallMeshComponents;
 
-	//ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	//ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 
     Shader* spriteShader;
     VertexArray* spriteVerts;
     Shader* meshShader;
     Shader* wallShader;
 
-    //ƒrƒ…[s—ñ
+    //ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
     Matrix4 view;
-	//Ë‰es—ñ
+	//å°„å½±è¡Œåˆ—
     Matrix4 projection;
-    //ƒXƒNƒŠ[ƒ“‚Ì‰¡•
+    //ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æ¨ªå¹…
     float screenWidth;
-	//ƒXƒNƒŠ[ƒ“‚Ìc•
+	//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ç¸¦å¹…
     float screenHeight;
-    //ŠÂ‹«Œõ
+    //ç’°å¢ƒå…‰
     Vector3 ambientLight;
-	//•½sŒõŒ¹
+	//å¹³è¡Œå…‰æº
     DirectionalLight dirLight;
     DirectionalLight wallDirLight;
-    //ƒEƒBƒ“ƒhƒE
+    //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦
     SDL_Window* window;
-    //ƒRƒ“ƒeƒLƒXƒg
+    //ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
     SDL_GLContext context;
 };

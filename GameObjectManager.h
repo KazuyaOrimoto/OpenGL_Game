@@ -18,24 +18,24 @@ public:
 	static void DeleteInstance();
 
 	/**
-	@brief  ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌƒAƒbƒvƒf[ƒgˆ—
+	@brief  ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆå‡¦ç†
 	*/
 	void UpdateGameObject(float _deltaTime);
 
 	/**
-	@brief  ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ì“ü—Íˆ—
+	@brief  ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å…¥åŠ›å‡¦ç†
 	*/
 	void ProcessInput(const InputState& _state);
 
 	/**
-	@brief  ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ì’Ç‰Á
-	@param	’Ç‰Á‚·‚éGameObjectƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¿½åŠ 
+	@param	è¿½åŠ ã™ã‚‹GameObjectã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	void AddGameObject(GameObject* _object);
 
 	/**
-	@brief  ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìíœ
-	@param	íœ‚·‚éGameObjectƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief  ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‰Šé™¤
+	@param	å‰Šé™¤ã™ã‚‹GameObjectã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	void RemoveGameObject(GameObject* _object);
 
@@ -48,12 +48,12 @@ private:
 
 	static GameObjectManager* manager;
 
-	//ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^‚Ì‰Â•Ï’·ƒRƒ“ƒeƒi
+	//ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
 	std::vector<GameObject*> gameObjects;
-	//Update’†‚É’Ç‰Á‚³‚ê‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^‚ğˆê“I‚É•Û‘¶‚·‚é‰Â•Ï’·ƒRƒ“ƒeƒi
+	//Updateä¸­ã«è¿½åŠ ã•ã‚ŒãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã‚’ä¸€æ™‚çš„ã«ä¿å­˜ã™ã‚‹å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
 	std::vector<GameObject*> pendingGameObjects;
 
-	//Update’†‚©‚Ç‚¤‚©
+	//Updateä¸­ã‹ã©ã†ã‹
 	bool updatingGameObject;
 
 

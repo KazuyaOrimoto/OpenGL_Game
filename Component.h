@@ -8,32 +8,32 @@ class Component
 {
 public:
 	/**
-	@param	ƒAƒ^ƒbƒ`‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
-	@param	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌXV‡”Ôi”’l‚ª¬‚³‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+	@param	ã‚¢ã‚¿ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+	@param	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ›´æ–°é †ç•ªï¼ˆæ•°å€¤ãŒå°ã•ã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
 	*/
 	Component(GameObject* _owner,int _updateOrder = 100);
 	virtual ~Component();
 
 	/**
-	@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+	@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+	@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 	*/
 	virtual void Update(float _deltaTime);
 
 	/**
-	@brief	“ü—Íˆ—
-	@param	InputState\‘¢‘Ì
+	@brief	å…¥åŠ›å‡¦ç†
+	@param	InputStateæ§‹é€ ä½“
 	*/
 	virtual void ProcessInput(const struct InputState& _state) {}
 
 	/**
-	@brief	Transform‚Ìƒ[ƒ‹ƒh•ÏŠ·
+	@brief	Transformã®ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›
 	*/
 	virtual void OnUpdateWorldTransform() {}
 
 	/**
-	@brief	UpdateOrder‚ğæ“¾‚·‚é
-	@return UpdateOrderi”’l‚ª¬‚³‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+	@brief	UpdateOrderã‚’å–å¾—ã™ã‚‹
+	@return UpdateOrderï¼ˆæ•°å€¤ãŒå°ã•ã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
 	*/
 	int GetUpdateOder() { return updateOrder; }
 
@@ -42,9 +42,9 @@ public:
 
 protected:
 
-	//ƒAƒ^ƒbƒ`‚µ‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
+	//ã‚¢ã‚¿ãƒƒãƒã—ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
 	GameObject* owner;			
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌXV‡”Ôi”’l‚ª¬‚³‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ›´æ–°é †ç•ªï¼ˆæ•°å€¤ãŒå°ã•ã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
 	int updateOrder;
 
 };

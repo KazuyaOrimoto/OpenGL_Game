@@ -11,28 +11,28 @@ class SceneManager
 {
 public:
 	/**
-	@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
-	@return RendererƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+	@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
+	@return Rendererã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	*/
 	static SceneManager* GetInstance() { return sceneManager; }
 
 	/**
-	@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬‚·‚é
+	@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹
 	*/
 	static void CreateInstance();
 
 	/**
-	@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğíœ‚·‚é
+	@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
 	*/
 	static void DeleteInstance();
 
 	/**
-	@brief  ‰Šú‰»ˆ—
-	@return true : ¬Œ÷ , false : ¸”s
+	@brief  åˆæœŸåŒ–å‡¦ç†
+	@return true : æˆåŠŸ , false : å¤±æ•—
 	*/
 	void Initialize();
 	/**
-	@brief  I—¹ˆ—
+	@brief  çµ‚äº†å‡¦ç†
 	*/
 	void Shutdown();
 

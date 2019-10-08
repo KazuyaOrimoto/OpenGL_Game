@@ -21,26 +21,26 @@ JumpCheck::~JumpCheck()
 }
 
 /**
-@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 */
 void JumpCheck::UpdateGameObject(float _deltaTime)
 {
-	//bike‚Ì‘O•û­‚µã‚É©•ª‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğİ’è‚·‚é
+	//bikeã®å‰æ–¹å°‘ã—ä¸Šã«è‡ªåˆ†ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’è¨­å®šã™ã‚‹
 	Vector3 bikePos = bike->GetPosition();
-	//bike‚Ìƒ|ƒWƒVƒ‡ƒ“‚©‚çbike‚Ìã•ûŒü‚ÉˆÚ“®‚³‚¹‚é
+	//bikeã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‹ã‚‰bikeã®ä¸Šæ–¹å‘ã«ç§»å‹•ã•ã›ã‚‹
 	Vector3 myPos = bikePos + bike->GetUp() * 200.0f;
 	SetPosition(myPos);
 
-	//áŠQ•¨‚ÆÕ“Ë‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç
+	//éšœå®³ç‰©ã¨è¡çªã—ã¦ã„ãªã‹ã£ãŸã‚‰
 	if (!wasCollidedObstacle)
 	{
-		//ƒWƒƒƒ“ƒv‰Â”\
+		//ã‚¸ãƒ£ãƒ³ãƒ—å¯èƒ½
 		canJump = true;
 	}
 	else
 	{
-		//ƒŠƒZƒbƒg
+		//ãƒªã‚»ãƒƒãƒˆ
 		wasCollidedObstacle = false;
 	}
 }

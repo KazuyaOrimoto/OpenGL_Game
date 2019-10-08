@@ -4,9 +4,9 @@
 #include "PhysicsWorld.h"
 
 /**
-@param	ƒAƒ^ƒbƒ`‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
-@param	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌXV‡”Ôi”’l‚ª¬‚³‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
-@param  “–‚½‚è”»’è‚ÉA‚ß‚è‚İ‚©‚ç“®‚©‚­ˆ—‚Ì—Dæ“x‚ğŒˆ‚ß‚é”’l
+@param	ã‚¢ã‚¿ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+@param	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ›´æ–°é †ç•ªï¼ˆæ•°å€¤ãŒå°ã•ã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
+@param  å½“ãŸã‚Šåˆ¤å®šæ™‚ã«ã€ã‚ã‚Šè¾¼ã¿ã‹ã‚‰å‹•ã‹ãå‡¦ç†ã®å„ªå…ˆåº¦ã‚’æ±ºã‚ã‚‹æ•°å€¤
 */
 ColliderComponent::ColliderComponent(GameObject* _owner, int _updateOrder, int _collisionOrder)
 	: Component(_owner, _updateOrder)

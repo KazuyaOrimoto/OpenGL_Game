@@ -20,9 +20,9 @@ SphereCollider::~SphereCollider()
 
 void SphereCollider::OnUpdateWorldTransform()
 {
-	//ワールド座標での中心位置を更新する
+	//繝ｯ繝ｼ繝ｫ繝牙ｺｧ讓吶〒縺ｮ荳ｭ蠢�菴咲ｽｮ繧呈峩譁ｰ縺吶ｋ
 	worldSphere.center = objectSphere.center + owner->GetPosition();
-	//ワールド空間での球の大きさを更新する
+	//繝ｯ繝ｼ繝ｫ繝臥ｩｺ髢薙〒縺ｮ逅�縺ｮ螟ｧ縺阪＆繧呈峩譁ｰ縺吶ｋ
 	worldSphere.radius = objectSphere.radius * owner->GetScale();
 
 	PHYSICS->HitCheck(this);

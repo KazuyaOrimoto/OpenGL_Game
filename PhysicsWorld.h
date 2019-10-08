@@ -24,7 +24,7 @@ public:
 	static void CreateInstance();
 	static void DeleteInstance();
 
-	//“–‚½‚è”»’è
+	//å½“ãŸã‚Šåˆ¤å®š
     void HitCheck();
     void HitCheck(BoxCollider* _box);
     void HitCheck(SphereCollider* _sphere);
@@ -35,7 +35,7 @@ public:
 	void RemoveSphere(SphereCollider* _sphere);
 
 private:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Ì‰B•Á
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã®éš è”½
 	PhysicsWorld();
 
 	static PhysicsWorld* physics;

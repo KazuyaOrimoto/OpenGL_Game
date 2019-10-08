@@ -19,19 +19,19 @@ FPS::~FPS()
 }
 
 /**
-@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
+@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
 */
 void FPS::Update()
 {
 	Wait();
 	deltaTime = (SDL_GetTicks() - beforetickCount) / 1000.0f;
 	beforetickCount = SDL_GetTicks();
-	//1ƒtƒŒ[ƒ€–Ú‚Ì‚ğ•Û‘¶
+	//1ãƒ•ãƒ¬ãƒ¼ãƒ ç›®ã®æ™‚åˆ»ã‚’ä¿å­˜
 	if (fpsCount == 0)
 	{
 		frameStartTickTime = SDL_GetTicks();
 	}
-	//İ’è‚µ‚½ƒtƒŒ[ƒ€”‚ªŒo‰ß‚µ‚½‚ç
+	//è¨­å®šã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ æ•°ãŒçµŒéã—ãŸã‚‰
 	if (fpsCount == setFps)
 	{
 		int nowTickTime = SDL_GetTicks();
@@ -45,7 +45,7 @@ void FPS::Update()
 }
 
 /**
-@brief	FPS‚ªİ’è’l‚æ‚è‘å‚«‚­‚È‚ç‚È‚¢‚½‚ß‚Ì§Œä
+@brief	FPSãŒè¨­å®šå€¤ã‚ˆã‚Šå¤§ãããªã‚‰ãªã„ãŸã‚ã®åˆ¶å¾¡
 */
 void FPS::Wait()
 {

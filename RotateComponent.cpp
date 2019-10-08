@@ -14,8 +14,8 @@ RotateComponent::RotateComponent(GameObject* _owner, int _updateOrder)
 }
 
 /**
-@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 */
 void RotateComponent::Update(float _deltaTime)
 {
@@ -23,27 +23,27 @@ void RotateComponent::Update(float _deltaTime)
 	cameraQuat = owner->GetRotation();
     if (canMove)
     {
-		//‰E‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
+		//å³ã®å£ã«ã¤ã„ãŸã¨ã
         if (ownerPos.y > 950)
         {
 			HitRightWall();
         }
-        //¶‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
+        //å·¦ã®å£ã«ã¤ã„ãŸã¨ã
         else if (ownerPos.y < -950)
         {
 			HitLeftWall();
         }
-        //ã‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
+        //ä¸Šã®å£ã«ã¤ã„ãŸã¨ã
         else if (ownerPos.z > 1950)
         {
 			HitTopWall();
         }
-        //‰º‚Ì•Ç‚É‚Â‚¢‚½‚Æ‚«
+        //ä¸‹ã®å£ã«ã¤ã„ãŸã¨ã
         else if (ownerPos.z < 50)
         {
 			HitUnderWall();
         }
-		//‚Ç‚Ì•Ç‚É‚à‚Â‚¢‚Ä‚¢‚È‚¢‚Æ‚«
+		//ã©ã®å£ã«ã‚‚ã¤ã„ã¦ã„ãªã„ã¨ã
 		else
 		{
 			if (f < 1.0)
@@ -59,7 +59,7 @@ void RotateComponent::Update(float _deltaTime)
 			}
 		}
     }
-	//ˆÚ“®‚ª‚Å‚«‚È‚¢ó‘Ô
+	//ç§»å‹•ãŒã§ããªã„çŠ¶æ…‹
 	else
 	{
 		MoveWall();
@@ -68,8 +68,8 @@ void RotateComponent::Update(float _deltaTime)
 }
 
 /**
-@brief	“ü—Íˆ—
-@param	InputState\‘¢‘Ì
+@brief	å…¥åŠ›å‡¦ç†
+@param	InputStateæ§‹é€ ä½“
 */
 void RotateComponent::ProcessInput(const InputState & _state)
 {
@@ -112,7 +112,7 @@ void RotateComponent::ProcessInput(const InputState & _state)
 	}
 }
 
-//•ÇˆÚ“®
+//å£ç§»å‹•
 void RotateComponent::MoveWall()
 {
 	if (f < 1.0)
@@ -136,7 +136,7 @@ void RotateComponent::MoveWall()
 
 void RotateComponent::HitRightWall()
 {
-	//‚±‚ÌƒtƒŒ[ƒ€‚Å“ü—Í‚³‚ê‚½‚Ì‚ª‰E‚È‚ç‰E‰ñ“]A¶‚È‚ç¶‰ñ“]—p‚ÌŠp“x‚ğ‘ã“ü‚·‚é
+	//ã“ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§å…¥åŠ›ã•ã‚ŒãŸã®ãŒå³ãªã‚‰å³å›è»¢ã€å·¦ãªã‚‰å·¦å›è»¢ç”¨ã®è§’åº¦ã‚’ä»£å…¥ã™ã‚‹
 	float rad = right ? Math::ToRadians(90.0f) : Math::ToRadians(-90.0f);
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);
@@ -152,7 +152,7 @@ void RotateComponent::HitRightWall()
 
 void RotateComponent::HitLeftWall()
 {
-	//‚±‚ÌƒtƒŒ[ƒ€‚Å“ü—Í‚³‚ê‚½‚Ì‚ª‰E‚È‚ç‰E‰ñ“]A¶‚È‚ç¶‰ñ“]—p‚ÌŠp“x‚ğ‘ã“ü‚·‚é
+	//ã“ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§å…¥åŠ›ã•ã‚ŒãŸã®ãŒå³ãªã‚‰å³å›è»¢ã€å·¦ãªã‚‰å·¦å›è»¢ç”¨ã®è§’åº¦ã‚’ä»£å…¥ã™ã‚‹
 	float rad = right ? Math::ToRadians(90.0f) : Math::ToRadians(-90.0f);
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);
@@ -168,7 +168,7 @@ void RotateComponent::HitLeftWall()
 
 void RotateComponent::HitTopWall()
 {
-	//‚±‚ÌƒtƒŒ[ƒ€‚Å“ü—Í‚³‚ê‚½‚Ì‚ª‰E‚È‚ç‰E‰ñ“]A¶‚È‚ç¶‰ñ“]—p‚ÌŠp“x‚ğ‘ã“ü‚·‚é
+	//ã“ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§å…¥åŠ›ã•ã‚ŒãŸã®ãŒå³ãªã‚‰å³å›è»¢ã€å·¦ãªã‚‰å·¦å›è»¢ç”¨ã®è§’åº¦ã‚’ä»£å…¥ã™ã‚‹
 	float rad = right ? Math::ToRadians(90.0f) : Math::ToRadians(-90.0f);
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);
@@ -184,7 +184,7 @@ void RotateComponent::HitTopWall()
 
 void RotateComponent::HitUnderWall()
 {
-	//‚±‚ÌƒtƒŒ[ƒ€‚Å“ü—Í‚³‚ê‚½‚Ì‚ª‰E‚È‚ç‰E‰ñ“]A¶‚È‚ç¶‰ñ“]—p‚ÌŠp“x‚ğ‘ã“ü‚·‚é
+	//ã“ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§å…¥åŠ›ã•ã‚ŒãŸã®ãŒå³ãªã‚‰å³å›è»¢ã€å·¦ãªã‚‰å·¦å›è»¢ç”¨ã®è§’åº¦ã‚’ä»£å…¥ã™ã‚‹
 	float rad = right ? Math::ToRadians(90.0f) : Math::ToRadians(-90.0f);
 	rot = owner->GetRotation();
 	Quaternion inc(Vector3::UnitX, rad);

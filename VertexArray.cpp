@@ -2,58 +2,58 @@
 #include <glew.h>
 
 /**
-@param	’¸“_ƒoƒbƒtƒ@‚Ì”z—ñ‚Ìƒ|ƒCƒ“ƒ^
-@param	’¸“_”
-@param	ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì”z—ñ‚Ìƒ|ƒCƒ“ƒ^
-@param	ƒCƒ“ƒfƒbƒNƒX‚Ì”
+@param	é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®é…åˆ—ã®ãƒã‚¤ãƒ³ã‚¿
+@param	é ‚ç‚¹æ•°
+@param	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®é…åˆ—ã®ãƒã‚¤ãƒ³ã‚¿
+@param	ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®æ•°
 */
 VertexArray::VertexArray(const float* _verts, unsigned int _numVerts,
 	const unsigned int* _indices, unsigned int _numIndices)
 	:numVerts(_numVerts)
 	,numIndices(_numIndices)
 {
-	// ’¸“_”z—ñ‚Ìì¬
+	// é ‚ç‚¹é…åˆ—ã®ä½œæˆ
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
 
-	// ’¸“_ƒoƒbƒtƒ@‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, _numVerts * 8 * sizeof(float), _verts, GL_STATIC_DRAW);
 
-	// ƒCƒ“ƒfƒNƒXƒoƒbƒtƒ@‚Ìì¬
+	// ã‚¤ãƒ³ãƒ‡ã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	glGenBuffers(1, &indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _numIndices * sizeof(unsigned int), _indices, GL_STATIC_DRAW);
 
-	//Å‰‚Ì’¸“_‘®«‚ğ—LŒø‚ÉiˆÊ’uÀ•Wj
+	//æœ€åˆã®é ‚ç‚¹å±æ€§ã‚’æœ‰åŠ¹ã«ï¼ˆä½ç½®åº§æ¨™ï¼‰
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(
-		0,						//’¸“_‘®«ƒCƒ“ƒfƒbƒNƒXiˆÊ’uÀ•Wj
-		3,						//—v‘f‚Ì”
-		GL_FLOAT,				//—v‘f‚ÌŒ^
-		GL_FALSE,				//iGL_FLOAT‚É‚Íg‚í‚È‚¢j
-		sizeof(float) * 8,		//Še’¸“_‚ÌƒTƒCƒY
-		0						//’¸“_ƒf[ƒ^‚ÌŠJnˆÊ’u‚©‚ç‚±‚Ì‘®«‚Ü‚Å‚ÌƒIƒtƒZƒbƒg
+		0,						//é ‚ç‚¹å±æ€§ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆä½ç½®åº§æ¨™ï¼‰
+		3,						//è¦ç´ ã®æ•°
+		GL_FLOAT,				//è¦ç´ ã®å‹
+		GL_FALSE,				//ï¼ˆGL_FLOATã«ã¯ä½¿ã‚ãªã„ï¼‰
+		sizeof(float) * 8,		//å„é ‚ç‚¹ã®ã‚µã‚¤ã‚º
+		0						//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã®é–‹å§‹ä½ç½®ã‹ã‚‰ã“ã®å±æ€§ã¾ã§ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 	);
-	//‘æ2‚Ì’¸“_‘®«‚ğ—LŒø‚Éi–@üƒxƒNƒgƒ‹j
+	//ç¬¬2ã®é ‚ç‚¹å±æ€§ã‚’æœ‰åŠ¹ã«ï¼ˆæ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ï¼‰
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(
-		1,						//’¸“_‘®«ƒCƒ“ƒfƒbƒNƒXi–@üƒxƒNƒgƒ‹j
-		3,						//—v‘f‚Ì”
-		GL_FLOAT,				//—v‘f‚ÌŒ^
-		GL_FALSE,				//iGL_FLOAT‚É‚Íg‚í‚È‚¢j
-		sizeof(float) * 8,		//Še’¸“_‚ÌƒTƒCƒY
-		reinterpret_cast<void*>(sizeof(float) * 3));	//ƒIƒtƒZƒbƒgƒ|ƒCƒ“ƒ^
-    //‘æ3‚Ì’¸“_‘®«‚ğ—LŒø‚ÉiƒeƒNƒXƒ`ƒƒÀ•Wj
+		1,						//é ‚ç‚¹å±æ€§ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆæ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ï¼‰
+		3,						//è¦ç´ ã®æ•°
+		GL_FLOAT,				//è¦ç´ ã®å‹
+		GL_FALSE,				//ï¼ˆGL_FLOATã«ã¯ä½¿ã‚ãªã„ï¼‰
+		sizeof(float) * 8,		//å„é ‚ç‚¹ã®ã‚µã‚¤ã‚º
+		reinterpret_cast<void*>(sizeof(float) * 3));	//ã‚ªãƒ•ã‚»ãƒƒãƒˆãƒã‚¤ãƒ³ã‚¿
+    //ç¬¬3ã®é ‚ç‚¹å±æ€§ã‚’æœ‰åŠ¹ã«ï¼ˆãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ï¼‰
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(
-        2,						//’¸“_‘®«ƒCƒ“ƒfƒbƒNƒXiƒeƒNƒXƒ`ƒƒÀ•Wj
-        2,						//—v‘f‚Ì”iUV‚Í2ŒÂj
-        GL_FLOAT,				//—v‘f‚ÌŒ^
-        GL_FALSE,				//iGL_FLOAT‚É‚Íg‚í‚È‚¢j
-        sizeof(float) * 8,		//Še’¸“_‚ÌƒTƒCƒY
-        reinterpret_cast<void*>(sizeof(float) * 6));	//ƒIƒtƒZƒbƒgƒ|ƒCƒ“ƒ^
+        2,						//é ‚ç‚¹å±æ€§ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™ï¼‰
+        2,						//è¦ç´ ã®æ•°ï¼ˆUVã¯2å€‹ï¼‰
+        GL_FLOAT,				//è¦ç´ ã®å‹
+        GL_FALSE,				//ï¼ˆGL_FLOATã«ã¯ä½¿ã‚ãªã„ï¼‰
+        sizeof(float) * 8,		//å„é ‚ç‚¹ã®ã‚µã‚¤ã‚º
+        reinterpret_cast<void*>(sizeof(float) * 6));	//ã‚ªãƒ•ã‚»ãƒƒãƒˆãƒã‚¤ãƒ³ã‚¿
 }
 
 
@@ -65,7 +65,7 @@ VertexArray::~VertexArray()
 }
 
 /**
-@brief	’¸“_”z—ñ‚ğƒAƒNƒeƒBƒu‚É‚·‚é
+@brief	é ‚ç‚¹é…åˆ—ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
 */
 void VertexArray::SetActive()
 {

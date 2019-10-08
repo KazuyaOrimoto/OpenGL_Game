@@ -6,7 +6,7 @@
 #include "GameObjectManager.h"
 
 /**
-@param	ƒQ[ƒ€ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@param	ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 GameObject::GameObject()
 	: state(Active)
@@ -29,8 +29,8 @@ GameObject::~GameObject()
 }
 
 /**
-@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 */
 void GameObject::Update(float _deltaTime)
 {
@@ -46,8 +46,8 @@ void GameObject::Update(float _deltaTime)
 }
 
 /**
-@brief	ƒAƒ^ƒbƒ`‚³‚ê‚Ä‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌƒAƒbƒvƒf[ƒg
-@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+@brief	ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
+@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 */
 void GameObject::UpdateComponents(float _deltaTime)
 {
@@ -58,8 +58,8 @@ void GameObject::UpdateComponents(float _deltaTime)
 }
 
 /**
-@brief	ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌƒAƒbƒvƒf[ƒg
-@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+@brief	ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
+@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 */
 void GameObject::UpdateGameObject(float _deltaTime)
 {
@@ -83,8 +83,8 @@ void GameObject::GameObjectInput(const InputState& _keyState)
 }
 
 /**
-@brief	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’Ç‰Á‚·‚é
-@param	’Ç‰Á‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ|ƒCƒ“ƒ^
+@brief	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’è¿½åŠ ã™ã‚‹
+@param	è¿½åŠ ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
 */
 void GameObject::AddComponent(Component * _component)
 {
@@ -103,8 +103,8 @@ void GameObject::AddComponent(Component * _component)
 }
 
 /**
-@brief	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ‚·‚é
-@param	íœ‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ|ƒCƒ“ƒ^
+@brief	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å‰Šé™¤ã™ã‚‹
+@param	å‰Šé™¤ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
 */
 void GameObject::RemoveComponent(Component * _component)
 {
@@ -116,7 +116,7 @@ void GameObject::RemoveComponent(Component * _component)
 }
 
 /**
-@brief	Transform‚Ìƒ[ƒ‹ƒh•ÏŠ·
+@brief	Transformã®ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›
 */
 void GameObject::ComputeWorldTransform()
 {

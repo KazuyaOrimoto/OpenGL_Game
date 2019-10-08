@@ -19,9 +19,9 @@ public:
 
 
 private:
-	//�I�u�W�F�N�g�ɐݒ肷��p�̋��i���S���I�u�W�F�N�g�̒��S�ɂ���j
+	//オブジェクトに設定する用の球（中心をオブジェクトの中心にする）
 	Sphere objectSphere;
-	//�����蔻�肷��Ƃ��Ɏg�����i���S�����[���h���W�̒��S�ɂ���j
+	//当たり判定するときに使う球（中心をワールド座標の中心にする）
 	Sphere worldSphere;
 
 };

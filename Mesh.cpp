@@ -20,10 +20,10 @@ Mesh::~Mesh()
 }
 
 /**
-@brief  ƒƒbƒVƒ…ƒf[ƒ^‚Ì“Ç‚İ‚İ
-@param	ƒ[ƒh‚µ‚½‚¢ƒƒbƒVƒ…‚Ìƒtƒ@ƒCƒ‹–¼
-@param	RendererƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
-@return true : ¬Œ÷ , false : ¸”s
+@brief  ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿
+@param	ãƒ­ãƒ¼ãƒ‰ã—ãŸã„ãƒ¡ãƒƒã‚·ãƒ¥ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+@param	Rendererã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
+@return true : æˆåŠŸ , false : å¤±æ•—
 */
 bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 {
@@ -49,7 +49,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 
     int ver = doc["version"].GetInt();
 
-    // ƒo[ƒWƒ‡ƒ“‚Ìƒ`ƒFƒbƒN
+    // ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã®ãƒã‚§ãƒƒã‚¯
     if (ver != 1)
     {
         SDL_Log("Mesh %s not version 1", _fileName.c_str());
@@ -62,7 +62,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
     // (This is changed in a later chapter's code)
     size_t vertSize = 8;
 
-    // ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰
     const rapidjson::Value& readTextures = doc["textures"];
     if (!readTextures.IsArray() || readTextures.Size() < 1)
     {
@@ -74,23 +74,23 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 
     for (rapidjson::SizeType i = 0; i < readTextures.Size(); i++)
     {
-        // ‚·‚Å‚Éƒ[ƒh‚³‚ê‚½ƒeƒNƒXƒ`ƒƒ‚¶‚á‚È‚¢‚©’²‚×‚é
+        // ã™ã§ã«ãƒ­ãƒ¼ãƒ‰ã•ã‚ŒãŸãƒ†ã‚¯ã‚¹ãƒãƒ£ã˜ã‚ƒãªã„ã‹èª¿ã¹ã‚‹
         std::string texName = readTextures[i].GetString();
         Texture* t = _renderer->GetTexture(texName);
         if (t == nullptr)
         {
-            // ƒeƒNƒXƒ`ƒƒ‚ğƒ[ƒh‚·‚é
+            // ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
             t = _renderer->GetTexture(texName);
             if (t == nullptr)
             {
-                // ƒeƒNƒXƒ`ƒƒ‚ªƒ[ƒh‚Å‚«‚È‚©‚Á‚½ê‡AƒfƒtƒHƒ‹ƒg‚ÌƒeƒNƒXƒ`ƒƒ‚ğg—p
+                // ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒãƒ­ãƒ¼ãƒ‰ã§ããªã‹ã£ãŸå ´åˆã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½¿ç”¨
                 t = _renderer->GetTexture("Assets/Default.png");
             }
         }
 		textures.emplace_back(t);
     }
 
-    // ’¸“_”z—ñƒf[ƒ^‚ğƒ[ƒh
+    // é ‚ç‚¹é…åˆ—ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ­ãƒ¼ãƒ‰
     const rapidjson::Value& vertsJson = doc["vertices"];
     if (!vertsJson.IsArray() || vertsJson.Size() < 1)
     {
@@ -103,7 +103,7 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 	radius = 0.0f;
     for (rapidjson::SizeType i = 0; i < vertsJson.Size(); i++)
     {
-        // ¡‚Ì‚Æ‚±‚ë‚Í‚W‚Â‚Ì—v‘f‚Æ‚·‚é
+        // ä»Šã®ã¨ã“ã‚ã¯ï¼˜ã¤ã®è¦ç´ ã¨ã™ã‚‹
         const rapidjson::Value& vert = vertsJson[i];
         if (!vert.IsArray() || vert.Size() != 8)
         {
@@ -115,17 +115,17 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
 		verts.push_back(pos);
 		radius = Math::Max(radius, pos.LengthSq());
 
-        // floatŒ^‚Å—v‘f‚ğ’Ç‰Á
+        // floatå‹ã§è¦ç´ ã‚’è¿½åŠ 
         for (rapidjson::SizeType i = 0; i < vert.Size(); i++)
         {
             vertices.emplace_back(static_cast<float>(vert[i].GetDouble()));
         }
     }
 
-    // ”¼Œa‚ğ2æ‚·‚é
+    // åŠå¾„ã‚’2ä¹—ã™ã‚‹
 	radius = Math::Sqrt(radius);
 
-    // —v‘f”z—ñƒf[ƒ^‚Ìƒ[ƒh
+    // è¦ç´ é…åˆ—ãƒ‡ãƒ¼ã‚¿ã®ãƒ­ãƒ¼ãƒ‰
     const rapidjson::Value& indJson = doc["indices"];
     if (!indJson.IsArray() || indJson.Size() < 1)
     {
@@ -149,14 +149,14 @@ bool Mesh::Load(const std::string & _fileName, Renderer* _renderer)
         indices.emplace_back(ind[2].GetUint());
     }
 
-    // ‚±‚±‚ÅVertexArrayƒNƒ‰ƒX‚Ìì¬
+    // ã“ã“ã§VertexArrayã‚¯ãƒ©ã‚¹ã®ä½œæˆ
 	vertexArray = new VertexArray(vertices.data(), static_cast<unsigned>(vertices.size()) / vertSize,
         indices.data(), static_cast<unsigned>(indices.size()));
     return true;
 }
 
 /**
-@brief  ƒ[ƒh‚µ‚½ƒƒbƒVƒ…ƒf[ƒ^‚Ì‰ğ•ú
+@brief  ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®è§£æ”¾
 */
 void Mesh::Unload()
 {
@@ -165,7 +165,7 @@ void Mesh::Unload()
 }
 
 /**
-@brief  ƒeƒNƒXƒ`ƒƒ‚ÌGetter
+@brief  ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®Getter
 */
 Texture* Mesh::GetTexture(size_t _index)
 {

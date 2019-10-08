@@ -3,7 +3,7 @@
 #include "SpriteComponent.h"
 
 /**
-@param	ƒQ[ƒ€ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@param	ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 Ship::Ship()
 	:GameObject()
@@ -17,8 +17,8 @@ Ship::~Ship()
 }
 
 /**
-@brief	ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌƒAƒbƒvƒf[ƒg
-@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+@brief	ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
+@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 */
 void Ship::UpdateGameObject(float _deltaTime)
 {

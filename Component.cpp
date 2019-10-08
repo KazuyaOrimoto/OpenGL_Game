@@ -2,8 +2,8 @@
 #include "GameObject.h"
 
 /**
-@param	ƒAƒ^ƒbƒ`‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
-@param	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌXV‡”Ôi”’l‚ª¬‚³‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+@param	ã‚¢ã‚¿ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+@param	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ›´æ–°é †ç•ªï¼ˆæ•°å€¤ãŒå°ã•ã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
 */
 Component::Component(GameObject* _owner, int _updateOrder)
 	: owner(_owner)
@@ -18,7 +18,7 @@ Component::~Component()
 }
 
 /**
-@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 */
 void Component::Update(float _deltaTime)
 {

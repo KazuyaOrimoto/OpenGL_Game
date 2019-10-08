@@ -8,7 +8,7 @@
 #include "Texture.h"
 
 /**
-@param	ƒAƒ^ƒbƒ`‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
+@param	ã‚¢ã‚¿ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
 */
 MeshComponent::MeshComponent(GameObject* _owner, ShaderType _shaderType)
     :Component(_owner)
@@ -26,8 +26,8 @@ MeshComponent::~MeshComponent()
 }
 
 /**
-@brief@•`‰æˆ—
-@param	Žg—p‚·‚éƒVƒF[ƒ_[ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@briefã€€æç”»å‡¦ç†
+@param	ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void MeshComponent::Draw(Shader* _shader)
 {

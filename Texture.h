@@ -8,39 +8,39 @@ public:
     Texture();
     ~Texture();
 	/**
-	@brief	ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh
-	@param	ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹–¼
-	@return	true : ¬Œ÷ , false : ¸”s
+	@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰
+	@param	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+	@return	true : æˆåŠŸ , false : å¤±æ•—
 	*/
 	bool Load(const std::string& _fileName);
 	/**
-	@brief	ƒ[ƒh‚µ‚½ƒeƒNƒXƒ`ƒƒ‚Ì‰ğ•ú
+	@brief	ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è§£æ”¾
 	*/
 	void Unload();
 
 	/**
-	@brief	ƒeƒNƒXƒ`ƒƒ‚ğƒAƒNƒeƒBƒu‚É‚·‚é
+	@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
 	*/
 	void SetActive();
 
 	/**
-	@brief	ƒeƒNƒXƒ`ƒƒ‚Ì‰¡•‚ğæ“¾‚·‚é
-	@return ‰¡•
+	@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ¨ªå¹…ã‚’å–å¾—ã™ã‚‹
+	@return æ¨ªå¹…
 	*/
 	int GetWidth() const { return width; }
 
 	/**
-	@brief	ƒeƒNƒXƒ`ƒƒ‚Ìc•‚ğæ“¾‚·‚é
-	@return c•
+	@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç¸¦å¹…ã‚’å–å¾—ã™ã‚‹
+	@return ç¸¦å¹…
 	*/
 	int GetHeight() const { return height; }
 
 private:
 	unsigned int textureID;
 
-	//ƒeƒNƒXƒ`ƒƒ‚Ì‰¡•
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ¨ªå¹…
 	int width;
-	//ƒeƒNƒXƒ`ƒƒ‚Ìc•
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç¸¦å¹…
 	int height;
 };
 

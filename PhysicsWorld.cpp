@@ -38,14 +38,14 @@ void PhysicsWorld::HitCheck()
 
 void PhysicsWorld::HitCheck(BoxCollider* _box)
 {
-	//�R���C�_�[�̐e�I�u�W�F�N�g��Active����Ȃ���ΏI������
+	//コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_box->GetOwner()->GetState() != State::Active)
 	{
 		return;
 	}
 	for (auto itr : spheres)
 	{
-		//�R���C�_�[�̐e�I�u�W�F�N�g��Active����Ȃ���ΏI������
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
 		{
 			continue;
@@ -65,7 +65,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		{
 			continue;
 		}
-		//�R���C�_�[�̐e�I�u�W�F�N�g��Active����Ȃ���ΏI������
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
 		{
 			continue;
@@ -83,7 +83,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 
 void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 {
-	//�R���C�_�[�̐e�I�u�W�F�N�g��Active����Ȃ���ΏI������
+	//コライダーの親オブジェクトがActiveじゃなければ終了する
 	if (_sphere->GetOwner()->GetState() != State::Active)
 	{
 		return;
@@ -94,7 +94,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 		{
 			continue;
 		}
-		//�R���C�_�[�̐e�I�u�W�F�N�g��Active����Ȃ���ΏI������
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
 		{
 			continue;
@@ -110,7 +110,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 	}
 	for (auto itr : boxes)
 	{
-		//�R���C�_�[�̐e�I�u�W�F�N�g��Active����Ȃ���ΏI������
+		//コライダーの親オブジェクトがActiveじゃなければ終了する
 		if (itr->GetOwner()->GetState() != State::Active)
 		{
 			continue;
@@ -129,7 +129,7 @@ void PhysicsWorld::HitCheck(SphereCollider * _sphere)
 void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 {
 	boxes.emplace_back(_box);
-    //�R���C�_�[�̃|�C���^�Ɛe�I�u�W�F�N�g�̓����蔻�莞�֐��|�C���^
+    //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
     collisionFunction.insert(std::make_pair(dynamic_cast<ColliderComponent*>(_box), _func));
 }
 
@@ -147,7 +147,7 @@ void PhysicsWorld::RemoveBox(BoxCollider * _box)
 void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 {
 	spheres.emplace_back(_sphere);
-    //�R���C�_�[�̃|�C���^�Ɛe�I�u�W�F�N�g�̓����蔻�莞�֐��|�C���^
+    //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
     collisionFunction.insert(std::make_pair(dynamic_cast<ColliderComponent*>(_sphere), _func));
 }
 

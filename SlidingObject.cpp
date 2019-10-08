@@ -54,7 +54,7 @@ void SlidingObject::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Player)
 	{
-		//áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
+		//éšœå®³ç‰©ã¨å½“ãŸã£ãŸæ™‚ã®å‡¦ç†
 	}
 }
 

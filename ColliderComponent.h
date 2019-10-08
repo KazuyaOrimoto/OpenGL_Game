@@ -8,22 +8,22 @@ class ColliderComponent : public Component
 {
 public:
     /**
-    @param	�A�^�b�`����Q�[���I�u�W�F�N�g�̃|�C���^
-    @param	�R���|�[�l���g�̍X�V���ԁi���l���������قǑ����X�V�����j
-    @param  �����蔻�莞�ɁA�߂荞�݂��瓮���������̗D��x�����߂鐔�l
+    @param	アタッチするゲームオブジェクトのポインタ
+    @param	コンポーネントの更新順番（数値が小さいほど早く更新される）
+    @param  当たり判定時に、めり込みから動かく処理の優先度を決める数値
     */
 	ColliderComponent(GameObject* _owner, int _updateOrder = 200,int _collisionOrder = 100);
 	virtual ~ColliderComponent();
 
 	int GetCollisionOrder() const { return collisionOrder; }
 
-	//�I�u�W�F�N�g�����ɓ����������ɂ߂肱�݂��炸�炷����
+	//オブジェクトが球に当たった時にめりこみからずらす処理
 	virtual void ShiftObject(const Sphere& _hirSphere) {}
-	//�I�u�W�F�N�g�����ʂɓ����������ɂ߂肱�݂��炸�炷����
+	//オブジェクトが平面に当たった時にめりこみからずらす処理
 	virtual void ShiftObject(const Plane& _hitPlane) {}
-	//�I�u�W�F�N�g��AABB�ɓ����������ɂ߂肱�݂��炸�炷����
+	//オブジェクトがAABBに当たった時にめりこみからずらす処理
 	virtual void ShiftObject(const AABB& _hitBox) {}
-	//�I�u�W�F�N�g���J�v�Z���ɓ����������ɂ߂肱�݂��炸�炷����
+	//オブジェクトがカプセルに当たった時にめりこみからずらす処理
 	virtual void ShiftObject(const Capsule& _hitCapsule) {}
 
 	virtual void CollisionPause() = 0;
@@ -31,9 +31,9 @@ public:
 
 
 private:
-    //���̂𔺂������蔻������邩�ǂ���
+    //実体を伴う当たり判定をするかどうか
 	bool isTrigger;
-	//���l���傫������D�悵�Ă߂荞�݂��瓮��������������i0�ȉ��͓������Ȃ��j
+	//数値が大きい方を優先してめり込みから動かす処理をする（0以下は動かさない）
 	int collisionOrder;
     //
 

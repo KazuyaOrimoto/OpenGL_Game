@@ -18,27 +18,27 @@ public:
     ~BikeObject();
 
     /**
-    @brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-    @param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+    @brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+    @param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
     */
     virtual void UpdateGameObject(float _deltaTime) override;
 
     virtual void OnCollision(const GameObject& _hitObject) override;
 
     /**
-    @brief	“ü—Íˆ—
-    @param	InputState\‘¢‘Ì
+    @brief	å…¥åŠ›å‡¦ç†
+    @param	InputStateæ§‹é€ ä½“
     */
     virtual void GameObjectInput(const InputState& _state)override;
 
 private:
 	void Animation();
 	/**
-	@brief	ƒAƒNƒVƒ‡ƒ“‚ğŒˆ’è‚·‚é
+	@brief	ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’æ±ºå®šã™ã‚‹
 	*/
 	void ActionDetermining();
 	/**
-	@brief	ƒAƒNƒVƒ‡ƒ“‚ğÀs‚·‚é
+	@brief	ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å®Ÿè¡Œã™ã‚‹
 	*/
 	void ActionExecution();
 

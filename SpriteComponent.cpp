@@ -6,8 +6,8 @@
 #include "Renderer.h"
 
 /**
-@param	ƒAƒ^ƒbƒ`‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
-@param	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌXV‡”Ôi”’l‚ª¬‚³‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+@param	ã‚¢ã‚¿ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+@param	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ›´æ–°é †ç•ªï¼ˆæ•°å€¤ãŒå°ã•ã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
 */
 SpriteComponent::SpriteComponent(GameObject * _owner, int _drawOrder)
     :Component(_owner)
@@ -25,8 +25,8 @@ SpriteComponent::~SpriteComponent()
 }
 
 /**
-@brief	•`‰æˆ—
-@param	g—p‚·‚éƒVƒF[ƒ_[ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief	æç”»å‡¦ç†
+@param	ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void SpriteComponent::Draw(Shader * _shader)
 {
@@ -49,8 +49,8 @@ void SpriteComponent::Draw(Shader * _shader)
 }
 
 /**
-@brief	g—p‚·‚éƒeƒNƒXƒ`ƒƒ‚Ìİ’è
-@param	g—p‚·‚éƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^
+@brief	ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
+@param	ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void SpriteComponent::SetTexture(Texture * _texture)
 {

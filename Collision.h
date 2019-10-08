@@ -5,126 +5,126 @@
 
 
 
-//ü•ª
+//ç·šåˆ†
 struct LineSegment
 {
 	/**
-	@param	ü•ª‚ÌŠJn’n“_‚Ìƒ|ƒWƒVƒ‡ƒ“
-	@param	ü•ª‚ÌI—¹’n“_‚Ìƒ|ƒWƒVƒ‡ƒ“
+	@param	ç·šåˆ†ã®é–‹å§‹åœ°ç‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
+	@param	ç·šåˆ†ã®çµ‚äº†åœ°ç‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
 	*/
     LineSegment(const Vector3& _start, const Vector3& _end);
 	
 	/**
-	@brief	ü•ªã‚Ì“_‚ğ•Ô‚·
-	@param	“ü—Í’l tiL(t) = Start + (End - Start)tj
-	@return ü•ªã‚Ì“_‚Ìƒ|ƒWƒVƒ‡ƒ“
+	@brief	ç·šåˆ†ä¸Šã®ç‚¹ã‚’è¿”ã™
+	@param	å…¥åŠ›å€¤ tï¼ˆL(t) = Start + (End - Start)tï¼‰
+	@return ç·šåˆ†ä¸Šã®ç‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
 	*/
 	Vector3 PointOnSegment(float _t) const;
 	
 	/**
-	@brief	“_‚Æü•ª‚ÌŠÔ‚ÌÅ’Z‹——£‚ğ•Ô‚·
-	@param	”CˆÓ‚Ì“_‚Ìƒ|ƒWƒVƒ‡ƒ“
-	@return Å’Z‹——£
+	@brief	ç‚¹ã¨ç·šåˆ†ã®é–“ã®æœ€çŸ­è·é›¢ã‚’è¿”ã™
+	@param	ä»»æ„ã®ç‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
+	@return æœ€çŸ­è·é›¢
 	*/
     float MinDistanceSquared(const Vector3& _point)const;
 
 	/**
-	@brief	ü•ª‚Æü•ª‚ÌŠÔ‚ÌÅ’Z‹——£‚ğ•Ô‚·
-	@param	”»’è‚·‚éü•ª‚Ì\‘¢‘Ì‚P
-	@param	”»’è‚·‚éü•ª‚Ì\‘¢‘Ì‚Q
-	@return Å’Z‹——£
+	@brief	ç·šåˆ†ã¨ç·šåˆ†ã®é–“ã®æœ€çŸ­è·é›¢ã‚’è¿”ã™
+	@param	åˆ¤å®šã™ã‚‹ç·šåˆ†ã®æ§‹é€ ä½“ï¼‘
+	@param	åˆ¤å®šã™ã‚‹ç·šåˆ†ã®æ§‹é€ ä½“ï¼’
+	@return æœ€çŸ­è·é›¢
 	*/
     static float MinDistanceSquared(const LineSegment& _line1,const LineSegment& _line2);
 
-	//ü•ª‚ÌŠJn’n“_
+	//ç·šåˆ†ã®é–‹å§‹åœ°ç‚¹
     Vector3 start;
-	//ü•ª‚ÌI—¹’n“_
+	//ç·šåˆ†ã®çµ‚äº†åœ°ç‚¹
     Vector3 end;
 };
 
-//•½–Ê
+//å¹³é¢
 struct Plane
 {
 	/**
-	@param	•½–Ê‚Ì–@üƒxƒNƒgƒ‹
-	@param	•½–Ê‚ÆŒ´“_‚Ì•„†‚Â‚«Å’Z‹——£
+	@param	å¹³é¢ã®æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
+	@param	å¹³é¢ã¨åŸç‚¹ã®ç¬¦å·ã¤ãæœ€çŸ­è·é›¢
 	*/
     Plane(const Vector3& _normal, float _distance);
 
 	/**
-	@param	•½–Êã‚Ì“_1
-	@param	•½–Êã‚Ì“_2
-	@param	•½–Êã‚Ì“_3
+	@param	å¹³é¢ä¸Šã®ç‚¹1
+	@param	å¹³é¢ä¸Šã®ç‚¹2
+	@param	å¹³é¢ä¸Šã®ç‚¹3
 	*/
     Plane(const Vector3& _vec1, const Vector3& _vec2, const Vector3& _vec3);
 
 	/**
-	@brief	“_‚Æ•½–Ê‚ÌÅ’Z‹——£‚ğ•Ô‚·
-	@param	”CˆÓ‚Ì“_‚Ìƒ|ƒWƒVƒ‡ƒ“
-	@return •„†‚Â‚«Å’Z‹——£
+	@brief	ç‚¹ã¨å¹³é¢ã®æœ€çŸ­è·é›¢ã‚’è¿”ã™
+	@param	ä»»æ„ã®ç‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
+	@return ç¬¦å·ã¤ãæœ€çŸ­è·é›¢
 	*/
     float SignedDistance(const Vector3& _point);
 
-	//•½–Ê‚Ì–@üƒxƒNƒgƒ‹
+	//å¹³é¢ã®æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«
     Vector3 normal;
-	//•½–Ê‚ÆŒ´“_‚Ì•„†‚Â‚«Å’Z‹——£
+	//å¹³é¢ã¨åŸç‚¹ã®ç¬¦å·ã¤ãæœ€çŸ­è·é›¢
     float distance;
 };
 
-//‹…
+//çƒ
 struct Sphere
 {
 	/**
-	@param	‹…‘Ì‚Ì’†SÀ•W
-	@param	‹…‘Ì‚Ì”¼Œa
+	@param	çƒä½“ã®ä¸­å¿ƒåº§æ¨™
+	@param	çƒä½“ã®åŠå¾„
 	*/
     Sphere(const Vector3& _center, const float _radius);
     
 	/**
-	@brief	‹…‘Ì‚É“_‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
-	@param	”CˆÓ‚Ì“_
-	@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+	@brief	çƒä½“ã«ç‚¹ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
+	@param	ä»»æ„ã®ç‚¹
+	@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 	*/
 	bool Contains(const Vector3& _point)const;
 
-	//‹…‘Ì‚Ì’†SÀ•W
+	//çƒä½“ã®ä¸­å¿ƒåº§æ¨™
     Vector3 center;
-	//‹…‘Ì‚Ì”¼Œa
+	//çƒä½“ã®åŠå¾„
     float radius;
 };
 
-//²•ÀsƒoƒEƒ“ƒfƒBƒ“ƒOƒ{ƒbƒNƒX(Axis-Aligned Bounding Box)
+//è»¸ä¸¦è¡Œãƒã‚¦ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒœãƒƒã‚¯ã‚¹(Axis-Aligned Bounding Box)
 struct AABB
 {
 	/**
-	@param	Å¬‚Ìx,y,z‚Ì’l‚Ìƒ|ƒWƒVƒ‡ƒ“
-	@param	Å‘å‚Ìx,y,z‚Ì’l‚Ìƒ|ƒWƒVƒ‡ƒ“
+	@param	æœ€å°ã®x,y,zã®å€¤ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
+	@param	æœ€å¤§ã®x,y,zã®å€¤ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
 	*/
     AABB(const Vector3& _min,const Vector3& _max);
 
 	/**
-	@brief	Å¬’l‚ÆÅ‘å’l‚ğŠe¬•ª‚²‚Æ‚ÉXV‚·‚é
-	@param	”CˆÓ‚Ì“_‚Ìƒ|ƒWƒVƒ‡ƒ“
+	@brief	æœ€å°å€¤ã¨æœ€å¤§å€¤ã‚’å„æˆåˆ†ã”ã¨ã«æ›´æ–°ã™ã‚‹
+	@param	ä»»æ„ã®ç‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
 	*/
     void UpdateMinMax(const Vector3& _point);
 
 	/**
-	@brief	“–‚½‚è”»’èƒ{ƒbƒNƒX‚Ì‰ñ“]
-	@param	‰ñ“]²‚Æ‰ñ“]•\‚·’liQuaternionj
+	@brief	å½“ãŸã‚Šåˆ¤å®šãƒœãƒƒã‚¯ã‚¹ã®å›è»¢
+	@param	å›è»¢è»¸ã¨å›è»¢è¡¨ã™å€¤ï¼ˆQuaternionï¼‰
 	*/
     void Rotate(const Quaternion& _quaternion);
     
 	/**
-	@brief	ƒ{ƒbƒNƒX‚É“_‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
-	@param	”CˆÓ‚Ì“_
-	@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+	@brief	ãƒœãƒƒã‚¯ã‚¹ã«ç‚¹ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
+	@param	ä»»æ„ã®ç‚¹
+	@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 	*/
 	bool Contains(const Vector3& _point)const;
     
 	/**
-	@brief	“_‚Æƒ{ƒbƒNƒX‚ÌÅ’Z‹——£‚ğ•Ô‚·
-	@param	”CˆÓ‚Ì“_
-	@return Å’Z‹——£
+	@brief	ç‚¹ã¨ãƒœãƒƒã‚¯ã‚¹ã®æœ€çŸ­è·é›¢ã‚’è¿”ã™
+	@param	ä»»æ„ã®ç‚¹
+	@return æœ€çŸ­è·é›¢
 	*/
 	float MinDistanceSquared(const Vector3& _point)const;
 
@@ -132,131 +132,131 @@ struct AABB
     Vector3 max;
 };
 
-//—LŒüƒoƒEƒ“ƒfƒBƒ“ƒOƒ{ƒbƒNƒXiOriented Bounding Boxj
-//–¢À‘•
+//æœ‰å‘ãƒã‚¦ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒœãƒƒã‚¯ã‚¹ï¼ˆOriented Bounding Boxï¼‰
+//æœªå®Ÿè£…
 struct OBB
 {
-	//’†S‚ÌÀ•W
+	//ä¸­å¿ƒã®åº§æ¨™
     Vector3 center;
-	//‰ñ“]ƒNƒH[ƒ^ƒjƒIƒ“
+	//å›è»¢ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³
     Quaternion rotation;
-	//ƒ{ƒbƒNƒX‚ÌL‚ª‚èi•A‚‚³A‰œs‚«j
+	//ãƒœãƒƒã‚¯ã‚¹ã®åºƒãŒã‚Šï¼ˆå¹…ã€é«˜ã•ã€å¥¥è¡Œãï¼‰
     Vector3 extents;
 };
 
-//ƒJƒvƒZƒ‹
+//ã‚«ãƒ—ã‚»ãƒ«
 struct Capsule
 {
 	/**
-	@param	n“_‚Æ‚È‚é“_‚ÌÀ•W
-	@param	I“_‚Æ‚È‚é“_‚ÌÀ•W
-	@param	ƒJƒvƒZƒ‹‚Ì”¼Œa
+	@param	å§‹ç‚¹ã¨ãªã‚‹ç‚¹ã®åº§æ¨™
+	@param	çµ‚ç‚¹ã¨ãªã‚‹ç‚¹ã®åº§æ¨™
+	@param	ã‚«ãƒ—ã‚»ãƒ«ã®åŠå¾„
 	*/
     Capsule(const Vector3& _start,const Vector3& _end,float _radius);
 
 	/**
-	@brief	ƒJƒvƒZƒ‹‚Ìn“_‚ÆI“_‚Ìü•ªã‚Ì“_‚ğ•Ô‚·
-	@param	“ü—Í’l tiL(t) = Start + (End - Start)tj
-	@return ü•ªã‚Ì“_‚Ìƒ|ƒWƒVƒ‡ƒ“
+	@brief	ã‚«ãƒ—ã‚»ãƒ«ã®å§‹ç‚¹ã¨çµ‚ç‚¹ã®ç·šåˆ†ä¸Šã®ç‚¹ã‚’è¿”ã™
+	@param	å…¥åŠ›å€¤ tï¼ˆL(t) = Start + (End - Start)tï¼‰
+	@return ç·šåˆ†ä¸Šã®ç‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
 	*/
     Vector3 PointOnSegment(float _t)const;
 
 	/**
-	@brief	ƒJƒvƒZƒ‹‚É“_‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
-	@param	”CˆÓ‚Ì“_
-	@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+	@brief	ã‚«ãƒ—ã‚»ãƒ«ã«ç‚¹ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
+	@param	ä»»æ„ã®ç‚¹
+	@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 	*/
     bool Contains(const Vector3& _point)const;
 
-	//ƒJƒvƒZƒ‹‚ğ\¬‚·‚éü•ª
+	//ã‚«ãƒ—ã‚»ãƒ«ã‚’æ§‹æˆã™ã‚‹ç·šåˆ†
     LineSegment segment;
-	//ƒJƒvƒZƒ‹‚Ì”¼Œa
+	//ã‚«ãƒ—ã‚»ãƒ«ã®åŠå¾„
     float radius;
 };
 
-//“Êƒ|ƒŠƒSƒ“
+//å‡¸ãƒãƒªã‚´ãƒ³
 struct ConvexPolygon
 {
 	/**
-	@brief	‚QŸŒ³‚Ìƒ|ƒŠƒSƒ“‚É“_‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
-	@param	”CˆÓ‚Ì“_
-	@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+	@brief	ï¼’æ¬¡å…ƒã®ãƒãƒªã‚´ãƒ³ã«ç‚¹ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
+	@param	ä»»æ„ã®ç‚¹
+	@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 	*/
     bool Contains(const Vector2& _point)const;
 
-	//’¸“_‚Ì‰Â•Ï’·ƒRƒ“ƒeƒi
+	//é ‚ç‚¹ã®å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
     std::vector<Vector2> vertices;
 };
 
 /**
-@brief	‹…‚Æ‹…‚Ì“–‚½‚è”»’è
-@param	‹…‚Ì\‘¢‘Ì‚P
-@param	‹…‚Ì\‘¢‘Ì‚Q
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	çƒã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
+@param	çƒã®æ§‹é€ ä½“ï¼‘
+@param	çƒã®æ§‹é€ ä½“ï¼’
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool Intersect(const Sphere& _sphere1,const Sphere& _sphere2);
 
 /**
-@brief	ƒ{ƒbƒNƒX‚Æƒ{ƒbƒNƒX‚Ì“–‚½‚è”»’è
-@param	ƒ{ƒbƒNƒX‚Ì\‘¢‘Ì‚P
-@param	ƒ{ƒbƒNƒX‚Ì\‘¢‘Ì‚Q
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	ãƒœãƒƒã‚¯ã‚¹ã¨ãƒœãƒƒã‚¯ã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
+@param	ãƒœãƒƒã‚¯ã‚¹ã®æ§‹é€ ä½“ï¼‘
+@param	ãƒœãƒƒã‚¯ã‚¹ã®æ§‹é€ ä½“ï¼’
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool Intersect(const AABB& _AABB1, const AABB& _AABB2);
 
 /**
-@brief	ƒJƒvƒZƒ‹‚ÆƒJƒvƒZƒ‹‚Ì“–‚½‚è”»’è
-@param	ƒJƒvƒZƒ‹‚Ì\‘¢‘Ì‚P
-@param	ƒJƒvƒZƒ‹‚Ì\‘¢‘Ì‚Q
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	ã‚«ãƒ—ã‚»ãƒ«ã¨ã‚«ãƒ—ã‚»ãƒ«ã®å½“ãŸã‚Šåˆ¤å®š
+@param	ã‚«ãƒ—ã‚»ãƒ«ã®æ§‹é€ ä½“ï¼‘
+@param	ã‚«ãƒ—ã‚»ãƒ«ã®æ§‹é€ ä½“ï¼’
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool Intersect(const Capsule& _capsule1, const Capsule& _capsule2);
 
 /**
-@brief	‹…‚Æƒ{ƒbƒNƒX‚Ì“–‚½‚è”»’è
-@param	‹…‚Ì\‘¢‘Ì
-@param	ƒ{ƒbƒNƒX‚Ì\‘¢‘Ì
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	çƒã¨ãƒœãƒƒã‚¯ã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
+@param	çƒã®æ§‹é€ ä½“
+@param	ãƒœãƒƒã‚¯ã‚¹ã®æ§‹é€ ä½“
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool Intersect(const Sphere& _sphere, const AABB& _AABB);
 
 /**
-@brief	ü•ª‚Æ‹…‚Ì“–‚½‚è”»’è
-@param	ü•ª‚Ì\‘¢‘Ì
-@param	‹…‚Ì\‘¢‘Ì
-@param	ü•ª‚Ìn“_‚©‚çÚG‚µ‚Ä‚¢‚é“_‚Ü‚Å‚Ì’lt‚ğŠi”[‚·‚é
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	ç·šåˆ†ã¨çƒã®å½“ãŸã‚Šåˆ¤å®š
+@param	ç·šåˆ†ã®æ§‹é€ ä½“
+@param	çƒã®æ§‹é€ ä½“
+@param	ç·šåˆ†ã®å§‹ç‚¹ã‹ã‚‰æ¥è§¦ã—ã¦ã„ã‚‹ç‚¹ã¾ã§ã®å€¤tã‚’æ ¼ç´ã™ã‚‹
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool Intersect(const LineSegment& _line, const Sphere& _sphere, float& _outT);
 
 /**
-@brief	ü•ª‚Æ•½–Ê‚Ì“–‚½‚è”»’è
-@param	ü•ª‚Ì\‘¢‘Ì
-@param	•½–Ê‚Ì\‘¢‘Ì
-@param	ü•ª‚Ìn“_‚©‚çÚG‚µ‚Ä‚¢‚é“_‚Ü‚Å‚Ì’lt‚ğŠi”[‚·‚é
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	ç·šåˆ†ã¨å¹³é¢ã®å½“ãŸã‚Šåˆ¤å®š
+@param	ç·šåˆ†ã®æ§‹é€ ä½“
+@param	å¹³é¢ã®æ§‹é€ ä½“
+@param	ç·šåˆ†ã®å§‹ç‚¹ã‹ã‚‰æ¥è§¦ã—ã¦ã„ã‚‹ç‚¹ã¾ã§ã®å€¤tã‚’æ ¼ç´ã™ã‚‹
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool Intersect(const LineSegment& _line, const Plane& _plane, float& _outT);
 
 /**
-@brief	ü•ª‚Æƒ{ƒbƒNƒX‚Ì“–‚½‚è”»’è
-@param	ü•ª‚Ì\‘¢‘Ì
-@param	ƒ{ƒbƒNƒX‚Ì\‘¢‘Ì
-@param	ü•ª‚Ìn“_‚©‚çÚG‚µ‚Ä‚¢‚é“_‚Ü‚Å‚Ì’lt‚ğŠi”[‚·‚é
-@param	ü•ª‚Ìn“_‚©‚çÚG‚µ‚½–Ê‚Ì–@üƒxƒNƒgƒ‹‚ğŠi”[‚·‚é
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	ç·šåˆ†ã¨ãƒœãƒƒã‚¯ã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
+@param	ç·šåˆ†ã®æ§‹é€ ä½“
+@param	ãƒœãƒƒã‚¯ã‚¹ã®æ§‹é€ ä½“
+@param	ç·šåˆ†ã®å§‹ç‚¹ã‹ã‚‰æ¥è§¦ã—ã¦ã„ã‚‹ç‚¹ã¾ã§ã®å€¤tã‚’æ ¼ç´ã™ã‚‹
+@param	ç·šåˆ†ã®å§‹ç‚¹ã‹ã‚‰æ¥è§¦ã—ãŸé¢ã®æ³•ç·šãƒ™ã‚¯ãƒˆãƒ«ã‚’æ ¼ç´ã™ã‚‹
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool Intersect(const LineSegment& _line, const AABB& _AABB, float& _outT,
     Vector3& outNorm);
 
 /**
-@brief	‹…ƒXƒC[ƒv‚Ì“–‚½‚è”»’è
-@param	‚PƒtƒŒ[ƒ€‘O‚Ì‹…‚P‚Ì\‘¢‘Ì
-@param	Œ»İ‚ÌƒtƒŒ[ƒ€‚Ì‹…‚P‚Ì\‘¢‘Ì
-@param	‚PƒtƒŒ[ƒ€‘O‚Ì‹…‚Q‚Ì\‘¢‘Ì
-@param	Œ»İ‚ÌƒtƒŒ[ƒ€‚Ì‹…‚Q‚Ì\‘¢‘Ì
-@param	ü•ª‚Ìn“_‚©‚çÚG‚µ‚Ä‚¢‚é“_‚Ü‚Å‚Ì’lt‚ğŠi”[‚·‚é
-@return true : “–‚½‚Á‚Ä‚¢‚é , false : “–‚½‚Á‚Ä‚¢‚È‚¢
+@brief	çƒã‚¹ã‚¤ãƒ¼ãƒ—ã®å½“ãŸã‚Šåˆ¤å®š
+@param	ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çƒï¼‘ã®æ§‹é€ ä½“
+@param	ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®çƒï¼‘ã®æ§‹é€ ä½“
+@param	ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çƒï¼’ã®æ§‹é€ ä½“
+@param	ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®çƒï¼’ã®æ§‹é€ ä½“
+@param	ç·šåˆ†ã®å§‹ç‚¹ã‹ã‚‰æ¥è§¦ã—ã¦ã„ã‚‹ç‚¹ã¾ã§ã®å€¤tã‚’æ ¼ç´ã™ã‚‹
+@return true : å½“ãŸã£ã¦ã„ã‚‹ , false : å½“ãŸã£ã¦ã„ãªã„
 */
 bool SweptSphere(const Sphere& _sphere1, const Sphere& _sphere2,
     const Sphere& _sphere3, const Sphere& _sphere4, float& _outT);

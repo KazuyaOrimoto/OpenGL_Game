@@ -32,7 +32,7 @@ Renderer::~Renderer()
 }
 
 /**
-@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬‚·‚é
+@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹
 */
 void Renderer::CreateInstance()
 {
@@ -44,7 +44,7 @@ void Renderer::CreateInstance()
 
 
 /**
-@brief  ƒCƒ“ƒXƒ^ƒ“ƒX‚ğíœ‚·‚é
+@brief  ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰Šé™¤ã™ã‚‹
 */
 void Renderer::DeleteInstance()
 {
@@ -56,32 +56,32 @@ void Renderer::DeleteInstance()
 }
 
 /**
-@brief  ‰Šú‰»ˆ—
-@return true : ¬Œ÷ , false : ¸”s
+@brief  åˆæœŸåŒ–å‡¦ç†
+@return true : æˆåŠŸ , false : å¤±æ•—
 */
 bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 {
     screenWidth = _screenWidth;
     screenHeight = _screenHeight;
 
-    // OpenGL‚ÌŠe‘®«‚ğİ’è‚·‚é
-    // ƒRƒAOpenGLƒvƒƒtƒ@ƒCƒ‹‚ğg‚¤
+    // OpenGLã®å„å±æ€§ã‚’è¨­å®šã™ã‚‹
+    // ã‚³ã‚¢OpenGLãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ã†
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    // OpenGL‚Ìg—pƒo[ƒWƒ‡ƒ“‚ğ3.3‚Éw’è
+    // OpenGLã®ä½¿ç”¨ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’3.3ã«æŒ‡å®š
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-    // RGBAŠeƒ`ƒƒƒ“ƒlƒ‹8ƒrƒbƒg‚ÌƒJƒ‰[ƒoƒbƒtƒ@‚ğg‚¤
+    // RGBAå„ãƒãƒ£ãƒ³ãƒãƒ«8ãƒ“ãƒƒãƒˆã®ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ã‚’ä½¿ã†
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    // ƒ_ƒuƒ‹ƒoƒbƒtƒ@‚ğ—LŒø‚É‚·‚é
+    // ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ã‚’æœ‰åŠ¹ã«ã™ã‚‹
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    // ƒn[ƒhƒEƒFƒAƒAƒNƒZƒ‰ƒŒ[ƒVƒ‡ƒ“‚ğg‚¤
+    // ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã‚¢ã‚¯ã‚»ãƒ©ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ä½¿ã†
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-	//ƒEƒBƒ“ƒhƒE‚Ìì¬
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
     window = SDL_CreateWindow("OpenGL Game", 100, 100,
         static_cast<int>(screenWidth), static_cast<int>(screenHeight), SDL_WINDOW_OPENGL);
 
@@ -91,10 +91,10 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
         return false;
     }
 
-    // OpenGL‚ÌƒRƒ“ƒeƒLƒXƒg‚ğì¬
+    // OpenGLã®ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ä½œæˆ
     context = SDL_GL_CreateContext(window);
 
-    // GLEW‚Ì‰Šú‰»
+    // GLEWã®åˆæœŸåŒ–
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
@@ -102,24 +102,24 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
         return false;
     }
 
-    // ˆê•”‚Ìƒvƒ‰ƒbƒgƒtƒH[ƒ€‚Åo‚é–³ŠQ‚ÈƒGƒ‰[ƒR[ƒh‚ğƒNƒŠƒA‚·‚é
+    // ä¸€éƒ¨ã®ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã§å‡ºã‚‹ç„¡å®³ãªã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
     glGetError();
 
-    // ƒVƒF[ƒ_[‚Ìƒ[ƒh
+    // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ­ãƒ¼ãƒ‰
     if (!LoadShaders())
     {
         SDL_Log("Failed to load shaders.");
         return false;
     }
 
-    //ƒXƒvƒ‰ƒCƒg—p‚Ì’¸“_”z—ñ‚ğì¬
+    //ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”¨ã®é ‚ç‚¹é…åˆ—ã‚’ä½œæˆ
     CreateSpriteVerts();
 
     return true;
 }
 
 /**
-@brief  I—¹ˆ—
+@brief  çµ‚äº†å‡¦ç†
 */
 void Renderer::Shutdown()
 {
@@ -135,11 +135,11 @@ void Renderer::Shutdown()
 }
 
 /**
-@brief  ƒ[ƒh‚µ‚½ƒf[ƒ^‚Ì‰ğ•ú
+@brief  ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ‡ãƒ¼ã‚¿ã®è§£æ”¾
 */
 void Renderer::UnloadData()
 {
-    // ‚·‚×‚Ä‚ÌƒeƒNƒXƒ`ƒƒ‚Ìƒf[ƒ^‚ğ‰ğ•ú
+    // ã™ã¹ã¦ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ‡ãƒ¼ã‚¿ã‚’è§£æ”¾
     for (auto i : textures)
     {
         i.second->Unload();
@@ -147,7 +147,7 @@ void Renderer::UnloadData()
     }
 	textures.clear();
 
-    // ‚·‚×‚Ä‚ÌƒƒbƒVƒ…‚Ìƒf[ƒ^‚ğ‰ğ•ú
+    // ã™ã¹ã¦ã®ãƒ¡ãƒƒã‚·ãƒ¥ã®ãƒ‡ãƒ¼ã‚¿ã‚’è§£æ”¾
     for (auto i : meshes)
     {
         i.second->Unload();
@@ -157,27 +157,27 @@ void Renderer::UnloadData()
 }
 
 /**
-@brief  •`‰æˆ—
+@brief  æç”»å‡¦ç†
 */
 void Renderer::Draw()
 {
-    // ƒNƒŠƒAƒJƒ‰[‚ğŠDF‚Éİ’è
+    // ã‚¯ãƒªã‚¢ã‚«ãƒ©ãƒ¼ã‚’ç°è‰²ã«è¨­å®š
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    // ƒJƒ‰[ƒoƒbƒtƒ@‚ÆƒfƒvƒXƒoƒbƒtƒ@‚ğƒNƒŠƒA
+    // ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ã¨ãƒ‡ãƒ—ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì•`‰æ
-    // ƒfƒvƒXƒoƒbƒtƒ@–@‚ğ—LŒø‚É‚·‚é
+    // ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æç”»
+    // ãƒ‡ãƒ—ã‚¹ãƒãƒƒãƒ•ã‚¡æ³•ã‚’æœ‰åŠ¹ã«ã™ã‚‹
     glEnable(GL_DEPTH_TEST);
-	//ƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒfƒBƒ“ƒO‚ğ–³Œø‚É‚·‚é
+	//ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚’ç„¡åŠ¹ã«ã™ã‚‹
     glDisable(GL_BLEND);
-    // Šî–{“I‚ÈƒƒbƒVƒ…ƒVƒF[ƒ_[‚ğƒAƒNƒeƒBƒu‚É‚·‚é
+    // åŸºæœ¬çš„ãªãƒ¡ãƒƒã‚·ãƒ¥ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
     meshShader->SetActive();
-    // ƒrƒ…[Ë‰es—ñ‚ğXV‚·‚é
+    // ãƒ“ãƒ¥ãƒ¼å°„å½±è¡Œåˆ—ã‚’æ›´æ–°ã™ã‚‹
     meshShader->SetMatrixUniform("uViewProj", view * projection);
-    // ƒVƒF[ƒ_[‚É“n‚·ƒ‰ƒCƒeƒBƒ“ƒOî•ñ‚ğXV‚·‚é
+    // ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«æ¸¡ã™ãƒ©ã‚¤ãƒ†ã‚£ãƒ³ã‚°æƒ…å ±ã‚’æ›´æ–°ã™ã‚‹
     SetLightUniforms(meshShader);
-	// ‚·‚×‚Ä‚ÌƒƒbƒVƒ…‚Ì•`‰æ
+	// ã™ã¹ã¦ã®ãƒ¡ãƒƒã‚·ãƒ¥ã®æç”»
     for (auto mc : meshComponents)
     {
 		if (mc->GetVisible())
@@ -199,37 +199,37 @@ void Renderer::Draw()
         }
     }
 
-    // ƒXƒvƒ‰ƒCƒgƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì•`‰æ
-    // ƒfƒvƒXƒoƒbƒtƒ@–@‚ğ–³Œø‚É‚·‚é
+    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æç”»
+    // ãƒ‡ãƒ—ã‚¹ãƒãƒƒãƒ•ã‚¡æ³•ã‚’ç„¡åŠ¹ã«ã™ã‚‹
     glDisable(GL_DEPTH_TEST);
-    // ƒAƒ‹ƒtƒ@ƒuƒŒƒ“ƒfƒBƒ“ƒO‚ğ—LŒø‚É‚·‚é
+    // ã‚¢ãƒ«ãƒ•ã‚¡ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã‚’æœ‰åŠ¹ã«ã™ã‚‹
     glEnable(GL_BLEND);
-	// RGB¬•ª‚Æƒ¿¬•ª‚ÌƒuƒŒƒ“ƒfƒBƒ“ƒO•û–@‚ğ•ÊX‚Éİ’è
+	// RGBæˆåˆ†ã¨Î±æˆåˆ†ã®ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°æ–¹æ³•ã‚’åˆ¥ã€…ã«è¨­å®š
     glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-	// RGB¬•ª‚ÆƒAƒ‹ƒtƒ@¬•ª‚É•ÊX‚Ì¬‡ŒW”‚ğİ’è
+	// RGBæˆåˆ†ã¨ã‚¢ãƒ«ãƒ•ã‚¡æˆåˆ†ã«åˆ¥ã€…ã®æ··åˆä¿‚æ•°ã‚’è¨­å®š
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
-    // ƒXƒvƒ‰ƒCƒgƒVƒF[ƒ_[‚ğƒAƒNƒeƒBƒu‚É‚·‚é/ƒXƒvƒ‰ƒCƒg’¸“_”z—ñ‚ğ—LŒø‚É‚·‚é
+    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹/ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆé ‚ç‚¹é…åˆ—ã‚’æœ‰åŠ¹ã«ã™ã‚‹
     spriteShader->SetActive();
     spriteVerts->SetActive();
-	// ‚·‚×‚Ä‚ÌƒXƒvƒ‰ƒCƒg‚Ì•`‰æ
+	// ã™ã¹ã¦ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®æç”»
     for (auto sprite : sprites)
     {
         sprite->Draw(spriteShader);
     }
 
-    // ƒoƒbƒtƒ@‚ğŒğŠ·
+    // ãƒãƒƒãƒ•ã‚¡ã‚’äº¤æ›
     SDL_GL_SwapWindow(window);
 }
 
 /**
-@brief  ƒXƒvƒ‰ƒCƒg‚Ìíœ
-@param	íœ‚·‚éSpriteComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief  ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å‰Šé™¤
+@param	å‰Šé™¤ã™ã‚‹SpriteComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 {
-    // ¡‚ ‚éƒXƒvƒ‰ƒCƒg‚©‚ç‘}“ü‚·‚éêŠ‚ÌŒŸõ
-    // (DrawOrder‚ª¬‚³‚¢‡”Ô‚É•`‰æ‚·‚é‚½‚ß)
+    // ä»Šã‚ã‚‹ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‹ã‚‰æŒ¿å…¥ã™ã‚‹å ´æ‰€ã®æ¤œç´¢
+    // (DrawOrderãŒå°ã•ã„é †ç•ªã«æç”»ã™ã‚‹ãŸã‚)
 	int myDrawOrder = _spriteComponent->GetDrawOrder();
     auto iter = sprites.begin();
     for (;
@@ -242,13 +242,13 @@ void Renderer::AddSprite(SpriteComponent* _spriteComponent)
         }
     }
 
-    // ŒŸõ‚µ‚½êŠ‚Ìiter‚ÌêŠ‚É‘}“ü
+    // æ¤œç´¢ã—ãŸå ´æ‰€ã®iterã®å ´æ‰€ã«æŒ¿å…¥
 	sprites.insert(iter, _spriteComponent);
 }
 
 /**
-@brief  ƒXƒvƒ‰ƒCƒg‚Ìíœ
-@param	íœ‚·‚éSpriteComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief  ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®å‰Šé™¤
+@param	å‰Šé™¤ã™ã‚‹SpriteComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 {
@@ -257,8 +257,8 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 }
 
 /**
-@brief  ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì’Ç‰Á
-@param	’Ç‰Á‚·‚éMeshComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief  ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è¿½åŠ 
+@param	è¿½åŠ ã™ã‚‹MeshComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 {
@@ -273,8 +273,8 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 }
 
 /**
-@brief  ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìíœ
-@param	íœ‚·‚éMeshComponentƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief  ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å‰Šé™¤
+@param	å‰Šé™¤ã™ã‚‹MeshComponentã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 {
@@ -291,20 +291,20 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 }
 
 /**
-@brief  ƒeƒNƒXƒ`ƒƒ‚Ìæ“¾
-@param	æ“¾‚µ‚½‚¢ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹–¼
-@return TextureƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief  ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å–å¾—
+@param	å–å¾—ã—ãŸã„ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+@return Textureã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 Texture* Renderer::GetTexture(const std::string& _fileName)
 {
 	Texture* texture = nullptr;
-	//‚·‚Å‚Éì¬‚³‚ê‚Ä‚È‚¢‚©’²‚×‚é
+	//ã™ã§ã«ä½œæˆã•ã‚Œã¦ãªã„ã‹èª¿ã¹ã‚‹
 	auto itr = textures.find(_fileName);
 	if (itr != textures.end())
 	{
 		texture = itr->second;
 	}
-	//ì¬Ï‚İ‚Å‚È‚¢ê‡AV‚µ‚­ƒeƒNƒXƒ`ƒƒ‚ğì¬
+	//ä½œæˆæ¸ˆã¿ã§ãªã„å ´åˆã€æ–°ã—ããƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½œæˆ
 	else
 	{
 		texture = new Texture();
@@ -323,20 +323,20 @@ Texture* Renderer::GetTexture(const std::string& _fileName)
 }
 
 /**
-@brief  ƒƒbƒVƒ…‚Ìæ“¾
-@param	æ“¾‚µ‚½‚¢ƒƒbƒVƒ…‚Ìƒtƒ@ƒCƒ‹–¼
-@return MeshƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief  ãƒ¡ãƒƒã‚·ãƒ¥ã®å–å¾—
+@param	å–å¾—ã—ãŸã„ãƒ¡ãƒƒã‚·ãƒ¥ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+@return Meshã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 Mesh* Renderer::GetMesh(const std::string &_fileName)
 {
     Mesh* m = nullptr;
-	//‚·‚Å‚Éì¬‚³‚ê‚Ä‚È‚¢‚©’²‚×‚é
+	//ã™ã§ã«ä½œæˆã•ã‚Œã¦ãªã„ã‹èª¿ã¹ã‚‹
     auto iter = meshes.find(_fileName);
     if (iter != meshes.end())
     {
         m = iter->second;
     }
-	//ì¬Ï‚İ‚Å‚È‚¢ê‡AV‚µ‚­ƒƒbƒVƒ…‚ğì¬
+	//ä½œæˆæ¸ˆã¿ã§ãªã„å ´åˆã€æ–°ã—ããƒ¡ãƒƒã‚·ãƒ¥ã‚’ä½œæˆ
     else
     {
         m = new Mesh();
@@ -354,12 +354,12 @@ Mesh* Renderer::GetMesh(const std::string &_fileName)
 }
 
 /**
-@brief  ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
-@return true : ¬Œ÷ , false : ¸”s
+@brief  ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®èª­ã¿è¾¼ã¿
+@return true : æˆåŠŸ , false : å¤±æ•—
 */
 bool Renderer::LoadShaders()
 {
-    // ƒXƒvƒ‰ƒCƒgƒVƒF[ƒ_[‚Ìì¬
+    // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ä½œæˆ
     spriteShader = new Shader();
     if (!spriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
     {
@@ -367,11 +367,11 @@ bool Renderer::LoadShaders()
     }
 
     spriteShader->SetActive();
-    // ƒrƒ…[s—ñ‚Ìİ’è
+    // ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®è¨­å®š
     Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
     spriteShader->SetMatrixUniform("uViewProj", viewProj);
 
-    // •W€‚ÌƒƒbƒVƒ…ƒVƒF[ƒ_[‚Ìì¬
+    // æ¨™æº–ã®ãƒ¡ãƒƒã‚·ãƒ¥ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ä½œæˆ
     meshShader = new Shader();
     if (!meshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
     {
@@ -385,7 +385,7 @@ bool Renderer::LoadShaders()
     }
 
     meshShader->SetActive();
-    // ƒrƒ…[s—ñ‚Ìİ’è
+    // ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®è¨­å®š
     view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
     projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
         screenWidth, screenHeight, 25.0f, 10000.0f);
@@ -397,15 +397,15 @@ bool Renderer::LoadShaders()
 }
 
 /**
-@brief  Sprite—p‚Ì’¸“_ƒoƒbƒtƒ@‚ÆƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬
+@brief  Spriteç”¨ã®é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 */
 void Renderer::CreateSpriteVerts()
 {
     float vertices[] = {
-        -0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // ¶ã
-        0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f, // ‰Eã
-        0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // ‰E‰º
-        -0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // ¶‰º
+        -0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // å·¦ä¸Š
+        0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f, // å³ä¸Š
+        0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // å³ä¸‹
+        -0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // å·¦ä¸‹
     };
 
     unsigned int indices[] = {
@@ -418,18 +418,18 @@ void Renderer::CreateSpriteVerts()
 
 
 /**
-@brief  ŒõŒ¹î•ñ‚ğƒVƒF[ƒ_[‚Ì•Ï”‚ÉƒZƒbƒg‚·‚é
-@param  ƒZƒbƒg‚·‚éShaderƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+@brief  å…‰æºæƒ…å ±ã‚’ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å¤‰æ•°ã«ã‚»ãƒƒãƒˆã™ã‚‹
+@param  ã‚»ãƒƒãƒˆã™ã‚‹Shaderã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 */
 void Renderer::SetLightUniforms(Shader* _shader)
 {
-	// ƒrƒ…[s—ñ‚ğ“]’us—ñ‚É‚·‚é
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’è»¢ç½®è¡Œåˆ—ã«ã™ã‚‹
     Matrix4 invView = view;
     invView.Invert();
 	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
-    // ŠÂ‹«Œõ‚Ìİ’è
+    // ç’°å¢ƒå…‰ã®è¨­å®š
 	_shader->SetVectorUniform("uAmbientLight", ambientLight);
-    // •½sŒõŒ¹‚Ìİ’è
+    // å¹³è¡Œå…‰æºã®è¨­å®š
 	_shader->SetVectorUniform("uDirLight.mDirection",
         dirLight.direction);
 	_shader->SetVectorUniform("uDirLight.mDiffuseColor",
@@ -440,13 +440,13 @@ void Renderer::SetLightUniforms(Shader* _shader)
 
 void Renderer::SetWallLightUniforms(Shader* _shader)
 {
-    // ƒrƒ…[s—ñ‚ğ“]’us—ñ‚É‚·‚é
+    // ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’è»¢ç½®è¡Œåˆ—ã«ã™ã‚‹
     Matrix4 invView = view;
     invView.Invert();
 	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
-    // ŠÂ‹«Œõ‚Ìİ’è
+    // ç’°å¢ƒå…‰ã®è¨­å®š
 	_shader->SetVectorUniform("uAmbientLight", ambientLight);
-    // •½sŒõŒ¹‚Ìİ’è
+    // å¹³è¡Œå…‰æºã®è¨­å®š
 	_shader->SetVectorUniform("uDirLight.mDirection",
         wallDirLight.direction);
 	_shader->SetVectorUniform("uDirLight.mDiffuseColor",

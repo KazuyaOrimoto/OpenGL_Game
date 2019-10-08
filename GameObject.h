@@ -20,7 +20,7 @@ enum Tag
 };
 
 /**
-@brief	ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìó‘Ô
+@brief	ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çŠ¶æ…‹
 */
 enum State
 {
@@ -33,26 +33,26 @@ class GameObject
 {
 public:
 	/**
-	@param	ƒQ[ƒ€ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@param	ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	GameObject();
 	virtual ~GameObject();
 
 	/**
-	@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+	@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+	@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 	*/
 	void Update(float _deltaTime);
 
 	/**
-	@brief	ƒAƒ^ƒbƒ`‚³‚ê‚Ä‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌƒAƒbƒvƒf[ƒg
-	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+	@brief	ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
+	@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 	*/
 	void UpdateComponents(float _deltaTime);
 
 	/**
-	@brief	ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌƒAƒbƒvƒf[ƒg
-	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+	@brief	ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
+	@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 	*/
 	virtual void UpdateGameObject(float _deltaTime);
 
@@ -60,91 +60,91 @@ public:
 	virtual void GameObjectInput(const InputState& _keyState);
 
 	/**
-	@brief	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’Ç‰Á‚·‚é
-	@param	’Ç‰Á‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ|ƒCƒ“ƒ^
+	@brief	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’è¿½åŠ ã™ã‚‹
+	@param	è¿½åŠ ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	void AddComponent(Component* _component);
 
 	/**
-	@brief	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ‚·‚é
-	@param	íœ‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒ|ƒCƒ“ƒ^
+	@brief	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å‰Šé™¤ã™ã‚‹
+	@param	å‰Šé™¤ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
 	*/
 	void RemoveComponent(Component* _component);
 
 	/**
-	@brief	Transform‚Ìƒ[ƒ‹ƒh•ÏŠ·
+	@brief	Transformã®ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›
 	*/
 	void ComputeWorldTransform();
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğæ“¾‚·‚é
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
 	@return	position
 	*/
     const Vector3& GetPosition() const { return position; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğİ’è‚·‚é
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’è¨­å®šã™ã‚‹
 	@param	position
 	*/
     virtual void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚ÌƒXƒP[ƒ‹‚ğæ“¾‚·‚é
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¹ã‚±ãƒ¼ãƒ«ã‚’å–å¾—ã™ã‚‹
 	@return	scale
 	*/
     float GetScale() const { return scale; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚ÌƒXƒP[ƒ‹‚ğİ’è‚·‚é
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¹ã‚±ãƒ¼ãƒ«ã‚’è¨­å®šã™ã‚‹
 	@param	scale
 	*/
 	virtual void SetScale(float _scale) { scale = _scale;  recomputeWorldTransform = true; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚ğæ“¾‚·‚é
-	@return	rotationiQuaternionŒ^j
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’å–å¾—ã™ã‚‹
+	@return	rotationï¼ˆQuaternionå‹ï¼‰
 	*/
     const Quaternion& GetRotation() const { return rotation; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚ÌƒNƒH[ƒ^ƒjƒIƒ“‚ğİ’è‚·‚é
-	@param	rotationiQuaternionŒ^j
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³ã‚’è¨­å®šã™ã‚‹
+	@param	rotationï¼ˆQuaternionå‹ï¼‰
 	*/
 	virtual void SetRotation(const Quaternion& _qotation) { rotation = _qotation;  recomputeWorldTransform = true; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ìó‘Ô‚ğæ“¾‚·‚é
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
 	@return	state
 	*/
 	State GetState() const { return state; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ìó‘Ô‚ğİ’è‚·‚é
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çŠ¶æ…‹ã‚’è¨­å®šã™ã‚‹
 	@param	state
 	*/
 	virtual void SetState(State _state) { state = _state; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ‚ğæ“¾‚·‚é
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’å–å¾—ã™ã‚‹
 	@return	worldTransform
 	*/
 	const Matrix4& GetWorldTransform() const { return worldTransform; }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ì‘O•û‚ğ•\‚·ƒxƒNƒgƒ‹‚ğæ“¾‚·‚é
-	@param	forward(Vector3Œ^)
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‰æ–¹ã‚’è¡¨ã™ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—ã™ã‚‹
+	@param	forward(Vector3å‹)
 	*/
     Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ì‰E‚ğ•\‚·ƒxƒNƒgƒ‹‚ğæ“¾‚·‚é
-	@param	right(Vector3Œ^)
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å³ã‚’è¡¨ã™ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—ã™ã‚‹
+	@param	right(Vector3å‹)
 	*/
 	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitY, rotation); }
 
 	/**
-	@brief@ƒIƒuƒWƒFƒNƒg‚Ìã‚ğ•\‚·ƒxƒNƒgƒ‹‚ğæ“¾‚·‚é
-	@param	up(Vector3Œ^)
+	@briefã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸Šã‚’è¡¨ã™ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—ã™ã‚‹
+	@param	up(Vector3å‹)
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
@@ -155,9 +155,9 @@ protected:
     virtual void OnCollision(const GameObject& _hitObject) {}
 
     virtual void OnTrigger(GameObject& _triggerObject) {}
-	//ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìó‘Ô
+	//ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çŠ¶æ…‹
 	State state;
-	//ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ^ƒO
+	//ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¿ã‚°
 	Tag tag;
 
 	//Transform
@@ -165,10 +165,10 @@ protected:
 	Quaternion rotation;	
 	float scale;
 	Matrix4 worldTransform;
-	//ƒ[ƒ‹ƒh•ÏŠ·‚Ìˆ—‚ğs‚¤•K—v«‚ª‚ ‚é‚©
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›ã®å‡¦ç†ã‚’è¡Œã†å¿…è¦æ€§ãŒã‚ã‚‹ã‹
 	bool recomputeWorldTransform;
 
-	//ƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+	//ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	std::vector<class Component*>components;
 
 };

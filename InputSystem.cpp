@@ -3,9 +3,9 @@
 #include <cstring>
 
 /**
-@brief	Œ»İ‚ÌƒL[‚Ì“ü—Íó‘Ô‚Ì‚İ‚ğæ“¾‚·‚é
-@param	SDL_Scancode‚ÌƒL[ƒR[ƒh
-@return	true : ‰Ÿ‚³‚ê‚Ä‚¢‚é , false : ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
+@brief	ç¾åœ¨ã®ã‚­ãƒ¼ã®å…¥åŠ›çŠ¶æ…‹ã®ã¿ã‚’å–å¾—ã™ã‚‹
+@param	SDL_Scancodeã®ã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰
+@return	true : æŠ¼ã•ã‚Œã¦ã„ã‚‹ , false : æŠ¼ã•ã‚Œã¦ã„ãªã„
 */
 bool KeyboardState::GetKeyValue(SDL_Scancode _keyCode) const
 {
@@ -13,9 +13,9 @@ bool KeyboardState::GetKeyValue(SDL_Scancode _keyCode) const
 }
 
 /**
-@brief	Œ»İ‚Æ1ƒtƒŒ[ƒ€‘O‚Ìó‘Ô‚©‚çButtonState‚ğ•Ô‚·
-@param	SDL_Scancode‚ÌƒL[ƒR[ƒh
-@return	ButtonStateŒ^‚ÌŒ»İ‚Ìó‘Ô
+@brief	ç¾åœ¨ã¨1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çŠ¶æ…‹ã‹ã‚‰ButtonStateã‚’è¿”ã™
+@param	SDL_Scancodeã®ã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰
+@return	ButtonStateå‹ã®ç¾åœ¨ã®çŠ¶æ…‹
 */
 ButtonState KeyboardState::GetKeyState(SDL_Scancode _keyCode) const
 {
@@ -44,9 +44,9 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode _keyCode) const
 }
 
 /**
-@brief	Œ»İ‚Ì“ü—Íó‘Ô‚Ì‚İ‚ğæ“¾‚·‚é
-@param	SDL_BUTTON’è”
-@return	true : ‰Ÿ‚³‚ê‚Ä‚¢‚é , false : ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
+@brief	ç¾åœ¨ã®å…¥åŠ›çŠ¶æ…‹ã®ã¿ã‚’å–å¾—ã™ã‚‹
+@param	SDL_BUTTONå®šæ•°
+@return	true : æŠ¼ã•ã‚Œã¦ã„ã‚‹ , false : æŠ¼ã•ã‚Œã¦ã„ãªã„
 */
 bool MouseState::GetButtonValue(int _button) const
 {
@@ -54,9 +54,9 @@ bool MouseState::GetButtonValue(int _button) const
 }
 
 /**
-@brief	Œ»İ‚Æ1ƒtƒŒ[ƒ€‘O‚Ìó‘Ô‚©‚çButtonState‚ğ•Ô‚·
-@param	SDL_BUTTON’è”
-@return	ButtonStateŒ^‚ÌŒ»İ‚Ìó‘Ô
+@brief	ç¾åœ¨ã¨1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çŠ¶æ…‹ã‹ã‚‰ButtonStateã‚’è¿”ã™
+@param	SDL_BUTTONå®šæ•°
+@return	ButtonStateå‹ã®ç¾åœ¨ã®çŠ¶æ…‹
 */
 ButtonState MouseState::GetButtonState(int _button) const
 {
@@ -86,9 +86,9 @@ ButtonState MouseState::GetButtonState(int _button) const
 }
 
 /**
-@brief	Œ»İ‚Ì“ü—Íó‘Ô‚Ì‚İ‚ğæ“¾‚·‚é
-@param	SDL_GameControllerButton‚Ìƒ{ƒ^ƒ“ƒR[ƒh
-@return	true : ‰Ÿ‚³‚ê‚Ä‚¢‚é , false : ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
+@brief	ç¾åœ¨ã®å…¥åŠ›çŠ¶æ…‹ã®ã¿ã‚’å–å¾—ã™ã‚‹
+@param	SDL_GameControllerButtonã®ãƒœã‚¿ãƒ³ã‚³ãƒ¼ãƒ‰
+@return	true : æŠ¼ã•ã‚Œã¦ã„ã‚‹ , false : æŠ¼ã•ã‚Œã¦ã„ãªã„
 */
 bool ControllerState::GetButtonValue(SDL_GameControllerButton _button) const
 {
@@ -96,9 +96,9 @@ bool ControllerState::GetButtonValue(SDL_GameControllerButton _button) const
 }
 
 /**
-@brief	Œ»İ‚Æ1ƒtƒŒ[ƒ€‘O‚Ìó‘Ô‚©‚çButtonState‚ğ•Ô‚·
-@param	SDL_GameControllerButton‚Ìƒ{ƒ^ƒ“ƒR[ƒh
-@return	ButtonStateŒ^‚ÌŒ»İ‚Ìó‘Ô
+@brief	ç¾åœ¨ã¨1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çŠ¶æ…‹ã‹ã‚‰ButtonStateã‚’è¿”ã™
+@param	SDL_GameControllerButtonã®ãƒœã‚¿ãƒ³ã‚³ãƒ¼ãƒ‰
+@return	ButtonStateå‹ã®ç¾åœ¨ã®çŠ¶æ…‹
 */
 ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) const
 {
@@ -127,27 +127,27 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) co
 }
 
 /**
-@brief  ‰Šú‰»ˆ—
-@return true : ¬Œ÷ , false : ¸”s
+@brief  åˆæœŸåŒ–å‡¦ç†
+@return true : æˆåŠŸ , false : å¤±æ•—
 */
 bool InputSystem::Initialize()
 {
-	//ƒL[ƒ{[ƒh‚Ì‰Šú‰»ˆ—
-	//¡‚ÌƒL[ƒ{[ƒh‚Ìó‘Ô‚ğŠ„‚è“–‚Ä‚é
+	//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®åˆæœŸåŒ–å‡¦ç†
+	//ä»Šã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®çŠ¶æ…‹ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	state.Keyboard.currState = SDL_GetKeyboardState(NULL);
-	//‚PƒtƒŒ[ƒ€‘O‚Ì“ü—Íó‘Ô‚ğ‰Šú‰»‚·‚é
+	//ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®å…¥åŠ›çŠ¶æ…‹ã‚’åˆæœŸåŒ–ã™ã‚‹
 	memset(state.Keyboard.prevState, 0,
 		SDL_NUM_SCANCODES);
 
-	//Œ»İ‚Æ‚PƒtƒŒ[ƒ€‘O‚Ìƒ}ƒEƒX‚Ì“ü—Íó‘Ô‚ğ‰Šú‰»‚·‚é
+	//ç¾åœ¨ã¨ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ãƒã‚¦ã‚¹ã®å…¥åŠ›çŠ¶æ…‹ã‚’åˆæœŸåŒ–ã™ã‚‹
 	state.Mouse.currButtons = 0;
 	state.Mouse.prevButtons = 0;
 
-	//ƒRƒ“ƒgƒ[ƒ‰[‚ªÚ‘±‚³‚ê‚Ä‚¢‚é‚È‚çæ“¾‚·‚é
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒæ¥ç¶šã•ã‚Œã¦ã„ã‚‹ãªã‚‰å–å¾—ã™ã‚‹
 	controller = SDL_GameControllerOpen(0);
-	//ƒRƒ“ƒgƒ[ƒ‰[‚ªÚ‘±‚³‚ê‚Ä‚¢‚é‚©‚ğ‹L˜^‚·‚é
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒæ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã‹ã‚’è¨˜éŒ²ã™ã‚‹
 	state.Controller.isConnected = (controller != nullptr);
-	//Œ»İ‚Æ‚PƒtƒŒ[ƒ€‘O‚ÌƒRƒ“ƒgƒ[ƒ‰[‚Ì“ü—Íó‘Ô‚ğ‰Šú‰»‚·‚é
+	//ç¾åœ¨ã¨ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®å…¥åŠ›çŠ¶æ…‹ã‚’åˆæœŸåŒ–ã™ã‚‹
 	memset(state.Controller.currButtons, 0,
 		SDL_CONTROLLER_BUTTON_MAX);
 	memset(state.Controller.prevButtons, 0,
@@ -157,40 +157,40 @@ bool InputSystem::Initialize()
 }
 
 /**
-@brief  I—¹ˆ—
+@brief  çµ‚äº†å‡¦ç†
 */
 void InputSystem::Shutdown()
 {
 }
 
 /**
-@brief  Update‚Ì€”õ‚ğ‚·‚éiSDL_PollEvents‚Ì’¼‘O‚ÉŒÄ‚Ôj
+@brief  Updateã®æº–å‚™ã‚’ã™ã‚‹ï¼ˆSDL_PollEventsã®ç›´å‰ã«å‘¼ã¶ï¼‰
 */
 void InputSystem::PrepareForUpdate()
 {
-	//Œ»İ‚Ì“ü—Íó‘Ô‚ğ‚PƒtƒŒ[ƒ€‘O‚Ì“ü—Íó‘Ô‚ÉƒRƒs[‚·‚é
-	//ƒL[ƒ{[ƒh
+	//ç¾åœ¨ã®å…¥åŠ›çŠ¶æ…‹ã‚’ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®å…¥åŠ›çŠ¶æ…‹ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹
+	//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰
 	memcpy(state.Keyboard.prevState,
 		state.Keyboard.currState,
 		SDL_NUM_SCANCODES);
 
-	//ƒ}ƒEƒX
+	//ãƒã‚¦ã‚¹
 	state.Mouse.prevButtons = state.Mouse.currButtons;
 	state.Mouse.isRelative = false;
 	state.Mouse.scrollWheel = Vector2::Zero;
 
-	//ƒRƒ“ƒgƒ[ƒ‰[
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 	memcpy(state.Controller.prevButtons,
 		state.Controller.currButtons,
 		SDL_CONTROLLER_BUTTON_MAX);
 }
 
 /**
-@brief  ƒtƒŒ[ƒ€–ˆ‚Ìˆ—iSDL_PollEvents‚Ì’¼Œã‚ÉŒÄ‚Ôj
+@brief  ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†ï¼ˆSDL_PollEventsã®ç›´å¾Œã«å‘¼ã¶ï¼‰
 */
 void InputSystem::Update()
 {
-	//ƒ}ƒEƒX
+	//ãƒã‚¦ã‚¹
 	int x = 0, y = 0;
 	if (state.Mouse.isRelative)
 	{
@@ -206,8 +206,8 @@ void InputSystem::Update()
 	state.Mouse.mousePos.x = static_cast<float>(x) - 1024.0f/2;
 	state.Mouse.mousePos.y = 768.0f / 2 - static_cast<float>(y);
 
-	//ƒRƒ“ƒgƒ[ƒ‰[
-	//Eƒ{ƒ^ƒ“
+	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
+	//ãƒ»ãƒœã‚¿ãƒ³
 	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; i++)
 	{
 		state.Controller.currButtons[i] =
@@ -215,7 +215,7 @@ void InputSystem::Update()
 				SDL_GameControllerButton(i));
 	}
 
-	//EƒgƒŠƒK[
+	//ãƒ»ãƒˆãƒªã‚¬ãƒ¼
 	state.Controller.leftTrigger =
 		Filter1D(SDL_GameControllerGetAxis(controller,
 			SDL_CONTROLLER_AXIS_TRIGGERLEFT));
@@ -223,7 +223,7 @@ void InputSystem::Update()
 		Filter1D(SDL_GameControllerGetAxis(controller,
 			SDL_CONTROLLER_AXIS_TRIGGERRIGHT));
 
-	//EƒXƒeƒBƒbƒN
+	//ãƒ»ã‚¹ãƒ†ã‚£ãƒƒã‚¯
 	x = SDL_GameControllerGetAxis(controller,
 		SDL_CONTROLLER_AXIS_LEFTX);
 	y = -SDL_GameControllerGetAxis(controller,
@@ -238,7 +238,7 @@ void InputSystem::Update()
 }
 
 /**
-@brief  SDLƒCƒxƒ“ƒg‚ğInputSystem‚É“n‚·
+@brief  SDLã‚¤ãƒ™ãƒ³ãƒˆã‚’InputSystemã«æ¸¡ã™
 */
 void InputSystem::ProcessEvent(SDL_Event& _event)
 {
@@ -255,8 +255,8 @@ void InputSystem::ProcessEvent(SDL_Event& _event)
 }
 
 /**
-@brief  ƒ}ƒEƒX‚Ìƒ‚[ƒh‚ğİ’è‚·‚é
-@param	true : ‘Š‘Îƒ‚[ƒh , false : ƒfƒtƒHƒ‹ƒgƒ‚[ƒh
+@brief  ãƒã‚¦ã‚¹ã®ãƒ¢ãƒ¼ãƒ‰ã‚’è¨­å®šã™ã‚‹
+@param	true : ç›¸å¯¾ãƒ¢ãƒ¼ãƒ‰ , false : ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ¢ãƒ¼ãƒ‰
 */
 void InputSystem::SetRelativeMouseMode(bool _value)
 {
@@ -267,30 +267,30 @@ void InputSystem::SetRelativeMouseMode(bool _value)
 }
 
 /**
-@brief  “ü—Í‚³‚ê‚½’liintj‚ğƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚·‚éi”ÍˆÍ“à‚Éû‚ß‚Ä-1.0~1.0‚É‚Ü‚Æ‚ß‚éj
-@param	“ü—Í‚³‚ê‚½’liintj
-@return	ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚³‚ê‚½’l
+@brief  å…¥åŠ›ã•ã‚ŒãŸå€¤ï¼ˆintï¼‰ã‚’ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã™ã‚‹ï¼ˆç¯„å›²å†…ã«åã‚ã¦-1.0~1.0ã«ã¾ã¨ã‚ã‚‹ï¼‰
+@param	å…¥åŠ›ã•ã‚ŒãŸå€¤ï¼ˆintï¼‰
+@return	ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã•ã‚ŒãŸå€¤
 */
 float InputSystem::Filter1D(int _input)
 {
-	//ƒfƒbƒhƒ][ƒ“i‚±‚Ì’l‚æ‚è¬‚³‚¢‚È‚ç0.0‚É‚·‚éj
+	//ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ï¼ˆã“ã®å€¤ã‚ˆã‚Šå°ã•ã„ãªã‚‰0.0ã«ã™ã‚‹ï¼‰
 	const int deadZone = 250;
-	//Å‘å’li‚±‚Ì’l‚æ‚è‘å‚«‚­‚Ä‚à1.0‚É‚·‚éj
+	//æœ€å¤§å€¤ï¼ˆã“ã®å€¤ã‚ˆã‚Šå¤§ããã¦ã‚‚1.0ã«ã™ã‚‹ï¼‰
 	const int maxValue = 30000;
 
 	float retVal = 0.0f;
 
-	//“ü—Í’l‚Ìâ‘Î’l‚ğæ‚é
+	//å…¥åŠ›å€¤ã®çµ¶å¯¾å€¤ã‚’å–ã‚‹
 	int absValue = _input > 0 ? _input : -_input;
-	//“ü—Í’l‚ªƒfƒbƒhƒ][ƒ“‚æ‚è¬‚³‚¢‚È‚ç
+	//å…¥åŠ›å€¤ãŒãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã‚ˆã‚Šå°ã•ã„ãªã‚‰
 	if (absValue > deadZone)
 	{
-		//ƒfƒbƒhƒ][ƒ“‚ÆÅ‘å’l‚ÌŠÔ‚Å1.0ˆÈ‰º‚É‚È‚é‚æ‚¤ŒvZ‚·‚é
+		//ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã¨æœ€å¤§å€¤ã®é–“ã§1.0ä»¥ä¸‹ã«ãªã‚‹ã‚ˆã†è¨ˆç®—ã™ã‚‹
 		retVal = static_cast<float>(absValue - deadZone) /
 			(maxValue - deadZone);
-		//•„†‚ğŒ³‚Ì’l‚Æ“¯‚¶‚É‚·‚é
+		//ç¬¦å·ã‚’å…ƒã®å€¤ã¨åŒã˜ã«ã™ã‚‹
 		retVal = _input > 0 ? retVal : -1.0f * retVal;
-		//-1.0~1.0‚ÌŠÔ‚Éû‚ß‚é
+		//-1.0~1.0ã®é–“ã«åã‚ã‚‹
 		retVal = Math::Clamp(retVal, -1.0f, 1.0f);
 	}
 
@@ -298,37 +298,37 @@ float InputSystem::Filter1D(int _input)
 }
 
 /**
-@brief  “ü—Í‚³‚ê‚½’liintj‚ğƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚·‚éi”ÍˆÍ“à‚Éû‚ß‚Ä0.0~1.0‚É‚Ü‚Æ‚ß‚éj
-@param	“ü—Í‚³‚ê‚½’l‚Ìxiintj
-@param	“ü—Í‚³‚ê‚½’l‚Ìyiintj
-@return	ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚³‚ê‚½’l
+@brief  å…¥åŠ›ã•ã‚ŒãŸå€¤ï¼ˆintï¼‰ã‚’ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã™ã‚‹ï¼ˆç¯„å›²å†…ã«åã‚ã¦0.0~1.0ã«ã¾ã¨ã‚ã‚‹ï¼‰
+@param	å…¥åŠ›ã•ã‚ŒãŸå€¤ã®xï¼ˆintï¼‰
+@param	å…¥åŠ›ã•ã‚ŒãŸå€¤ã®yï¼ˆintï¼‰
+@return	ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã•ã‚ŒãŸå€¤
 */
 Vector2 InputSystem::Filter2D(int _inputX, int _inputY)
 {
-	//ƒfƒbƒhƒ][ƒ“i‚±‚Ì’l‚æ‚è¬‚³‚¢‚È‚ç0.0‚É‚·‚éj
+	//ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ï¼ˆã“ã®å€¤ã‚ˆã‚Šå°ã•ã„ãªã‚‰0.0ã«ã™ã‚‹ï¼‰
 	const float deadZone = 8000.0f;
-	//Å‘å’li‚±‚Ì’l‚æ‚è‘å‚«‚­‚Ä‚à1.0‚É‚·‚éj
+	//æœ€å¤§å€¤ï¼ˆã“ã®å€¤ã‚ˆã‚Šå¤§ããã¦ã‚‚1.0ã«ã™ã‚‹ï¼‰
 	const float maxValue = 30000.0f;
 
-	//2ŸŒ³ƒxƒNƒgƒ‹‚É‚·‚é
+	//2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ã«ã™ã‚‹
 	Vector2 dir;
 	dir.x = static_cast<float>(_inputX);
 	dir.y = static_cast<float>(_inputY);
 
 	float length = dir.Length();
 
-	//“ü—Í’l‚ÌƒxƒNƒgƒ‹‚Ì’·‚³‚ªƒfƒbƒhƒ][ƒ“‚æ‚è¬‚³‚¢‚È‚ç
+	//å…¥åŠ›å€¤ã®ãƒ™ã‚¯ãƒˆãƒ«ã®é•·ã•ãŒãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã‚ˆã‚Šå°ã•ã„ãªã‚‰
 	if (length < deadZone)
 	{
 		dir = Vector2::Zero;
 	}
 	else
 	{
-		//ƒfƒbƒhƒ][ƒ“‚ÆÅ‘å’l‚ÌŠÔ‚Å1.0ˆÈ‰º‚É‚È‚é‚æ‚¤ŒvZ‚·‚é
+		//ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã¨æœ€å¤§å€¤ã®é–“ã§1.0ä»¥ä¸‹ã«ãªã‚‹ã‚ˆã†è¨ˆç®—ã™ã‚‹
 		float f = (length - deadZone) / (maxValue - deadZone);
-		//0.0‚Æ1.0‚ÌŠÔ‚Éû‚ß‚é
+		//0.0ã¨1.0ã®é–“ã«åã‚ã‚‹
 		f = Math::Clamp(f, 0.0f, 1.0f);
-		//ƒxƒNƒgƒ‹‚ğ³‹K‰»‚µ‚ÄA•ª”‚Ì’l‚ÉƒXƒP[ƒŠƒ“ƒO‚·‚é
+		//ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–ã—ã¦ã€åˆ†æ•°ã®å€¤ã«ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ã™ã‚‹
 		dir *= f / length;
 	}
 

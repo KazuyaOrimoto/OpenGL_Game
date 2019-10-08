@@ -22,21 +22,21 @@ ObstacleCheck::~ObstacleCheck()
 }
 
 /**
-@brief	�t���[�����̏���
-@param	�Ō�̃t���[������������̂ɗv��������
+@brief	フレーム毎の処理
+@param	最後のフレームを完了するのに要した時間
 */
 void ObstacleCheck::UpdateGameObject(float _deltaTime)
 {
 	SetPosition(bike->GetPosition());
-	//��Q���ƏՓ˂��Ă��Ȃ�������
+	//障害物と衝突していなかったら
 	if (!wasCollidedObstacle)
 	{
-		//��Q���ƂԂ����Ă��Ȃ�
+		//障害物とぶつかっていない
 		onObstacle = false;
 	}
 	else
 	{
-		//���Z�b�g
+		//リセット
 		wasCollidedObstacle = false;
 	}
 }

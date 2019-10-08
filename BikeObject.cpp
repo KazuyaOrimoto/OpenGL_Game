@@ -44,7 +44,7 @@ void BikeObject::OnCollision(const GameObject& _hitObject)
 {
     if (_hitObject.GetTag() == Tag::Obstacle)
     {
-        //áŠQ•¨‚Æ“–‚½‚Á‚½‚Ìˆ—
+        //éšœå®³ç‰©ã¨å½“ãŸã£ãŸæ™‚ã®å‡¦ç†
 		animation = true;
 		meshComp->SetVisible(false);
     }
@@ -101,7 +101,7 @@ void BikeObject::Animation()
 }
 
 /**
-@brief	ƒAƒNƒVƒ‡ƒ“‚ğŒˆ’è‚·‚é
+@brief	ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’æ±ºå®šã™ã‚‹
 */
 void BikeObject::ActionDetermining()
 {
@@ -117,7 +117,7 @@ void BikeObject::ActionDetermining()
 }
 
 /**
-@brief	ƒAƒNƒVƒ‡ƒ“‚ğÀs‚·‚é
+@brief	ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å®Ÿè¡Œã™ã‚‹
 */
 void BikeObject::ActionExecution()
 {

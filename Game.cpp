@@ -1,12 +1,12 @@
 //=============================================================================
 //	@file	Game.cpp
-//	@brief	ƒQ[ƒ€‘S‘Ì‚Ìis‚ğ‚Ü‚Æ‚ß‚é
-//	@autor	‹–{ ˜aÆ
+//	@brief	ã‚²ãƒ¼ãƒ å…¨ä½“ã®é€²è¡Œã‚’ã¾ã¨ã‚ã‚‹
+//	@autor	å±…æœ¬ å’Œå“‰
 //	@date	2019/10/3
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Game.h"
 #include "SDL.h"
@@ -22,7 +22,7 @@
 #include "SceneBase.h"
 
 /**
-@brief  ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+@brief  ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 */
 Game::Game()
 	: fps(nullptr)
@@ -33,26 +33,26 @@ Game::Game()
 }
 
 /**
-@brief  ƒfƒXƒgƒ‰ƒNƒ^
+@brief  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 */
 Game::~Game()
 {
 }
 
 /**
-@brief  ‰Šú‰»ˆ—
-@return true : ¬Œ÷ , false : ¸”s
+@brief  åˆæœŸåŒ–å‡¦ç†
+@return true : æˆåŠŸ , false : å¤±æ•—
 */
 bool Game::Initialize()
 {
-	//SDL‚Ì‰Šú‰»
+	//SDLã®åˆæœŸåŒ–
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
 	}
 
-	//ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»
+	//ãƒ¬ãƒ³ãƒ€ãƒ©ãƒ¼ã®åˆæœŸåŒ–
 	Renderer::CreateInstance();
 	if (!RENDERER->Initialize(1024.0f, 768.0f))
 	{
@@ -61,10 +61,10 @@ bool Game::Initialize()
 		return false;
 	}
 
-    //“–‚½‚è”»’è—pƒNƒ‰ƒX‚Ì‰Šú‰»
+    //å½“ãŸã‚Šåˆ¤å®šç”¨ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
 	PhysicsWorld::CreateInstance();
 
-    //“ü—ÍŠÇ—ƒNƒ‰ƒX‚Ì‰Šú‰»
+    //å…¥åŠ›ç®¡ç†ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
 	inputSystem = new InputSystem();
 	if (!inputSystem->Initialize())
 	{
@@ -72,45 +72,45 @@ bool Game::Initialize()
 		return false;
 	}
 
-	//FPSŠÇ—ƒNƒ‰ƒX‚Ì‰Šú‰»
+	//FPSç®¡ç†ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
 	fps = new FPS();
 
-    //ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgŠÇ—ƒNƒ‰ƒX‚Ì‰Šú‰»
+    //ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç®¡ç†ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
     GameObjectManager::CreateInstance();
-    //ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg¶¬ƒNƒ‰ƒX‚Ì‰Šú‰»
+    //ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
     GameObjectCreater::CreateInstance();
-	//áŠQ•¨ŠÇ—ƒNƒ‰ƒX‚Ì‰Šú‰»
+	//éšœå®³ç‰©ç®¡ç†ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–
     ObstacleManager::CreateInstance();
 
-    //Œ»İ‚ÌƒV[ƒ“‚Ì‰Šú‰»
+    //ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã®åˆæœŸåŒ–
     nowScene = SceneBase::StartGame();
 
 	return true;
 }
 
 /**
-@brief  I—¹ˆ—
+@brief  çµ‚äº†å‡¦ç†
 */
 void Game::Termination()
 {
-    //ƒf[ƒ^‚ÌƒAƒ“ƒ[ƒh
+    //ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	UnloadData();
-    //ƒVƒ“ƒOƒ‹ƒgƒ“ƒNƒ‰ƒX‚Ì‰ğ•úˆ—
+    //ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã‚¯ãƒ©ã‚¹ã®è§£æ”¾å‡¦ç†
     GameObjectManager::DeleteInstance();
     GameObjectCreater::DeleteInstance();
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
-    //ƒNƒ‰ƒX‚Ì‰ğ•úˆ—
+    //ã‚¯ãƒ©ã‚¹ã®è§£æ”¾å‡¦ç†
     delete fps;
     delete inputSystem;
     delete nowScene;
-    //ƒTƒuƒVƒXƒeƒ€‚ÌI—¹
+    //ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®çµ‚äº†
 	SDL_Quit();
 }
 
 /**
-@brief  ƒQ[ƒ€ƒ‹[ƒv
+@brief  ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
 */
 void Game::GameLoop()
 {
@@ -124,7 +124,7 @@ void Game::GameLoop()
 }
 
 /**
-@brief   ƒ[ƒh‚µ‚½ƒf[ƒ^‚Ì‰ğ•ú
+@brief   ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ‡ãƒ¼ã‚¿ã®è§£æ”¾
 */
 void Game::UnloadData()
 {
@@ -136,7 +136,7 @@ void Game::UnloadData()
 }
 
 /**
-@brief  “ü—ÍŠÖ˜A‚Ìˆ—
+@brief  å…¥åŠ›é–¢é€£ã®å‡¦ç†
 */
 void Game::ProcessInput()
 {
@@ -170,7 +170,7 @@ void Game::ProcessInput()
 }
 
 /**
-@brief  •`‰æŠÖ˜A‚Ìˆ—
+@brief  æç”»é–¢é€£ã®å‡¦ç†
 */
 void Game::GenerateOutput()
 {
@@ -178,7 +178,7 @@ void Game::GenerateOutput()
 }
 
 /**
-@brief  ƒQ[ƒ€‚ÌƒAƒbƒvƒf[ƒgˆ—
+@brief  ã‚²ãƒ¼ãƒ ã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆå‡¦ç†
 */
 void Game::UpdateGame()
 {

@@ -10,53 +10,53 @@ class SpriteComponent : public Component
 {
 public:
 	/**
-	@param	ƒAƒ^ƒbƒ`‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
-	@param	ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌXV‡”Ôi”’l‚ª¬‚³‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+	@param	ã‚¢ã‚¿ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
+	@param	ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ›´æ–°é †ç•ªï¼ˆæ•°å€¤ãŒå°ã•ã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
 	*/
     SpriteComponent(GameObject* _owner, int _drawOrder = 100);
     ~SpriteComponent();
 
 	/**
-	@brief	•`‰æˆ—
-	@param	g—p‚·‚éƒVƒF[ƒ_[ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief	æç”»å‡¦ç†
+	@param	ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     virtual void Draw(Shader* _shader);
 
 	/**
-	@brief	g—p‚·‚éƒeƒNƒXƒ`ƒƒ‚Ìİ’è
-	@param	g—p‚·‚éƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^
+	@brief	ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è¨­å®š
+	@param	ä½¿ç”¨ã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     virtual void SetTexture(Texture* _texture);
 
 	/**
-	@brief	ƒeƒNƒXƒ`ƒƒ‚Ì‰¡•‚ğæ“¾‚·‚é
-	@return ƒeƒNƒXƒ`ƒƒ‚Ì‰¡•
+	@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ¨ªå¹…ã‚’å–å¾—ã™ã‚‹
+	@return ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ¨ªå¹…
 	*/
     int GetTexWidth() const { return textureWidth; }
 
 	/**
-	@brief	ƒeƒNƒXƒ`ƒƒ‚Ìc•‚ğæ“¾‚·‚é
-	@return ƒeƒNƒXƒ`ƒƒ‚Ìc•
+	@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç¸¦å¹…ã‚’å–å¾—ã™ã‚‹
+	@return ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç¸¦å¹…
 	*/
     int GetTexHeight() const { return textureHeight; }
 
 	/**
-	@brief	DrawOrder‚ğæ“¾‚·‚é
-	@return DrawOrderi”’l‚ª­‚È‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+	@brief	DrawOrderã‚’å–å¾—ã™ã‚‹
+	@return DrawOrderï¼ˆæ•°å€¤ãŒå°‘ãªã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
 	*/
 	int GetDrawOrder() { return drawOrder; }
 
 protected:
 
-	//ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	//ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 
     Texture* texture;
 
-	//•`‰æ‚³‚ê‚é‡”Ôi”’l‚ª­‚È‚¢‚Ù‚Ç‘‚­XV‚³‚ê‚éj
+	//æç”»ã•ã‚Œã‚‹é †ç•ªï¼ˆæ•°å€¤ãŒå°‘ãªã„ã»ã©æ—©ãæ›´æ–°ã•ã‚Œã‚‹ï¼‰
     int drawOrder;
-	//ƒeƒNƒXƒ`ƒƒ‚Ì‰¡•
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®æ¨ªå¹…
     int textureWidth;
-	//ƒeƒNƒXƒ`ƒƒ‚Ìc•
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç¸¦å¹…
     int textureHeight;
 };
 

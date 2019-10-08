@@ -15,8 +15,8 @@ public:
 	PlayerObject();
 
 	/**
-	@brief	ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌƒAƒbƒvƒf[ƒg
-	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+	@brief	ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
+	@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 	*/
 	virtual void UpdateGameObject(float _deltaTime);
 

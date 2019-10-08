@@ -16,20 +16,20 @@ class MeshComponent : public Component
 {
 public:
 	/**
-	@param	ƒAƒ^ƒbƒ`‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒCƒ“ƒ^
+	@param	ã‚¢ã‚¿ãƒƒãƒã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     MeshComponent(GameObject* _owner, ShaderType _shaderType = DEFAULT);
     ~MeshComponent();
 
 	/**
-	@brief@•`‰æˆ—
-	@param	g—p‚·‚éƒVƒF[ƒ_[ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@briefã€€æç”»å‡¦ç†
+	@param	ä½¿ç”¨ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     virtual void Draw(Shader* _shader);
 
 	/**
-	@brief@ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªg‚¤Mesh‚Ìİ’è
-	@param	İ’è‚·‚éMeshƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@briefã€€ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒä½¿ã†Meshã®è¨­å®š
+	@param	è¨­å®šã™ã‚‹Meshã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     virtual void SetMesh(Mesh* _mesh) { mMesh = _mesh; }
 
@@ -39,33 +39,33 @@ public:
 	void SetShaderName(ShaderType _shaderName) { shaderName = _shaderName; }
 
 	/**
-	@brief@ƒƒbƒVƒ…ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªg‚¤TextureƒCƒ“ƒfƒbƒNƒX‚Ìİ’è
-	@param	İ’è‚·‚éTextureƒCƒ“ƒfƒbƒNƒX‚Ì”
+	@briefã€€ãƒ¡ãƒƒã‚·ãƒ¥ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒä½¿ã†Textureã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®è¨­å®š
+	@param	è¨­å®šã™ã‚‹Textureã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®æ•°
 	*/
     void SetTextureIndex(size_t _index) { mTextureIndex = _index; }
 
 	/**
-	@brief@•`‰æ‚ğ‚·‚é‚©‚Ç‚¤‚©‚ğİ’è
-	@param	true : •`‰æ‚·‚é , false : •`‰æ‚µ‚È‚¢
+	@briefã€€æç”»ã‚’ã™ã‚‹ã‹ã©ã†ã‹ã‚’è¨­å®š
+	@param	true : æç”»ã™ã‚‹ , false : æç”»ã—ãªã„
 	*/
 	void SetVisible(bool _visible) { visible = _visible; }
 
 	/**
-	@brief@•`‰æ‚ğ‚·‚é‚©‚Ç‚¤‚©‚ğæ“¾‚·‚é
-	@return	true : •`‰æ‚·‚é , false : •`‰æ‚µ‚È‚¢
+	@briefã€€æç”»ã‚’ã™ã‚‹ã‹ã©ã†ã‹ã‚’å–å¾—ã™ã‚‹
+	@return	true : æç”»ã™ã‚‹ , false : æç”»ã—ãªã„
 	*/
 	bool GetVisible() const { return visible; }
 
 protected:
 
-	//ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	//ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 
     Mesh* mMesh;
     size_t mTextureIndex;
 
     ShaderType shaderName;
 
-	//•`‰æ‚ğ‚·‚é‚©‚Ç‚¤‚©
+	//æç”»ã‚’ã™ã‚‹ã‹ã©ã†ã‹
 	bool visible;
 };
 

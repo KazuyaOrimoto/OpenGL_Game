@@ -6,7 +6,7 @@ public:
 	~FPS();
 
 	/**
-	@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
+	@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
 	*/
 	void Update();
 
@@ -14,17 +14,17 @@ public:
 
 private:
 	/**
-	@brief	FPS‚ªİ’è’l‚æ‚è‘å‚«‚­‚È‚ç‚È‚¢‚½‚ß‚Ì§Œä
+	@brief	FPSãŒè¨­å®šå€¤ã‚ˆã‚Šå¤§ãããªã‚‰ãªã„ãŸã‚ã®åˆ¶å¾¡
 	*/
 	void Wait();
 
-	const Uint32 setFps;				//ƒtƒŒ[ƒ€ƒŒ[ƒg‚ÌÅ‚’l
-	const Uint32 oneFrameTickCount;		//‚PƒtƒŒ[ƒ€‚É‚©‚¯‚éŠÔ
-	Uint32 fpsCount;					//ƒtƒŒ[ƒ€‚ÌƒJƒEƒ“ƒ^[
-	Uint32 frameStartTickTime;			//FPS‚ÌŒvZ‚ğn‚ß‚½‚ÌŠÔ
-	Uint32 fps;							//ŒvZ‚µ‚½ƒtƒŒ[ƒ€ƒŒ[ƒg
-	int beforetickCount;				//‘O‚ÌƒtƒŒ[ƒ€‚Ì‚©‚©‚Á‚½ŠÔ
-	float deltaTime;					//Œ»İ‚ÌƒtƒŒ[ƒ€‚Ì‚©‚©‚Á‚½ŠÔ
+	const Uint32 setFps;				//ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆã®æœ€é«˜å€¤
+	const Uint32 oneFrameTickCount;		//ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ ã«ã‹ã‘ã‚‹æ™‚é–“
+	Uint32 fpsCount;					//ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
+	Uint32 frameStartTickTime;			//FPSã®è¨ˆç®—ã‚’å§‹ã‚ãŸæ™‚ã®æ™‚é–“
+	Uint32 fps;							//è¨ˆç®—ã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆ
+	int beforetickCount;				//å‰ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‹ã‹ã£ãŸæ™‚é–“
+	float deltaTime;					//ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‹ã‹ã£ãŸæ™‚é–“
 
 };
 

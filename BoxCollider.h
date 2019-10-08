@@ -18,9 +18,9 @@ public:
 	virtual void CollisionActive() override;
 
 private:
-	//�I�u�W�F�N�g�ɐݒ肷��p�̃{�b�N�X�i���S���I�u�W�F�N�g�̒��S�ɂ���j
+	//オブジェクトに設定する用のボックス（中心をオブジェクトの中心にする）
 	AABB objectBox;
-	//�����蔻�肷��Ƃ��Ɏg���{�b�N�X�i���S�����[���h���W�̒��S�ɂ���j
+	//当たり判定するときに使うボックス（中心をワールド座標の中心にする）
 	AABB worldBox;
 };
 

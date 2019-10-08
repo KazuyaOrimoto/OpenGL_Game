@@ -21,7 +21,7 @@ void CameraObject::UpdateGameObject(float _deltaTime)
 {
     GameObject::UpdateGameObject(_deltaTime);
 
-	// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ|ƒWƒVƒ‡ƒ“‚©‚çƒrƒ…[s—ñ‚ğŒvZ
+	// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‹ã‚‰ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’è¨ˆç®—
     Vector3 cameraPos = GetPosition();
     Vector3 target = GetPosition() + GetForward() * 100.0f;
     Vector3 up = Vector3::UnitZ;

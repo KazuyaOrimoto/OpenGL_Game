@@ -10,14 +10,14 @@ public:
 	RotateComponent(GameObject* _owner, int _updateOrder = 10);
 
 	/**
-	@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+	@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+	@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 	*/
 	virtual void Update(float _deltaTime);
 
 	/**
-	@brief	“ü—Íˆ—
-	@param	InputState\‘¢‘Ì
+	@brief	å…¥åŠ›å‡¦ç†
+	@param	InputStateæ§‹é€ ä½“
 	*/
 	virtual void ProcessInput(const struct InputState& _state);
 

@@ -22,7 +22,7 @@ void GameObjectManager::DeleteInstance()
 }
 
 /**
-@brief  �Q�[���I�u�W�F�N�g�̃A�b�v�f�[�g����
+@brief  ゲームオブジェクトのアップデート処理
 */
 void GameObjectManager::UpdateGameObject(float _deltaTime)
 {
@@ -52,8 +52,8 @@ void GameObjectManager::ProcessInput(const InputState& _state)
 }
 
 /**
-@brief  �Q�[���I�u�W�F�N�g�̒ǉ�
-@param	�ǉ�����GameObject�N���X�̃|�C���^
+@brief  ゲームオブジェクトの追加
+@param	追加するGameObjectクラスのポインタ
 */
 void GameObjectManager::AddGameObject(GameObject* _object)
 {
@@ -68,8 +68,8 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 }
 
 /**
-@brief  �Q�[���I�u�W�F�N�g�̍폜
-@param	�폜����GameObject�N���X�̃|�C���^
+@brief  ゲームオブジェクトの削除
+@param	削除するGameObjectクラスのポインタ
 */
 void GameObjectManager::RemoveGameObject(GameObject * _object)
 {

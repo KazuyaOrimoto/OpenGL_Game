@@ -68,7 +68,7 @@ void ObstacleBox::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Player)
 	{
-		//áŠQ•¨‚Æ“–‚½‚Á‚½Žž‚Ìˆ—
+		//éšœå®³ç‰©ã¨å½“ãŸã£ãŸæ™‚ã®å‡¦ç†
 		meshComp->SetVisible(false);
 		ResetObstacle();
 	}

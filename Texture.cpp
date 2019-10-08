@@ -16,9 +16,9 @@ Texture::~Texture()
 }
 
 /**
-@brief	ƒeƒNƒXƒ`ƒƒ‚Ìƒ[ƒh
-@param	ƒeƒNƒXƒ`ƒƒ‚Ìƒtƒ@ƒCƒ‹–¼
-@return	true : ¬Œ÷ , false : ¸”s
+@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ­ãƒ¼ãƒ‰
+@param	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+@return	true : æˆåŠŸ , false : å¤±æ•—
 */
 bool Texture::Load(const std::string& _fileName)
 {
@@ -53,7 +53,7 @@ bool Texture::Load(const std::string& _fileName)
 }
 
 /**
-@brief	ƒ[ƒh‚µ‚½ƒeƒNƒXƒ`ƒƒ‚Ì‰ğ•ú
+@brief	ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è§£æ”¾
 */
 void Texture::Unload()
 {
@@ -61,7 +61,7 @@ void Texture::Unload()
 }
 
 /**
-@brief	ƒeƒNƒXƒ`ƒƒ‚ğƒAƒNƒeƒBƒu‚É‚·‚é
+@brief	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
 */
 void Texture::SetActive()
 {

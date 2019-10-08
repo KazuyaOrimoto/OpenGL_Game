@@ -14,66 +14,66 @@ public:
     Mesh();
     ~Mesh();
 	/**
-	@brief  ƒƒbƒVƒ…ƒf[ƒ^‚Ì“Ç‚İ‚İ
-	@param	ƒ[ƒh‚µ‚½‚¢ƒƒbƒVƒ…‚Ìƒtƒ@ƒCƒ‹–¼
-	@param	RendererƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
-	@return true : ¬Œ÷ , false : ¸”s
+	@brief  ãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿
+	@param	ãƒ­ãƒ¼ãƒ‰ã—ãŸã„ãƒ¡ãƒƒã‚·ãƒ¥ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+	@param	Rendererã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
+	@return true : æˆåŠŸ , false : å¤±æ•—
 	*/
     bool Load(const std::string& _fileName, Renderer* _renderer);
 
 	/**
-	@brief  ƒ[ƒh‚µ‚½ƒƒbƒVƒ…ƒf[ƒ^‚Ì‰ğ•ú
+	@brief  ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ¡ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿ã®è§£æ”¾
 	*/
     void Unload();
 	
 	/**
-	@brief	ƒƒbƒVƒ…‚Ì’¸“_”z—ñ‚ğæ“¾‚·‚é
-	@return	VertexArrayŒ^‚Ìƒ|ƒCƒ“ƒ^
+	@brief	ãƒ¡ãƒƒã‚·ãƒ¥ã®é ‚ç‚¹é…åˆ—ã‚’å–å¾—ã™ã‚‹
+	@return	VertexArrayå‹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     VertexArray* GetVertexArray() { return vertexArray; }
 
 	/**
-	@brief	ƒCƒ“ƒfƒNƒX‚©‚çƒƒbƒVƒ…‚Ég‚Á‚Ä‚¢‚éƒeƒNƒXƒ`ƒƒ‚ğæ“¾‚·‚é
-	@param	ƒeƒNƒXƒ`ƒƒ‚ÌƒCƒ“ƒfƒbƒNƒX
-	@return TextureƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief	ã‚¤ãƒ³ãƒ‡ã‚¯ã‚¹ã‹ã‚‰ãƒ¡ãƒƒã‚·ãƒ¥ã«ä½¿ã£ã¦ã„ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—ã™ã‚‹
+	@param	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+	@return Textureã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     Texture* GetTexture(size_t _index);
 
 	/**
-	@brief	ƒCƒ“ƒfƒNƒX‚©‚çƒƒbƒVƒ…‚Ég‚Á‚Ä‚¢‚éƒeƒNƒXƒ`ƒƒ‚ğæ“¾‚·‚é
-	@param	ƒeƒNƒXƒ`ƒƒ‚ÌƒCƒ“ƒfƒbƒNƒX
-	@return TextureƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	@brief	ã‚¤ãƒ³ãƒ‡ã‚¯ã‚¹ã‹ã‚‰ãƒ¡ãƒƒã‚·ãƒ¥ã«ä½¿ã£ã¦ã„ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å–å¾—ã™ã‚‹
+	@param	ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+	@return Textureã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	*/
     const std::string& GetShaderName() const { return shaderName; }
 
 	/**
-	@brief	ƒIƒuƒWƒFƒNƒg‹óŠÔ‚Å‹«ŠE‹…‚Ì”¼Œa‚ğæ“¾‚·‚é
-	@return radiusi”¼Œaj
+	@brief	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç©ºé–“ã§å¢ƒç•Œçƒã®åŠå¾„ã‚’å–å¾—ã™ã‚‹
+	@return radiusï¼ˆåŠå¾„ï¼‰
 	*/
     float GetRadius() const { return radius; }
 
 	/**
-	@brief	‹¾–Ê”½Ë¬•ª‚Ì‘å‚«‚³‚ğæ“¾‚·‚é
-	@return specPoweri‹¾–Ê”½Ë¬•ªj
+	@brief	é¡é¢åå°„æˆåˆ†ã®å¤§ãã•ã‚’å–å¾—ã™ã‚‹
+	@return specPowerï¼ˆé¡é¢åå°„æˆåˆ†ï¼‰
 	*/
     float GetSpecPower() const { return specPower; }
 
 	std::vector<Vector3> GetVerts() {return verts;}
 
 private:
-    //‚±‚ÌƒƒbƒVƒ…‚Ég‚¤ƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^‚Ì‰Â•Ï’·ƒRƒ“ƒeƒi
+    //ã“ã®ãƒ¡ãƒƒã‚·ãƒ¥ã«ä½¿ã†ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ã‚¿ã®å¯å¤‰é•·ã‚³ãƒ³ãƒ†ãƒŠ
     std::vector<Texture*> textures;
-	//‚±‚ÌƒƒbƒVƒ…‚Ég‚¤’¸“_ƒf[ƒ^
+	//ã“ã®ãƒ¡ãƒƒã‚·ãƒ¥ã«ä½¿ã†é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿
 	std::vector<Vector3> verts;
 
-	//ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	//ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 
     VertexArray* vertexArray;
 
-    //‚±‚ÌƒƒbƒVƒ…‚Ég‚¤ƒVƒF[ƒ_[‚Ì–¼‘O
+    //ã“ã®ãƒ¡ãƒƒã‚·ãƒ¥ã«ä½¿ã†ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®åå‰
     std::string shaderName;
-    //ƒIƒuƒWƒFƒNƒg‹óŠÔ‚Å‚Ì‹«ŠE‹…‚Ì”¼Œa
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç©ºé–“ã§ã®å¢ƒç•Œçƒã®åŠå¾„
     float radius;
-    //‹¾–Ê”½Ë¬•ª‚Ì‘å‚«‚³
+    //é¡é¢åå°„æˆåˆ†ã®å¤§ãã•
     float specPower;
 };

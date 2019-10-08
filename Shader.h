@@ -10,63 +10,63 @@ public:
     Shader();
     ~Shader();
 	/**
-	@brief	’¸“_ƒVƒF[ƒ_[‚Æƒtƒ‰ƒOƒƒ“ƒgƒVƒF[ƒ_[‚Ìƒ[ƒh
-	@param	’¸“_ƒVƒF[ƒ_[‚Ìƒtƒ@ƒCƒ‹–¼
-	@param	’¸“_ƒVƒF[ƒ_[‚Ìƒtƒ@ƒCƒ‹–¼
-	@return	true : ¬Œ÷ , false : ¸”s
+	@brief	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã¨ãƒ•ãƒ©ã‚°ãƒ¡ãƒ³ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ­ãƒ¼ãƒ‰
+	@param	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+	@param	é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+	@return	true : æˆåŠŸ , false : å¤±æ•—
 	*/
 	bool Load(const std::string& _vertName,const std::string& _fragName);
 	/**
-	@brief	ƒ[ƒh‚µ‚½ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	@brief	ãƒ­ãƒ¼ãƒ‰ã—ãŸã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è§£æ”¾
 	*/
 	void Unload();
 
 	/**
-	@brief	ƒVƒF[ƒ_[ƒvƒƒOƒ‰ƒ€‚ğƒAƒNƒeƒBƒu‚É‚·‚é
+	@brief	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
 	*/
 	void SetActive();
 
 	/**
-	@brief	s—ñ‚ÌUniform•Ï”‚ğİ’è‚·‚é
-	@param	İ’è‚·‚éUniform•Ï”–¼
-	@param	İ’è‚·‚és—ñ
+	@brief	è¡Œåˆ—ã®Uniformå¤‰æ•°ã‚’è¨­å®šã™ã‚‹
+	@param	è¨­å®šã™ã‚‹Uniformå¤‰æ•°å
+	@param	è¨­å®šã™ã‚‹è¡Œåˆ—
 	*/
 	void SetMatrixUniform(const char* _name , const Matrix4& _matrix);
 
     /**
-    @brief	Vector3‚ÌUniform•Ï”‚ğİ’è‚·‚é
-    @param	İ’è‚·‚éUniform•Ï”–¼
-    @param	İ’è‚·‚éVector3
+    @brief	Vector3ã®Uniformå¤‰æ•°ã‚’è¨­å®šã™ã‚‹
+    @param	è¨­å®šã™ã‚‹Uniformå¤‰æ•°å
+    @param	è¨­å®šã™ã‚‹Vector3
     */
     void SetVectorUniform(const char* _name, const Vector3& _vector);
 
     /**
-    @brief	float‚ÌUniform•Ï”‚ğİ’è‚·‚é
-    @param	İ’è‚·‚éUniform•Ï”–¼
-    @param	İ’è‚·‚éfloat
+    @brief	floatã®Uniformå¤‰æ•°ã‚’è¨­å®šã™ã‚‹
+    @param	è¨­å®šã™ã‚‹Uniformå¤‰æ•°å
+    @param	è¨­å®šã™ã‚‹float
     */
     void SetFloatUniform(const char* _name, const float& _value);
 
 private:
 	/**
-	@brief	ƒVƒF[ƒ_[‚ğƒRƒ“ƒpƒCƒ‹‚·‚é
-	@param	ƒRƒ“ƒpƒCƒ‹‚·‚éƒVƒF[ƒ_[‚Ìƒtƒ@ƒCƒ‹–¼
-	@param	ƒVƒF[ƒ_[‚Ìí—Ş
-	@param	ƒVƒF[ƒ_[‚ÌID—p‚ÌQÆ•Ï”
-	@return	true : ¬Œ÷ , false : ¸”s
+	@brief	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹
+	@param	ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«ã™ã‚‹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«å
+	@param	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ç¨®é¡
+	@param	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®IDç”¨ã®å‚ç…§å¤‰æ•°
+	@return	true : æˆåŠŸ , false : å¤±æ•—
 	*/
 	bool CompileShader(const std::string& _fileName,GLenum _shaderType,GLuint& _outShader);
 
 	/**
-	@brief	ƒVƒF[ƒ_[‚ªƒRƒ“ƒpƒCƒ‹o—ˆ‚Ä‚¢‚é‚©Šm”F
-	@param	ƒVƒF[ƒ_[‚ÌID
-	@return	true : ¬Œ÷ , false : ¸”s
+	@brief	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãŒã‚³ãƒ³ãƒ‘ã‚¤ãƒ«å‡ºæ¥ã¦ã„ã‚‹ã‹ç¢ºèª
+	@param	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ID
+	@return	true : æˆåŠŸ , false : å¤±æ•—
 	*/
 	bool IsCompiled(GLuint _shader);
 	/**
-	@brief	ƒVƒF[ƒ_[‚ªƒŠƒ“ƒNo—ˆ‚Ä‚¢‚é‚©Šm”F
-	@param	ƒVƒF[ƒ_[‚ÌID
-	@return	true : ¬Œ÷ , false : ¸”s
+	@brief	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãŒãƒªãƒ³ã‚¯å‡ºæ¥ã¦ã„ã‚‹ã‹ç¢ºèª
+	@param	ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ID
+	@return	true : æˆåŠŸ , false : å¤±æ•—
 	*/
 	bool IsVaildProgram();
 

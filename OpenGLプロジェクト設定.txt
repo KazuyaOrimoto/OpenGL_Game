@@ -1,15 +1,15 @@
-<í«â¡ÇÃÉCÉìÉNÉãÅ[ÉhÉfÉBÉåÉNÉgÉä>
+<ËøΩÂä†„ÅÆ„Ç§„É≥„ÇØ„É´„Éº„Éâ„Éá„Ç£„É¨„ÇØ„Éà„É™>
 ..\..\external\SDL\include\SDL;..\..\external\GLEW\include\GL;..\..\external\SOIL\include\SOIL;%(AdditionalIncludeDirectories)
 
-<í«â¡ÇÃÉâÉCÉuÉâÉäÉfÉBÉåÉNÉgÉä>
+<ËøΩÂä†„ÅÆ„É©„Ç§„Éñ„É©„É™„Éá„Ç£„É¨„ÇØ„Éà„É™>
 ..\..\external\SDL\lib\win\x86;..\..\external\GLEW\lib\win\x86;..\..\external\SOIL\lib\win\x86;%(AdditionalLibraryDirectories)
 
-<OpenGLópÇÃí«â¡ÇÃàÀë∂ÉtÉ@ÉCÉã>
+<OpenGLÁî®„ÅÆËøΩÂä†„ÅÆ‰æùÂ≠ò„Éï„Ç°„Ç§„É´>
 opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;glew32.lib;SOIL.lib;%(AdditionalDependencies)
 
-<ç\ê¨->release,ÉäÉìÉJÅ[->ÉVÉXÉeÉÄ->ÉTÉuÉVÉXÉeÉÄ>
-ÉRÉìÉ\Å[Éã (/SUBSYSTEM:CONSOLE)
+<ÊßãÊàê->release,„É™„É≥„Ç´„Éº->„Ç∑„Çπ„ÉÜ„É†->„Çµ„Éñ„Ç∑„Çπ„ÉÜ„É†>
+„Ç≥„É≥„ÇΩ„Éº„É´ (/SUBSYSTEM:CONSOLE)
 
-<ÉrÉãÉhÉCÉxÉìÉg->ÉrÉãÉhå„ÇÃÉCÉxÉìÉg->ÉRÉ}ÉìÉhÉâÉCÉì>
+<„Éì„É´„Éâ„Ç§„Éô„É≥„Éà->„Éì„É´„ÉâÂæå„ÅÆ„Ç§„Éô„É≥„Éà->„Ç≥„Éû„É≥„Éâ„É©„Ç§„É≥>
 xcopy "$(ProjectDir)\..\..\external\SDL\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
 xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y

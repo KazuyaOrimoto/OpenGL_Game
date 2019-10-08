@@ -10,8 +10,8 @@ public:
 	~JumpCheck();
 
 	/**
-	@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—
-	@param	ÅŒã‚ÌƒtƒŒ[ƒ€‚ğŠ®—¹‚·‚é‚Ì‚É—v‚µ‚½ŠÔ
+	@brief	ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†
+	@param	æœ€å¾Œã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å®Œäº†ã™ã‚‹ã®ã«è¦ã—ãŸæ™‚é–“
 	*/
 	virtual void UpdateGameObject(float _deltaTime) override;
 
@@ -23,7 +23,7 @@ private:
 	BikeObject* bike;
 
 	bool canJump;
-	//áŠQ•¨‚ÆÕ“Ë‚µ‚Ä‚¢‚½‚©‚Ç‚¤‚©
+	//éšœå®³ç‰©ã¨è¡çªã—ã¦ã„ãŸã‹ã©ã†ã‹
 	bool wasCollidedObstacle;
 };
 
