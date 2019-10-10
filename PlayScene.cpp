@@ -1,4 +1,4 @@
-#include "PlayScene.h"
+﻿#include "PlayScene.h"
 #include "GameObjectCreater.h"
 #include "Game.h"
 #include "Renderer.h"
@@ -15,6 +15,7 @@ PlayScene::PlayScene()
     dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
     GAME_OBJECT_CREATER->PlayerAndWallCreate();
+
 }
 
 PlayScene::~PlayScene()

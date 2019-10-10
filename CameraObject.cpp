@@ -1,4 +1,4 @@
-#include "CameraObject.h"
+﻿#include "CameraObject.h"
 #include "Game.h"
 #include "SDL_scancode.h"
 #include "Renderer.h"

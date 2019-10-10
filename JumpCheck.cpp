@@ -1,4 +1,4 @@
-#include "JumpCheck.h"
+﻿#include "JumpCheck.h"
 #include "BikeObject.h"
 #include "BoxCollider.h"
 

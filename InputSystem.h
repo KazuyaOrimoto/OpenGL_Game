@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <SDL_scancode.h>
 #include <SDL_gamecontroller.h>

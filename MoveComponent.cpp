@@ -1,4 +1,4 @@
-#include "MoveComponent.h"
+﻿#include "MoveComponent.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "Renderer.h"

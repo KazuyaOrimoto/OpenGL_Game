@@ -1,4 +1,4 @@
-#include "MainCamera.h"
+﻿#include "MainCamera.h"
 #include "GameObject.h"
 #include "SDL.h"
 #include "RotateComponent.h"

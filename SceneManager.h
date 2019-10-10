@@ -1,4 +1,6 @@
-#pragma once
+﻿#pragma once
+
+#define SCENE_MANAGER SceneManager::GetInstance()
 
 enum SceneName
 {
@@ -7,12 +9,14 @@ enum SceneName
 	Result
 };
 
+class SceneBase;
+
 class SceneManager
 {
 public:
 	/**
 	@brief  インスタンスを取得する
-	@return Rendererクラスのインスタンス
+	@return SceneManagerクラスのインスタンス
 	*/
 	static SceneManager* GetInstance() { return sceneManager; }
 
@@ -28,7 +32,6 @@ public:
 
 	/**
 	@brief  初期化処理
-	@return true : 成功 , false : 失敗
 	*/
 	void Initialize();
 	/**
@@ -36,6 +39,7 @@ public:
 	*/
 	void Shutdown();
 
+    void ChangeScene(SceneName _name);
 
 private:
 
@@ -43,5 +47,7 @@ private:
 	~SceneManager();
 
 	static SceneManager* sceneManager;
+    SceneBase* nowScene;
+    
 };
 

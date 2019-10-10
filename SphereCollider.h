@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "ColliderComponent.h"
 #include "PhysicsWorld.h"

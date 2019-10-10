@@ -1,4 +1,4 @@
-#include "GameObjectCreater.h"
+﻿#include "GameObjectCreater.h"
 #include "GameObject.h"
 #include "PlayerObject.h"
 #include "MeshComponent.h"
@@ -8,6 +8,7 @@
 #include "ObstacleObject.h"
 #include "WallObject.h"
 #include "ObstacleBox.h"
+#include "Ship.h"
 
 GameObjectCreater* GameObjectCreater::creater = nullptr;
 

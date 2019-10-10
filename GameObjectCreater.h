@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define GAME_OBJECT_CREATER GameObjectCreater::GetInstance()
 

@@ -1,6 +1,7 @@
-#include "Ship.h"
+﻿#include "Ship.h"
 #include "Game.h"
 #include "SpriteComponent.h"
+#include "Renderer.h"
 
 /**
 @param	ゲームクラスのポインタ
@@ -8,8 +9,9 @@
 Ship::Ship()
 	:GameObject()
 {
-	//SpriteComponent* sprite = new SpriteComponent(this,100);
-	//sprite->SetTexture(game->GetTexture("Assets/Ship.png"));
+	SpriteComponent* sprite = new SpriteComponent(this,100);
+	sprite->SetTexture(RENDERER->GetTexture("Assets/Cube.png"));
+
 }
 
 Ship::~Ship()

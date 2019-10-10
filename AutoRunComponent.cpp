@@ -1,4 +1,4 @@
-#include "AutoRunComponent.h"
+﻿#include "AutoRunComponent.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "Renderer.h"

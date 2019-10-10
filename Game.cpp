@@ -1,4 +1,4 @@
-//=============================================================================
+﻿//=============================================================================
 //	@file	Game.cpp
 //	@brief	ゲーム全体の進行をまとめる
 //	@autor	居本 和哉
@@ -19,7 +19,7 @@
 #include "GameObjectManager.h"
 #include "GameObjectCreater.h"
 #include "ObstacleManager.h"
-#include "SceneBase.h"
+#include "SceneManager.h"
 
 /**
 @brief  コンストラクタ
@@ -27,8 +27,6 @@
 Game::Game()
 	: fps(nullptr)
     , isRunning(true)
-    , nowScene(nullptr)
-    , nextScene(nullptr)
 {
 }
 
@@ -81,9 +79,9 @@ bool Game::Initialize()
     GameObjectCreater::CreateInstance();
 	//障害物管理クラスの初期化
     ObstacleManager::CreateInstance();
-
-    //現在のシーンの初期化
-    nowScene = SceneBase::StartGame();
+    //シーン管理クラスの初期化
+    SceneManager::CreateInstance();
+    SCENE_MANAGER->Initialize();
 
 	return true;
 }
@@ -101,10 +99,10 @@ void Game::Termination()
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
+    SceneManager::DeleteInstance();
     //クラスの解放処理
     delete fps;
     delete inputSystem;
-    delete nowScene;
     //サブシステムの終了
 	SDL_Quit();
 }
