@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{36679240-81E7-4953-B0DE-126EB19FE058}</ProjectGuid>
     <RootNamespace>Space</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>OpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -140,6 +140,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionArea.cpp" />
     <ClCompile Include="AutoRunComponent.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="BoxObject.cpp" />
@@ -195,6 +196,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="WallObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionArea.h" />
     <ClInclude Include="AutoRunComponent.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="BoxObject.h" />

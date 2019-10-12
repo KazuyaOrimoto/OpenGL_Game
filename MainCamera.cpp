@@ -6,8 +6,8 @@
 
 MainCamera::MainCamera(GameObject* _owner)
 	:CameraComponent(_owner)
-	, horzDist(700.0f)
-	, vertDist(250.0f)
+	, horzDist(1000.0f)
+	, vertDist(400.0f)
 	, targetDist(200.0f)
 	, springConstant(500.0f)
 	, rotate(nullptr)

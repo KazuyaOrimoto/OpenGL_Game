@@ -8,6 +8,7 @@
 #include "InputSystem.h"
 #include "jumpCheck.h"
 #include "ObstacleCheck.h"
+#include "ActionArea.h"
 
 BikeObject::BikeObject(PlayerObject* _ownerObject)
     : GameObject()
@@ -28,6 +29,8 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	tag = Tag::Player;
 	jumpCheck = new JumpCheck(this);
 	obstacleCheck = new ObstacleCheck(this);
+	new ActionArea(ownerObject);
+
 }
 
 BikeObject::~BikeObject()
@@ -112,6 +115,14 @@ void BikeObject::ActionDetermining()
 		{
 			jumping = true;
 			printf("CanJump!\n");
+		}
+	}
+	else
+	{
+		bool canJump = jumpCheck->CanJump() && obstacleCheck->OnObstacle();
+		if (!canJump)
+		{
+			jumping = false;
 		}
 	}
 }

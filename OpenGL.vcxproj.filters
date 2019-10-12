@@ -144,6 +144,7 @@
     <ClCompile Include="JumpCheck.cpp" />
     <ClCompile Include="ObstacleCheck.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ActionArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -288,6 +289,7 @@
     <ClInclude Include="JumpCheck.h" />
     <ClInclude Include="ObstacleCheck.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ActionArea.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

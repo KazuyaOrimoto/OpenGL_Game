@@ -30,6 +30,6 @@ private:
     AutoRunComponent* autoRun;
 	RotateComponent* rotate;
     SphereCollider* sphereCollider;
-	BikeObject* dril;
+	BikeObject* bike;
 };
 

@@ -28,8 +28,8 @@ PlayerObject::PlayerObject()
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 
-    dril = new BikeObject(this);
-    autoRun->SetDrilObject(dril);
+    bike = new BikeObject(this);
+    autoRun->SetDrilObject(bike);
 
     SetScale(10.0f);
 
