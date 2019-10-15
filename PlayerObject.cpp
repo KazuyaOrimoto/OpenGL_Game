@@ -46,5 +46,5 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 
 bool PlayerObject::CanMove()
 {
-    return rotate->CanMove();
+    return rotate->CanMove() && bike->CanMove();
 }

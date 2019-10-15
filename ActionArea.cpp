@@ -8,6 +8,9 @@ ActionArea::ActionArea(GameObject* _owner)
 {
 	meshComp = new MeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/ActionArea.gpmesh"));
+	meshComp2 = new MeshComponent(this);
+	meshComp2->SetMesh(RENDERER->GetMesh("Assets/ActionArea2.gpmesh"));
+	meshComp2->SetVisible(false);
 
 	SetPosition(_owner->GetPosition());
 	owner = _owner;
@@ -27,4 +30,16 @@ void ActionArea::UpdateGameObject(float _deltaTime)
 	SetPosition(nextPos);
 
 	SetRotation(owner->GetRotation());
+}
+
+void ActionArea::CanJump()
+{
+	meshComp->SetVisible(false);
+	meshComp2->SetVisible(true);
+}
+
+void ActionArea::CanNotJump()
+{
+	meshComp->SetVisible(true);
+	meshComp2->SetVisible(false);
 }

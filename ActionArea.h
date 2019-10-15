@@ -11,8 +11,13 @@ public:
 
 	void UpdateGameObject(float _deltaTime) override;
 
+	void CanJump();
+	void CanNotJump();
+
 private:
 	MeshComponent* meshComp;
+	MeshComponent* meshComp2;
+
 	GameObject* owner;
 };
 
