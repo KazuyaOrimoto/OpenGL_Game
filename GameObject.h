@@ -76,23 +76,55 @@ public:
 	*/
 	void ComputeWorldTransform();
 
+
+
+protected:
+    std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
+    virtual void OnCollision(const GameObject& _hitObject) {}
+
+    //virtual void OnTrigger(GameObject& _triggerObject) {}
+	//ゲームオブジェクトの状態
+	State state;
+	//ゲームオブジェクトのタグ
+	Tag tag;
+
+	//Transform
+	Vector3 position;
+	Quaternion rotation;
+	float scale;
+	Matrix4 worldTransform;
+	//ワールド変換の処理を行う必要性があるか
+	bool recomputeWorldTransform;
+
+	//アタッチされているコンポーネント
+	std::vector<class Component*>components;
+
+	//子のゲームオブジェクト
+	std::vector <GameObject*>childObjects;
+	//親のゲームオブジェクト
+	GameObject* parent;
+
+public:
+	//-----------------------------------------------------------------------------
+	//							Getter・Setter群
+	//-----------------------------------------------------------------------------
 	/**
 	@brief　オブジェクトのポジションを取得する
 	@return	position
 	*/
-    const Vector3& GetPosition() const { return position; }
+	const Vector3& GetPosition() const { return position; }
 
 	/**
 	@brief　オブジェクトのポジションを設定する
 	@param	position
 	*/
-    virtual void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
+	virtual void SetPosition(const Vector3& _pos) { position = _pos; recomputeWorldTransform = true; }
 
 	/**
 	@brief　オブジェクトのスケールを取得する
 	@return	scale
 	*/
-    float GetScale() const { return scale; }
+	float GetScale() const { return scale; }
 
 	/**
 	@brief　オブジェクトのスケールを設定する
@@ -104,13 +136,25 @@ public:
 	@brief　オブジェクトのクォータニオンを取得する
 	@return	rotation（Quaternion型）
 	*/
-    const Quaternion& GetRotation() const { return rotation; }
+	const Quaternion& GetRotation() const { return rotation; }
 
 	/**
 	@brief　オブジェクトのクォータニオンを設定する
 	@param	rotation（Quaternion型）
 	*/
 	virtual void SetRotation(const Quaternion& _qotation) { rotation = _qotation;  recomputeWorldTransform = true; }
+
+	/**
+	@brief	子のオブジェクトを設定する
+	@param	設定するゲームオブジェクト
+	*/
+	void SetChild(GameObject* _object) { childObjects.emplace_back(_object); }
+
+	/**
+	@brief	親のオブジェクトの設定
+	@param	設定するゲームオブジェクト
+	*/
+	void SetParent(GameObject* _object) { parent = _object; _object->SetChild(this); }
 
 	/**
 	@brief　オブジェクトの状態を取得する
@@ -120,7 +164,7 @@ public:
 
 	/**
 	@brief　オブジェクトの状態を設定する
-	@param	state
+	@return	state
 	*/
 	virtual void SetState(State _state) { state = _state; }
 
@@ -132,44 +176,26 @@ public:
 
 	/**
 	@brief　オブジェクトの前方を表すベクトルを取得する
-	@param	forward(Vector3型)
+	@return	forward(Vector3型)
 	*/
-    Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
+	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, rotation); }
 
 	/**
 	@brief　オブジェクトの右を表すベクトルを取得する
-	@param	right(Vector3型)
+	@return	right(Vector3型)
 	*/
 	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitY, rotation); }
 
 	/**
 	@brief　オブジェクトの上を表すベクトルを取得する
-	@param	up(Vector3型)
+	@return	up(Vector3型)
 	*/
 	Vector3 GetUp() const { return Vector3::Transform(Vector3::UnitZ, rotation); }
 
+	/**
+	@brief	オブジェクトのタグを取得する
+	@return	オブジェクトのタグ
+	*/
 	Tag GetTag() const { return tag; }
-
-protected:
-    std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
-    virtual void OnCollision(const GameObject& _hitObject) {}
-
-    virtual void OnTrigger(GameObject& _triggerObject) {}
-	//ゲームオブジェクトの状態
-	State state;
-	//ゲームオブジェクトのタグ
-	Tag tag;
-
-	//Transform
-	Vector3 position;
-	Quaternion rotation;	
-	float scale;
-	Matrix4 worldTransform;
-	//ワールド変換の処理を行う必要性があるか
-	bool recomputeWorldTransform;
-
-	//アタッチされているコンポーネント
-	std::vector<class Component*>components;
-
 };
 

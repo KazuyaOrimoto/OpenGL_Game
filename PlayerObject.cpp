@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "MoveComponent.h"
-#include "SphereCollider.h"
 #include "MainCamera.h"
 #include "AutoRunComponent.h"
 #include "RotateComponent.h"

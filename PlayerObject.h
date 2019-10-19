@@ -29,7 +29,6 @@ private:
     MainCamera* camera;
     AutoRunComponent* autoRun;
 	RotateComponent* rotate;
-    SphereCollider* sphereCollider;
 	BikeObject* bike;
 };
 

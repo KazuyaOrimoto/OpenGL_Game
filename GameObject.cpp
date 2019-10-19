@@ -15,6 +15,7 @@ GameObject::GameObject()
 	, scale(1.0f)
 	, rotation(Quaternion::Identity)
 	, recomputeWorldTransform(true)
+	, parent(nullptr)
 {
 	GAME_OBJECT_MANAGER->AddGameObject(this);
 }
