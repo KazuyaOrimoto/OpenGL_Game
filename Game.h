@@ -29,9 +29,10 @@ class SceneBase;
 //-----------------------------------------------------------------------------
 //	@brief	Gameクラス
 //-----------------------------------------------------------------------------
-class Game
+class Game final
 {
 public:
+
 //===================== パブリック関数 ======================//
 
 	Game();
@@ -42,10 +43,12 @@ public:
     @return true : 成功, false : 失敗
     */
 	bool Initialize();
+
 	/**
 	@brief  終了処理
 	*/
 	void Termination();
+
 	/**
 	@brief  ゲームループ
 	*/
@@ -58,6 +61,7 @@ private:
 	@brief  入力関連の処理
 	*/
     void ProcessInput();
+
 	/**
 	@brief  描画関連の処理
 	*/
@@ -73,13 +77,10 @@ private:
 	*/
 	void UnloadData();
 
-//===================== プライベート変数 ======================//
+//===================== メンバ変数 ======================//
 
-	// FPS計測クラス
-	FPS* fps;
-    // 入力管理クラス
-	InputSystem* inputSystem;
-	//ゲームを続けるかどうか
-    bool isRunning;
+	FPS*				fps;				// FPS計測クラス
+	InputSystem*		inputSystem;		// 入力管理クラス
+    bool				isRunning;			// ゲームを続けるかどうか
 };
 

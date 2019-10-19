@@ -25,6 +25,7 @@
 @brief  コンストラクタ
 */
 Game::Game()
+	// メンバ変数の初期化
 	: fps(nullptr)
     , isRunning(true)
 {
@@ -43,14 +44,14 @@ Game::~Game()
 */
 bool Game::Initialize()
 {
-	//SDLの初期化
+	// SDLの初期化
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
 	}
 
-	//レンダラーの初期化
+	// レンダラーの初期化
 	Renderer::CreateInstance();
 	if (!RENDERER->Initialize(1024.0f, 768.0f))
 	{
@@ -59,10 +60,7 @@ bool Game::Initialize()
 		return false;
 	}
 
-    //当たり判定用クラスの初期化
-	PhysicsWorld::CreateInstance();
-
-    //入力管理クラスの初期化
+    // 入力管理クラスの初期化
 	inputSystem = new InputSystem();
 	if (!inputSystem->Initialize())
 	{
@@ -70,16 +68,22 @@ bool Game::Initialize()
 		return false;
 	}
 
-	//FPS管理クラスの初期化
+    // 当たり判定用クラスの初期化
+	PhysicsWorld::CreateInstance();
+
+	// FPS管理クラスの初期化
 	fps = new FPS();
 
-    //ゲームオブジェクト管理クラスの初期化
+    // ゲームオブジェクト管理クラスの初期化
     GameObjectManager::CreateInstance();
-    //ゲームオブジェクト生成クラスの初期化
+
+    // ゲームオブジェクト生成クラスの初期化
     GameObjectCreater::CreateInstance();
-	//障害物管理クラスの初期化
+
+	// 障害物管理クラスの初期化
     ObstacleManager::CreateInstance();
-    //シーン管理クラスの初期化
+
+    // シーン管理クラスの初期化
     SceneManager::CreateInstance();
     SCENE_MANAGER->Initialize();
 
@@ -91,19 +95,19 @@ bool Game::Initialize()
 */
 void Game::Termination()
 {
-    //データのアンロード
+    // データのアンロード
 	UnloadData();
-    //シングルトンクラスの解放処理
+    // シングルトンクラスの解放処理
     GameObjectManager::DeleteInstance();
     GameObjectCreater::DeleteInstance();
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
     SceneManager::DeleteInstance();
-    //クラスの解放処理
+    // クラスの解放処理
     delete fps;
     delete inputSystem;
-    //サブシステムの終了
+    // サブシステムの終了
 	SDL_Quit();
 }
 
@@ -112,6 +116,7 @@ void Game::Termination()
 */
 void Game::GameLoop()
 {
+	// ゲームのメインループを継続するか
 	while (isRunning)
 	{
 		ProcessInput();
@@ -122,7 +127,7 @@ void Game::GameLoop()
 }
 
 /**
-@brief   ロードしたデータの解放
+@brief  ロードしたデータの解放
 */
 void Game::UnloadData()
 {
