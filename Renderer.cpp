@@ -114,7 +114,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 
     //スプライト用の頂点配列を作成
     CreateSpriteVerts();
-
+    
     return true;
 }
 
@@ -388,7 +388,7 @@ bool Renderer::LoadShaders()
     // ビュー行列の設定
     view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
     projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
-        screenWidth, screenHeight, 25.0f, 10000.0f);
+        screenWidth, screenHeight, 25.0f, 20000.0f);
     meshShader->SetMatrixUniform("uViewProj", view * projection);
 
     wallShader->SetActive();
