@@ -53,7 +53,7 @@ bool Game::Initialize()
 
 	// レンダラーの初期化
 	Renderer::CreateInstance();
-	if (!RENDERER->Initialize(1024.0f, 768.0f))
+	if (!RENDERER->Initialize(1600.0f, 900.0f))
 	{
 		SDL_Log("Failed to initialize renderer");
 		Renderer::DeleteInstance();

@@ -388,7 +388,7 @@ bool Renderer::LoadShaders()
     // ビュー行列の設定
     view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
     projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
-        screenWidth, screenHeight, 25.0f, 20000.0f);
+        screenWidth, screenHeight, 25.0f, 13000.0f);
     meshShader->SetMatrixUniform("uViewProj", view * projection);
 
     wallShader->SetActive();
