@@ -145,6 +145,7 @@
     <ClCompile Include="ObstacleCheck.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ActionArea.cpp" />
+    <ClCompile Include="UVScrollMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -290,6 +291,7 @@
     <ClInclude Include="ObstacleCheck.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ActionArea.h" />
+    <ClInclude Include="UVScrollMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

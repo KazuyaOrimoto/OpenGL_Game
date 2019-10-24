@@ -24,15 +24,15 @@ ObstacleBox::ObstacleBox()
 	switch (randNum)
 	{
 	case 0:
-		mesh = RENDERER->GetMesh("Assets/Obstacle.gpmesh");
+		mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
 		break;
 
 	case 1:
-		mesh = RENDERER->GetMesh("Assets/Obstacle.gpmesh");
+		mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
 		break;
 
 	case 2:
-		mesh = RENDERER->GetMesh("Assets/Obstacle.gpmesh");
+		mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
 		break;
 
 	default:

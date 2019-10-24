@@ -9,7 +9,8 @@ class Mesh;
 enum ShaderType
 {
 	DEFAULT,
-	WALL
+	WALL,
+	UV_SCROLL
 };
 
 class MeshComponent : public Component
