@@ -165,13 +165,13 @@ private:
 
     void SetWallDirLight();
 
-    //ファイル名でメッシュを取得するための可変長コンテナ
+    //ファイル名でメッシュを取得するための連想配列
     std::unordered_map<std::string, Mesh*> meshes;
     //メッシュコンポーネントのポインタの可変長コンテナ
     std::vector<MeshComponent*> meshComponents;
 	//スプライトコンポーネントのポインタの可変長コンテナ
 	std::vector<SpriteComponent*> sprites;
-	//ファイル名でテクスチャを取得するための可変長コンテナ
+	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*>textures;
 
     std::vector<MeshComponent*> wallMeshComponents;
