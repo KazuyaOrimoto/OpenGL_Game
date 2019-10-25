@@ -12,11 +12,20 @@ public:
 	@param	テクスチャのファイル名
 	@return	true : 成功 , false : 失敗
 	*/
+
 	bool Load(const std::string& _fileName);
 	/**
 	@brief	ロードしたテクスチャの解放
 	*/
 	void Unload();
+
+	/**
+	@brief	レンダリング用のテクスチャを作成
+	@param	テクスチャの横幅
+	@param	テクスチャの縦幅
+	@param	ピクセルデータのフォーマット
+	*/
+	void CreateForRendering(int width, int height, unsigned int format);
 
 	/**
 	@brief	テクスチャをアクティブにする
