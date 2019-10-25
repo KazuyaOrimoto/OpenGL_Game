@@ -12,7 +12,7 @@ AutoRunComponent::AutoRunComponent(GameObject* _owner, int _updateOrder)
 
 void AutoRunComponent::Update(float _deltaTime)
 {
-	if (_deltaTime > 0.03)
+	if (_deltaTime > 0.02)
 	{
 		return;
 	}

@@ -17,6 +17,10 @@ MoveComponent::MoveComponent(GameObject* _owner, int _updateOrder)
 
 void MoveComponent::Update(float _deltaTime)
 {
+	if (_deltaTime > 0.02)
+	{
+		return;
+	}
     if (player->CanMove())
     {
         if (!Math::NearZero(forwardSpeed) || !Math::NearZero(starafeSpeed))

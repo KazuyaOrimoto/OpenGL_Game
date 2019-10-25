@@ -141,11 +141,11 @@
     <ClCompile Include="SlidingObject.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="JumpCheck.cpp" />
-    <ClCompile Include="ObstacleCheck.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="ActionArea.cpp" />
     <ClCompile Include="UVScrollMesh.cpp" />
+    <ClCompile Include="ObstacleCheck.cpp" />
+    <ClCompile Include="JumpCheck.cpp" />
+    <ClCompile Include="ActionArea.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -287,11 +287,11 @@
     <ClInclude Include="SlidingObject.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
-    <ClInclude Include="JumpCheck.h" />
-    <ClInclude Include="ObstacleCheck.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="ActionArea.h" />
     <ClInclude Include="UVScrollMesh.h" />
+    <ClInclude Include="ObstacleCheck.h" />
+    <ClInclude Include="JumpCheck.h" />
+    <ClInclude Include="ActionArea.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
