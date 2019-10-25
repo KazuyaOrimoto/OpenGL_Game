@@ -192,6 +192,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="UIScreen.cpp" />
     <ClCompile Include="UVScrollMesh.cpp" />
     <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="WallMeshComponent.cpp" />
@@ -249,6 +250,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="UIScreen.h" />
     <ClInclude Include="UVScrollMesh.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="WallMeshComponent.h" />

@@ -19,6 +19,8 @@ public:
 	*/
 	void Unload();
 
+	void CreateFromSurface(struct SDL_Surface* surface);
+
 	/**
 	@brief	レンダリング用のテクスチャを作成
 	@param	テクスチャの横幅

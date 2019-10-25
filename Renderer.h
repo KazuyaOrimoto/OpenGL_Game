@@ -65,6 +65,15 @@ public:
 	*/
     void Draw();
 
+	void LoadText(const std::string& fileName);
+	const std::string& GetText(const std::string& key);
+
+	class Font* GetFont(const std::string& fileName);
+
+	// Manage UI stack
+	const std::vector<class UIScreen*>& GetUIStack() { return mUIStack; }
+	void PushUI(class UIScreen* screen);
+
 	/**
 	@brief  スプライトの追加
 	@param	追加するSpriteComponentクラスのポインタ
@@ -173,8 +182,14 @@ private:
 	std::vector<SpriteComponent*> sprites;
 	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*>textures;
+	//
+	std::unordered_map<std::string, std::string> text;
 
     std::vector<MeshComponent*> wallMeshComponents;
+
+	std::unordered_map<std::string, class Font*> mFonts;
+
+	std::vector<class UIScreen*> mUIStack;
 
 	//クラスのポインタ
 

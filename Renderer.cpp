@@ -7,6 +7,10 @@
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
 #include <glew.h>
+#include <fstream>
+#include <sstream>
+#include <document.h>
+#include "Font.h"
 
 Renderer* Renderer::renderer = nullptr;
 
@@ -220,6 +224,87 @@ void Renderer::Draw()
 
     // バッファを交換
     SDL_GL_SwapWindow(window);
+}
+
+void Renderer::LoadText(const std::string & fileName)
+{
+	// 既存の連想配列をクリア
+	text.clear();
+	// ファイルを開く
+	std::ifstream file(fileName);
+	if (!file.is_open())
+	{
+		SDL_Log("Text file %s not found", fileName.c_str());
+		return;
+	}
+	// ファイル全体を読み込む
+	std::stringstream fileStream;
+	fileStream << file.rdbuf();
+	std::string contents = fileStream.str();
+	// jsonでファイルを読み込む
+	rapidjson::StringStream jsonStr(contents.c_str());
+	rapidjson::Document doc;
+	doc.ParseStream(jsonStr);
+	if (!doc.IsObject())
+	{
+		SDL_Log("Text file %s is not valid JSON", fileName.c_str());
+		return;
+	}
+	// テキストを読み取る
+	const rapidjson::Value& actions = doc["TextMap"];
+	for (rapidjson::Value::ConstMemberIterator itr = actions.MemberBegin();
+		itr != actions.MemberEnd(); ++itr)
+	{
+		if (itr->name.IsString() && itr->value.IsString())
+		{
+			text.emplace(itr->name.GetString(),
+				itr->value.GetString());
+		}
+	}
+}
+
+const std::string & Renderer::GetText(const std::string & key)
+{
+	static std::string errorMsg("**KEY NOT FOUND**");
+	// Find this text in the map, if it exists
+	auto iter = text.find(key);
+	if (iter != text.end())
+	{
+		return iter->second;
+	}
+	else
+	{
+		return errorMsg;
+	}
+}
+
+Font * Renderer::GetFont(const std::string & fileName)
+{
+	auto iter = mFonts.find(fileName);
+	if (iter != mFonts.end())
+	{
+		return iter->second;
+	}
+	else
+	{
+		Font* font = new Font();
+		if (font->Load(fileName))
+		{
+			mFonts.emplace(fileName, font);
+		}
+		else
+		{
+			font->Unload();
+			delete font;
+			font = nullptr;
+		}
+		return font;
+	}
+}
+
+void Renderer::PushUI(UIScreen * screen)
+{
+	mUIStack.emplace_back(screen);
 }
 
 /**

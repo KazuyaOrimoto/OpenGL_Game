@@ -147,6 +147,7 @@
     <ClCompile Include="JumpCheck.cpp" />
     <ClCompile Include="ActionArea.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="UIScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -294,6 +295,7 @@
     <ClInclude Include="JumpCheck.h" />
     <ClInclude Include="ActionArea.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="UIScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
