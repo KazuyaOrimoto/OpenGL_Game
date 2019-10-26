@@ -102,6 +102,8 @@ bool Game::Initialize()
 
 	UIManager::CreateInstance();
 
+	UI_MANAGER->LoadText("Assets/English.gptext");
+
 	return true;
 }
 
@@ -162,6 +164,18 @@ void Game::HandleKeyPress(int key)
 		// Create pause menu
 		new PauseMenu();
 		break;
+	case '1':
+	{
+		// Load English text
+		UI_MANAGER->LoadText("Assets/English.gptext");
+		break;
+	}
+	case '2':
+	{
+		// Load Russian text
+		UI_MANAGER->LoadText("Assets/Russian.gptext");
+		break;
+	}
 	default:
 		break;
 	}
