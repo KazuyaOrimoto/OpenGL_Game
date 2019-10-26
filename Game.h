@@ -54,6 +54,17 @@ public:
 	*/
 	void GameLoop();
 
+	enum GameState
+	{
+		EGameplay,
+		EPaused,
+		EQuit
+	};
+
+	static GameState GetState() { return gameState; }
+	static void SetState(GameState _state) { gameState = _state; }
+	
+
 private:
 //===================== プライベート関数 ======================//
 
@@ -77,10 +88,12 @@ private:
 	*/
 	void UnloadData();
 
+	void HandleKeyPress(int key);
+
 //===================== メンバ変数 ======================//
 
 	FPS*				fps;				// FPS計測クラス
 	InputSystem*		inputSystem;		// 入力管理クラス
-    bool				isRunning;			// ゲームを続けるかどうか
+	static GameState	gameState;				// ゲームの状態
 };
 

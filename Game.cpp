@@ -20,6 +20,13 @@
 #include "GameObjectCreater.h"
 #include "ObstacleManager.h"
 #include "SceneManager.h"
+#include "UIManager.h"
+#include "PauseMenu.h"
+#include "UIScreen.h"
+#include <SDL_ttf.h>
+#include <string>
+
+Game::GameState Game::gameState = GameState::EGameplay;
 
 /**
 @brief  コンストラクタ
@@ -27,7 +34,6 @@
 Game::Game()
 	// メンバ変数の初期化
 	: fps(nullptr)
-    , isRunning(true)
 {
 }
 
@@ -68,6 +74,13 @@ bool Game::Initialize()
 		return false;
 	}
 
+	// Initialize SDL_ttf
+	if (TTF_Init() != 0)
+	{
+		SDL_Log("Failed to initialize SDL_ttf");
+		return false;
+	}
+
     // 当たり判定用クラスの初期化
 	PhysicsWorld::CreateInstance();
 
@@ -87,6 +100,8 @@ bool Game::Initialize()
     SceneManager::CreateInstance();
     SCENE_MANAGER->Initialize();
 
+	UIManager::CreateInstance();
+
 	return true;
 }
 
@@ -104,6 +119,7 @@ void Game::Termination()
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
     SceneManager::DeleteInstance();
+	UIManager::DeleteInstance();
     // クラスの解放処理
     delete fps;
     delete inputSystem;
@@ -117,7 +133,7 @@ void Game::Termination()
 void Game::GameLoop()
 {
 	// ゲームのメインループを継続するか
-	while (isRunning)
+	while (gameState != EQuit)
 	{
 		ProcessInput();
 		UpdateGame();
@@ -138,6 +154,19 @@ void Game::UnloadData()
 	}
 }
 
+void Game::HandleKeyPress(int key)
+{
+	switch (key)
+	{
+	case SDLK_ESCAPE:
+		// Create pause menu
+		new PauseMenu();
+		break;
+	default:
+		break;
+	}
+}
+
 /**
 @brief  入力関連の処理
 */
@@ -151,10 +180,31 @@ void Game::ProcessInput()
 		switch (event.type)
 		{
 		case SDL_QUIT:
-			isRunning = false;
+			gameState = GameState::EQuit;
 			break;
-		case SDL_MOUSEWHEEL:
-			inputSystem->ProcessEvent(event);
+		case SDL_KEYDOWN:
+			if (!event.key.repeat)
+			{
+				if (gameState == GameState::EGameplay)
+				{
+					HandleKeyPress(event.key.keysym.sym);
+				}
+				else if (!UI_MANAGER->UIEmpty())
+				{
+					UI_MANAGER->HandleKeyPress(event.key.keysym.sym);
+				}
+			}
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (gameState == EGameplay)
+			{
+				HandleKeyPress(event.button.button);
+				inputSystem->ProcessEvent(event);
+			}
+			else if (!UI_MANAGER->UIEmpty())
+			{
+				UI_MANAGER->HandleKeyPress(event.button.button);
+			}
 			break;
 		default:
 			break;
@@ -164,12 +214,14 @@ void Game::ProcessInput()
 	inputSystem->Update();
 	const InputState& state = inputSystem->GetState();
 
-	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
+	if (gameState == Game::EGameplay)
 	{
-		isRunning = false;
+		GAME_OBJECT_MANAGER->ProcessInput(state);
 	}
-
-	GAME_OBJECT_MANAGER->ProcessInput(state);
+	else if (UI_MANAGER->UIEmpty())
+	{
+		UI_MANAGER
+	}
 }
 
 /**
@@ -187,5 +239,6 @@ void Game::UpdateGame()
 {
 	float deltaTime = fps->GetDeltaTime();
 	
+	UI_MANAGER->Update(deltaTime);
 	GAME_OBJECT_MANAGER->UpdateGameObject(deltaTime);
 }

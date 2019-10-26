@@ -5,6 +5,8 @@
 #include <functional>
 #include <vector>
 
+struct InputState;
+
 class Button
 {
 public:
@@ -39,12 +41,12 @@ private:
 class UIScreen
 {
 public:
-	UIScreen(class Game* game);
+	UIScreen();
 	virtual ~UIScreen();
 	// UIScreen subclasses can override these
 	virtual void Update(float deltaTime);
 	virtual void Draw(class Shader* shader);
-	virtual void ProcessInput(const uint8_t* keys);
+	virtual void ProcessInput(const InputState & _keyState);
 	virtual void HandleKeyPress(int key);
 	// Tracks if the UI is active or closing
 	enum UIState
@@ -70,7 +72,6 @@ protected:
 		bool flipY = false);
 	// Sets the mouse mode to relative or not
 	void SetRelativeMouseMode(bool relative);
-	class Game* mGame;
 
 	class Font* mFont;
 	class Texture* mTitle;

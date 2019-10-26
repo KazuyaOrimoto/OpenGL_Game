@@ -4,10 +4,10 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "Font.h"
+#include "UIManager.h"
 
-UIScreen::UIScreen(Game* game)
-	:mGame(game)
-	, mTitle(nullptr)
+UIScreen::UIScreen()
+	: mTitle(nullptr)
 	, mBackground(nullptr)
 	, mTitlePos(0.0f, 300.0f)
 	, mNextButtonPos(0.0f, 200.0f)
@@ -15,8 +15,8 @@ UIScreen::UIScreen(Game* game)
 	, mState(EActive)
 {
 	// Add to UI Stack
-	RENDERER->PushUI(this);
-	mFont = RENDERER->GetFont("Assets/Carlito-Regular.ttf");
+	UI_MANAGER->PushUI(this);
+	mFont = UI_MANAGER->GetFont("Assets/Carlito-Regular.ttf");
 	mButtonOn = RENDERER->GetTexture("Assets/ButtonYellow.png");
 	mButtonOff = RENDERER->GetTexture("Assets/ButtonBlue.png");
 }
@@ -65,7 +65,7 @@ void UIScreen::Draw(Shader* shader)
 	// Override in subclasses to draw any textures
 }
 
-void UIScreen::ProcessInput(const uint8_t* keys)
+void UIScreen::ProcessInput(const InputState & _keyState)
 {
 	// Do we have buttons?
 	if (!mButtons.empty())

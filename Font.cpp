@@ -3,6 +3,7 @@
 #include <vector>
 #include "Game.h"
 #include "Renderer.h"
+#include "UIManager.h"
 
 Font::Font()
 {
@@ -68,7 +69,7 @@ Texture* Font::RenderText(const std::string& textKey,
 	if (iter != fontData.end())
 	{
 		TTF_Font* font = iter->second;
-		const std::string& actualText = RENDERER->GetText(textKey);
+		const std::string& actualText = UI_MANAGER->GetText(textKey);
 		// SDL_Surfaceに描画(αブレンディングする)
 		SDL_Surface* surf = TTF_RenderUTF8_Blended(font, actualText.c_str(), sdlColor);
 		if (surf != nullptr)
