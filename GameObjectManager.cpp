@@ -1,6 +1,7 @@
 ﻿#include "GameObjectManager.h"
 #include "GameObject.h"
 #include "InputSystem.h"
+#include "Game.h"
 
 GameObjectManager* GameObjectManager::manager = nullptr;
 
@@ -26,19 +27,22 @@ void GameObjectManager::DeleteInstance()
 */
 void GameObjectManager::UpdateGameObject(float _deltaTime)
 {
-	updatingGameObject = true;
-	for (auto gameObject : gameObjects)
+	if (Game::GetState() == Game::GameState::EGameplay)
 	{
-		gameObject->Update(_deltaTime);
-	}
-	updatingGameObject = false;
+		updatingGameObject = true;
+		for (auto gameObject : gameObjects)
+		{
+			gameObject->Update(_deltaTime);
+		}
+		updatingGameObject = false;
 
-	for (auto pending : pendingGameObjects)
-	{
-		pending->ComputeWorldTransform();
-		gameObjects.emplace_back(pending);
+		for (auto pending : pendingGameObjects)
+		{
+			pending->ComputeWorldTransform();
+			gameObjects.emplace_back(pending);
+		}
+		pendingGameObjects.clear();
 	}
-	pendingGameObjects.clear();
 }
 
 void GameObjectManager::ProcessInput(const InputState& _state)
