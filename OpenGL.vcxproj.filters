@@ -165,8 +165,12 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="PauseMenu.cpp" />
-    <ClCompile Include="DialogBox.cpp" />
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogBox.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -332,8 +336,12 @@
     <ClInclude Include="UIManager.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="PauseMenu.h" />
-    <ClInclude Include="DialogBox.h" />
+    <ClInclude Include="PauseMenu.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogBox.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

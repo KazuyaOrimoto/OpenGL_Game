@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "Font.h"
 #include "UIManager.h"
+#include "InputSystem.h"
 
 UIScreen::UIScreen()
 	: mTitle(nullptr)
@@ -71,12 +72,7 @@ void UIScreen::ProcessInput(const InputState & _keyState)
 	if (!mButtons.empty())
 	{
 		// Get position of mouse
-		int x, y;
-		SDL_GetMouseState(&x, &y);
-		// Convert to (0,0) center coordinates
-		Vector2 mousePos(static_cast<float>(x), static_cast<float>(y));
-		mousePos.x -= RENDERER->GetScreenWidth() * 0.5f;
-		mousePos.y = RENDERER->GetScreenHeight() * 0.5f - mousePos.y;
+		Vector2 mousePos = _keyState.Mouse.GetPosition();
 
 		// Highlight any buttons
 		for (auto b : mButtons)

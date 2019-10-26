@@ -218,9 +218,9 @@ void Game::ProcessInput()
 	{
 		GAME_OBJECT_MANAGER->ProcessInput(state);
 	}
-	else if (UI_MANAGER->UIEmpty())
+	else if (!UI_MANAGER->UIEmpty())
 	{
-		UI_MANAGER
+		UI_MANAGER->ProcessInput(state);
 	}
 }
 
