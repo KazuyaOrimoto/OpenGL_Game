@@ -44,7 +44,6 @@ void Renderer::CreateInstance()
 	}
 }
 
-
 /**
 @brief  インスタンスを削除する
 */
@@ -178,7 +177,7 @@ void Renderer::Draw()
     // ビュー射影行列を更新する
     meshShader->SetMatrixUniform("uViewProj", view * projection);
     // シェーダーに渡すライティング情報を更新する
-    SetLightUniforms(meshShader);
+    SetLightUniforms(meshShader,view);
 	// すべてのメッシュの描画
     for (auto mc : meshComponents)
     {
@@ -424,14 +423,69 @@ void Renderer::CreateSpriteVerts()
     spriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
+void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const Matrix4 & proj, float viewPortScale, bool lit)
+{
+	// Set the current frame buffer
+	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+	// Set viewport size based on scale
+	glViewport(0, 0,
+		static_cast<int>(screenWidth * viewPortScale),
+		static_cast<int>(screenHeight * viewPortScale)
+	);
+
+	// Clear color buffer/depth buffer
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glDepthMask(GL_TRUE);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Draw mesh components
+	// Enable depth buffering/disable alpha blend
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+	// Set the mesh shader active
+	meshShader->SetActive();
+	// Update view-projection matrix
+	meshShader->SetMatrixUniform("uViewProj", view * proj);
+	// Update lighting uniforms
+	if (lit)
+	{
+		SetLightUniforms(meshShader, view);
+	}
+	for (auto mc : meshComponents)
+	{
+		if (mc->GetVisible())
+		{
+			mc->Draw(meshShader);
+		}
+	}
+
+	//// Draw any skinned meshes now
+	//mSkinnedShader->SetActive();
+	//// Update view-projection matrix
+	//mSkinnedShader->SetMatrixUniform("uViewProj", view * proj);
+	//// Update lighting uniforms
+	//if (lit)
+	//{
+	//	SetLightUniforms(mSkinnedShader, view);
+	//}
+	//for (auto sk : mSkeletalMeshes)
+	//{
+	//	if (sk->GetVisible())
+	//	{
+	//		sk->Draw(mSkinnedShader);
+	//	}
+	//}
+}
+
 /**
 @brief  光源情報をシェーダーの変数にセットする
 @param  セットするShaderクラスのポインタ
 */
-void Renderer::SetLightUniforms(Shader* _shader)
+void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 {
 	// ビュー行列を転置行列にする
-    Matrix4 invView = view;
+    Matrix4 invView = _view;
     invView.Invert();
 	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
     // 環境光の設定

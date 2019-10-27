@@ -48,7 +48,7 @@ ObstacleBox::ObstacleBox()
 		box.UpdateMinMax(itr);
 	}
 	boxCollider->SetObjectBox(box);
-	SetScale(200.0f);
+	SetScale(100.0f);
 	OBSTACLE_MANAGER->AddObstacle(this);
 
 	tag = Tag::Obstacle;
@@ -56,8 +56,6 @@ ObstacleBox::ObstacleBox()
 	state = Paused;
 	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
 }
-
-
 
 ObstacleBox::~ObstacleBox()
 {

@@ -153,11 +153,14 @@ private:
 	*/
     void CreateSpriteVerts();
 
+	void Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj,
+		float viewPortScale = 1.0f, bool lit = true);
+
 	/**
 	@brief  光源情報をシェーダーの変数にセットする
 	@param  セットするShaderクラスのポインタ
 	*/
-    void SetLightUniforms(Shader* _shader);
+    void SetLightUniforms(Shader* _shader, const Matrix4& view);
 
     //ファイル名でメッシュを取得するための連想配列
     std::unordered_map<std::string, Mesh*> meshes;
@@ -170,7 +173,6 @@ private:
 	//
 
     std::vector<MeshComponent*> basicMeshComponents;
-
 
 	//クラスのポインタ
 
