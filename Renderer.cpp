@@ -20,21 +20,17 @@ Renderer::Renderer()
     : spriteShader(nullptr)
 	, spriteVerts(nullptr)
     , meshShader(nullptr)
-    , wallShader(nullptr)
+    , basicShader(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
 	, screenHeight(0)
 	, ambientLight(Vector3::Zero)
 {
-    wallDirLight.direction = Vector3(0.0f, -0.7f, -0.7f);
-    wallDirLight.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-    wallDirLight.specColor = Vector3(0.8f, 0.8f, 0.8f);
 }
 
 Renderer::~Renderer()
 {
-    SetWallDirLight();
 }
 
 /**
@@ -134,8 +130,8 @@ void Renderer::Shutdown()
     delete spriteShader;
     meshShader->Unload();
     delete meshShader;
-    wallShader->Unload();
-    delete wallShader;
+	basicShader->Unload();
+    delete basicShader;
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
 }
@@ -192,16 +188,15 @@ void Renderer::Draw()
 		}
     }
 
-    wallShader->SetActive();
+	basicShader->SetActive();
 
-    wallShader->SetMatrixUniform("uViewProj", view * projection);
+	basicShader->SetMatrixUniform("uViewProj", view * projection);
 
-    SetWallLightUniforms(wallShader);
-    for (auto mc : wallMeshComponents)
+    for (auto mc : basicMeshComponents)
     {
         if (mc->GetVisible())
         {
-            mc->Draw(wallShader);
+            mc->Draw(basicShader);
         }
     }
 
@@ -281,7 +276,7 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
     }
     else if (_meshComponent->GetShaderName() == WALL)
     {
-        wallMeshComponents.emplace_back(_meshComponent);
+        basicMeshComponents.emplace_back(_meshComponent);
     }
 }
 
@@ -298,8 +293,8 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
     }
     else if (_meshComponent->GetShaderName() == WALL)
     {
-        auto iter = std::find(wallMeshComponents.begin(), wallMeshComponents.end(), _meshComponent);
-        wallMeshComponents.erase(iter);
+        auto iter = std::find(basicMeshComponents.begin(), basicMeshComponents.end(), _meshComponent);
+        basicMeshComponents.erase(iter);
     }
 }
 
@@ -391,8 +386,8 @@ bool Renderer::LoadShaders()
         return false;
     }
 
-    wallShader = new Shader();
-    if (!wallShader->Load("Shaders/WallShader.vert", "Shaders/WallShader.frag"))
+    basicShader = new Shader();
+    if (!basicShader->Load("Shaders/BasicMesh.vert", "Shaders/BasicMesh.frag"))
     {
         return false;
     }
@@ -404,8 +399,8 @@ bool Renderer::LoadShaders()
         screenWidth, screenHeight, 25.0f, 13000.0f);
     meshShader->SetMatrixUniform("uViewProj", view * projection);
 
-    wallShader->SetActive();
-    wallShader->SetMatrixUniform("uViewProj", view * projection);
+    basicShader->SetActive();
+    basicShader->SetMatrixUniform("uViewProj", view * projection);
     return true;
 }
 
@@ -429,7 +424,6 @@ void Renderer::CreateSpriteVerts()
     spriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
-
 /**
 @brief  光源情報をシェーダーの変数にセットする
 @param  セットするShaderクラスのポインタ
@@ -449,28 +443,4 @@ void Renderer::SetLightUniforms(Shader* _shader)
         dirLight.diffuseColor);
 	_shader->SetVectorUniform("uDirLight.mSpecColor",
         dirLight.specColor);
-}
-
-void Renderer::SetWallLightUniforms(Shader* _shader)
-{
-    // ビュー行列を転置行列にする
-    Matrix4 invView = view;
-    invView.Invert();
-	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
-    // 環境光の設定
-	_shader->SetVectorUniform("uAmbientLight", ambientLight);
-    // 平行光源の設定
-	_shader->SetVectorUniform("uDirLight.mDirection",
-        wallDirLight.direction);
-	_shader->SetVectorUniform("uDirLight.mDiffuseColor",
-        wallDirLight.diffuseColor);
-	_shader->SetVectorUniform("uDirLight.mSpecColor",
-        wallDirLight.specColor);
-}
-
-void Renderer::SetWallDirLight()
-{
-    wallDirLight.direction = Vector3(0.0f, -0.7f, -0.7f);
-    wallDirLight.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-    wallDirLight.specColor = Vector3(0.8f, 0.8f, 0.8f);
 }

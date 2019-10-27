@@ -159,14 +159,6 @@ private:
 	*/
     void SetLightUniforms(Shader* _shader);
 
-    /**
-    @brief  光源情報をシェーダーの変数にセットする
-    @param  セットするShaderクラスのポインタ
-    */
-    void SetWallLightUniforms(Shader* _shader);
-
-    void SetWallDirLight();
-
     //ファイル名でメッシュを取得するための連想配列
     std::unordered_map<std::string, Mesh*> meshes;
     //メッシュコンポーネントのポインタの可変長コンテナ
@@ -177,9 +169,7 @@ private:
 	std::unordered_map<std::string, Texture*>textures;
 	//
 
-
-    std::vector<MeshComponent*> wallMeshComponents;
-
+    std::vector<MeshComponent*> basicMeshComponents;
 
 
 	//クラスのポインタ
@@ -187,7 +177,7 @@ private:
     Shader* spriteShader;
     VertexArray* spriteVerts;
     Shader* meshShader;
-    Shader* wallShader;
+    Shader* basicShader;
 
     //ビュー行列
     Matrix4 view;
@@ -201,7 +191,6 @@ private:
     Vector3 ambientLight;
 	//平行光源
     DirectionalLight dirLight;
-    DirectionalLight wallDirLight;
     //ウィンドウ
     SDL_Window* window;
     //コンテキスト

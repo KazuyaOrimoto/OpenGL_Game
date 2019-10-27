@@ -21,7 +21,7 @@ UVScrollMesh::~UVScrollMesh()
 void UVScrollMesh::Draw(Shader * _shader)
 {
 	_shader->SetFloatUniform("uTime",
-		(SDL_GetTicks() / 100));
+		static_cast<float>(SDL_GetTicks() / 100));
 	MeshComponent::Draw(_shader);
 }
 
