@@ -141,6 +141,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ActionArea.cpp" />
+    <ClCompile Include="AnimationClip.cpp" />
+    <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AutoRunComponent.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="BoxObject.cpp" />
@@ -203,6 +205,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionArea.h" />
+    <ClInclude Include="AnimationClip.h" />
+    <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AutoRunComponent.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="BoxObject.h" />

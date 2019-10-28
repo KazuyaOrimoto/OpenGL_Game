@@ -23,7 +23,7 @@ PlayerObject::PlayerObject()
     moveComp->SetLeftKey(SDL_SCANCODE_LEFT);
     moveComp->SetMaxStrafeSpeed(2400.0f);
     autoRun = new AutoRunComponent(this);
-    autoRun->SetForwardSpeed(2400.0f);
+    autoRun->SetForwardSpeed(3000.0f);
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 
