@@ -5,12 +5,20 @@ class GameObject;
 class AnimationClip
 {
 public:
-	AnimationClip(AnimationClip* _nextAnimation,GameObject* _gameObject);
-	~AnimationClip();
+	AnimationClip(GameObject* _gameObject, int _animationChangeCount);
+	virtual ~AnimationClip();
 
-	virtual AnimationClip* Update() = 0;
+	virtual void Update(float deltaTime) = 0;
+
+	AnimationClip * ChangeAnimation();
+	void SetNextAnimation(AnimationClip* _nextAnimation) { nextAnimation = _nextAnimation; }
+protected:
+	GameObject* owner;
+	
+	int animationCount;
+	const int animationChangeCount;
 
 private:
-	GameObject* gameObject;
+	AnimationClip* nextAnimation;
 };
 

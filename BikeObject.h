@@ -8,6 +8,8 @@ class ObstacleBox;
 class JumpCheck;
 class ObstacleCheck;
 class ActionArea;
+class AnimationComponent;
+class PlayerAnimationController;
 
 static Vector3 CHECK_AREA_MIN = Vector3(1500.0f, -1.0f, -1.0f);
 static Vector3 CHECK_AREA_MAX = Vector3(2500.0f, 1.0f, 1.0f);
@@ -48,6 +50,8 @@ private:
     MeshComponent* meshComp;
     PlayerObject* ownerObject;
     SphereCollider* sphereCollider;
+	AnimationComponent* animationComp;
+	PlayerAnimationController* controller;
 
 	JumpCheck* jumpCheck;
 	ObstacleCheck* obstacleCheck;

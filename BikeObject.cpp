@@ -9,6 +9,10 @@
 #include "jumpCheck.h"
 #include "ObstacleCheck.h"
 #include "ActionArea.h"
+#include "AnimationComponent.h"
+#include "AnimationController.h"
+#include "PlayerAnimationController.h"
+
 
 BikeObject::BikeObject(PlayerObject* _ownerObject)
 	: GameObject()
@@ -18,6 +22,7 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	, canJumping(false)
 	, jump(false)
 {
+	SetParent(_ownerObject);
 	meshComp = new MeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
 	SetScale(7.0f);
@@ -32,6 +37,8 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	obstacleCheck = new ObstacleCheck(this);
 	action = new ActionArea(ownerObject);
 
+	animationComp = new AnimationComponent(this);
+	controller = new PlayerAnimationController(this,animationComp);
 }
 
 BikeObject::~BikeObject()
@@ -85,6 +92,7 @@ void BikeObject::GameObjectInput(const InputState & _state)
 		if (canJumping)
 		{
 			jump = true;
+			controller->Jump();
 			SetRotation(ownerObject->GetRotation());
 		}
 	}
@@ -109,48 +117,9 @@ bool BikeObject::CanMove()
 
 void BikeObject::Animation()
 {
-	//if (animation)
-	//{
-	//	animNum++;
-	//	if (animNum > 20)
-	//	{
-	//		meshComp->SetVisible(true);
-	//	}
-	//	if (animNum > 20 * 2)
-	//	{
-	//		meshComp->SetVisible(false);
-	//	}
-	//	if (animNum > 20 * 3)
-	//	{
-	//		animation = false;
-	//		meshComp->SetVisible(true);
-	//		animNum = 0;
-	//	}
-	//}
 	if (jump)
 	{
- 		animNum++;
-
-		const int num = 35;
-		const int num2 = 55;
-		const int num3 = 75;
-
-
-		if (animNum < num)
-		{
-
-		}
-		else if (animNum < num2)
-		{
-			position= ownerObject->GetPosition() + GetUp() * 20.0f * (animNum - num);
-			SetPosition(position);
-		}
-		else if (animNum < num3)
-		{
-			position = ownerObject->GetPosition() + GetUp() * 20.0f * (num3 - (animNum));
-			SetPosition(position);
-		}
-		else
+		if (animationComp->AnimationEnd())
 		{
 			animNum = 0;
 			jump = false;

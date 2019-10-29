@@ -22,7 +22,8 @@ void AnimationComponent::Update(float _deltaTime)
 	}
 	else
 	{
-		nextAnimationClip = animationClip->Update();
+		animationClip->Update(_deltaTime);
+		nextAnimationClip = animationClip->ChangeAnimation();
 	}
 
 	const bool changeAnimation = animationClip != nextAnimationClip;

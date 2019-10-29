@@ -173,6 +173,12 @@
     </ClCompile>
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationClip.cpp" />
+    <ClCompile Include="JumpAnimation.cpp">
+      <Filter>PlayerObject\Aniamtion\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpAnimation2.cpp" />
+    <ClCompile Include="AnimationController.cpp" />
+    <ClCompile Include="PlayerAnimationController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -346,6 +352,12 @@
     </ClInclude>
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationClip.h" />
+    <ClInclude Include="JumpAnimation.h">
+      <Filter>PlayerObject\Aniamtion\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpAnimation2.h" />
+    <ClInclude Include="AnimationController.h" />
+    <ClInclude Include="PlayerAnimationController.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -389,6 +401,12 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{2851d23f-6a23-4ecb-ac2c-bcaf0494d8f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayerObject\Aniamtion">
+      <UniqueIdentifier>{446985cd-cfc5-40da-9609-740e9e6fd6d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayerObject\Aniamtion\Jump">
+      <UniqueIdentifier>{c9949255-a191-47dc-8e4c-374eb01c657b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

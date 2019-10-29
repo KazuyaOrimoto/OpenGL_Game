@@ -156,6 +156,8 @@ public:
 	*/
 	void SetParent(GameObject* _object) { parent = _object; _object->SetChild(this); }
 
+	GameObject* GetParent() { return parent; }
+
 	/**
 	@brief　オブジェクトの状態を取得する
 	@return	state

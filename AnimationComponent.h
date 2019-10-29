@@ -10,7 +10,7 @@ class AnimationComponent :
 {
 public:
 	AnimationComponent(GameObject* _owner);
-	~AnimationComponent();
+	virtual ~AnimationComponent();
 
 	/**
 	@brief	ƒtƒŒ[ƒ€–ˆ‚Ìˆ—

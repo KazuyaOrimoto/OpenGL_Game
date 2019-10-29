@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{36679240-81E7-4953-B0DE-126EB19FE058}</ProjectGuid>
     <RootNamespace>Space</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>OpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -30,7 +30,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -143,6 +143,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="ActionArea.cpp" />
     <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
+    <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AutoRunComponent.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="BoxObject.cpp" />
@@ -165,6 +166,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="JumpAnimation.cpp" />
+    <ClCompile Include="JumpAnimation2.cpp" />
     <ClCompile Include="JumpCheck.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainCamera.cpp" />
@@ -180,6 +183,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PhysicsWorld.cpp" />
     <ClCompile Include="PlaneObject.cpp" />
+    <ClCompile Include="PlayerAnimationController.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -207,6 +211,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="ActionArea.h" />
     <ClInclude Include="AnimationClip.h" />
     <ClInclude Include="AnimationComponent.h" />
+    <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AutoRunComponent.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="BoxObject.h" />
@@ -229,6 +234,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="JumpAnimation.h" />
+    <ClInclude Include="JumpAnimation2.h" />
     <ClInclude Include="JumpCheck.h" />
     <ClInclude Include="MainCamera.h" />
     <ClInclude Include="Math.h" />
@@ -243,6 +250,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PhysicsWorld.h" />
     <ClInclude Include="PlaneObject.h" />
+    <ClInclude Include="PlayerAnimationController.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Renderer.h" />
