@@ -171,14 +171,24 @@
     <ClCompile Include="DialogBox.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="AnimationClip.cpp" />
     <ClCompile Include="JumpAnimation.cpp">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClCompile>
-    <ClCompile Include="JumpAnimation2.cpp" />
-    <ClCompile Include="AnimationController.cpp" />
-    <ClCompile Include="PlayerAnimationController.cpp" />
+    <ClCompile Include="JumpAnimation2.cpp">
+      <Filter>PlayerObject\Aniamtion\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationClip.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationController.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAnimationController.cpp">
+      <Filter>PlayerObject\Aniamtion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -350,14 +360,24 @@
     <ClInclude Include="DialogBox.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="AnimationClip.h" />
     <ClInclude Include="JumpAnimation.h">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClInclude>
-    <ClInclude Include="JumpAnimation2.h" />
-    <ClInclude Include="AnimationController.h" />
-    <ClInclude Include="PlayerAnimationController.h" />
+    <ClInclude Include="JumpAnimation2.h">
+      <Filter>PlayerObject\Aniamtion\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationClip.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationController.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAnimationController.h">
+      <Filter>PlayerObject\Aniamtion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -407,6 +427,9 @@
     </Filter>
     <Filter Include="PlayerObject\Aniamtion\Jump">
       <UniqueIdentifier>{c9949255-a191-47dc-8e4c-374eb01c657b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{93049d66-9365-43a9-b04f-ba23f27dcc67}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

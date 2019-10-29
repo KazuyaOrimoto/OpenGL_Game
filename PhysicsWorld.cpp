@@ -130,7 +130,7 @@ void PhysicsWorld::AddBox(BoxCollider * _box, onCollisionFunc _func)
 {
 	boxes.emplace_back(_box);
     //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-    collisionFunction.insert(std::make_pair(dynamic_cast<ColliderComponent*>(_box), _func));
+    collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_box), _func));
 }
 
 void PhysicsWorld::RemoveBox(BoxCollider * _box)
@@ -148,7 +148,7 @@ void PhysicsWorld::AddSphere(SphereCollider * _sphere, onCollisionFunc _func)
 {
 	spheres.emplace_back(_sphere);
     //コライダーのポインタと親オブジェクトの当たり判定時関数ポインタ
-    collisionFunction.insert(std::make_pair(dynamic_cast<ColliderComponent*>(_sphere), _func));
+    collisionFunction.insert(std::make_pair(static_cast<ColliderComponent*>(_sphere), _func));
 }
 
 void PhysicsWorld::RemoveSphere(SphereCollider * _sphere)
