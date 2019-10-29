@@ -12,7 +12,7 @@ MainCamera::MainCamera(GameObject* _owner)
 	, springConstant(500.0f)
 	, rotate(nullptr)
 {
-	rotate = (dynamic_cast<PlayerObject*>(_owner)->GetRotate());
+	rotate = (dynamic_cast<PlayerObject*>(_owner->GetParent())->GetRotate());
 }
 
 void MainCamera::Update(float _deltaTime)

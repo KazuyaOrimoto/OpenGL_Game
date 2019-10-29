@@ -13,6 +13,7 @@
 #include "AnimationController.h"
 #include "PlayerAnimationController.h"
 
+#include "MainCamera.h"
 
 BikeObject::BikeObject(PlayerObject* _ownerObject)
 	: GameObject()
@@ -39,6 +40,9 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 
 	animationComp = new AnimationComponent(this);
 	controller = new PlayerAnimationController(this,animationComp);
+
+	MainCamera* camera = new MainCamera(this);
+	camera->SnapToIdeal();
 }
 
 BikeObject::~BikeObject()

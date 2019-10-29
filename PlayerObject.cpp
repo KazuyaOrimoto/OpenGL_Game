@@ -24,8 +24,8 @@ PlayerObject::PlayerObject()
     moveComp->SetMaxStrafeSpeed(2400.0f);
     autoRun = new AutoRunComponent(this);
     autoRun->SetForwardSpeed(3000.0f);
-	camera = new MainCamera(this);
-	camera->SnapToIdeal();
+	//camera = new MainCamera(this);
+	//camera->SnapToIdeal();
 
     bike = new BikeObject(this);
     autoRun->SetDrilObject(bike);
