@@ -9,7 +9,7 @@ MainCamera::MainCamera(GameObject* _owner)
 	, horzDist(1000.0f)
 	, vertDist(400.0f)
 	, targetDist(200.0f)
-	, springConstant(500.0f)
+	, springConstant(400.0f)
 	, rotate(nullptr)
 {
 	rotate = (dynamic_cast<PlayerObject*>(_owner->GetParent())->GetRotate());

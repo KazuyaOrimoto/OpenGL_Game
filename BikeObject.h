@@ -10,6 +10,7 @@ class ObstacleCheck;
 class ActionArea;
 class AnimationComponent;
 class PlayerAnimationController;
+class MainCamera;
 
 static Vector3 CHECK_AREA_MIN = Vector3(1500.0f, -1.0f, -1.0f);
 static Vector3 CHECK_AREA_MAX = Vector3(2500.0f, 1.0f, 1.0f);
@@ -36,6 +37,8 @@ public:
 
 	bool CanMove();
 
+	MainCamera* GetCamera() { return camera; }
+
 private:
 	void Animation();
 	/**
@@ -55,6 +58,7 @@ private:
 
 	JumpCheck* jumpCheck;
 	ObstacleCheck* obstacleCheck;
+	MainCamera* camera;
 
 	bool animation;
 	int animNum;

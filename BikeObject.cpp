@@ -41,7 +41,7 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	animationComp = new AnimationComponent(this);
 	controller = new PlayerAnimationController(this,animationComp);
 
-	MainCamera* camera = new MainCamera(this);
+	camera = new MainCamera(this);
 	camera->SnapToIdeal();
 }
 
@@ -93,7 +93,7 @@ void BikeObject::GameObjectInput(const InputState & _state)
 	}
 	else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE))
 	{
-		if (canJumping)
+		if (canJumping && !jump)
 		{
 			jump = true;
 			controller->Jump();

@@ -16,6 +16,11 @@ public:
     void SetTargetDist(float _dist) { targetDist = _dist; }
     void SetSpringConstant(float _spring) { springConstant = _spring; }
 
+	float GetHorzDist() { return horzDist; }
+	float GetVertDist() { return vertDist; }
+	float GetTargetDist() { return targetDist; }
+	float GetSpringConstant() { return springConstant; }
+
 private:
     Vector3 ComputeCameraPos() const;
 
