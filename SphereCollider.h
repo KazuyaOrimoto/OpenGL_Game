@@ -24,5 +24,7 @@ private:
 	//当たり判定するときに使う球（中心をワールド座標の中心にする）
 	Sphere worldSphere;
 
+	bool active;
+
 };
 

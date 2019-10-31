@@ -97,6 +97,7 @@ void BikeObject::GameObjectInput(const InputState & _state)
 		{
 			jump = true;
 			controller->Jump();
+			sphereCollider->CollisionPause();
 			SetRotation(ownerObject->GetRotation());
 		}
 	}
@@ -127,6 +128,7 @@ void BikeObject::Animation()
 		{
 			animNum = 0;
 			jump = false;
+			sphereCollider->CollisionActive();
 		}
 	}
 }

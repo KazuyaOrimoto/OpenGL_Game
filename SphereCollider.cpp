@@ -8,6 +8,7 @@ SphereCollider::SphereCollider(GameObject* _owner, onCollisionFunc _func, int _u
 	: ColliderComponent(_owner, _updateOrder, _collisionOrder)
 	, objectSphere({ Vector3::Zero,0.0f })
 	, worldSphere({ Vector3::Zero,0.0f })
+	, active(true)
 {
 	PHYSICS->AddSphere(this, _func);
 }
@@ -25,16 +26,19 @@ void SphereCollider::OnUpdateWorldTransform()
 	//ワールド空間での球の大きさを更新する
 	worldSphere.radius = objectSphere.radius * owner->GetScale();
 
-	PHYSICS->HitCheck(this);
+	if (active)
+	{
+		PHYSICS->HitCheck(this);
+	}
 }
 
 void SphereCollider::CollisionPause()
 {
-	PHYSICS->RemoveSphere(this);
+	active = false;
 }
 
 void SphereCollider::CollisionActive()
 {
-	//PHYSICS->AddSphere(this);
+	active = true;
 }
 

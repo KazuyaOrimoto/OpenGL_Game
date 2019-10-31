@@ -1,10 +1,10 @@
-#include "JumpAnimation2.h"
+#include "JumpAnimation3.h"
 #include "GameObject.h"
 #include "MainCamera.h"
 
 
-JumpAnimation2::JumpAnimation2(GameObject* _gameObject, MainCamera* _camera)
-	:AnimationClip(_gameObject,20)
+JumpAnimation3::JumpAnimation3(GameObject* _gameObject, MainCamera* _camera)
+	:AnimationClip(_gameObject, 20)
 {
 	rad = Math::ToRadians(-40);
 	right = owner->GetRight();
@@ -12,11 +12,11 @@ JumpAnimation2::JumpAnimation2(GameObject* _gameObject, MainCamera* _camera)
 
 }
 
-JumpAnimation2::~JumpAnimation2()
+JumpAnimation3::~JumpAnimation3()
 {
 }
 
-void JumpAnimation2::Update(float deltaTime)
+void JumpAnimation3::Update(float deltaTime)
 {
 	//ポジションのアニメーション
 	Vector3 playerPos = owner->GetParent()->GetPosition();
@@ -24,7 +24,7 @@ void JumpAnimation2::Update(float deltaTime)
 	owner->SetPosition(nextPos);
 
 	//回転のアニメーション
-	float r = Math::Lerp(rad, -(rad/2), ((float)animationCount / (float)animationChangeCount));
+	float r = Math::Lerp(rad, -(rad / 2), ((float)animationCount / (float)animationChangeCount));
 	Quaternion rot = owner->GetParent()->GetRotation();
 	Quaternion inc(right, r);
 	Quaternion NextRot = Quaternion::Concatenate(rot, inc);

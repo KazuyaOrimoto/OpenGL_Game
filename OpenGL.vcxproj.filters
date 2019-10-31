@@ -189,6 +189,7 @@
     <ClCompile Include="PlayerAnimationController.cpp">
       <Filter>PlayerObject\Aniamtion</Filter>
     </ClCompile>
+    <ClCompile Include="JumpAnimation3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -378,6 +379,7 @@
     <ClInclude Include="PlayerAnimationController.h">
       <Filter>PlayerObject\Aniamtion</Filter>
     </ClInclude>
+    <ClInclude Include="JumpAnimation3.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
