@@ -5,6 +5,12 @@ class MeshComponent;
 class BoxCollider;
 class PlayerObject;
 
+enum  ObstacleType
+{
+	OBSTACLE_BOX,
+	OBSTACLE_WALL
+};
+
 class ObstacleBox :public GameObject
 {
 public:

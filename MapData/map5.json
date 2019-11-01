@@ -2,6 +2,31 @@
   "Obstacles": [
     {
       "type": "Obstacle",
+      "x": -900,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -700,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -500,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -300,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -100,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
       "x": 100,
       "y": 100
     },
@@ -24,6 +49,56 @@
       "type": "Obstacle",
       "x": 900,
       "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -900,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": -700,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": -500,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": -300,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": -100,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": 100,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": 300,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": 500,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": 700,
+      "y": 300
+    },
+    {
+      "type": "Obstacle",
+      "x": 900,
+      "y": 300
     }
   ]
 }

@@ -17,27 +17,20 @@ ObstacleBox::ObstacleBox()
 	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);
-	
-	srand((unsigned)(SDL_GetTicks() + rand()));
-	int randNum = rand() % 3;
+
 	Mesh* mesh = nullptr;
-	switch (randNum)
-	{
-	case 0:
-		mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
-		break;
-
-	case 1:
-		mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
-		break;
-
-	case 2:
-		mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
-		break;
-
-	default:
-		break;
-	}
+	mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
+	//switch ()
+	//{
+	//case Box:
+	//	mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
+	//	break;
+	//case Wall:
+	//	mesh = RENDERER->GetMesh("Assets/ObstacleWall.gpmesh");
+	//	break;
+	//default:
+	//	break;
+	//}
 
 	meshComp->SetMesh(mesh);
 	boxCollider = new BoxCollider(this, GetOnCollisionFunc());

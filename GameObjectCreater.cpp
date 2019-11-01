@@ -42,7 +42,7 @@ void GameObjectCreater::PlayerAndWallCreate()
 	GameObject* mCameraActor = new PlayerObject();
 
 	ObstacleBox* box;
-	for (int i = 0; i < 200; i++)
+	for (int i = 0; i < 500; i++)
 	{
 		box = new ObstacleBox();
 	}

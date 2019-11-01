@@ -3,26 +3,101 @@
     {
       "type": "Obstacle",
       "x": -900,
-      "y": 300
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -700,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -500,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -300,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": -100,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": 100,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": 300,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": 500,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": 700,
+      "y": 100
+    },
+    {
+      "type": "Obstacle",
+      "x": 900,
+      "y": 100
     },
     {
       "type": "Obstacle",
       "x": -900,
-      "y": 700
+      "y": 1900
     },
     {
       "type": "Obstacle",
-      "x": -900,
-      "y": 1100
+      "x": -700,
+      "y": 1900
     },
     {
       "type": "Obstacle",
-      "x": -900,
-      "y": 1500
+      "x": -500,
+      "y": 1900
     },
     {
       "type": "Obstacle",
-      "x": -900,
+      "x": -300,
+      "y": 1900
+    },
+    {
+      "type": "Obstacle",
+      "x": -100,
+      "y": 1900
+    },
+    {
+      "type": "Obstacle",
+      "x": 100,
+      "y": 1900
+    },
+    {
+      "type": "Obstacle",
+      "x": 300,
+      "y": 1900
+    },
+    {
+      "type": "Obstacle",
+      "x": 500,
+      "y": 1900
+    },
+    {
+      "type": "Obstacle",
+      "x": 700,
+      "y": 1900
+    },
+    {
+      "type": "Obstacle",
+      "x": 900,
       "y": 1900
     }
   ]

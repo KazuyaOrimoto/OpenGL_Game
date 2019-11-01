@@ -43,7 +43,7 @@ void ObstacleObject::CreateObstacle(float _depth)
 	rapidjson::Value& Obstacles = (*doc)["Obstacles"];
     for (Uint16 i = 0; i < Obstacles.Size(); i++)
     {
-        ObstacleBox* box = dynamic_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle(Obstacles[i]["type"].GetString()));
+        ObstacleBox* box = static_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle(Obstacles[i]["type"].GetString()));
         if (box == nullptr)
         {
             return;

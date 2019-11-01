@@ -12,8 +12,8 @@ class ObstacleMapLoder;
 
 namespace StaticObstacle
 {
-	static const int ObstacleMaxNum = 30;
-	static const float ObstacleDistanceNum = 3000.0f;
+	static const int ObstacleMaxNum = 10;
+	static const float ObstacleDistanceNum = 4000.0f;
 }
 
 class ObstacleObject : public GameObject
