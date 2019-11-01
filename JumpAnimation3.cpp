@@ -34,7 +34,7 @@ void JumpAnimation3::Update(float deltaTime)
 	float vert = camera->GetVertDist();
 	float horz = camera->GetHorzDist();
 
-	camera->SetVertDist(vert + 25.0f);
+	//camera->SetVertDist(vert + 25.0f);
 	camera->SetHorzDist(horz + 25.0f);
 
 }

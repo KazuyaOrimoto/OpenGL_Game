@@ -8,6 +8,7 @@
 Component::Component(GameObject* _owner, int _updateOrder)
 	: owner(_owner)
 	, updateOrder(_updateOrder)
+	, active(true)
 {
 	owner->AddComponent(this);
 }

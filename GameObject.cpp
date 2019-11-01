@@ -22,7 +22,7 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-    GAME_OBJECT_MANAGER->RemoveGameObject(this);
+	GAME_OBJECT_MANAGER->RemoveGameObject(this);
 	while (!components.empty())
 	{
 		delete components.back();
@@ -54,7 +54,10 @@ void GameObject::UpdateComponents(float _deltaTime)
 {
 	for (auto itr : components)
 	{
-		itr->Update(_deltaTime);
+		if (itr->GetActive())
+		{
+			itr->Update(_deltaTime);
+		}
 	}
 }
 
@@ -109,7 +112,7 @@ void GameObject::AddComponent(Component * _component)
 */
 void GameObject::RemoveComponent(Component * _component)
 {
-	auto itr = std::find(components.begin(),components.end(), _component);
+	auto itr = std::find(components.begin(), components.end(), _component);
 	if (itr != components.end())
 	{
 		components.erase(itr);

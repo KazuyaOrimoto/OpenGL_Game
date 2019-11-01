@@ -37,7 +37,10 @@ public:
 	*/
 	int GetUpdateOder() { return updateOrder; }
 
-    GameObject* GetOwner() { return owner; };
+    GameObject* GetOwner() { return owner; }
+	
+	bool GetActive() { return active; }
+	void SetActive(bool _active) { active = _active; }
 
 
 protected:
@@ -46,6 +49,7 @@ protected:
 	GameObject* owner;			
 	// コンポーネントの更新順番（数値が小さいほど早く更新される）
 	int updateOrder;
+	bool active;
 
 };
 

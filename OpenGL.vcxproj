@@ -169,6 +169,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="JumpAnimation.cpp" />
     <ClCompile Include="JumpAnimation2.cpp" />
     <ClCompile Include="JumpAnimation3.cpp" />
+    <ClCompile Include="JumpAnimation4.cpp" />
     <ClCompile Include="JumpCheck.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainCamera.cpp" />
@@ -238,6 +239,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="JumpAnimation.h" />
     <ClInclude Include="JumpAnimation2.h" />
     <ClInclude Include="JumpAnimation3.h" />
+    <ClInclude Include="JumpAnimation4.h" />
     <ClInclude Include="JumpCheck.h" />
     <ClInclude Include="MainCamera.h" />
     <ClInclude Include="Math.h" />

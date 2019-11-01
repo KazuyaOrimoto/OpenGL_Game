@@ -95,8 +95,9 @@ void BikeObject::GameObjectInput(const InputState & _state)
 	{
 		if (canJumping && !jump)
 		{
-			jump = true;
 			controller->Jump();
+			animationComp->SetActive(false);
+			jump = true;
 			sphereCollider->CollisionPause();
 			SetRotation(ownerObject->GetRotation());
 		}
@@ -138,31 +139,26 @@ void BikeObject::Animation()
 */
 void BikeObject::ActionDetermining()
 {
+	//ジャンプできるかどうか
+	bool canJump = jumpCheck->CanJump() && obstacleCheck->OnObstacle();
+	//ジャンプ中でないとき
 	if (!canJumping)
 	{
-		bool canJump = jumpCheck->CanJump() && obstacleCheck->OnObstacle();
+		//ジャンプできるとき
 		if (canJump)
 		{
 			canJumping = true;
 			action->CanJump();
-			printf("CanJump!\n");
 		}
 	}
-	else
+	//ジャンプできないとき
+	if (!canJump)
 	{
-		bool canJump = jumpCheck->CanJump() && obstacleCheck->OnObstacle();
-		if (!canJump)
-		{
-			action->CanNotJump();
-			canJumping = false;
-		}
+		action->CanNotJump();
+		canJumping = false;
+	}
+	if (jump && !canJump)
+	{
+		animationComp->SetActive(true);
 	}
 }
-
-/**
-@brief	アクションを実行する
-*/
-void BikeObject::ActionExecution()
-{
-}
-

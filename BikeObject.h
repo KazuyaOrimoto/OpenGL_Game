@@ -45,10 +45,6 @@ private:
 	@brief	アクションを決定する
 	*/
 	void ActionDetermining();
-	/**
-	@brief	アクションを実行する
-	*/
-	void ActionExecution();
 
     MeshComponent* meshComp;
     PlayerObject* ownerObject;
