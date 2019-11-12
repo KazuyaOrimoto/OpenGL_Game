@@ -460,22 +460,6 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 		}
 	}
 
-	//// Draw any skinned meshes now
-	//mSkinnedShader->SetActive();
-	//// Update view-projection matrix
-	//mSkinnedShader->SetMatrixUniform("uViewProj", view * proj);
-	//// Update lighting uniforms
-	//if (lit)
-	//{
-	//	SetLightUniforms(mSkinnedShader, view);
-	//}
-	//for (auto sk : mSkeletalMeshes)
-	//{
-	//	if (sk->GetVisible())
-	//	{
-	//		sk->Draw(mSkinnedShader);
-	//	}
-	//}
 }
 
 /**

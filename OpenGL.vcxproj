@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{36679240-81E7-4953-B0DE-126EB19FE058}</ProjectGuid>
     <RootNamespace>Space</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
     <ProjectName>OpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -277,6 +277,20 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="WallMeshComponent.h" />
     <ClInclude Include="WallObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\AlphaTest.frag" />
+    <None Include="Shaders\AlphaTest.vert" />
+    <None Include="Shaders\BasicMesh.frag" />
+    <None Include="Shaders\BasicMesh.vert" />
+    <None Include="Shaders\Phong.frag" />
+    <None Include="Shaders\Phong.vert" />
+    <None Include="Shaders\Sprite.frag" />
+    <None Include="Shaders\Sprite.vert" />
+    <None Include="Shaders\UVScroll.frag" />
+    <None Include="Shaders\UVScroll.vert" />
+    <None Include="Shaders\WallShader.frag" />
+    <None Include="Shaders\WallShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

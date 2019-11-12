@@ -431,9 +431,6 @@
     <Filter Include="PlayerObject\Action">
       <UniqueIdentifier>{34c15fbd-516e-4597-93eb-c961a32e688d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{2851d23f-6a23-4ecb-ac2c-bcaf0494d8f7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PlayerObject\Aniamtion">
       <UniqueIdentifier>{446985cd-cfc5-40da-9609-740e9e6fd6d3}</UniqueIdentifier>
     </Filter>
@@ -443,5 +440,49 @@
     <Filter Include="Animation">
       <UniqueIdentifier>{93049d66-9365-43a9-b04f-ba23f27dcc67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{1614d1a3-f154-4a95-95e0-e37a0017b116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{2851d23f-6a23-4ecb-ac2c-bcaf0494d8f7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Phong.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Phong.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\UVScroll.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\UVScroll.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\WallShader.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\WallShader.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\BasicMesh.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\BasicMesh.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\AlphaTest.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\AlphaTest.vert">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
