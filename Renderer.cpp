@@ -13,14 +13,22 @@
 #include "Font.h"
 #include "UIScreen.h"
 #include "UIManager.h"
+#include "ParticleManager.h"
 
 Renderer* Renderer::renderer = nullptr;
+
+void Renderer::SetParticleVertex()
+{
+	particleVertex->SetActive();
+}
 
 Renderer::Renderer()
     : spriteShader(nullptr)
 	, spriteVerts(nullptr)
     , meshShader(nullptr)
     , basicShader(nullptr)
+	, particleVertex(nullptr)
+	, particleManager(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
@@ -115,6 +123,8 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 
     //スプライト用の頂点配列を作成
     CreateSpriteVerts();
+
+	particleManager = new ParticleManager();
     
     return true;
 }
@@ -133,6 +143,7 @@ void Renderer::Shutdown()
     delete basicShader;
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
+	delete particleManager;
 }
 
 /**
@@ -468,7 +479,7 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 */
 void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 {
-	// ビュー行列を転置行列にする
+	// ビュー行列を逆行列にする
     Matrix4 invView = _view;
     invView.Invert();
 	_shader->SetVectorUniform("uCameraPos", invView.GetTranslation());

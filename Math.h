@@ -676,6 +676,9 @@ public:
     // Invert the matrix - super slow
     void Invert();
 
+	// 転置行列
+	void Transpose();
+
     // Get the translation component of the matrix
     Vector3 GetTranslation() const
     {

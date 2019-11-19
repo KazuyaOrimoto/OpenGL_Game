@@ -25,6 +25,7 @@ class Game;
 class MeshComponent;
 class Shader;
 class VertexArray;
+class ParticleManager;
 
 class Renderer
 {
@@ -135,6 +136,12 @@ public:
 	*/
 	float GetScreenHeight() const { return screenHeight; }
 
+	Matrix4 GetViewMatrix() const { return view; };
+
+	void SetParticleVertex();
+
+	Matrix4 GetProjectionMatrix() { return projection; }
+
 private:
 	//コンストラクタ、デストラクタの隠蔽
 	Renderer();
@@ -180,6 +187,8 @@ private:
     VertexArray* spriteVerts;
     Shader* meshShader;
     Shader* basicShader;
+	VertexArray* particleVertex;   // パーティクル用頂点定義
+	ParticleManager* particleManager;
 
     //ビュー行列
     Matrix4 view;
