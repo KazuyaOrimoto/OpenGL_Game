@@ -74,16 +74,3 @@ bool Particle::operator>(const Particle & rhs) const
 	lenRhs  = (mStaticCameraWorldPos - rhs.mPosition).LengthSq();
 	return lenThis > lenRhs;
 }
-
-Matrix4 GetBillboardMatrix()
-{
-	Matrix4 ret;
-	ret = RENDERER->GetViewMatrix();
-	ret.mat[3][0] = ret.mat[3][1] = ret.mat[3][2] = 0.0f;
-	ret.Transpose();
-	ret.mat[1][1] *= -1;
-	ret.mat[2][2] *= -1;
-
-	return Matrix4(ret);
-}
-

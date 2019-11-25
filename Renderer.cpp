@@ -14,6 +14,7 @@
 #include "UIScreen.h"
 #include "UIManager.h"
 #include "ParticleManager.h"
+#include "ParticleObject.h"
 
 Renderer* Renderer::renderer = nullptr;
 
@@ -199,7 +200,6 @@ void Renderer::Draw()
     }
 
 	basicShader->SetActive();
-
 	basicShader->SetMatrixUniform("uViewProj", view * projection);
 
     for (auto mc : basicMeshComponents)
@@ -209,6 +209,17 @@ void Renderer::Draw()
             mc->Draw(basicShader);
         }
     }
+
+	particleShader->SetActive();
+
+	for (auto p : particles)
+	{
+		if (p->IsAlive())
+		{
+			p->Draw(particleShader);
+		}
+	}
+
 
     // スプライトコンポーネントの描画
     // デプスバッファ法を無効にする
@@ -271,6 +282,32 @@ void Renderer::AddSprite(SpriteComponent* _spriteComponent)
 void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 {
     auto iter = std::find(sprites.begin(), sprites.end(), _spriteComponent);
+	sprites.erase(iter);
+}
+
+void Renderer::AddParticle(ParticleObject * _particleComponent)
+{
+	// 今あるスプライトから挿入する場所の検索
+    // (DrawOrderが小さい順番に描画するため)
+	int myDrawOrder = _spriteComponent->GetDrawOrder();
+	auto iter = sprites.begin();
+	for (;
+		iter != sprites.end();
+		++iter)
+	{
+		if (myDrawOrder < (*iter)->GetDrawOrder())
+		{
+			break;
+		}
+	}
+
+	// 検索した場所のiterの場所に挿入
+	sprites.insert(iter, _spriteComponent);
+}
+
+void Renderer::RemoveParticle(ParticleObject * _particleComponent)
+{
+	auto iter = std::find(sprites.begin(), sprites.end(), _spriteComponent);
 	sprites.erase(iter);
 }
 
@@ -492,4 +529,45 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
         dirLight.diffuseColor);
 	_shader->SetVectorUniform("uDirLight.mSpecColor",
         dirLight.specColor);
+}
+
+void Renderer::ChangeBlendMode(Particle::PARTICLE_BLEND_ENUM blendType)
+{
+	switch (blendType)
+	{
+	case Particle::PARTICLE_BLEND_ENUM_ADD:
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成
+		break;
+	case Particle::PARTICLE_BLEND_ENUM_ALPHA:
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // アルファブレンド
+		break;
+	case Particle::PARTICLE_BLEND_ENUM_MULT:
+		glBlendFunc(GL_ZERO, GL_SRC_COLOR); //乗算合成
+		break;
+	default:
+		break;
+	}
+}
+
+void Renderer::ChangeTexture(int changeTextureID)
+{
+	glBindTexture(GL_TEXTURE_2D, changeTextureID);
+}
+
+Vector3 Renderer::CalcCameraPos()
+{
+	// ビュー行列よりワールドでのカメラ位置算出
+	Matrix4 transMat = view;
+
+	// ビュー行列の移動成分抜き取る
+	Vector3 v;
+	v.x = -1.0f * view.mat[3][0];
+	v.y = -1.0f * view.mat[3][1];
+	v.z = -1.0f * view.mat[3][2];
+
+	//移動成分を取り除いたあと転置して、回転部分の逆変換を作る
+	transMat.mat[3][0] = transMat.mat[3][1] = transMat.mat[3][2] = 0.0f;
+	transMat.Transpose();
+
+	return Vector3(Vector3::Transform(v, transMat));
 }

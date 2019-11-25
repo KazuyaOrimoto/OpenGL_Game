@@ -26,6 +26,7 @@ class MeshComponent;
 class Shader;
 class VertexArray;
 class ParticleManager;
+class ParticleObject;
 
 class Renderer
 {
@@ -79,6 +80,18 @@ public:
 	@param	削除するSpriteComponentクラスのポインタ
 	*/
 	void RemoveSprite(SpriteComponent* _spriteComponent);
+
+	/**
+	@brief  パーティクルの追加
+	@param	追加するParticleObjectクラスのポインタ
+	*/
+	void AddParticle(ParticleObject* _particleComponent);
+
+	/**
+	@brief  スプライトの削除
+	@param	削除するParticleObjectクラスのポインタ
+	*/
+	void RemoveParticle(ParticleObject* _particleComponent);
 
 	/**
 	@brief  テクスチャの取得
@@ -169,15 +182,24 @@ private:
 	*/
     void SetLightUniforms(Shader* _shader, const Matrix4& view);
 
+	void ChangeBlendMode(Particle::PARTICLE_BLEND_ENUM blendType);
+	void ChangeTexture(int changeTextureID);
+	Vector3 CalcCameraPos();
+
     //ファイル名でメッシュを取得するための連想配列
     std::unordered_map<std::string, Mesh*> meshes;
     //メッシュコンポーネントのポインタの可変長コンテナ
     std::vector<MeshComponent*> meshComponents;
 	//スプライトコンポーネントのポインタの可変長コンテナ
 	std::vector<SpriteComponent*> sprites;
+	//パーティクルのポインタ
+	std::vector<ParticleObject*> particles;
 	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*>textures;
-	//
+
+
+	//　コンポーネントに追加
+	//std::vector<Particle*> particles;        // パーティクル配列
 
     std::vector<MeshComponent*> basicMeshComponents;
 
@@ -187,6 +209,7 @@ private:
     VertexArray* spriteVerts;
     Shader* meshShader;
     Shader* basicShader;
+	Shader* particleShader;
 	VertexArray* particleVertex;   // パーティクル用頂点定義
 	ParticleManager* particleManager;
 
@@ -194,6 +217,8 @@ private:
     Matrix4 view;
 	//射影行列
     Matrix4 projection;
+	//ビルボード行列
+	Matrix4 mBillboardMat;
     //スクリーンの横幅
     float screenWidth;
 	//スクリーンの縦幅

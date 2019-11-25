@@ -1,5 +1,5 @@
 #include "ParticleManager.h"
-#include "Particle.h"
+#include "ParticleObject.h"
 #include "Shader.h"
 #include <algorithm>
 

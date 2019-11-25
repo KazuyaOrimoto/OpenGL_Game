@@ -63,7 +63,6 @@ private:
 	friend class ParticleManager;
 };
 
-Matrix4 GetBillboardMatrix();
 
 
 //class ParticleEmitter : public Component
