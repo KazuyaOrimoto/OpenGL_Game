@@ -1,35 +1,42 @@
-#include "ParticleObject.h"
-#include "Renderer.h"
+#include "ParticleComponent.h"
 #include "Shader.h"
+#include "Renderer.h"
+#include "GameObject.h"
 
-Matrix4 ParticleObject::staticBillboardMat;   // ビルボード行列
-Vector3 ParticleObject::staticCameraWorldPos; // カメラワールド位置
+Matrix4 ParticleComponent::staticBillboardMat;
+Vector3 ParticleComponent::staticCameraWorldPos;
 
-ParticleObject::ParticleObject()
-	: life(0.0f)
+ParticleComponent::ParticleComponent(GameObject * _owner)
+	:Component(_owner)
+	, life(0.0f)
 	, alpha(1.0f)
 {
+	RENDERER->AddParticle(this);
 }
 
-ParticleObject::ParticleObject(const Vector3 & _pos, const Vector3 & _v, float _scale, float _alpha, float _life)
-	: GameObject()
+ParticleComponent::ParticleComponent(GameObject * _owner, const Vector3 & _pos, const Vector3 & _v, float _scale, float _alpha, float _life)
+	: Component(_owner)
+	, position(_pos)
 	, velocity(_v)
+	, scale(_scale)
 	, life(_life)
 	, alpha(_alpha)
 	, nowTime(0.0)
-	, blendType(PARTICLE_BLEND_ENUM_ALPHA)
+	, blendType(PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA)
 {
-	position = _pos;
-	scale = _scale;
+	RENDERER->AddParticle(this);
 }
 
-
-ParticleObject::~ParticleObject()
+ParticleComponent::~ParticleComponent()
 {
 }
 
-void ParticleObject::UpdateGameObject(float _deltaTime)
+void ParticleComponent::Update(float _deltaTime)
 {
+	if (!IsAlive())
+	{
+		owner->RemoveComponent(this);
+	}
 	nowTime += _deltaTime;
 	velocity = velocity + acceleration;
 	position = position + velocity;
@@ -38,11 +45,11 @@ void ParticleObject::UpdateGameObject(float _deltaTime)
 	alpha = (life - nowTime) / life;
 }
 
-void ParticleObject::Draw(Shader * shader)
+void ParticleComponent::Draw(Shader * shader)
 {
 	Matrix4 mat, matScale;
-	matScale = Matrix4::CreateScale(scale);
-	mat = Matrix4::CreateTranslation(position);
+	matScale = Matrix4::CreateScale(scale * owner->GetScale());
+	mat = Matrix4::CreateTranslation(position + owner->GetPosition());
 
 	shader->SetMatrixUniform("uWorldTransform", matScale * staticBillboardMat * mat);
 	shader->SetFloatUniform("uAlpha", alpha);
@@ -52,12 +59,12 @@ void ParticleObject::Draw(Shader * shader)
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 
-bool ParticleObject::IsAlive() const
+bool ParticleComponent::IsAlive() const
 {
 	return nowTime < life;
 }
 
-bool ParticleObject::operator<(const ParticleObject & rhs) const
+bool ParticleComponent::operator<(const ParticleComponent & rhs) const
 {
 	float lenThis, lenRhs;
 	lenThis = (staticCameraWorldPos - position).LengthSq();
@@ -65,13 +72,14 @@ bool ParticleObject::operator<(const ParticleObject & rhs) const
 	return lenThis < lenRhs;
 }
 
-bool ParticleObject::operator>(const ParticleObject & rhs) const
+bool ParticleComponent::operator>(const ParticleComponent & rhs) const
 {
 	float lenThis, lenRhs;
 	lenThis = (staticCameraWorldPos - position).LengthSq();
 	lenRhs = (staticCameraWorldPos - rhs.position).LengthSq();
 	return lenThis > lenRhs;
 }
+
 
 Matrix4 GetBillboardMatrix()
 {

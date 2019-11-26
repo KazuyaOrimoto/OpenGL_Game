@@ -13,8 +13,6 @@
 #include "Font.h"
 #include "UIScreen.h"
 #include "UIManager.h"
-#include "ParticleManager.h"
-#include "ParticleObject.h"
 
 Renderer* Renderer::renderer = nullptr;
 
@@ -29,7 +27,6 @@ Renderer::Renderer()
     , meshShader(nullptr)
     , basicShader(nullptr)
 	, particleVertex(nullptr)
-	, particleManager(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
@@ -125,8 +122,8 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
     //スプライト用の頂点配列を作成
     CreateSpriteVerts();
 
-	particleManager = new ParticleManager();
-    
+	CreateParticleVerts();
+
     return true;
 }
 
@@ -144,7 +141,6 @@ void Renderer::Shutdown()
     delete basicShader;
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
-	delete particleManager;
 }
 
 /**
@@ -210,16 +206,7 @@ void Renderer::Draw()
         }
     }
 
-	particleShader->SetActive();
-
-	for (auto p : particles)
-	{
-		if (p->IsAlive())
-		{
-			p->Draw(particleShader);
-		}
-	}
-
+	DrawParticle();
 
     // スプライトコンポーネントの描画
     // デプスバッファ法を無効にする
@@ -285,30 +272,15 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 	sprites.erase(iter);
 }
 
-void Renderer::AddParticle(ParticleObject * _particleComponent)
+void Renderer::AddParticle(ParticleComponent * _particleComponent)
 {
-	// 今あるスプライトから挿入する場所の検索
-    // (DrawOrderが小さい順番に描画するため)
-	int myDrawOrder = _spriteComponent->GetDrawOrder();
-	auto iter = sprites.begin();
-	for (;
-		iter != sprites.end();
-		++iter)
-	{
-		if (myDrawOrder < (*iter)->GetDrawOrder())
-		{
-			break;
-		}
-	}
-
-	// 検索した場所のiterの場所に挿入
-	sprites.insert(iter, _spriteComponent);
+	particles.push_back(_particleComponent);
 }
 
-void Renderer::RemoveParticle(ParticleObject * _particleComponent)
+void Renderer::RemoveParticle(ParticleComponent * _particleComponent)
 {
-	auto iter = std::find(sprites.begin(), sprites.end(), _spriteComponent);
-	sprites.erase(iter);
+	auto iter = std::find(particles.begin(), particles.end(), _particleComponent);
+	particles.erase(iter);
 }
 
 /**
@@ -439,6 +411,12 @@ bool Renderer::LoadShaders()
         return false;
     }
 
+	particleShader = new Shader();
+	if (!particleShader->Load("Shaders/Phong.vert", "Shaders/Particle.frag"))
+	{
+		printf("シェーダー読み込み失敗\n");
+	}
+
     meshShader->SetActive();
     // ビュー行列の設定
     view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
@@ -469,6 +447,87 @@ void Renderer::CreateSpriteVerts()
     };
 
     spriteVerts = new VertexArray(vertices, 4, indices, 6);
+}
+
+// パーティクル頂点作成
+void Renderer::CreateParticleVerts()
+{
+	float vertices[] = {
+		-0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
+		 0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 1.f, 0.f, // top right
+		 0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 1.f, 1.f, // bottom right
+		-0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 0.f, 1.f  // bottom left
+	};
+
+	unsigned int indices[] = {
+		0, 2, 1,
+		2, 0, 3
+	};
+	particleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
+}
+
+void Renderer::DrawParticle()
+{
+
+	std::sort(particles.begin(), particles.end(), std::greater<ParticleComponent*>());
+
+	if (particles.size() == 0)
+	{
+		return;
+	}
+	// ブレンドモード初期状態取得
+	ParticleComponent::PARTICLE_BLEND_ENUM blendType, prevType;
+	auto itr = particles.begin();
+	blendType = prevType = (*itr)->GetBlendType();
+
+	// テクスチャID初期状態取得
+	int nowTexture, prevTexture;
+	nowTexture = prevTexture = (*itr)->GetTextureID();
+
+	// ビュープロジェクション行列
+	Matrix4 viewProjectionMat;
+	viewProjectionMat = view * projection;
+
+	// シェーダーON
+	particleShader->SetActive();
+	particleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
+
+	// 全てのパーティクルのビルボード行列をセット
+	Matrix4 tmp;
+	tmp = Matrix4::CreateRotationZ(0.5f * 3.14159f);
+	(*itr)->SetBillboardMat(tmp);
+
+	glEnable(GL_BLEND);
+	glDepthMask(GL_FALSE);
+
+	// すべてのパーティクルを描画
+	ChangeBlendMode(blendType);
+	ChangeTexture(nowTexture);
+
+	for (auto particle : particles)
+	{
+		//ブレンドモード変更が必要なら変更する
+		blendType = particle->GetBlendType();
+		if (blendType != prevType)
+		{
+			ChangeBlendMode(blendType);
+		}
+		// テクスチャ変更が必要なら変更する
+		nowTexture = particle->GetTextureID();
+		if (nowTexture != prevTexture)
+		{
+			ChangeTexture(nowTexture);
+		}
+
+		// パーティクル描画
+		particle->Draw(particleShader);
+
+		// 前回描画状態として保存
+		prevType = blendType;
+		prevTexture = nowTexture;
+	}
+	glDisable(GL_BLEND);
+	glDepthMask(GL_TRUE);
 }
 
 void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const Matrix4 & proj, float viewPortScale, bool lit)
@@ -531,17 +590,17 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
         dirLight.specColor);
 }
 
-void Renderer::ChangeBlendMode(Particle::PARTICLE_BLEND_ENUM blendType)
+void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM blendType)
 {
 	switch (blendType)
 	{
-	case Particle::PARTICLE_BLEND_ENUM_ADD:
+	case ParticleComponent::PARTICLE_BLEND_ENUM_ADD:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成
 		break;
-	case Particle::PARTICLE_BLEND_ENUM_ALPHA:
+	case ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // アルファブレンド
 		break;
-	case Particle::PARTICLE_BLEND_ENUM_MULT:
+	case ParticleComponent::PARTICLE_BLEND_ENUM_MULT:
 		glBlendFunc(GL_ZERO, GL_SRC_COLOR); //乗算合成
 		break;
 	default:

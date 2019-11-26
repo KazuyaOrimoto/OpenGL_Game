@@ -2,6 +2,13 @@
 class VertexArray
 {
 public:
+	// 頂点レイアウト列挙
+	enum Layout
+	{
+		PosNormTex,     // 位置&法線&テクスチャUV を持ったフォーマット
+		PosNormSkinTex  // 位置&法線& "スキン用の影響ボーン＆重み情報" & テクスチャUV 
+	};
+
 	/**
 	@param	頂点バッファの配列のポインタ
 	@param	頂点数
@@ -10,6 +17,8 @@ public:
 	*/
 	VertexArray(const float* _verts, unsigned int _numVerts,
 		const unsigned int* _indices, unsigned int _numIndices);
+	VertexArray(const void* verts, unsigned int numVerts, Layout layout,  // 頂点配列コンストラクタ 
+		const unsigned int* indices, unsigned int numIndices);
 	~VertexArray();
 
 	/**

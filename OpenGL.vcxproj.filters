@@ -195,13 +195,7 @@
     <ClCompile Include="JumpAnimation4.cpp">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleManager.cpp">
-      <Filter>Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleObject.cpp" />
+    <ClCompile Include="ParticleComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -397,13 +391,7 @@
     <ClInclude Include="JumpAnimation4.h">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleManager.h">
-      <Filter>Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleObject.h" />
+    <ClInclude Include="ParticleComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

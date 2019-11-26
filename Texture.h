@@ -46,6 +46,8 @@ public:
 	*/
 	int GetHeight() const { return height; }
 
+	int GetTextureID() const { return textureID; }
+
 private:
 	unsigned int textureID;
 

@@ -8,6 +8,7 @@ class AutoRunComponent;
 class ObstacleObject;
 class RotateComponent;
 class BikeObject;
+class Texture;
 
 class PlayerObject : public GameObject
 {
@@ -30,5 +31,6 @@ private:
     AutoRunComponent* autoRun;
 	RotateComponent* rotate;
 	BikeObject* bike;
+	Texture* texture;
 };
 
