@@ -1,165 +1,150 @@
-ï»¿#pragma once
+#pragma once
 
 #include <SDL_scancode.h>
 #include <SDL_gamecontroller.h>
 #include <SDL_mouse.h>
 #include "Math.h"
 
-//ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’è¡¨ã™
+//ƒ{ƒ^ƒ“‚Ìó‘Ô‚ğ•\‚·
 enum ButtonState
 {
-	None,		//æŠ¼ã•ã‚Œã¦ã„ãªã„
-	Pressed,	//æŠ¼ã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ 
-	Released,	//é›¢ã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ 
-	Held		//æŠ¼ã•ã‚Œã¦ã„ã‚‹é–“
+	None,		//‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
+	Pressed,	//‰Ÿ‚µ‚½ƒtƒŒ[ƒ€
+	Released,	//—£‚µ‚½ƒtƒŒ[ƒ€
+	Held		//‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ
 };
 
-//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å…¥åŠ›ç®¡ç†ã‚¯ãƒ©ã‚¹
+//ƒL[ƒ{[ƒh‚Ì“ü—ÍŠÇ—ƒNƒ‰ƒX
 class KeyboardState
 {
 public:
-	// InputSystemã‹ã‚‰å®¹æ˜“ã«æ›´æ–°ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+	// InputSystem‚©‚ç—eˆÕ‚ÉXV‚Å‚«‚é‚æ‚¤‚É‚·‚é
 	friend class InputSystem;
 
 	/**
-	@brief	ç¾åœ¨ã®ã‚­ãƒ¼ã®å…¥åŠ›çŠ¶æ…‹ã®ã¿ã‚’å–å¾—ã™ã‚‹
-	@param	SDL_Scancodeã®ã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰
-	@return	true : æŠ¼ã•ã‚Œã¦ã„ã‚‹ , false : æŠ¼ã•ã‚Œã¦ã„ãªã„
+	@brief	Œ»İ‚ÌƒL[‚Ì“ü—Íó‘Ô‚Ì‚İ‚ğæ“¾‚·‚é
+	@param	SDL_Scancode‚ÌƒL[ƒR[ƒh
+	@return	true : ‰Ÿ‚³‚ê‚Ä‚¢‚é , false : ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
 	*/
 	bool GetKeyValue(SDL_Scancode _keyCode) const;
 
 	/**
-	@brief	ç¾åœ¨ã¨1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çŠ¶æ…‹ã‹ã‚‰ButtonStateã‚’è¿”ã™
-	@param	SDL_Scancodeã®ã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰
-	@return	ButtonStateå‹ã®ç¾åœ¨ã®çŠ¶æ…‹
+	@brief	Œ»İ‚Æ1ƒtƒŒ[ƒ€‘O‚Ìó‘Ô‚©‚çButtonState‚ğ•Ô‚·
+	@param	SDL_Scancode‚ÌƒL[ƒR[ƒh
+	@return	ButtonStateŒ^‚ÌŒ»İ‚Ìó‘Ô
 	*/
 	ButtonState GetKeyState(SDL_Scancode _keyCode) const;
 private:
-	//ç¾åœ¨ã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å…¥åŠ›çŠ¶æ…‹
+	//Œ»İ‚ÌƒL[ƒ{[ƒh‚Ì“ü—Íó‘Ô
 	const Uint8* currState;
-	//ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å…¥åŠ›çŠ¶æ…‹
+	//‚PƒtƒŒ[ƒ€‘O‚ÌƒL[ƒ{[ƒh‚Ì“ü—Íó‘Ô
 	Uint8 prevState[SDL_NUM_SCANCODES];
 };
 
-//ãƒã‚¦ã‚¹ã®å…¥åŠ›ç®¡ç†ã‚¯ãƒ©ã‚¹
+//ƒ}ƒEƒX‚Ì“ü—ÍŠÇ—ƒNƒ‰ƒX
 class MouseState
 {
 public:
-	// InputSystemã‹ã‚‰å®¹æ˜“ã«æ›´æ–°ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+	// InputSystem‚©‚ç—eˆÕ‚ÉXV‚Å‚«‚é‚æ‚¤‚É‚·‚é
 	friend class InputSystem;
 
 	/**
-	@brief	ç¾åœ¨ã®ãƒã‚¦ã‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
+	@brief	Œ»İ‚Ìƒ}ƒEƒX‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğæ“¾‚·‚é
 	@return	Position
 	*/
 	const Vector2& GetPosition() const { return mousePos; }
 
 	/**
-	@brief	ç¾åœ¨ã®ãƒã‚¦ã‚¹ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ›ã‚¤ãƒ¼ãƒ«ã®çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
-	@return	ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡ï¼ˆVector2ï¼‰
+	@brief	Œ»İ‚Ìƒ}ƒEƒX‚ÌƒXƒNƒ[ƒ‹ƒzƒC[ƒ‹‚Ìó‘Ô‚ğæ“¾‚·‚é
+	@return	ƒXƒNƒ[ƒ‹—ÊiVector2j
 	*/
 	const Vector2& GetScrollWheel() const { return scrollWheel; }
 
 	/**
-	@brief	ç›¸å¯¾ãƒã‚¦ã‚¹ãƒ¢ãƒ¼ãƒ‰ã‹ã©ã†ã‹ã‚’å–å¾—ã™ã‚‹
-	@return	true : ç›¸å¯¾ãƒ¢ãƒ¼ãƒ‰ , false , é€šå¸¸ãƒ¢ãƒ¼ãƒ‰
+	@brief	‘Š‘Îƒ}ƒEƒXƒ‚[ƒh‚©‚Ç‚¤‚©‚ğæ“¾‚·‚é
+	@return	true : ‘Š‘Îƒ‚[ƒh , false , ’Êíƒ‚[ƒh
 	*/
 	bool IsRelative() const { return isRelative; }
 
 	/**
-	@brief	ç¾åœ¨ã®å…¥åŠ›çŠ¶æ…‹ã®ã¿ã‚’å–å¾—ã™ã‚‹
-	@param	SDL_BUTTONå®šæ•°
-	@return	true : æŠ¼ã•ã‚Œã¦ã„ã‚‹ , false : æŠ¼ã•ã‚Œã¦ã„ãªã„
+	@brief	Œ»İ‚Ì“ü—Íó‘Ô‚Ì‚İ‚ğæ“¾‚·‚é
+	@param	SDL_BUTTON’è”
+	@return	true : ‰Ÿ‚³‚ê‚Ä‚¢‚é , false : ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
 	*/
 	bool GetButtonValue(int _button) const;
 
 	/**
-	@brief	ç¾åœ¨ã¨1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çŠ¶æ…‹ã‹ã‚‰ButtonStateã‚’è¿”ã™
-	@param	SDL_BUTTONå®šæ•°
-	@return	ButtonStateå‹ã®ç¾åœ¨ã®çŠ¶æ…‹
+	@brief	Œ»İ‚Æ1ƒtƒŒ[ƒ€‘O‚Ìó‘Ô‚©‚çButtonState‚ğ•Ô‚·
+	@param	SDL_BUTTON’è”
+	@return	ButtonStateŒ^‚ÌŒ»İ‚Ìó‘Ô
 	*/
 	ButtonState GetButtonState(int _button) const;
 private:
-	//ãƒã‚¦ã‚¹ã®ãƒã‚¸ã‚·ãƒ§ãƒ³
+	//ƒ}ƒEƒX‚Ìƒ|ƒWƒVƒ‡ƒ“
 	Vector2 mousePos;
-	//ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ›ã‚¤ãƒ¼ãƒ«ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡
+	//ƒXƒNƒ[ƒ‹ƒzƒC[ƒ‹‚ÌƒXƒNƒ[ƒ‹—Ê
 	Vector2 scrollWheel;
-	// ç¾åœ¨ã®ãƒã‚¦ã‚¹ã®å…¥åŠ›çŠ¶æ…‹
+	// Œ»İ‚Ìƒ}ƒEƒX‚Ì“ü—Íó‘Ô
 	Uint32 currButtons;
-	//ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ãƒã‚¦ã‚¹ã®å…¥åŠ›çŠ¶æ…‹
+	//‚PƒtƒŒ[ƒ€‘O‚Ìƒ}ƒEƒX‚Ì“ü—Íó‘Ô
 	Uint32 prevButtons;
-	// ç›¸å¯¾ãƒã‚¦ã‚¹ãƒ¢ãƒ¼ãƒ‰ã‹ã©ã†ã‹
+	// ‘Š‘Îƒ}ƒEƒXƒ‚[ƒh‚©‚Ç‚¤‚©
 	bool isRelative;
 };
 
-// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®å…¥åŠ›ç®¡ç†ã‚¯ãƒ©ã‚¹
+// ƒRƒ“ƒgƒ[ƒ‰[‚Ì“ü—ÍŠÇ—ƒNƒ‰ƒX
 class ControllerState
 {
 public:
-	// InputSystemã‹ã‚‰å®¹æ˜“ã«æ›´æ–°ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+	// InputSystem‚©‚ç—eˆÕ‚ÉXV‚Å‚«‚é‚æ‚¤‚É‚·‚é
 	friend class InputSystem;
 
 	/**
-	@brief	ç¾åœ¨ã®å…¥åŠ›çŠ¶æ…‹ã®ã¿ã‚’å–å¾—ã™ã‚‹
-	@param	SDL_GameControllerButtonã®ãƒœã‚¿ãƒ³ã‚³ãƒ¼ãƒ‰
-	@return	true : æŠ¼ã•ã‚Œã¦ã„ã‚‹ , false : æŠ¼ã•ã‚Œã¦ã„ãªã„
+	@brief	Œ»İ‚Ì“ü—Íó‘Ô‚Ì‚İ‚ğæ“¾‚·‚é
+	@param	SDL_GameControllerButton‚Ìƒ{ƒ^ƒ“ƒR[ƒh
+	@return	true : ‰Ÿ‚³‚ê‚Ä‚¢‚é , false : ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
 	*/
 	bool GetButtonValue(SDL_GameControllerButton _button) const;
 
 	/**
-	@brief	ç¾åœ¨ã¨1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®çŠ¶æ…‹ã‹ã‚‰ButtonStateã‚’è¿”ã™
-	@param	SDL_GameControllerButtonã®ãƒœã‚¿ãƒ³ã‚³ãƒ¼ãƒ‰
-	@return	ButtonStateå‹ã®ç¾åœ¨ã®çŠ¶æ…‹
+	@brief	Œ»İ‚Æ1ƒtƒŒ[ƒ€‘O‚Ìó‘Ô‚©‚çButtonState‚ğ•Ô‚·
+	@param	SDL_GameControllerButton‚Ìƒ{ƒ^ƒ“ƒR[ƒh
+	@return	ButtonStateŒ^‚ÌŒ»İ‚Ìó‘Ô
 	*/
 	ButtonState GetButtonState(SDL_GameControllerButton _button) const;
 
-	/**
-	@brief	å·¦ã®ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›å€¤ã‚’å–å¾—ã™ã‚‹
-	@return	å…¥åŠ›å€¤ï¼ˆ-1.0~1.0ï¼‰
-	*/
-	const Vector2& GetLeftStick() const { return leftStick; }
+	///**
+	//@brief	¶‚ÌƒXƒeƒBƒbƒN‚Ì“ü—Í’l‚ğæ“¾‚·‚é
+	//@return	“ü—Í’li-1.0~1.0j
+	//*/
+	//const Vector2& GetLeftStick() const { return leftStick; }
 
-	/**
-	@brief	å³ã®ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›å€¤ã‚’å–å¾—ã™ã‚‹
-	@return	å…¥åŠ›å€¤ï¼ˆ-1.0~1.0ï¼‰
-	*/
-	const Vector2& GetRightStick() const { return rightStick; }
+	///**
+	//@brief	‰E‚ÌƒXƒeƒBƒbƒN‚Ì“ü—Í’l‚ğæ“¾‚·‚é
+	//@return	“ü—Í’li-1.0~1.0j
+	//*/
+	//const Vector2& GetRightStick() const { return rightStick; }
 
-	/**
-	@brief	å·¦ã®ãƒˆãƒªã‚¬ãƒ¼ã®å…¥åŠ›å€¤ã‚’å–å¾—ã™ã‚‹
-	@return	å…¥åŠ›å€¤ï¼ˆ0.0~1.0ï¼‰
-	*/
-	float GetLeftTrigger() const { return leftTrigger; }
+	///**
+	//@brief	¶‚ÌƒgƒŠƒK[‚Ì“ü—Í’l‚ğæ“¾‚·‚é
+	//@return	“ü—Í’li0.0~1.0j
+	//*/
+	//float GetLeftTrigger() const { return leftTrigger; }
 
-	/**
-	@brief	å³ã®ãƒˆãƒªã‚¬ãƒ¼ã®å…¥åŠ›å€¤ã‚’å–å¾—ã™ã‚‹
-	@return	å…¥åŠ›å€¤ï¼ˆ0.0~1.0ï¼‰
-	*/
-	float GetRightTrigger() const { return rightTrigger; }
+	///**
+	//@brief	‰E‚ÌƒgƒŠƒK[‚Ì“ü—Í’l‚ğæ“¾‚·‚é
+	//@return	“ü—Í’li0.0~1.0j
+	//*/
+	//float GetRightTrigger() const { return rightTrigger; }
 
-	/**
-	@brief	ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒæ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã‹
-	@return	true : æ¥ç¶šã•ã‚Œã¦ã„ã‚‹ , false : æ¥ç¶šã•ã‚Œã¦ã„ãªã„
-	*/
-	bool GetIsConnected() const { return isConnected; }
 private:
-	//ç¾åœ¨ã®ãƒœã‚¿ãƒ³ã®å…¥åŠ›çŠ¶æ…‹
+	//Œ»İ‚Ìƒ{ƒ^ƒ“‚Ì“ü—Íó‘Ô
 	Uint8 currButtons[SDL_CONTROLLER_BUTTON_MAX];
-	//ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ãƒœã‚¿ãƒ³ã®å…¥åŠ›çŠ¶æ…‹
+	//‚PƒtƒŒ[ƒ€‘O‚Ìƒ{ƒ^ƒ“‚Ì“ü—Íó‘Ô
 	Uint8 prevButtons[SDL_CONTROLLER_BUTTON_MAX];
-	//å·¦ã®ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›å€¤
-	Vector2 leftStick;
-	//å³ã®ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›å€¤
-	Vector2 rightStick;
-	//å·¦ã®ãƒˆãƒªã‚¬ãƒ¼ã®å…¥åŠ›å€¤
-	float leftTrigger;
-	//å³ã®ãƒˆãƒªã‚¬ãƒ¼ã®å…¥åŠ›å€¤
-	float rightTrigger;
-	//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒæ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã‹
-	bool isConnected;
 };
 
-//å„å…¥åŠ›æ©Ÿå™¨ã®å…¥åŠ›çŠ¶æ…‹ã‚’ã¾ã¨ã‚ãŸãƒ©ãƒƒãƒ‘ãƒ¼æ§‹é€ ä½“
+//Še“ü—Í‹@Ší‚Ì“ü—Íó‘Ô‚ğ‚Ü‚Æ‚ß‚½ƒ‰ƒbƒp[\‘¢‘Ì
 struct InputState
 {
 	KeyboardState Keyboard;
@@ -171,60 +156,60 @@ class InputSystem
 {
 public:
 	/**
-	@brief  åˆæœŸåŒ–å‡¦ç†
-	@return true : æˆåŠŸ , false : å¤±æ•—
+	@brief  ‰Šú‰»ˆ—
+	@return true : ¬Œ÷ , false : ¸”s
 	*/
 	bool Initialize();
 
 	/**
-	@brief  çµ‚äº†å‡¦ç†
+	@brief  I—¹ˆ—
 	*/
 	void Shutdown();
 
 	/**
-	@brief  Updateã®æº–å‚™ã‚’ã™ã‚‹ï¼ˆSDL_PollEventsã®ç›´å‰ã«å‘¼ã¶ï¼‰
+	@brief  Update‚Ì€”õ‚ğ‚·‚éiSDL_PollEvents‚Ì’¼‘O‚ÉŒÄ‚Ôj
 	*/
 	void PrepareForUpdate();
 
 	/**
-	@brief  ãƒ•ãƒ¬ãƒ¼ãƒ æ¯ã®å‡¦ç†ï¼ˆSDL_PollEventsã®ç›´å¾Œã«å‘¼ã¶ï¼‰
+	@brief  ƒtƒŒ[ƒ€–ˆ‚Ìˆ—iSDL_PollEvents‚Ì’¼Œã‚ÉŒÄ‚Ôj
 	*/
 	void Update();
 
 	/**
-	@brief  SDLã‚¤ãƒ™ãƒ³ãƒˆã‚’InputSystemã«æ¸¡ã™
+	@brief  SDLƒCƒxƒ“ƒg‚ğInputSystem‚É“n‚·
 	*/
 	void ProcessEvent(union SDL_Event& _event);
 
 	/**
-	@brief  ç¾åœ¨ã®å…¥åŠ›çŠ¶æ…‹ã‚’å–å¾—ã™ã‚‹
-	@return ï¼ˆInputStateï¼‰å„å…¥åŠ›æƒ…å ±ã‚’ã¾ã¨ã‚ãŸæ§‹é€ ä½“
+	@brief  Œ»İ‚Ì“ü—Íó‘Ô‚ğæ“¾‚·‚é
+	@return iInputStatejŠe“ü—Íî•ñ‚ğ‚Ü‚Æ‚ß‚½\‘¢‘Ì
 	*/
 	const InputState& GetState() const { return state; }
 
 	/**
-	@brief  ãƒã‚¦ã‚¹ã®ãƒ¢ãƒ¼ãƒ‰ã‚’è¨­å®šã™ã‚‹
-	@param	true : ç›¸å¯¾ãƒ¢ãƒ¼ãƒ‰ , false : ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ¢ãƒ¼ãƒ‰
+	@brief  ƒ}ƒEƒX‚Ìƒ‚[ƒh‚ğİ’è‚·‚é
+	@param	true : ‘Š‘Îƒ‚[ƒh , false : ƒfƒtƒHƒ‹ƒgƒ‚[ƒh
 	*/
 	void SetRelativeMouseMode(bool _value);
 private:
 	/**
-	@brief  å…¥åŠ›ã•ã‚ŒãŸå€¤ï¼ˆintï¼‰ã‚’ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã™ã‚‹ï¼ˆç¯„å›²å†…ã«åã‚ã¦-1.0~1.0ã«ã¾ã¨ã‚ã‚‹ï¼‰
-	@param	å…¥åŠ›ã•ã‚ŒãŸå€¤ï¼ˆintï¼‰
-	@return	ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã•ã‚ŒãŸå€¤
+	@brief  “ü—Í‚³‚ê‚½’liintj‚ğƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚·‚éi”ÍˆÍ“à‚Éû‚ß‚Ä-1.0~1.0‚É‚Ü‚Æ‚ß‚éj
+	@param	“ü—Í‚³‚ê‚½’liintj
+	@return	ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚³‚ê‚½’l
 	*/
 	float Filter1D(int _input);
 
 	/**
-	@brief  å…¥åŠ›ã•ã‚ŒãŸå€¤ï¼ˆintï¼‰ã‚’ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã™ã‚‹ï¼ˆç¯„å›²å†…ã«åã‚ã¦0.0~1.0ã«ã¾ã¨ã‚ã‚‹ï¼‰
-	@param	å…¥åŠ›ã•ã‚ŒãŸå€¤ã®xï¼ˆintï¼‰
-	@param	å…¥åŠ›ã•ã‚ŒãŸå€¤ã®yï¼ˆintï¼‰
-	@return	ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã•ã‚ŒãŸå€¤
+	@brief  “ü—Í‚³‚ê‚½’liintj‚ğƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚·‚éi”ÍˆÍ“à‚Éû‚ß‚Ä0.0~1.0‚É‚Ü‚Æ‚ß‚éj
+	@param	“ü—Í‚³‚ê‚½’l‚Ìxiintj
+	@param	“ü—Í‚³‚ê‚½’l‚Ìyiintj
+	@return	ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚³‚ê‚½’l
 	*/
 	Vector2 Filter2D(int _inputX, int _inputY);
 
-	//å„å…¥åŠ›æ©Ÿå™¨ã®å…¥åŠ›çŠ¶æ…‹ã‚’ã¾ã¨ã‚ãŸãƒ©ãƒƒãƒ‘ãƒ¼æ§‹é€ ä½“
+	//Še“ü—Í‹@Ší‚Ì“ü—Íó‘Ô‚ğ‚Ü‚Æ‚ß‚½ƒ‰ƒbƒp[\‘¢‘Ì
 	InputState state;
-	//SDLã§ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’èªè­˜ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹ãƒã‚¤ãƒ³ã‚¿
+	//SDL‚ÅƒRƒ“ƒgƒ[ƒ‰[‚ğ”F¯‚·‚é‚½‚ß‚ÌƒNƒ‰ƒXƒ|ƒCƒ“ƒ^
 	SDL_GameController* controller;
 };

@@ -195,7 +195,10 @@
     <ClCompile Include="JumpAnimation4.cpp">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleComponent.cpp" />
+    <ClCompile Include="ParticleComponent.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="FBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -391,7 +394,10 @@
     <ClInclude Include="JumpAnimation4.h">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleComponent.h" />
+    <ClInclude Include="ParticleComponent.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="FBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
