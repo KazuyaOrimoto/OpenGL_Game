@@ -8,21 +8,24 @@ Vector3 ParticleComponent::staticCameraWorldPos;
 
 ParticleComponent::ParticleComponent(GameObject * _owner)
 	:Component(_owner)
+	, position(_owner->GetPosition())
 	, life(0.0f)
 	, alpha(1.0f)
+	, isFollowing(true)
 {
 	RENDERER->AddParticle(this);
 }
 
 ParticleComponent::ParticleComponent(GameObject * _owner, const Vector3 & _pos, const Vector3 & _v, float _scale, float _alpha, float _life)
 	: Component(_owner)
-	, position(_pos)
+	, position(_pos + _owner->GetPosition())
 	, velocity(_v)
 	, scale(_scale)
 	, life(_life)
 	, alpha(_alpha)
 	, nowTime(0.0)
 	, blendType(PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA)
+	, isFollowing(true)
 {
 	RENDERER->AddParticle(this);
 }
@@ -49,7 +52,14 @@ void ParticleComponent::Draw(Shader * shader)
 {
 	Matrix4 mat, matScale;
 	matScale = Matrix4::CreateScale(scale * owner->GetScale());
-	mat = Matrix4::CreateTranslation(position + owner->GetPosition());
+	if (isFollowing)
+	{
+		mat = Matrix4::CreateTranslation(position + owner->GetPosition());
+	}
+	else
+	{
+		mat = Matrix4::CreateTranslation(position);
+	}
 
 	shader->SetMatrixUniform("uWorldTransform", matScale * staticBillboardMat * mat);
 	shader->SetFloatUniform("uAlpha", alpha);

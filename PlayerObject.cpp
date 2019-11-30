@@ -58,17 +58,10 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	frame++;
 	if (frame % 5 == 0)
 	{
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			Vector3 pos;
-			if (i % 2 == 0)
-			{
-				pos = Vector3(0, -100, 0);
-			}
-			else
-			{
-				pos = Vector3(0, 100, 0);
-			}
+			pos = Vector3(-300, 0, 0);
 			pos = pos + randV;
 
 			ParticleComponent* p = new ParticleComponent(this,pos,
@@ -79,6 +72,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 			p->SetTextureID(texture->GetTextureID());
 			p->SetColor(Vector3(1.0f, 0.5f, 0.2f));
 			p->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ADD);
+			p->SetIsFollowing(false);
 		}
 	}
 }

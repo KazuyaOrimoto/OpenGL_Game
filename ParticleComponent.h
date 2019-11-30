@@ -34,6 +34,7 @@ private:
 	float                nowTime; // 現在の時間
 	int                  textureID; // テクスチャID
 	PARTICLE_ENUM        blendType; // ブレンドタイプ
+	bool                 isFollowing;
 
 	// 共有スタティックメンバ
 	static Matrix4       staticBillboardMat; // ビルボード行列
@@ -56,7 +57,9 @@ public:
 	{
 		blendType = _blendType;
 	}
+	void                 SetIsFollowing(bool _isFollowing) { isFollowing = _isFollowing; }
 	bool                 IsAlive() const;
+	bool                 IsFollowing()const { return isFollowing; }
 
 	// カメラ距離でのソート用
 	bool                 operator < (const ParticleComponent& rhs) const;
