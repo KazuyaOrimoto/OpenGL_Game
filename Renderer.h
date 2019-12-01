@@ -179,8 +179,6 @@ private:
 	void Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj,
 		float viewPortScale = 1.0f, bool lit = true);
 
-	void FBOInit();
-
 	/**
 	@brief  光源情報をシェーダーの変数にセットする
 	@param  セットするShaderクラスのポインタ
@@ -215,7 +213,6 @@ private:
     Shader* meshShader;
     Shader* basicShader;
 	Shader* particleShader;
-	Shader* fullScreenShader;
 	VertexArray* particleVertex;   // パーティクル用頂点定義
 
     //ビュー行列
@@ -237,19 +234,15 @@ private:
     //コンテキスト
     SDL_GLContext context;
 
-	GLuint FBO;
-	GLuint rbo;
-	GLuint renderTextureColor;
-	GLuint renderTextureDepth;
+	Matrix4 scaleMat;
 
-	float fullScreenVertices[24] = {
-		//   positions     texture coordinates
-			-1.0f,  1.0f,  0.0f, 1.0f,
-			-1.0f, -1.0f,  0.0f, 0.0f,
-			 1.0f, -1.0f,  1.0f, 0.0f,
 
-			-1.0f,  1.0f,  0.0f, 1.0f,
-			 1.0f, -1.0f,  1.0f, 0.0f,
-			 1.0f,  1.0f,  1.0f, 1.0f
-	};
+	//テクスチャレンダリング用
+	unsigned int fbo;
+	class Texture* fboTexture;
+	Matrix4 fboView;
+
+	bool CreateFBO();
+
+
 };

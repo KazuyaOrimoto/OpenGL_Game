@@ -145,13 +145,13 @@ bool InputSystem::Initialize()
 	state.Mouse.currButtons = 0;
 	state.Mouse.prevButtons = 0;
 
-	// パッドの設定ファイル gamecontrollerdb.txt の読み込みと問題が無いかのチェック
-	int iNumOfControllers = SDL_GameControllerAddMappingsFromFile("Assets/GameControllerdb.txt");
-	if (iNumOfControllers == -1)
-	{
-		SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Error loading database [%s]", SDL_GetError());
-		return false;
-	}
+	//// パッドの設定ファイル gamecontrollerdb.txt の読み込みと問題が無いかのチェック
+	//int iNumOfControllers = SDL_GameControllerAddMappingsFromFile("Assets/GameControllerdb.txt");
+	//if (iNumOfControllers == -1)
+	//{
+	//	SDL_LogWarn(SDL_LOG_CATEGORY_INPUT, "Error loading database [%s]", SDL_GetError());
+	//	return false;
+	//}
 
 	//コントローラーを開く
 	controller = nullptr;
