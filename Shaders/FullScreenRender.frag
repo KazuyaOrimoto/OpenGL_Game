@@ -1,15 +1,17 @@
-
 // Request GLSL 3.3
 #version 330
 
-in vec2 TexCoords;
-out vec4 color;
+// Tex coord input from vertex shader
+in vec2 fragTexCoord;
+
+// This corresponds to the output color to the color buffer
+out vec4 outColor;
 
 // This is used for the texture sampling
-uniform sampler2D screenTexture;
+uniform sampler2D uTexture;
 
 void main()
 {
-    // Sample color from texture
-    color = vec4 (1.0,0.0,0.0,1.0);
+	// Sample color from texture
+    outColor = texture(uTexture, fragTexCoord);
 }

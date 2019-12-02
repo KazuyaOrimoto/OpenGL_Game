@@ -27,6 +27,7 @@ Renderer::Renderer()
     , meshShader(nullptr)
     , basicShader(nullptr)
 	, particleVertex(nullptr)
+	, fullShader(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
@@ -157,6 +158,8 @@ void Renderer::Shutdown()
     delete meshShader;
 	basicShader->Unload();
     delete basicShader;
+	fullShader->Unload();
+	delete fullShader;
     SDL_GL_DeleteContext(context);
     SDL_DestroyWindow(window);
 }
@@ -196,9 +199,9 @@ void Renderer::Draw()
 
 	// Disable depth testing for the global lighting pass
 	glDisable(GL_DEPTH_TEST);
-	spriteShader->SetActive();
+	fullShader->SetActive();
 	spriteVerts->SetActive();
-	spriteShader->SetMatrixUniform("uWorldTransform",scaleMat);
+	fullShader->SetMatrixUniform("uWorldTransform",scaleMat);
 	// Activate sprite verts quad
 	fboTexture->SetActive();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
@@ -395,6 +398,17 @@ bool Renderer::LoadShaders()
     // ビュー行列の設定
     Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
     spriteShader->SetMatrixUniform("uViewProj", viewProj);
+
+	fullShader = new Shader();
+	if (!fullShader->Load("Shaders/FullScreenRender.vert", "Shaders/FullScreenRender.frag"))
+	{
+		return false;
+	}
+
+	fullShader->SetActive();
+	// ビュー行列の設定
+	fullShader->SetMatrixUniform("uViewProj", viewProj);
+
 
     // 標準のメッシュシェーダーの作成
     meshShader = new Shader();

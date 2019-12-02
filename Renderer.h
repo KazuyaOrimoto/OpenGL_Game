@@ -241,6 +241,7 @@ private:
 	unsigned int fbo;
 	class Texture* fboTexture;
 	Matrix4 fboView;
+	Shader* fullShader;
 
 	bool CreateFBO();
 
