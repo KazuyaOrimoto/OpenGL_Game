@@ -198,7 +198,6 @@
     <ClCompile Include="ParticleComponent.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
-    <ClCompile Include="FBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -397,7 +396,6 @@
     <ClInclude Include="ParticleComponent.h">
       <Filter>Particle</Filter>
     </ClInclude>
-    <ClInclude Include="FBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -493,6 +491,15 @@
       <Filter>Shader</Filter>
     </None>
     <None Include="Shaders\AlphaTest.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\FullScreenRender.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\FullScreenRender.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\GausuBokasi.frag">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

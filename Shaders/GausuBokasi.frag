@@ -30,5 +30,13 @@ void main()
             result += texture( uTexture, fragTexCoord - vec2(0.0, tex_offset.y * i)).rgb * weight[i];
         }
     }
-    outColor = vec4(result, 1.0);
+    float add = result.x + result.y + result.z;
+    if(add < 0.1)
+    {
+         outColor = vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else
+    {
+         outColor = vec4(result, 0.0);
+    }
 }

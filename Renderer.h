@@ -239,9 +239,12 @@ private:
 
 	//テクスチャレンダリング用
 	unsigned int fbo;
+	unsigned int gaussian;
 	class Texture* fboTexture;
+	class Texture* gaussianTexture;
 	Matrix4 fboView;
 	Shader* fullShader;
+	Shader* gaussianShader;
 
 	bool CreateFBO();
 

@@ -47,6 +47,13 @@ public:
     */
     void SetFloatUniform(const char* _name, const float& _value);
 
+	/**
+	@brief	boolのUniform変数を設定する
+	@param	設定するUniform変数名
+	@param	設定するbool
+	*/
+	void SetBoolUniform(const char* _name, const bool& _value);
+
 private:
 	/**
 	@brief	シェーダーをコンパイルする

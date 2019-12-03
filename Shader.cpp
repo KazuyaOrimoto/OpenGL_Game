@@ -97,6 +97,18 @@ void Shader::SetFloatUniform(const char * _name, const float & _value)
 }
 
 /**
+@brief	boolのUniform変数を設定する
+@param	設定するUniform変数名
+@param	設定するbool
+*/
+void Shader::SetBoolUniform(const char * _name, const bool & _value)
+{
+	GLuint loc = glGetUniformLocation(shaderProgram, _name);
+	// シェーダーにfloatデータを送る
+	glUniform1f(loc, _value);
+}
+
+/**
 @brief	シェーダーをコンパイルする
 @param	コンパイルするシェーダーのファイル名
 @param	シェーダーの種類
