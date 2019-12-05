@@ -205,8 +205,8 @@ void Renderer::Draw()
 
 	// Set viewport size based on scale
 	glViewport(0, 0,
-		static_cast<int>(screenWidth * 1.0f),
-		static_cast<int>(screenHeight * 1.0f)
+		static_cast<int>(screenWidth * (1.0f / num)),
+		static_cast<int>(screenHeight * (1.0f / num))
 	);
 
 	// Clear color buffer/depth buffer
@@ -216,9 +216,9 @@ void Renderer::Draw()
 
 	// Disable depth testing for the global lighting pass
 	glDisable(GL_DEPTH_TEST);
-	fullShader->SetActive();
+	gaussianShader->SetActive();
 	spriteVerts->SetActive();
-	fullShader->SetMatrixUniform("uWorldTransform", scaleMat);
+	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
 	// Activate sprite verts quad
 	fboTexture->SetActive();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
@@ -226,7 +226,12 @@ void Renderer::Draw()
 	//標準フレームバッファ
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+	glViewport(0, 0,
+		static_cast<int>(screenWidth * 1.0f),
+		static_cast<int>(screenHeight * 1.0f)
+	);
 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Disable depth testing for the global lighting pass
 	glDisable(GL_DEPTH_TEST);
 	glDepthMask(GL_FALSE);
@@ -238,6 +243,10 @@ void Renderer::Draw()
 	fboTexture->SetActive();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
+	glViewport(0, 0,
+		static_cast<int>(screenWidth * num),
+		static_cast<int>(screenHeight * num)
+	);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	fullShader->SetActive();
@@ -748,13 +757,6 @@ bool Renderer::CreateFBO()
 	// Create the texture we'll use for rendering
 	gaussianTexture = new Texture();
 	gaussianTexture->CreateForRendering(width, height, GL_RGB);
-
-	// Add a depth buffer to this target
-	GLuint depthBuffer2;
-	glGenRenderbuffers(1, &depthBuffer2);
-	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer2);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer2);
 
 	// Attach mirror texture as the output target for the frame buffer
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, gaussianTexture->GetTextureID(), 0);

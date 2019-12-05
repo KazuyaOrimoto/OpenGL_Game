@@ -14,7 +14,7 @@ void main()
 {             
     vec2 tex_offset = 1.0 / textureSize(uTexture, 0); // gets size of single texel
     vec3 result = texture(uTexture, fragTexCoord).rgb * weight[0]; // current fragment's contribution
-    if(horizontal)
+    //if(horizontal)
     {
         for(int i = 1; i < 5; ++i)
         {
@@ -22,7 +22,7 @@ void main()
             result += texture(uTexture, fragTexCoord - vec2(tex_offset.x * i, 0.0)).rgb * weight[i];
         }
     }
-    else
+    //else
     {
         for(int i = 1; i < 5; ++i)
         {
@@ -31,12 +31,5 @@ void main()
         }
     }
     float add = result.x + result.y + result.z;
-    if(add < 0.1)
-    {
-         outColor = vec4(0.0, 0.0, 0.0, 0.0);
-    }
-    else
-    {
-         outColor = vec4(result, 0.0);
-    }
+    outColor = vec4(result, 0.0);
 }

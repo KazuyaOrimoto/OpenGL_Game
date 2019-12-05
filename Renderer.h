@@ -249,4 +249,5 @@ private:
 	bool CreateFBO();
 
 
+	const int num = 1;
 };
