@@ -6,8 +6,8 @@
 
 Texture::Texture()
 	:textureID(0)
-	,width(0)
-	,height(0)
+	, width(0)
+	, height(0)
 {
 }
 
@@ -33,7 +33,7 @@ bool Texture::Load(const std::string& _fileName)
 		return false;
 	}
 
-	// サーフェスからテクスチャを作る
+	//サーフェスからテクスチャを作る
 	tex = SDL_CreateTextureFromSurface(RENDERER->GetSDLRenderer(), surf);
 	if (!tex)
 	{
@@ -48,16 +48,48 @@ bool Texture::Load(const std::string& _fileName)
 
 	// OpenGLにテクスチャ登録
 	int format = GL_RGB;
+	int depth, pitch;
+	depth = 24;
+	pitch = 3 * width; // 1ピクセルあたり3byte * 1行のピクセル数
 	if (channels == 4)
 	{
 		format = GL_RGBA;
+		depth = 32;
+		pitch = 4 * width;
 	}
 
-	glGenTextures(1,&textureID);
-	glBindTexture(GL_TEXTURE_2D,textureID);
+	Uint32 rmask, gmask, bmask, amask;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	int shift = (req_format == STBI_rgb) ? 8 : 0;
+	rmask = 0xff000000 >> shift;
+	gmask = 0x00ff0000 >> shift;
+	bmask = 0x0000ff00 >> shift;
+	amask = 0x000000ff >> shift;
+#else // little endian, like x86
+	rmask = 0x000000ff;
+	gmask = 0x0000ff00;
+	bmask = 0x00ff0000;
+	amask = 0xff000000;
+#endif
 
-	glTexImage2D(GL_TEXTURE_2D,0,format,width,height,0,format,GL_UNSIGNED_BYTE,surf->pixels);
-	//glTexSubImage2D(GL_TEXTURE_2D, 0, 128, 128, width -128 , height - 128 , format, GL_UNSIGNED_BYTE, image);
+	SDL_Surface* surf2 = SDL_CreateRGBSurfaceFrom(0, 512, 512, depth, pitch, rmask, gmask, bmask, amask);
+	surf->clip_rect.x = 256;
+	surf->clip_rect.y = 256;
+	surf->clip_rect.w = 256;
+	surf->clip_rect.h = 256;
+	if (SDL_BlitSurface(surf, &surf->clip_rect, surf2, NULL) == 0)
+	{
+
+	}
+	else
+	{
+
+	}
+
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, surf2->pixels);
 
 	SDL_FreeSurface(surf);
 
@@ -84,7 +116,7 @@ bool Texture::Load(const std::string& _fileName)
 */
 void Texture::Unload()
 {
-	glDeleteTextures(1,&textureID);
+	glDeleteTextures(1, &textureID);
 }
 
 void Texture::CreateFromSurface(SDL_Surface * surface)
@@ -130,13 +162,13 @@ void Texture::CreateForRendering(int _width, int _height, unsigned int _format)
 */
 void Texture::SetActive()
 {
-	glBindTexture(GL_TEXTURE_2D,textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 }
 
 bool Texture::LoadDiv(const std::string& _fileName, const unsigned int _allNum
-					, const unsigned int _widthNum, const unsigned int _heightNum
-					, const unsigned int _width, const unsigned int _height
-					, std::vector<Texture*> textures)
+	, const unsigned int _widthNum, const unsigned int _heightNum
+	, const unsigned int _width, const unsigned int _height
+	, std::vector<Texture*> textures)
 {
 	textures.clear();
 
