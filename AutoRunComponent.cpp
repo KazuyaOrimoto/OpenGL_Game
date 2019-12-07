@@ -17,7 +17,7 @@ void AutoRunComponent::Update(float _deltaTime)
 		return;
 	}
 	Vector3 pos = owner->GetPosition();
-	pos += owner->GetForward() * forwardSpeed * _deltaTime;
+	pos += owner->GetForward() * 500 * _deltaTime;
 	owner->SetPosition(pos);
     dril->SetPosition(pos);
 }

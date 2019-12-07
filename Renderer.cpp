@@ -99,6 +99,13 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
         return false;
     }
 
+	sdlRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (!sdlRenderer)
+	{
+		printf("SDLRendererの作成に失敗 : %s", SDL_GetError());
+		return false;
+	}
+
     // OpenGLのコンテキストを作成
     context = SDL_GL_CreateContext(window);
 

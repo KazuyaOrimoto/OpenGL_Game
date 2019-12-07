@@ -155,6 +155,8 @@ public:
 
 	Matrix4 GetProjectionMatrix() { return projection; }
 
+	SDL_Renderer* GetSDLRenderer() { return sdlRenderer; }
+
 private:
 	//コンストラクタ、デストラクタの隠蔽
 	Renderer();
@@ -233,6 +235,8 @@ private:
     SDL_Window* window;
     //コンテキスト
     SDL_GLContext context;
+
+	SDL_Renderer* sdlRenderer;
 
 	Matrix4 scaleMat;
 

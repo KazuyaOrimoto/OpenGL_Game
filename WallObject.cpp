@@ -22,6 +22,10 @@ WallObject::~WallObject()
 
 void WallObject::UpdateGameObject(float _deltaTime)
 {
+	if (player == nullptr)
+	{
+		return;
+	}
 	bool moveRequired = player->GetPosition().x - 2000.0f > position.x;
 	if (moveRequired)
 	{

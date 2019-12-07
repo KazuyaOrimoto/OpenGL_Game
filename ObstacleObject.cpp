@@ -31,6 +31,10 @@ ObstacleObject::~ObstacleObject()
 
 void ObstacleObject::UpdateGameObject(float _deltaTime)
 {
+	if (player == nullptr)
+	{
+		return;
+	}
     if (player->GetPosition().x - 500.0f > position.x)
     {
         CreateObstacle(position.x + StaticObstacle::ObstacleMaxNum * StaticObstacle::ObstacleDistanceNum);

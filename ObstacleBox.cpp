@@ -84,6 +84,10 @@ void ObstacleBox::UseObstacle()
 
 void ObstacleBox::UpdateGameObject(float _deltaTime)
 {
+	if (player == nullptr)
+	{
+		return;
+	}
 	if (player->GetPosition().x - 500.0f > position.x)
 	{
 		ResetObstacle();

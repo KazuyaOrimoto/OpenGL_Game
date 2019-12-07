@@ -1,7 +1,8 @@
 ﻿#include "Texture.h"
-#include <SOIL.h>
 #include <glew.h>
 #include <SDL.h>
+#include <SDL_image.h>
+#include "Renderer.h"
 
 Texture::Texture()
 	:textureID(0)
@@ -23,15 +24,29 @@ bool Texture::Load(const std::string& _fileName)
 {
 	int channels = 0;
 
-	unsigned char* image = SOIL_load_image(_fileName.c_str(),
-											&width,&height,&channels,SOIL_LOAD_AUTO);
-
-	if (image == nullptr)
+	// SDLサーフェスをテクスチャから作成
+	SDL_Texture* tex = nullptr;
+	SDL_Surface* surf = IMG_Load(_fileName.c_str());
+	if (!surf)
 	{
-		SDL_Log("SOIL failed to load image %s: %s", _fileName.c_str(), SOIL_last_result());
+		printf("テクスチャ読み込みに失敗 %s", _fileName.c_str());
 		return false;
 	}
 
+	// サーフェスからテクスチャを作る
+	tex = SDL_CreateTextureFromSurface(RENDERER->GetSDLRenderer(), surf);
+	if (!tex)
+	{
+		printf("サーフェスからテクスチャの作成に失敗 : %s", _fileName.c_str());
+		return false;
+	}
+
+	// 画像の幅、高さを取得
+	width = surf->w;
+	height = surf->h;
+	channels = surf->format->BytesPerPixel;
+
+	// OpenGLにテクスチャ登録
 	int format = GL_RGB;
 	if (channels == 4)
 	{
@@ -41,10 +56,10 @@ bool Texture::Load(const std::string& _fileName)
 	glGenTextures(1,&textureID);
 	glBindTexture(GL_TEXTURE_2D,textureID);
 
-	glTexImage2D(GL_TEXTURE_2D,0,format,width,height,0,format,GL_UNSIGNED_BYTE,image);
-	//glTexSubImage2D(GL_TEXTURE_2D, 0, 32, 32, width - 32, height - 32, format, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D,0,format,width,height,0,format,GL_UNSIGNED_BYTE,surf->pixels);
+	//glTexSubImage2D(GL_TEXTURE_2D, 0, 128, 128, width -128 , height - 128 , format, GL_UNSIGNED_BYTE, image);
 
-	SOIL_free_image_data(image);
+	SDL_FreeSurface(surf);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -124,30 +139,6 @@ bool Texture::LoadDiv(const std::string& _fileName, const unsigned int _allNum
 					, std::vector<Texture*> textures)
 {
 	textures.clear();
-
-	int channels = 0;
-
-	int width, height;
-
-	unsigned char* image = SOIL_load_image(_fileName.c_str(),
-		&width, &height, &channels, SOIL_LOAD_AUTO);
-
-	if (image == nullptr)
-	{
-		SDL_Log("SOIL failed to load image %s: %s", _fileName.c_str(), SOIL_last_result());
-		return false;
-	}
-
-	int format = GL_RGB;
-	if (channels == 4)
-	{
-		format = GL_RGBA;
-	}
-
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image);
 
 	return false;
 }
