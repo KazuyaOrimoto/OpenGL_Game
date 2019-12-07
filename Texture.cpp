@@ -42,6 +42,7 @@ bool Texture::Load(const std::string& _fileName)
 	glBindTexture(GL_TEXTURE_2D,textureID);
 
 	glTexImage2D(GL_TEXTURE_2D,0,format,width,height,0,format,GL_UNSIGNED_BYTE,image);
+	//glTexSubImage2D(GL_TEXTURE_2D, 0, 32, 32, width - 32, height - 32, format, GL_UNSIGNED_BYTE, image);
 
 	SOIL_free_image_data(image);
 
@@ -115,4 +116,38 @@ void Texture::CreateForRendering(int _width, int _height, unsigned int _format)
 void Texture::SetActive()
 {
 	glBindTexture(GL_TEXTURE_2D,textureID);
+}
+
+bool Texture::LoadDiv(const std::string& _fileName, const unsigned int _allNum
+					, const unsigned int _widthNum, const unsigned int _heightNum
+					, const unsigned int _width, const unsigned int _height
+					, std::vector<Texture*> textures)
+{
+	textures.clear();
+
+	int channels = 0;
+
+	int width, height;
+
+	unsigned char* image = SOIL_load_image(_fileName.c_str(),
+		&width, &height, &channels, SOIL_LOAD_AUTO);
+
+	if (image == nullptr)
+	{
+		SDL_Log("SOIL failed to load image %s: %s", _fileName.c_str(), SOIL_last_result());
+		return false;
+	}
+
+	int format = GL_RGB;
+	if (channels == 4)
+	{
+		format = GL_RGBA;
+	}
+
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image);
+
+	return false;
 }

@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <string>
+#include <vector>
 
 class Texture
 {
@@ -47,6 +48,12 @@ public:
 	int GetHeight() const { return height; }
 
 	int GetTextureID() const { return textureID; }
+
+	static bool LoadDiv(
+		 const std::string& _fileName,const unsigned int _allNum
+		,const unsigned int _widthNum, const unsigned int _heightNum
+		,const unsigned int _width, const unsigned int _height
+		,std::vector<Texture*> textures);
 
 private:
 	unsigned int textureID;
