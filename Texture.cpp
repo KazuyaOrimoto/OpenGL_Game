@@ -59,37 +59,37 @@ bool Texture::Load(const std::string& _fileName)
 	}
 
 	Uint32 rmask, gmask, bmask, amask;
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-	int shift = (req_format == STBI_rgb) ? 8 : 0;
-	rmask = 0xff000000 >> shift;
-	gmask = 0x00ff0000 >> shift;
-	bmask = 0x0000ff00 >> shift;
-	amask = 0x000000ff >> shift;
-#else // little endian, like x86
-	rmask = 0x000000ff;
-	gmask = 0x0000ff00;
-	bmask = 0x00ff0000;
-	amask = 0xff000000;
-#endif
-
-	SDL_Surface* surf2 = SDL_CreateRGBSurfaceFrom(0, 512, 512, depth, pitch, rmask, gmask, bmask, amask);
-	surf->clip_rect.x = 256;
-	surf->clip_rect.y = 256;
-	surf->clip_rect.w = 256;
-	surf->clip_rect.h = 256;
-	if (SDL_BlitSurface(surf, &surf->clip_rect, surf2, NULL) == 0)
-	{
-
-	}
-	else
-	{
-
-	}
+//#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+//	int shift = (req_format == STBI_rgb) ? 8 : 0;
+//	rmask = 0xff000000 >> shift;
+//	gmask = 0x00ff0000 >> shift;
+//	bmask = 0x0000ff00 >> shift;
+//	amask = 0x000000ff >> shift;
+//#else // little endian, like x86
+//	rmask = 0x000000ff;
+//	gmask = 0x0000ff00;
+//	bmask = 0x00ff0000;
+//	amask = 0xff000000;
+//#endif
+//
+//	SDL_Surface* surf2 = SDL_CreateRGBSurfaceFrom(0, 512, 512, depth, pitch, rmask, gmask, bmask, amask);
+//	surf->clip_rect.x = 256;
+//	surf->clip_rect.y = 256;
+//	surf->clip_rect.w = 256;
+//	surf->clip_rect.h = 256;
+//	if (SDL_BlitSurface(surf, &surf->clip_rect, surf2, NULL) == 0)
+//	{
+//
+//	}
+//	else
+//	{
+//
+//	}
 
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, surf2->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, surf->pixels);
 
 	SDL_FreeSurface(surf);
 
