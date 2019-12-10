@@ -58,7 +58,7 @@ bool Texture::Load(const std::string& _fileName)
 		pitch = 4 * width;
 	}
 
-	Uint32 rmask, gmask, bmask, amask;
+	//Uint32 rmask, gmask, bmask, amask;
 //#if SDL_BYTEORDER == SDL_BIG_ENDIAN
 //	int shift = (req_format == STBI_rgb) ? 8 : 0;
 //	rmask = 0xff000000 >> shift;
