@@ -26,6 +26,8 @@
 #include <SDL_ttf.h>
 #include <string>
 
+#include "imguiManager.h"
+
 Game::GameState Game::gameState = GameState::EGameplay;
 
 /**
@@ -79,6 +81,12 @@ bool Game::Initialize()
 	{
 		SDL_Log("Failed to initialize SDL_ttf");
 		return false;
+	}
+
+	imguiManager::CreateInstance();
+	if (IMGUI_MANAGER->Initialize())
+	{
+
 	}
 
     // 当たり判定用クラスの初期化

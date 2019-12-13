@@ -14,10 +14,14 @@
 #include "UIScreen.h"
 #include "UIManager.h"
 
-#include "imgui.h"
-#include "imgui_impl_opengl3.h"
+#include "imguiManager.h"
 
 Renderer* Renderer::renderer = nullptr;
+
+static void glfw_error_callback(int error, const char* description)
+{
+	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
+}
 
 void Renderer::SetParticleVertex()
 {
@@ -101,11 +105,6 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
         SDL_Log("Failed to create window: %s", SDL_GetError());
         return false;
     }
-
-	if (ImGui_ImplOpenGL3_Init())
-	{
-		//return false;
-	}
 
 	sdlRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (!sdlRenderer)
