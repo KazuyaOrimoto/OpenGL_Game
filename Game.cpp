@@ -53,7 +53,7 @@ Game::~Game()
 bool Game::Initialize()
 {
 	// SDLの初期化
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER) != 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER | SDL_INIT_TIMER) != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
@@ -69,7 +69,7 @@ bool Game::Initialize()
 	}
 
 	imguiManager::CreateInstance();
-	if (!IMGUI_MANAGER->Initialize())
+	if (!IMGUI_MANAGER->Initialize(RENDERER->GetSDLWindow(),RENDERER->GetContext(),RENDERER->GetScreenWidth(),RENDERER->GetScreenHeight()))
 	{
 		SDL_Log("Failed to initialize imgui");
 		return false;
@@ -153,6 +153,7 @@ void Game::GameLoop()
 		UpdateGame();
 		GenerateOutput();
 		fps->Update();
+		IMGUI_MANAGER->Update();
 	}
 }
 
@@ -241,6 +242,8 @@ void Game::ProcessInput()
 			break;
 		}
 	}
+
+	IMGUI_MANAGER->SetSDLEvent(event);
 
 	inputSystem->Update();
 	const InputState& state = inputSystem->GetState();

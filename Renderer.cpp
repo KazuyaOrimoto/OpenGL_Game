@@ -106,7 +106,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 		printf("SDLRendererの作成に失敗 : %s", SDL_GetError());
 		return false;
 	}
-
+	
     // OpenGLのコンテキストを作成
     context = SDL_GL_CreateContext(window);
 
@@ -290,7 +290,7 @@ void Renderer::Draw()
 		ui->Draw(spriteShader);
 	}
 
-	IMGUI_MANAGER->Update();
+	IMGUI_MANAGER->Draw();
 
 	SDL_GL_SwapWindow(window);
 

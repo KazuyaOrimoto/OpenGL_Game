@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SDL.h>
 #include "imgui/imgui.h"
 
 #define IMGUI_MANAGER imguiManager::GetInstance()
@@ -30,13 +31,14 @@ public:
 	@brief  初期化処理
 	@return true : 成功 , false : 失敗
 	*/
-	bool Initialize();
+	bool Initialize(SDL_Window* _window, SDL_GLContext _context, float _screenWidth, float _screenHeight);
 
 	/**
 	@brief  終了処理
 	*/
 	void Shutdown();
 
+	void SetSDLEvent(SDL_Event _event) { event = _event; }
 
 	void Update();
 
@@ -47,6 +49,12 @@ private:
 	struct ImVec4 clearColor;
 	bool show_demo_window;
 	bool show_another_window;
-	struct SDL_Window* window;
+	SDL_Window* window;
+	SDL_Event event;
+	//スクリーンの横幅
+	float screenWidth;
+	//スクリーンの縦幅
+	float screenHeight;
+	char str[128];
 };
 

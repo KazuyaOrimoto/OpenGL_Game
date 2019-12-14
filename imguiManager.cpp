@@ -9,8 +9,7 @@
 #include "imgui/imgui_impl_sdl.h"
 #include "imgui/imgui_impl_opengl3.h"
 #include <stdio.h>
-#include <SDL.h>
-#include "Renderer.h"
+#include <string>
 
 imguiManager* imguiManager::imgui = nullptr;
 
@@ -44,11 +43,13 @@ void imguiManager::DeleteInstance()
 	}
 }
 
-bool imguiManager::Initialize()
+bool imguiManager::Initialize(SDL_Window* _window, SDL_GLContext _context, float _screenWidth, float _screenHeight)
 {
 	const char* glsl_version = "#version 130";
-	window = RENDERER->GetSDLWindow();
-	SDL_GL_MakeCurrent(window, RENDERER->GetContext());
+	window = _window;
+	screenWidth = _screenWidth;
+	screenHeight = _screenHeight;
+	SDL_GL_MakeCurrent(window, _context);
 
 	// Setup SDL
 	// (Some versions of SDL before <2.0.10 appears to have performance/stalling issues on a minority of Windows systems,
@@ -56,7 +57,7 @@ bool imguiManager::Initialize()
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
 	{
 		printf("Error: %s\n", SDL_GetError());
-		return -1;
+		return false;
 	}
 
 	// Initialize OpenGL loader
@@ -86,7 +87,7 @@ bool imguiManager::Initialize()
 	//ImGui::StyleColorsClassic();
 
 	// Setup Platform/Renderer bindings
-	ImGui_ImplSDL2_InitForOpenGL(window, RENDERER->GetContext());
+	ImGui_ImplSDL2_InitForOpenGL(window, _context);
 	ImGui_ImplOpenGL3_Init(glsl_version);
 
 	// Load Fonts
@@ -105,8 +106,8 @@ bool imguiManager::Initialize()
 	//IM_ASSERT(font != NULL);
 
 	// Our state
-	bool show_demo_window = true;
-	bool show_another_window = false;
+	show_demo_window = true;
+	show_another_window = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 	// Main loop
@@ -124,11 +125,14 @@ void imguiManager::Shutdown()
 
 void imguiManager::Update()
 {
-	// Poll and handle events (inputs, window resize, etc.)
-	// You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-	// - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
-	// - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
-	// Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
+	ImGui_ImplSDL2_ProcessEvent(&event);
+
+	
+
+}
+
+void imguiManager::Draw()
+{
 
 	// Start the Dear ImGui frame
 	ImGui_ImplOpenGL3_NewFrame();
@@ -144,9 +148,11 @@ void imguiManager::Update()
 		static float f = 0.0f;
 		static int counter = 0;
 
-		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("Debug Window");                          // Create a window called "Hello, world!" and append into it.
 
 		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		
+		ImGui::InputText("paramater", str , IM_ARRAYSIZE(str));
 		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		ImGui::Checkbox("Another Window", &show_another_window);
 
@@ -171,14 +177,7 @@ void imguiManager::Update()
 		ImGui::End();
 	}
 
-	// Rendering
-
 	ImGui::Render();
-	glViewport(0, 0, RENDERER->GetScreenWidth(), RENDERER->GetScreenHeight());
+	glViewport(0, 0, static_cast<GLsizei>(screenWidth), static_cast<GLsizei>(screenHeight));
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-}
-
-void imguiManager::Draw()
-{
-
 }
