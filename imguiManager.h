@@ -1,5 +1,7 @@
 #pragma once
 
+#include "imgui/imgui.h"
+
 #define IMGUI_MANAGER imguiManager::GetInstance()
 
 class imguiManager
@@ -30,8 +32,21 @@ public:
 	*/
 	bool Initialize();
 
+	/**
+	@brief  èIóπèàóù
+	*/
+	void Shutdown();
+
+
+	void Update();
+
 
 private:
 	static imguiManager* imgui;
+	struct ImVec4 clearColor;
+	bool show_demo_window;
+	bool show_another_window;
+	struct SDL_Window* window;
+	struct ImGuiIO* io;
 };
 

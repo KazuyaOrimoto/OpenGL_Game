@@ -68,6 +68,13 @@ bool Game::Initialize()
 		return false;
 	}
 
+	//imguiManager::CreateInstance();
+	//if (!IMGUI_MANAGER->Initialize())
+	//{
+	//	SDL_Log("Failed to initialize imgui");
+	//	return false;
+	//}
+
     // 入力管理クラスの初期化
 	inputSystem = new InputSystem();
 	if (!inputSystem->Initialize())
@@ -83,11 +90,7 @@ bool Game::Initialize()
 		return false;
 	}
 
-	imguiManager::CreateInstance();
-	if (IMGUI_MANAGER->Initialize())
-	{
 
-	}
 
     // 当たり判定用クラスの初期化
 	PhysicsWorld::CreateInstance();
@@ -130,6 +133,7 @@ void Game::Termination()
 	ObstacleManager::DeleteInstance();
     SceneManager::DeleteInstance();
 	UIManager::DeleteInstance();
+	imguiManager::DeleteInstance();
     // クラスの解放処理
     delete fps;
     delete inputSystem;
@@ -149,6 +153,7 @@ void Game::GameLoop()
 		UpdateGame();
 		GenerateOutput();
 		fps->Update();
+		//IMGUI_MANAGER->Update();
 	}
 }
 
@@ -161,6 +166,11 @@ void Game::UnloadData()
 	{
 		RENDERER->UnloadData();
 		RENDERER->Shutdown();
+	}
+
+	if (IMGUI_MANAGER != nullptr)
+	{
+		IMGUI_MANAGER->Shutdown();
 	}
 }
 

@@ -67,8 +67,6 @@ public:
 	*/
     void Draw();
 
-
-
 	/**
 	@brief  スプライトの追加
 	@param	追加するSpriteComponentクラスのポインタ
@@ -156,6 +154,10 @@ public:
 	Matrix4 GetProjectionMatrix() { return projection; }
 
 	SDL_Renderer* GetSDLRenderer() { return sdlRenderer; }
+
+	SDL_Window* GetSDLWindow() { return window; }
+
+	SDL_GLContext GetContext() { return context; }
 
 private:
 	//コンストラクタ、デストラクタの隠蔽

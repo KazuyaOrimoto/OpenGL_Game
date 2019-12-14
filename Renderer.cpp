@@ -14,14 +14,7 @@
 #include "UIScreen.h"
 #include "UIManager.h"
 
-#include "imguiManager.h"
-
 Renderer* Renderer::renderer = nullptr;
-
-static void glfw_error_callback(int error, const char* description)
-{
-	fprintf(stderr, "Glfw Error %d: %s\n", error, description);
-}
 
 void Renderer::SetParticleVertex()
 {

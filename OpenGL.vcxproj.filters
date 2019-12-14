@@ -220,6 +220,9 @@
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="imguiManager.cpp" />
+    <ClCompile Include="imgui\imgui_impl_sdl.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -449,6 +452,9 @@
       <Filter>imgui</Filter>
     </ClInclude>
     <ClInclude Include="imguiManager.h" />
+    <ClInclude Include="imgui\imgui_impl_sdl.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

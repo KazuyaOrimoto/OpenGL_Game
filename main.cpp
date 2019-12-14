@@ -19,17 +19,19 @@
 int main(int argc, char** argv)
 {
     //ゲームクラスの定義
-	Game game;
+	Game* game;
+
+	game = new Game();
 
     //ゲームクラスの初期化が成功したか
-	bool success = game.Initialize();
+	bool success = game->Initialize();
 	if (success)
 	{
-		game.GameLoop();
+		game->GameLoop();
 	}
 
     //ゲームクラスの終了処理
-	game.Termination();
+	game->Termination();
 
 	return 0;
 }
