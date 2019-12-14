@@ -68,12 +68,12 @@ bool Game::Initialize()
 		return false;
 	}
 
-	//imguiManager::CreateInstance();
-	//if (!IMGUI_MANAGER->Initialize())
-	//{
-	//	SDL_Log("Failed to initialize imgui");
-	//	return false;
-	//}
+	imguiManager::CreateInstance();
+	if (!IMGUI_MANAGER->Initialize())
+	{
+		SDL_Log("Failed to initialize imgui");
+		return false;
+	}
 
     // 入力管理クラスの初期化
 	inputSystem = new InputSystem();
@@ -153,7 +153,6 @@ void Game::GameLoop()
 		UpdateGame();
 		GenerateOutput();
 		fps->Update();
-		//IMGUI_MANAGER->Update();
 	}
 }
 

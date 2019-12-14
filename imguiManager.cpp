@@ -78,7 +78,6 @@ bool imguiManager::Initialize()
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	*io = ImGui::GetIO(); (void)io;
 	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
@@ -173,9 +172,13 @@ void imguiManager::Update()
 	}
 
 	// Rendering
+
 	ImGui::Render();
 	glViewport(0, 0, RENDERER->GetScreenWidth(), RENDERER->GetScreenHeight());
-	glClear(GL_COLOR_BUFFER_BIT);
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	SDL_GL_SwapWindow(window);
+}
+
+void imguiManager::Draw()
+{
+
 }

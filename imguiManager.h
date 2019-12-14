@@ -40,6 +40,7 @@ public:
 
 	void Update();
 
+	void Draw();
 
 private:
 	static imguiManager* imgui;
@@ -47,6 +48,5 @@ private:
 	bool show_demo_window;
 	bool show_another_window;
 	struct SDL_Window* window;
-	struct ImGuiIO* io;
 };
 

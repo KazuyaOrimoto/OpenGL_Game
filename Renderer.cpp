@@ -13,6 +13,7 @@
 #include "Font.h"
 #include "UIScreen.h"
 #include "UIManager.h"
+#include "imguiManager.h"
 
 Renderer* Renderer::renderer = nullptr;
 
@@ -289,9 +290,9 @@ void Renderer::Draw()
 		ui->Draw(spriteShader);
 	}
 
+	IMGUI_MANAGER->Update();
 
 	SDL_GL_SwapWindow(window);
-
 
 }
 
