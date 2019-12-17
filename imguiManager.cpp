@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <string>
 
+#include "GameObject.h"
+
 imguiManager* imguiManager::imgui = nullptr;
 
 static void glfw_error_callback(int error, const char* description)

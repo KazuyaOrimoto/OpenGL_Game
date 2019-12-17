@@ -20,7 +20,7 @@ ObstacleObject::ObstacleObject(int _i)
 	{
 		mapLoder = new ObstacleMapLoder();
 	}
-    player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
+    player = GameObject::FindGameObject(Tag::Player);
     CreateObstacle(5000.0f + _i * StaticObstacle::ObstacleDistanceNum);
 	i = _i;
 }

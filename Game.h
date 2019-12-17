@@ -91,6 +91,16 @@ private:
 
 	void HandleKeyPress(int key);
 
+	/**
+	@brief  ゲームオブジェクトのアップデート処理
+	*/
+	friend void UpdateGameObjects(float _deltaTime);
+
+	/**
+	@brief  ゲームオブジェクトの入力処理
+	*/
+	friend void ProcessInputs(const struct InputState& _state);
+
 //===================== メンバ変数 ======================//
 
 	FPS*				fps;				// FPS計測クラス

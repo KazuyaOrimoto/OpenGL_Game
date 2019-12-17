@@ -20,7 +20,7 @@ void JumpAnimation3::Update(float deltaTime)
 {
 	//ポジションのアニメーション
 	Vector3 playerPos = owner->GetParent()->GetPosition();
-	Vector3 nextPos = playerPos + owner->GetUp() * 20.0f * (20 - animationCount);
+	Vector3 nextPos = playerPos + owner->GetUp() * 20.0f * static_cast<float>(20 - animationCount);
 	owner->SetPosition(nextPos);
 
 	//回転のアニメーション

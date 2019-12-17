@@ -31,6 +31,10 @@ enum State
 
 class GameObject
 {
+#ifdef _DEBUG
+	friend class imguiManager;
+#endif // _DEBUG
+
 public:
 	/**
 	@param	ゲームクラスのポインタ
@@ -197,5 +201,43 @@ public:
 	@return	オブジェクトのタグ
 	*/
 	Tag GetTag() const { return tag; }
+
+	static GameObject* FindGameObject(Tag _tag);
+	static std::vector<GameObject*> FindGameObjects(Tag _tag);
+
+	/**
+	@brief  ゲームオブジェクトの追加
+	@param	追加するGameObjectクラスのポインタ
+	*/
+	static void AddGameObject(GameObject* _object);
+
+	/**
+	@brief  ゲームオブジェクトの削除
+	@param	削除するGameObjectクラスのポインタ
+	*/
+	static void RemoveGameObject(GameObject* _object);
+
+private:
+
+	/**
+	@brief  ゲームオブジェクトのアップデート処理
+	*/
+	friend void UpdateGameObjects(float _deltaTime);
+
+	/**
+	@brief  ゲームオブジェクトの入力処理
+	*/
+	friend void ProcessInputs(const InputState& _state);
+
+
+
+	//ゲームオブジェクトのポインタの可変長コンテナ
+	static std::vector<GameObject*> gameObjects;
+	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
+	static std::vector<GameObject*> pendingGameObjects;
+
+	//Update中かどうか
+	static bool updatingGameObject;
+
 };
 

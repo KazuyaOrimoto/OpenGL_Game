@@ -34,7 +34,7 @@ SlidingObject::SlidingObject()
 	tag = Tag::Obstacle;
 
 	state = Paused;
-	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
+	player = GameObject::FindGameObject(Tag::Player);
 }
 
 SlidingObject::~SlidingObject()

@@ -16,7 +16,7 @@
 #include "Renderer.h"
 #include "InputSystem.h"
 #include "PhysicsWorld.h"
-#include "GameObjectManager.h"
+//#include "GameObjectManager.h"
 #include "GameObjectCreater.h"
 #include "ObstacleManager.h"
 #include "SceneManager.h"
@@ -25,6 +25,7 @@
 #include "UIScreen.h"
 #include <SDL_ttf.h>
 #include <string>
+#include "GameObject.h"
 
 #include "imguiManager.h"
 
@@ -99,7 +100,7 @@ bool Game::Initialize()
 	fps = new FPS();
 
     // ゲームオブジェクト管理クラスの初期化
-    GameObjectManager::CreateInstance();
+    //GameObjectManager::CreateInstance();
 
     // ゲームオブジェクト生成クラスの初期化
     GameObjectCreater::CreateInstance();
@@ -126,7 +127,7 @@ void Game::Termination()
     // データのアンロード
 	UnloadData();
     // シングルトンクラスの解放処理
-    GameObjectManager::DeleteInstance();
+    //GameObjectManager::DeleteInstance();
     GameObjectCreater::DeleteInstance();
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
@@ -250,7 +251,7 @@ void Game::ProcessInput()
 
 	if (gameState == Game::EGameplay)
 	{
-		GAME_OBJECT_MANAGER->ProcessInput(state);
+		ProcessInputs(state);
 	}
 	else if (!UI_MANAGER->UIEmpty())
 	{
@@ -274,5 +275,35 @@ void Game::UpdateGame()
 	float deltaTime = fps->GetDeltaTime();
 	
 	UI_MANAGER->Update(deltaTime);
-	GAME_OBJECT_MANAGER->UpdateGameObject(deltaTime);
+	UpdateGameObjects(deltaTime);
+}
+
+void UpdateGameObjects(float _deltaTime)
+{
+	if (Game::GetState() == Game::GameState::EGameplay)
+	{
+		GameObject::updatingGameObject = true;
+		for (auto gameObject : GameObject::gameObjects)
+		{
+			gameObject->Update(_deltaTime);
+		}
+		GameObject::updatingGameObject = false;
+
+		for (auto pending : GameObject::pendingGameObjects)
+		{
+			pending->ComputeWorldTransform();
+			GameObject::gameObjects.emplace_back(pending);
+		}
+		GameObject::pendingGameObjects.clear();
+	}
+}
+
+void ProcessInputs(const InputState & _state)
+{
+	GameObject::updatingGameObject = true;
+	for (auto gameObject : GameObject::gameObjects)
+	{
+		gameObject->ProcessInput(_state);
+	}
+	GameObject::updatingGameObject = false;
 }

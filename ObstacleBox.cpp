@@ -47,7 +47,7 @@ ObstacleBox::ObstacleBox()
 	tag = Tag::Obstacle;
 
 	state = Paused;
-	player = GAME_OBJECT_MANAGER->FindGameObject(Tag::Player);
+	player = GameObject::FindGameObject(Tag::Player);
 }
 
 ObstacleBox::~ObstacleBox()
@@ -78,8 +78,8 @@ void ObstacleBox::UseObstacle()
 	meshComp->SetVisible(true);
 	state = Active;
 	boxCollider->CollisionActive();
-	GAME_OBJECT_MANAGER->RemoveGameObject(this);
-	GAME_OBJECT_MANAGER->AddGameObject(this);
+	GameObject::RemoveGameObject(this);
+	GameObject::AddGameObject(this);
 }
 
 void ObstacleBox::UpdateGameObject(float _deltaTime)
