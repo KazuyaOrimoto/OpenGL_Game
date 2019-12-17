@@ -17,7 +17,7 @@ MeshComponent::MeshComponent(GameObject* _owner, ShaderType _shaderType)
 	, visible(true)
 	, shaderName(_shaderType)
 {
-	RENDERER->AddMeshComponent(this);
+	//RENDERER->AddMeshComponent(this);
 }
 
 MeshComponent::~MeshComponent()

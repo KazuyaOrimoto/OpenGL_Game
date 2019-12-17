@@ -365,8 +365,7 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 	}
 	//同じ名前のシェーダーが見つからなかったとき
 	ShaderToMesh newShaderToMesh;
-	auto a = _meshComponent->GetMesh()->GetShaderName();
-	newShaderToMesh.shaderName = a;
+	newShaderToMesh.shaderName = _meshComponent->GetMesh()->GetShaderName();
 	newShaderToMesh.shader = new Shader();
 	if (!newShaderToMesh.shader->Load("Shaders/" + newShaderToMesh.shaderName + ".vert", "Shaders/" + newShaderToMesh.shaderName + ".frag"))
 	{

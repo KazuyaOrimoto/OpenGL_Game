@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Component.h"
+#include "Renderer.h"
 
 class GameObject;
 class Shader;
@@ -32,7 +33,7 @@ public:
 	@brief　メッシュコンポーネントが使うMeshの設定
 	@param	設定するMeshクラスのポインタ
 	*/
-    virtual void SetMesh(Mesh* _mesh) { mMesh = _mesh; }
+    virtual void SetMesh(Mesh* _mesh) { mMesh = _mesh; RENDERER->AddMeshComponent(this);}
 
 	virtual Mesh* GetMesh() { return mMesh; }
 
