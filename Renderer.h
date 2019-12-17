@@ -28,6 +28,14 @@ class Shader;
 class VertexArray;
 class ParticleComponent;
 
+//シェーダーとメッシュを紐づけるための構造体
+struct ShaderToMesh
+{
+	std::string shaderName;
+	Shader* shader;
+	std::vector<MeshComponent*> meshComponentArray;
+};
+
 class Renderer
 {
 public:
@@ -218,6 +226,8 @@ private:
     Shader* basicShader;
 	Shader* particleShader;
 	VertexArray* particleVertex;   // パーティクル用頂点定義
+
+	std::vector<ShaderToMesh> shaderToMeshArray;
 
     //ビュー行列
     Matrix4 view;

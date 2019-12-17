@@ -165,6 +165,11 @@ void Renderer::Shutdown()
 		gaussianTexture->Unload();
 		delete gaussianTexture;
 	}
+	while (!shaderToMeshArray.empty())
+	{
+		delete shaderToMeshArray.back().shader;
+	} 
+
     delete spriteVerts;
     spriteShader->Unload();
     delete spriteShader;
@@ -348,14 +353,38 @@ void Renderer::RemoveParticle(ParticleComponent * _particleComponent)
 */
 void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 {
-    if (_meshComponent->GetShaderName() == DEFAULT)
-    {
-        meshComponents.emplace_back(_meshComponent);
-    }
-    else if (_meshComponent->GetShaderName() == WALL)
-    {
-        basicMeshComponents.emplace_back(_meshComponent);
-    }
+	//同じ名前のシェーダーの配列を探す
+	for (auto itr : shaderToMeshArray)
+	{
+		if (itr.shaderName == _meshComponent->GetMesh()->GetShaderName())
+		{
+			//同じ名前のシェーダーの配列にメッシュを登録する
+			itr.meshComponentArray.emplace_back(_meshComponent);
+			return;
+		}
+	}
+	//同じ名前のシェーダーが見つからなかったとき
+	ShaderToMesh newShaderToMesh;
+	auto a = _meshComponent->GetMesh()->GetShaderName();
+	newShaderToMesh.shaderName = a;
+	newShaderToMesh.shader = new Shader();
+	if (!newShaderToMesh.shader->Load("Shaders/" + newShaderToMesh.shaderName + ".vert", "Shaders/" + newShaderToMesh.shaderName + ".frag"))
+	{
+		return;
+	}
+	newShaderToMesh.meshComponentArray.emplace_back(_meshComponent);
+	shaderToMeshArray.emplace_back(newShaderToMesh);
+	auto viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
+	newShaderToMesh.shader->SetMatrixUniform("uViewProj", viewProj);
+
+    //if (_meshComponent->GetShaderName() == DEFAULT)
+    //{
+    //    meshComponents.emplace_back(_meshComponent);
+    //}
+    //else if (_meshComponent->GetShaderName() == WALL)
+    //{
+    //    basicMeshComponents.emplace_back(_meshComponent);
+    //}
 }
 
 /**
@@ -364,7 +393,19 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 */
 void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 {
-    if (_meshComponent->GetShaderName() == DEFAULT)
+	//同じ名前のシェーダーの配列を探す
+	for (auto itr : shaderToMeshArray)
+	{
+		if (itr.shaderName == _meshComponent->GetMesh()->GetShaderName())
+		{
+			//同じ名前のシェーダーの配列からメッシュを削除する
+			auto deleteMesh = std::find(itr.meshComponentArray.begin(), itr.meshComponentArray.end(), _meshComponent);
+			itr.meshComponentArray.erase(deleteMesh);
+			return;
+		}
+	}
+
+    /*if (_meshComponent->GetShaderName() == DEFAULT)
     {
         auto iter = std::find(meshComponents.begin(), meshComponents.end(), _meshComponent);
         meshComponents.erase(iter);
@@ -373,7 +414,7 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
     {
         auto iter = std::find(basicMeshComponents.begin(), basicMeshComponents.end(), _meshComponent);
         basicMeshComponents.erase(iter);
-    }
+    }*/
 }
 
 /**
@@ -454,7 +495,7 @@ bool Renderer::LoadShaders()
 
     spriteShader->SetActive();
     // ビュー行列の設定
-    Matrix4 viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
+    auto viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
     spriteShader->SetMatrixUniform("uViewProj", viewProj);
 
 	fullShader = new Shader();
@@ -628,31 +669,42 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 	glEnable(GL_DEPTH_TEST);
 	//アルファブレンディングを無効にする
 	glDisable(GL_BLEND);
-	// 基本的なメッシュシェーダーをアクティブにする
-	meshShader->SetActive();
-	// ビュー射影行列を更新する
-	meshShader->SetMatrixUniform("uViewProj", view * projection);
-	// シェーダーに渡すライティング情報を更新する
-	SetLightUniforms(meshShader, view);
-	// すべてのメッシュの描画
-	for (auto mc : meshComponents)
+	for (auto itr : shaderToMeshArray)
 	{
-		if (mc->GetVisible())
+		itr.shader->SetActive();
+		itr.shader->SetMatrixUniform("uViewProj", view * projection);
+		SetLightUniforms(itr.shader, view);
+		for (auto meshComp : itr.meshComponentArray)
 		{
-			mc->Draw(meshShader);
+			meshComp->Draw(itr.shader);
 		}
 	}
 
-	basicShader->SetActive();
-	basicShader->SetMatrixUniform("uViewProj", view * projection);
+	//// 基本的なメッシュシェーダーをアクティブにする
+	//meshShader->SetActive();
+	//// ビュー射影行列を更新する
+	//meshShader->SetMatrixUniform("uViewProj", view * projection);
+	//// シェーダーに渡すライティング情報を更新する
+	//SetLightUniforms(meshShader, view);
+	//// すべてのメッシュの描画
+	//for (auto mc : meshComponents)
+	//{
+	//	if (mc->GetVisible())
+	//	{
+	//		mc->Draw(meshShader);
+	//	}
+	//}
 
-	for (auto mc : basicMeshComponents)
-	{
-		if (mc->GetVisible())
-		{
-			mc->Draw(basicShader);
-		}
-	}
+	//basicShader->SetActive();
+	//basicShader->SetMatrixUniform("uViewProj", view * projection);
+
+	//for (auto mc : basicMeshComponents)
+	//{
+	//	if (mc->GetVisible())
+	//	{
+	//		mc->Draw(basicShader);
+	//	}
+	//}
 
 	DrawParticle();
 
