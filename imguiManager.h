@@ -44,11 +44,16 @@ public:
 
 	void Draw();
 
+	void ShowGameObjects();
+
+	void ShowGameObject(class GameObject& _gameObject);
+
 private:
 	static imguiManager* imgui;
 	struct ImVec4 clearColor;
 	bool show_demo_window;
 	bool show_another_window;
+	bool showGameObjectsWindow;
 	SDL_Window* window;
 	SDL_Event event;
 	//ƒXƒNƒŠ[ƒ“‚Ì‰¡•

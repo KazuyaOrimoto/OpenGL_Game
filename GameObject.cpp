@@ -20,6 +20,7 @@ GameObject::GameObject()
 	, rotation(Quaternion::Identity)
 	, recomputeWorldTransform(true)
 	, parent(nullptr)
+	, name("GameObject")
 {
 	GameObject::AddGameObject(this);
 }

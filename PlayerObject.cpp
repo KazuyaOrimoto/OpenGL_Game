@@ -36,6 +36,8 @@ PlayerObject::PlayerObject()
 
     tag = Tag::Player;
 	texture = RENDERER->GetTexture("assets/fire.png");
+
+	name = "Player";
 }
 
 /**

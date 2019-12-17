@@ -31,10 +31,6 @@ enum State
 
 class GameObject
 {
-#ifdef _DEBUG
-	friend class imguiManager;
-#endif // _DEBUG
-
 public:
 	/**
 	@param	ゲームクラスのポインタ
@@ -105,6 +101,8 @@ protected:
 	std::vector <GameObject*>childObjects;
 	//親のゲームオブジェクト
 	GameObject* parent;
+
+	std::string name;
 
 public:
 	//-----------------------------------------------------------------------------
@@ -229,8 +227,6 @@ private:
 	*/
 	friend void ProcessInputs(const InputState& _state);
 
-
-
 	//ゲームオブジェクトのポインタの可変長コンテナ
 	static std::vector<GameObject*> gameObjects;
 	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
@@ -238,6 +234,12 @@ private:
 
 	//Update中かどうか
 	static bool updatingGameObject;
+
+private:
+#ifdef _DEBUG
+		friend class imguiManager;
+		bool view;
+#endif // _DEBUG
 
 };
 

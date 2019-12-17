@@ -110,6 +110,7 @@ bool imguiManager::Initialize(SDL_Window* _window, SDL_GLContext _context, float
 	// Our state
 	show_demo_window = true;
 	show_another_window = false;
+	showGameObjectsWindow = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 	// Main loop
@@ -157,6 +158,7 @@ void imguiManager::Draw()
 		ImGui::InputText("paramater", str , IM_ARRAYSIZE(str));
 		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		ImGui::Checkbox("Another Window", &show_another_window);
+		ImGui::Checkbox("GameObjects Window", &showGameObjectsWindow);
 
 		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
 
@@ -179,7 +181,38 @@ void imguiManager::Draw()
 		ImGui::End();
 	}
 
+	if (showGameObjectsWindow)
+	{
+		ShowGameObjects();
+	}
+
 	ImGui::Render();
 	glViewport(0, 0, static_cast<GLsizei>(screenWidth), static_cast<GLsizei>(screenHeight));
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void imguiManager::ShowGameObjects()
+{
+	ImGui::Begin("GameObjects Window",&showGameObjectsWindow);
+	for (auto itr : GameObject::gameObjects)
+	{
+		
+		ImGui::Checkbox(itr->name.c_str(), &itr->view);
+		if (itr->view)
+		{
+			ShowGameObject(*itr);
+		}
+	}
+	ImGui::End();
+}
+
+void imguiManager::ShowGameObject(GameObject&_gameObject)
+{
+	ImGui::Begin(_gameObject.name.c_str(), &_gameObject.view);
+
+	ImGui::Text("Position   :   x = %f, y = %f, z = %f", _gameObject.position.x, _gameObject.position.y, _gameObject.position.z);
+	ImGui::Text("Rotation   :   x = %f, y = %f, z = %f,w = %f", _gameObject.rotation.x, _gameObject.rotation.y, _gameObject.rotation.z, _gameObject.rotation.w);
+
+
+	ImGui::End();
 }
