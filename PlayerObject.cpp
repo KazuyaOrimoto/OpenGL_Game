@@ -35,7 +35,7 @@ PlayerObject::PlayerObject()
     SetScale(10.0f);
 
     tag = Tag::Player;
-	texture = RENDERER->GetTexture("assets/fire.png");
+	texture = RENDERER->GetTexture("Assets/fire.png");
 
 	name = "Player";
 }

@@ -165,10 +165,10 @@ void Renderer::Shutdown()
 		gaussianTexture->Unload();
 		delete gaussianTexture;
 	}
-	while (!shaderToMeshArray.empty())
+	for (auto itr : shaderToMeshArray)
 	{
-		delete shaderToMeshArray.back().shader;
-	} 
+		delete itr.shader;
+	}
 
     delete spriteVerts;
     spriteShader->Unload();
