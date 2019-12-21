@@ -140,10 +140,16 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 
 	CreateParticleVerts();
 
+	CreateScreenVerts();
+
 	scaleMat = Matrix4::CreateScale(
 		static_cast<float>(screenWidth),
 		static_cast<float>(-screenHeight),
 		1.0f);
+
+	// カリング
+	glFrontFace(GL_CCW);
+	glEnable(GL_CULL_FACE);
 
     return true;
 }
@@ -210,6 +216,7 @@ void Renderer::UnloadData()
 */
 void Renderer::Draw()
 {
+
 	//FBOに標準の画面を描画
 	Draw3DScene(fbo,view,projection,1.0f);
 
@@ -230,7 +237,7 @@ void Renderer::Draw()
 	// Disable depth testing for the global lighting pass
 	glDisable(GL_DEPTH_TEST);
 	gaussianShader->SetActive();
-	spriteVerts->SetActive();
+	screenVertex->SetActive();
 	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
 	// Activate sprite verts quad
 	fboTexture->SetActive();
@@ -250,7 +257,7 @@ void Renderer::Draw()
 	glDepthMask(GL_FALSE);
 
 	fullShader->SetActive();
-	spriteVerts->SetActive();
+	screenVertex->SetActive();
 	fullShader->SetMatrixUniform("uWorldTransform", scaleMat);
 	// Activate sprite verts quad
 	fboTexture->SetActive();
@@ -263,7 +270,7 @@ void Renderer::Draw()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	fullShader->SetActive();
-	spriteVerts->SetActive();
+	screenVertex->SetActive();
 	fullShader->SetMatrixUniform("uWorldTransform",scaleMat);
 	// Activate sprite verts quad
 	gaussianTexture->SetActive();
@@ -283,6 +290,7 @@ void Renderer::Draw()
 	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
 	spriteShader->SetActive();
 	spriteVerts->SetActive();
+	//glDisable(GL_CULL_FACE);
 	// すべてのスプライトの描画
 	for (auto sprite : sprites)
 	{
@@ -295,7 +303,7 @@ void Renderer::Draw()
 		ui->Draw(spriteShader);
 	}
 
-	//IMGUI_MANAGER->Draw();
+	IMGUI_MANAGER->Draw();
 
 	SDL_GL_SwapWindow(window);
 
@@ -558,10 +566,10 @@ void Renderer::CreateSpriteVerts()
         -0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // 左下
     };
 
-    unsigned int indices[] = {
-        0, 1, 2,
-        2, 3, 0
-    };
+	unsigned int indices[] = {
+	0, 2, 1,
+	2, 0, 3
+	};
 
     spriteVerts = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
@@ -576,11 +584,28 @@ void Renderer::CreateParticleVerts()
 		-0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 0.f, 1.f  // bottom left
 	};
 
+
 	unsigned int indices[] = {
-		0, 2, 1,
-		2, 0, 3
+	0, 2, 1,
+	2, 0, 3
 	};
 	particleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
+}
+
+void Renderer::CreateScreenVerts()
+{
+	float vertices[] = {
+		-0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // 左上
+		0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f, // 右上
+		0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // 右下
+		-0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // 左下
+	};
+
+	unsigned int indices[] = {
+	0, 1, 2,
+	2, 3, 0
+	};
+	screenVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
 void Renderer::DrawParticle()

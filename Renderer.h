@@ -185,6 +185,7 @@ private:
 	*/
     void CreateSpriteVerts();
 	void CreateParticleVerts();
+	void CreateScreenVerts();
 
 	void DrawParticle();
 
@@ -226,6 +227,7 @@ private:
     Shader* basicShader;
 	Shader* particleShader;
 	VertexArray* particleVertex;   // パーティクル用頂点定義
+	VertexArray* screenVertex;
 
 	std::vector<ShaderToMesh*> shaderToMeshArray;
 
