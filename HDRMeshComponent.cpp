@@ -20,5 +20,6 @@ HDRMeshComponent::~HDRMeshComponent()
 void HDRMeshComponent::Draw(Shader * _shader)
 {
 	_shader->SetFloatUniform("uIntensity", intensity);
+	_shader->SetVectorUniform("uHDRColor", hdrColor);
 	MeshComponent::Draw(_shader);
 }

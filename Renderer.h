@@ -257,7 +257,7 @@ private:
 
 	//テクスチャレンダリング用
 	unsigned int fbo;
-	unsigned int gaussian;
+	//unsigned int gaussian;
 	class Texture* fboTexture;
 	class Texture* gaussianTexture;
 	Matrix4 fboView;

@@ -167,7 +167,7 @@ void Renderer::Shutdown()
 	}
 	if (gaussianTexture != nullptr)
 	{
-		glDeleteFramebuffers(1, &gaussian);
+		//glDeleteFramebuffers(1, &gaussian);
 		gaussianTexture->Unload();
 		delete gaussianTexture;
 	}
@@ -220,28 +220,28 @@ void Renderer::Draw()
 	//FBOに標準の画面を描画
 	Draw3DScene(fbo,view,projection,1.0f);
 
-	//ガウスぼかし用の画面
-	glBindFramebuffer(GL_FRAMEBUFFER, gaussian);
+	////ガウスぼかし用の画面
+	//glBindFramebuffer(GL_FRAMEBUFFER, gaussian);
 
-	// Set viewport size based on scale
-	glViewport(0, 0,
-		static_cast<int>(screenWidth * (1.0f / num)),
-		static_cast<int>(screenHeight * (1.0f / num))
-	);
+	//// Set viewport size based on scale
+	//glViewport(0, 0,
+	//	static_cast<int>(screenWidth * (1.0f / num)),
+	//	static_cast<int>(screenHeight * (1.0f / num))
+	//);
 
-	// Clear color buffer/depth buffer
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glDepthMask(GL_TRUE);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//// Clear color buffer/depth buffer
+	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//glDepthMask(GL_TRUE);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Disable depth testing for the global lighting pass
-	glDisable(GL_DEPTH_TEST);
-	gaussianShader->SetActive();
-	screenVertex->SetActive();
-	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
-	// Activate sprite verts quad
-	fboTexture->SetActive();
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+	//// Disable depth testing for the global lighting pass
+	//glDisable(GL_DEPTH_TEST);
+	//gaussianShader->SetActive();
+	//screenVertex->SetActive();
+	//gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
+	//// Activate sprite verts quad
+	//fboTexture->SetActive();
+	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 	//標準フレームバッファ
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -256,12 +256,12 @@ void Renderer::Draw()
 	glDisable(GL_DEPTH_TEST);
 	glDepthMask(GL_FALSE);
 
-	fullShader->SetActive();
-	screenVertex->SetActive();
-	fullShader->SetMatrixUniform("uWorldTransform", scaleMat);
-	// Activate sprite verts quad
-	fboTexture->SetActive();
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+	//fullShader->SetActive();
+	//screenVertex->SetActive();
+	//fullShader->SetMatrixUniform("uWorldTransform", scaleMat);
+	//// Activate sprite verts quad
+	//fboTexture->SetActive();
+	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 	glViewport(0, 0,
 		static_cast<int>(screenWidth * num),
@@ -809,6 +809,39 @@ bool Renderer::CreateFBO()
 	fboTexture = new Texture();
 	fboTexture->CreateForRendering(width, height, GL_RGB);
 
+	// Attach mirror texture as the output target for the frame buffer
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, fboTexture->GetTextureID(), 0);
+
+	// Set the list of buffers to draw to for this frame buffer
+	//GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
+	//glDrawBuffers(1, drawBuffers);
+
+	// Make sure everything worked
+	//if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	//{
+	//	// If it didn't work, delete the framebuffer,
+	//	// unload/delete the texture and return false
+	//	glDeleteFramebuffers(1, &fbo);
+	//	fboTexture->Unload();
+	//	delete fboTexture;
+	//	fboTexture = nullptr;
+	//	return false;
+	//}
+
+	//glGenFramebuffers(1, &gaussian);
+	//glBindFramebuffer(GL_FRAMEBUFFER, gaussian);
+
+	// Create the texture we'll use for rendering
+	gaussianTexture = new Texture();
+	gaussianTexture->CreateForRendering(width, height, GL_RGB);
+
+	// Attach mirror texture as the output target for the frame buffer
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, gaussianTexture->GetTextureID(), 0);
+
+	// Set the list of buffers to draw to for this frame buffer
+	GLenum drawBuffers2[] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+	glNamedFramebufferDrawBuffers(fbo,2, drawBuffers2);
+
 	// Add a depth buffer to this target
 	GLuint depthBuffer;
 	glGenRenderbuffers(1, &depthBuffer);
@@ -816,45 +849,12 @@ bool Renderer::CreateFBO()
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
 
-	// Attach mirror texture as the output target for the frame buffer
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, fboTexture->GetTextureID(), 0);
-
-	// Set the list of buffers to draw to for this frame buffer
-	GLenum drawBuffers[] = { GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(1, drawBuffers);
-
 	// Make sure everything worked
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 	{
 		// If it didn't work, delete the framebuffer,
 		// unload/delete the texture and return false
 		glDeleteFramebuffers(1, &fbo);
-		fboTexture->Unload();
-		delete fboTexture;
-		fboTexture = nullptr;
-		return false;
-	}
-
-	glGenFramebuffers(1, &gaussian);
-	glBindFramebuffer(GL_FRAMEBUFFER, gaussian);
-
-	// Create the texture we'll use for rendering
-	gaussianTexture = new Texture();
-	gaussianTexture->CreateForRendering(width, height, GL_RGB);
-
-	// Attach mirror texture as the output target for the frame buffer
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, gaussianTexture->GetTextureID(), 0);
-
-	// Set the list of buffers to draw to for this frame buffer
-	GLenum drawBuffers2[] = { GL_COLOR_ATTACHMENT0 };
-	glDrawBuffers(1, drawBuffers2);
-
-	// Make sure everything worked
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-	{
-		// If it didn't work, delete the framebuffer,
-		// unload/delete the texture and return false
-		glDeleteFramebuffers(1, &gaussian);
 		gaussianTexture->Unload();
 		delete gaussianTexture;
 		gaussianTexture = nullptr;
