@@ -167,7 +167,7 @@ void Renderer::Shutdown()
 	}
 	for (auto itr : shaderToMeshArray)
 	{
-		delete itr.shader;
+		delete itr->shader;
 	}
 
     delete spriteVerts;
@@ -295,7 +295,7 @@ void Renderer::Draw()
 		ui->Draw(spriteShader);
 	}
 
-	IMGUI_MANAGER->Draw();
+	//IMGUI_MANAGER->Draw();
 
 	SDL_GL_SwapWindow(window);
 
@@ -356,25 +356,25 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 	//同じ名前のシェーダーの配列を探す
 	for (auto itr : shaderToMeshArray)
 	{
-		if (itr.shaderName == _meshComponent->GetMesh()->GetShaderName())
+		if (itr->shaderName == _meshComponent->GetMesh()->GetShaderName())
 		{
 			//同じ名前のシェーダーの配列にメッシュを登録する
-			itr.meshComponentArray.emplace_back(_meshComponent);
+			itr->meshComponentArray.emplace_back(_meshComponent);
 			return;
 		}
 	}
 	//同じ名前のシェーダーが見つからなかったとき
-	ShaderToMesh newShaderToMesh;
-	newShaderToMesh.shaderName = _meshComponent->GetMesh()->GetShaderName();
-	newShaderToMesh.shader = new Shader();
-	if (!newShaderToMesh.shader->Load("Shaders/" + newShaderToMesh.shaderName + ".vert", "Shaders/" + newShaderToMesh.shaderName + ".frag"))
+	ShaderToMesh* newShaderToMesh = new ShaderToMesh;
+	newShaderToMesh->shaderName = _meshComponent->GetMesh()->GetShaderName();
+	newShaderToMesh->shader = new Shader();
+	if (!newShaderToMesh->shader->Load("Shaders/" + newShaderToMesh->shaderName + ".vert", "Shaders/" + newShaderToMesh->shaderName + ".frag"))
 	{
 		return;
 	}
-	newShaderToMesh.meshComponentArray.emplace_back(_meshComponent);
+	newShaderToMesh->meshComponentArray.emplace_back(_meshComponent);
 	shaderToMeshArray.emplace_back(newShaderToMesh);
 	auto viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
-	newShaderToMesh.shader->SetMatrixUniform("uViewProj", viewProj);
+	newShaderToMesh->shader->SetMatrixUniform("uViewProj", viewProj);
 
     //if (_meshComponent->GetShaderName() == DEFAULT)
     //{
@@ -395,11 +395,11 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 	//同じ名前のシェーダーの配列を探す
 	for (auto itr : shaderToMeshArray)
 	{
-		if (itr.shaderName == _meshComponent->GetMesh()->GetShaderName())
+		if (itr->shaderName == _meshComponent->GetMesh()->GetShaderName())
 		{
 			//同じ名前のシェーダーの配列からメッシュを削除する
-			auto deleteMesh = std::find(itr.meshComponentArray.begin(), itr.meshComponentArray.end(), _meshComponent);
-			itr.meshComponentArray.erase(deleteMesh);
+			auto deleteMesh = std::find(itr->meshComponentArray.begin(), itr->meshComponentArray.end(), _meshComponent);
+			itr->meshComponentArray.erase(deleteMesh);
 			return;
 		}
 	}
@@ -563,7 +563,7 @@ void Renderer::CreateSpriteVerts()
         2, 3, 0
     };
 
-    spriteVerts = new VertexArray(vertices, 4, indices, 6);
+    spriteVerts = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
 // パーティクル頂点作成
@@ -670,12 +670,12 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 	glDisable(GL_BLEND);
 	for (auto itr : shaderToMeshArray)
 	{
-		itr.shader->SetActive();
-		itr.shader->SetMatrixUniform("uViewProj", view * projection);
-		SetLightUniforms(itr.shader, view);
-		for (auto meshComp : itr.meshComponentArray)
+		itr->shader->SetActive();
+		itr->shader->SetMatrixUniform("uViewProj", view * projection);
+		SetLightUniforms(itr->shader, view);
+		for (auto meshComp : itr->meshComponentArray)
 		{
-			meshComp->Draw(itr.shader);
+			meshComp->Draw(itr->shader);
 		}
 	}
 

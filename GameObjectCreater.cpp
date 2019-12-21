@@ -40,6 +40,7 @@ GameObjectCreater::~GameObjectCreater()
 void GameObjectCreater::PlayerAndWallCreate()
 {
 	GameObject* mCameraActor = new PlayerObject();
+	GameObject* ac = new Ship();
 
 	ObstacleBox* box;
 	for (int i = 0; i < 500; i++)

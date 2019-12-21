@@ -31,6 +31,10 @@ MeshComponent::~MeshComponent()
 */
 void MeshComponent::Draw(Shader* _shader)
 {
+	if (!visible)
+	{
+		return;
+	}
     if (mMesh)
     {
         // Set the world transform

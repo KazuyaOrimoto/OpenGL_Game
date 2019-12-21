@@ -227,7 +227,7 @@ private:
 	Shader* particleShader;
 	VertexArray* particleVertex;   // パーティクル用頂点定義
 
-	std::vector<ShaderToMesh> shaderToMeshArray;
+	std::vector<ShaderToMesh*> shaderToMeshArray;
 
     //ビュー行列
     Matrix4 view;
