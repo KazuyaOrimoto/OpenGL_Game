@@ -23,6 +23,7 @@ ObstacleObject::ObstacleObject(int _i)
     player = GameObject::FindGameObject(Tag::Player);
     CreateObstacle(5000.0f + _i * StaticObstacle::ObstacleDistanceNum);
 	i = _i;
+	name = "Obstacle";
 }
 
 ObstacleObject::~ObstacleObject()

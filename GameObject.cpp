@@ -3,7 +3,6 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "InputSystem.h"
-//#include "GameObjectManager.h"
 
 std::vector<GameObject*> GameObject::gameObjects;
 std::vector<GameObject*> GameObject::pendingGameObjects;
@@ -143,36 +142,6 @@ void GameObject::ComputeWorldTransform()
 	}
 }
 
-//void GameObject::UpdateGameObjects(float _deltaTime)
-//{
-//	if (Game::GetState() == Game::GameState::EGameplay)
-//	{
-//		updatingGameObject = true;
-//		for (auto gameObject : gameObjects)
-//		{
-//			gameObject->Update(_deltaTime);
-//		}
-//		updatingGameObject = false;
-//
-//		for (auto pending : pendingGameObjects)
-//		{
-//			pending->ComputeWorldTransform();
-//			gameObjects.emplace_back(pending);
-//		}
-//		pendingGameObjects.clear();
-//	}
-//}
-
-//void GameObject::ProcessInputs(const InputState & _state)
-//{
-//	updatingGameObject = true;
-//	for (auto gameObject : gameObjects)
-//	{
-//		gameObject->ProcessInput(_state);
-//	}
-//	updatingGameObject = false;
-//}
-
 void GameObject::AddGameObject(GameObject * _object)
 {
 	if (updatingGameObject)
@@ -202,6 +171,8 @@ void GameObject::RemoveGameObject(GameObject * _object)
 	}
 }
 
+
+
 GameObject * GameObject::FindGameObject(Tag _tag)
 {
 	for (auto itr : gameObjects)
@@ -227,3 +198,19 @@ std::vector<GameObject*> GameObject::FindGameObjects(Tag _tag)
 	return ret;
 }
 
+#ifdef _DEBUG
+#include "imgui/imgui.h"
+
+void GameObject::ShowGameObject()
+{
+
+	ImGui::Begin(name.c_str(), &view);
+
+	ImGui::Text("Position   :   x = %f, y = %f, z = %f", position.x, position.y, position.z);
+	ImGui::Text("Rotation   :   x = %f, y = %f, z = %f,w = %f", rotation.x, rotation.y, rotation.z, rotation.w);
+
+
+	ImGui::End();
+}
+
+#endif // _DEBUG

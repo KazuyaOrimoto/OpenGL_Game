@@ -15,6 +15,8 @@ ActionArea::ActionArea(GameObject* _owner)
 	SetPosition(_owner->GetPosition());
 	owner = _owner;
 	SetScale(200.0f);
+
+	name = "CheckArea";
 }
 
 

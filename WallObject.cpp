@@ -14,6 +14,8 @@ WallObject::WallObject(int _i)
 	mc->SetMesh(RENDERER->GetMesh("Assets/Wall.gpmesh"));
 	player = GameObject::FindGameObject(Tag::Player);
 	tag = Tag::Wall;
+
+	name = "Wall";
 }
 
 WallObject::~WallObject()

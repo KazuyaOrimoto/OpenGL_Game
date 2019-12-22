@@ -268,4 +268,12 @@ private:
 
 
 	const int num = 1;
+
+#ifdef _DEBUG
+	friend class imguiManager;
+	bool isDebugView;
+	bool isDrawHDRFrame;
+	bool isNormalFrame;
+	virtual void ShowRenderer();
+#endif // _DEBUG
 };

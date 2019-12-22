@@ -48,6 +48,8 @@ ObstacleBox::ObstacleBox()
 
 	state = Paused;
 	player = GameObject::FindGameObject(Tag::Player);
+
+	name = "Box";
 }
 
 ObstacleBox::~ObstacleBox()

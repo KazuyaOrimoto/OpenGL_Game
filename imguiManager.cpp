@@ -12,6 +12,7 @@
 #include <string>
 
 #include "GameObject.h"
+#include "Renderer.h"
 
 imguiManager* imguiManager::imgui = nullptr;
 
@@ -109,7 +110,6 @@ bool imguiManager::Initialize(SDL_Window* _window, SDL_GLContext _context, float
 
 	// Our state
 	show_demo_window = true;
-	show_another_window = false;
 	showGameObjectsWindow = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
@@ -157,8 +157,8 @@ void imguiManager::Draw()
 		
 		ImGui::InputText("paramater", str , IM_ARRAYSIZE(str));
 		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-		ImGui::Checkbox("Another Window", &show_another_window);
 		ImGui::Checkbox("GameObjects Window", &showGameObjectsWindow);
+		ImGui::Checkbox("Renderer Debug Window", &RENDERER->isDebugView);
 
 		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
 
@@ -171,19 +171,14 @@ void imguiManager::Draw()
 		ImGui::End();
 	}
 
-	// 3. Show another simple window.
-	if (show_another_window)
-	{
-		ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Text("Hello from another window!");
-		if (ImGui::Button("Close Me"))
-			show_another_window = false;
-		ImGui::End();
-	}
-
 	if (showGameObjectsWindow)
 	{
 		ShowGameObjects();
+	}
+
+	if (RENDERER->isDebugView)
+	{
+		ShowRenderer();
 	}
 
 	ImGui::Render();
@@ -200,19 +195,20 @@ void imguiManager::ShowGameObjects()
 		ImGui::Checkbox(itr->name.c_str(), &itr->view);
 		if (itr->view)
 		{
-			ShowGameObject(*itr);
+			itr->ShowGameObject();
 		}
 	}
 	ImGui::End();
 }
 
-void imguiManager::ShowGameObject(GameObject&_gameObject)
+void imguiManager::ShowRenderer()
 {
-	ImGui::Begin(_gameObject.name.c_str(), &_gameObject.view);
+	ImGui::Begin("Renderer Debug Window");                          // Create a window called "Hello, world!" and append into it.
 
-	ImGui::Text("Position   :   x = %f, y = %f, z = %f", _gameObject.position.x, _gameObject.position.y, _gameObject.position.z);
-	ImGui::Text("Rotation   :   x = %f, y = %f, z = %f,w = %f", _gameObject.rotation.x, _gameObject.rotation.y, _gameObject.rotation.z, _gameObject.rotation.w);
-
+	ImGui::Checkbox("DrawNormalFrame", &RENDERER->isNormalFrame);
+	ImGui::Checkbox("DrawHDRFrame", &RENDERER->isDrawHDRFrame);
 
 	ImGui::End();
 }
+
+

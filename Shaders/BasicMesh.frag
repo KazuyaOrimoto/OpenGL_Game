@@ -18,10 +18,11 @@ layout (location = 1) out vec4 outColor1; // 出力先の指定
 
 // This is used for the texture sampling
 uniform sampler2D uTexture;
+uniform vec3 uHDRColor = vec3(0.0,0.0,0.0);
 
 void main()
 {
 	// Sample color from texture
     outColor0 = texture(uTexture, fragTexCoord);
-    outColor1.rgb = vec3(0.5,0.5,0.5);
+    outColor1.rgb = uHDRColor;
 }

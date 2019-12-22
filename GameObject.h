@@ -3,6 +3,7 @@
 #include <functional>
 #include "Math.h"
 
+
 class Game;
 class Vector3;
 class Matrix4;
@@ -81,6 +82,7 @@ protected:
     virtual void OnCollision(const GameObject& _hitObject) {}
 
     //virtual void OnTrigger(GameObject& _triggerObject) {}
+
 	//ゲームオブジェクトの状態
 	State state;
 	//ゲームオブジェクトのタグ
@@ -239,6 +241,7 @@ private:
 #ifdef _DEBUG
 		friend class imguiManager;
 		bool view;
+		virtual void ShowGameObject();
 #endif // _DEBUG
 
 };

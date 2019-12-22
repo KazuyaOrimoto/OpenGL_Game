@@ -12,6 +12,7 @@
 #include "AnimationComponent.h"
 #include "AnimationController.h"
 #include "PlayerAnimationController.h"
+#include "HDRMeshComponent.h"
 
 #include "MainCamera.h"
 
@@ -24,8 +25,11 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	, jump(false)
 {
 	SetParent(_ownerObject);
-	meshComp = new MeshComponent(this);
+	HDRMeshComponent* m = new HDRMeshComponent(this);
+	meshComp = m;
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
+	//Vector3 v = Vector3(0.5f, 0.5f, 0.5f);
+	//m->SetHDRColor(v);
 	SetScale(7.0f);
 
 	sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
@@ -43,6 +47,8 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
+
+	name = "BikeObject";
 }
 
 BikeObject::~BikeObject()

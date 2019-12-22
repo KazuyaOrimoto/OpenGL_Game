@@ -14,6 +14,8 @@ JumpCheck::JumpCheck(BikeObject* _bike)
 	sphereCollider->SetObjectBox(box);
 	SetScale(1.0f);
 	tag = Tag::CheckArea;
+
+	name = "CheckArea";
 }
 
 JumpCheck::~JumpCheck()

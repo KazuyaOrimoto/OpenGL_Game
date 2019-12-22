@@ -14,6 +14,8 @@ BoxObject::BoxObject()
     boxCollider->SetObjectBox(AABB(Vector3(-0.5f, -0.5f, -0.5f), Vector3(0.5f, 0.5f, 0.5f)));
     SetPosition(Vector3(2000.0f, 900.0f, 0.0f));
     SetScale(250.0f);
+
+	name = "Box";
 }
 
 
