@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 class PlayerObject;
-class MeshComponent;
+class HDRMeshComponent;
 class SphereCollider;
 class ObstacleBox;
 class JumpCheck;
@@ -46,7 +46,7 @@ private:
 	*/
 	void ActionDetermining();
 
-    MeshComponent* meshComp;
+	HDRMeshComponent* meshComp;
     PlayerObject* ownerObject;
     SphereCollider* sphereCollider;
 	AnimationComponent* animationComp;

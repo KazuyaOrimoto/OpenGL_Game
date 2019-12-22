@@ -23,7 +23,7 @@ public:
 	float GetIntensity()const { return intensity; }
 
 	const Vector3& GetHDRColor() const { return hdrColor; }
-	void SetHDRColor(Vector3& _color) { hdrColor = _color; }
+	void SetHDRColor(const Vector3& _color) { hdrColor = _color; }
 
 private:
 	float intensity;
