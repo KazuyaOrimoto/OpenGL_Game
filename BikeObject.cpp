@@ -28,8 +28,8 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	HDRMeshComponent* m = new HDRMeshComponent(this);
 	meshComp = m;
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/Bike.gpmesh"));
-	//Vector3 v = Vector3(0.5f, 0.5f, 0.5f);
-	//m->SetHDRColor(v);
+	Vector3 v = Vector3(0.5f, 0.5f, 0.5f);
+	m->SetHDRColor(v);
 	SetScale(7.0f);
 
 	sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
