@@ -5,12 +5,12 @@ out vec4 outColor;
   
 in vec2 fragTexCoord;
 
-const int SAMPLE_NUM = 5; 
+const int SAMPLE_NUM = 15; 
 
 uniform sampler2D uTexture;
-  
 uniform bool horizontal = true;
-uniform float weight[SAMPLE_NUM] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
+uniform float weight[SAMPLE_NUM] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216 , 0.0 , 0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0);
+uniform int uRange = 5;
 
 void main()
 {             
@@ -18,7 +18,7 @@ void main()
     vec3 result = texture(uTexture, fragTexCoord).rgb * weight[0]; // current fragment's contribution
     if(horizontal)
     {
-        for(int i = 1; i < SAMPLE_NUM; ++i)
+        for(int i = 1; i < uRange; ++i)
         {
             result += texture(uTexture, fragTexCoord + vec2(tex_offset.x * i, 0.0)).rgb * weight[i];
             result += texture(uTexture, fragTexCoord - vec2(tex_offset.x * i, 0.0)).rgb * weight[i];
@@ -26,7 +26,7 @@ void main()
     }
     else
     {
-        for(int i = 1; i < SAMPLE_NUM; ++i)
+        for(int i = 1; i < uRange; ++i)
         {
             result += texture( uTexture, fragTexCoord + vec2(0.0, tex_offset.y * i)).rgb * weight[i];
             result += texture( uTexture, fragTexCoord - vec2(0.0, tex_offset.y * i)).rgb * weight[i];

@@ -8,6 +8,8 @@
 
 #define RENDERER Renderer::GetInstance()
 
+const int SAMPLE_NUM = 15;
+
 //平行光源用の構造体
 struct DirectionalLight
 {
@@ -202,6 +204,9 @@ private:
 	void ChangeTexture(int changeTextureID);
 	Vector3 CalcCameraPos();
 
+	//Gaussianフィルタの重み係数を算出
+	void SettingWeight();
+
     //ファイル名でメッシュを取得するための連想配列
     std::unordered_map<std::string, Mesh*> meshes;
     //メッシュコンポーネントのポインタの可変長コンテナ
@@ -266,8 +271,10 @@ private:
 
 	bool CreateFBO();
 
-
 	const int num = 1;
+
+	float weight[SAMPLE_NUM];
+	int gaussianRange = 1;
 
 #ifdef _DEBUG
 	friend class imguiManager;

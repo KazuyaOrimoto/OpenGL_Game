@@ -798,6 +798,27 @@ Vector3 Renderer::CalcCameraPos()
 	return Vector3(Vector3::Transform(v, transMat));
 }
 
+void Renderer::SettingWeight()
+{
+	auto t = 0.0f;
+	auto d = gaussianRange * gaussianRange / 100;
+	for (auto i = 0; i < SAMPLE_NUM ; i++)
+	{
+		auto r = 1.0 + 2.0 * i;
+		auto w = std::exp(-0.5 * (r * r) / d);
+		weight[i] = w;
+		if (i > 0)
+		{
+			w *= 2.0;
+		}
+		t += w;
+	}
+	for (auto i = 0; i < SAMPLE_NUM; i++)
+	{
+		weight[i] /= t;
+	}
+}
+
 bool Renderer::CreateFBO()
 {
 	int width = static_cast<int>(screenWidth);
