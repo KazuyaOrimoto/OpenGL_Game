@@ -7,7 +7,7 @@
 Shader::Shader()
 	:vertexShader(0)
 	, fragShader(0)
-	,shaderProgram(0)
+	, shaderProgram(0)
 {
 }
 
@@ -23,14 +23,14 @@ Shader::~Shader()
 */
 bool Shader::Load(const std::string & _vertName, const std::string & _fragName)
 {
-	if (!CompileShader(_vertName,GL_VERTEX_SHADER,vertexShader) ||
-		!CompileShader(_fragName,GL_FRAGMENT_SHADER, fragShader))
+	if (!CompileShader(_vertName, GL_VERTEX_SHADER, vertexShader) ||
+		!CompileShader(_fragName, GL_FRAGMENT_SHADER, fragShader))
 	{
 		return false;
 	}
 
 	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram,vertexShader);
+	glAttachShader(shaderProgram, vertexShader);
 	glAttachShader(shaderProgram, fragShader);
 	glLinkProgram(shaderProgram);
 
@@ -67,7 +67,7 @@ void Shader::SetActive()
 */
 void Shader::SetMatrixUniform(const char * _name, const Matrix4 & _matrix)
 {
-	GLuint loc = glGetUniformLocation(shaderProgram,_name);
+	GLuint loc = glGetUniformLocation(shaderProgram, _name);
 	// シェーダーに行列データを送る
 	glUniformMatrix4fv(loc, 1, GL_TRUE, _matrix.GetAsFloatPtr());
 }
@@ -79,9 +79,9 @@ void Shader::SetMatrixUniform(const char * _name, const Matrix4 & _matrix)
 */
 void Shader::SetVectorUniform(const char * _name, const Vector3 & _vector)
 {
-    GLuint loc = glGetUniformLocation(shaderProgram, _name);
-    // シェーダーにVectorデータを送る
-    glUniform3fv(loc, 1, _vector.GetAsFloatPtr());
+	GLuint loc = glGetUniformLocation(shaderProgram, _name);
+	// シェーダーにVectorデータを送る
+	glUniform3fv(loc, 1, _vector.GetAsFloatPtr());
 }
 
 /**
@@ -91,9 +91,9 @@ void Shader::SetVectorUniform(const char * _name, const Vector3 & _vector)
 */
 void Shader::SetFloatUniform(const char * _name, const float & _value)
 {
-    GLuint loc = glGetUniformLocation(shaderProgram, _name);
-    // シェーダーにfloatデータを送る
-    glUniform1f(loc, _value);
+	GLuint loc = glGetUniformLocation(shaderProgram, _name);
+	// シェーダーにfloatデータを送る
+	glUniform1f(loc, _value);
 }
 
 /**
@@ -106,6 +106,24 @@ void Shader::SetBoolUniform(const char * _name, const bool & _value)
 	GLuint loc = glGetUniformLocation(shaderProgram, _name);
 	// シェーダーにfloatデータを送る
 	glUniform1f(loc, _value);
+}
+
+void Shader::SetFloatArrayUniform(const char * _name, const int _size, const float * const & _value)
+{
+	GLuint loc = glGetUniformLocation(shaderProgram, _name);
+	glUniform1fv(loc, _size, _value);
+}
+
+void Shader::SetFloatArrayUniform(const char * _name, const int _size, double * const & _value)
+{
+	GLuint loc = glGetUniformLocation(shaderProgram, _name);
+	glUniform1fv(loc, _size, reinterpret_cast<float*>(_value));
+}
+
+void Shader::SetIntUniform(const char * _name, const int & _value)
+{
+	GLuint loc = glGetUniformLocation(shaderProgram, _name);
+	glUniform1i(loc,_value);
 }
 
 /**
@@ -155,13 +173,13 @@ bool Shader::IsCompiled(GLuint _shader)
 {
 	GLint status;
 
-	glGetShaderiv(_shader,GL_COMPILE_STATUS, &status);
+	glGetShaderiv(_shader, GL_COMPILE_STATUS, &status);
 
 	if (status != GL_TRUE)
 	{
 		char buffer[512];
-		memset(buffer,0,512);
-		glGetShaderInfoLog(_shader,411,nullptr,buffer);
+		memset(buffer, 0, 512);
+		glGetShaderInfoLog(_shader, 411, nullptr, buffer);
 		SDL_Log("GLSL Compile Failed:\n%s", buffer);
 		return false;
 	}
@@ -177,12 +195,12 @@ bool Shader::IsVaildProgram()
 {
 	GLint status;
 
-	glGetProgramiv(shaderProgram,GL_LINK_STATUS,&status);
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &status);
 	if (status != GL_TRUE)
 	{
 		char buffer[512];
-		memset(buffer,0,512);
-		glGetProgramInfoLog(shaderProgram,511,nullptr,buffer);
+		memset(buffer, 0, 512);
+		glGetProgramInfoLog(shaderProgram, 511, nullptr, buffer);
 		SDL_Log("GLSL Link Status:\n%s", buffer);
 		return false;
 	}
