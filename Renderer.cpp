@@ -148,7 +148,8 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 		1.0f);
 
 	SettingWeight();
-
+	prevRange = gaussianRange;
+	prevGaussianCoefficient = gaussianCoefficient;
 	// カリング
 	glFrontFace(GL_CCW);
 	glEnable(GL_CULL_FACE);
@@ -224,6 +225,13 @@ void Renderer::UnloadData()
 */
 void Renderer::Draw()
 {
+	//ガウシアン用の値が変わっていたら
+	if (gaussianRange != prevRange || gaussianCoefficient != prevGaussianCoefficient)
+	{
+		SettingWeight();
+		prevRange = gaussianRange;
+		prevGaussianCoefficient = gaussianCoefficient;
+	}
 
 	//FBOに標準の画面を描画
 	Draw3DScene(fbo, view, projection, 1.0f);
@@ -249,8 +257,33 @@ void Renderer::Draw()
 	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
 	gaussianShader->SetFloatArrayUniform("weight", SAMPLE_NUM, weight);
 	gaussianShader->SetIntUniform("uRange",gaussianRange);
+	gaussianShader->SetBoolUniform("horizontal", true);
 	// Activate sprite verts quad
 	fboBrightTexture->SetActive();
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, gaussianFinal);
+
+	glViewport(0, 0,
+		static_cast<int>(screenWidth * 1.0f),
+		static_cast<int>(screenHeight * 1.0f)
+	);
+
+	// Clear color buffer/depth buffer
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glDepthMask(GL_TRUE);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Disable depth testing for the global lighting pass
+	glDisable(GL_DEPTH_TEST);
+	gaussianShader->SetActive();
+	screenVertex->SetActive();
+	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
+	gaussianShader->SetFloatArrayUniform("weight", SAMPLE_NUM, weight);
+	gaussianShader->SetIntUniform("uRange", gaussianRange);
+	gaussianShader->SetBoolUniform("horizontal",false);
+	// Activate sprite verts quad
+	gaussianTexture->SetActive();
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
 	//標準フレームバッファ
@@ -283,7 +316,7 @@ void Renderer::Draw()
 		fullShader->SetActive();
 		screenVertex->SetActive();
 		fullShader->SetMatrixUniform("uWorldTransform", scaleMat);
-		gaussianTexture->SetActive();
+		gaussianFinalTexture->SetActive();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 		glDisable(GL_BLEND);
 	}
@@ -766,7 +799,7 @@ Vector3 Renderer::CalcCameraPos()
 void Renderer::SettingWeight()
 {
 	double t = 0.0;
-	double d = static_cast<double>(gaussianRange * gaussianRange) / 100.0;
+	double d = static_cast<double>(gaussianRange * gaussianRange) / gaussianCoefficient;
 	for (auto i = 0; i < SAMPLE_NUM; i++)
 	{
 		double r = 1.0 + 2.0 * i;
@@ -833,7 +866,7 @@ bool Renderer::CreateFBO()
 		fboBrightTexture = nullptr;
 		return false;
 	}
-
+	
 	//ガウスぼかし用のフレームバッファ
 	glGenFramebuffers(1, &gaussian);
 	glBindFramebuffer(GL_FRAMEBUFFER, gaussian);
@@ -858,9 +891,33 @@ bool Renderer::CreateFBO()
 		return false;
 	}
 
+	//ガウスぼかし用のフレームバッファ
+	glGenFramebuffers(1, &gaussianFinal);
+	glBindFramebuffer(GL_FRAMEBUFFER, gaussianFinal);
+
+	gaussianFinalTexture = new Texture();
+	gaussianFinalTexture->CreateForRendering(width, height, GL_RGB);
+
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, gaussianFinalTexture->GetTextureID(), 0);
+
+	// Set the list of buffers to draw to for this frame buffer
+	glNamedFramebufferDrawBuffers(gaussianFinal, 1, drawBuffers);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		// If it didn't work, delete the framebuffer,
+		// unload/delete the texture and return false
+		glDeleteFramebuffers(1, &gaussianFinal);
+		gaussianFinalTexture->Unload();
+		delete gaussianFinalTexture;
+		gaussianFinalTexture = nullptr;
+		return false;
+	}
+
 	return true;
 }
 
 void Renderer::ShowRenderer()
 {
+
 }

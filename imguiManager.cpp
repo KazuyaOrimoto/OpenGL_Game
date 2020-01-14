@@ -207,6 +207,8 @@ void imguiManager::ShowRenderer()
 
 	ImGui::Checkbox("DrawNormalFrame", &RENDERER->isNormalFrame);
 	ImGui::Checkbox("DrawHDRFrame", &RENDERER->isDrawHDRFrame);
+	ImGui::SliderInt("Gaussian", &RENDERER->gaussianRange,1,400);
+	ImGui::SliderInt("GaussianCoefficient", &RENDERER->gaussianCoefficient,1,1000);
 
 	ImGui::End();
 }

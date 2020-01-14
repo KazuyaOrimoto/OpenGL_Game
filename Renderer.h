@@ -8,7 +8,7 @@
 
 #define RENDERER Renderer::GetInstance()
 
-const int SAMPLE_NUM = 10;
+const int SAMPLE_NUM = 15;
 
 //平行光源用の構造体
 struct DirectionalLight
@@ -263,9 +263,11 @@ private:
 	//テクスチャレンダリング用
 	unsigned int fbo;
 	unsigned int gaussian;
+	unsigned int gaussianFinal;
 	class Texture* fboTexture;
 	class Texture* fboBrightTexture;
 	class Texture* gaussianTexture;
+	class Texture* gaussianFinalTexture;
 	Matrix4 fboView;
 	Shader* fullShader;
 	Shader* gaussianShader;
@@ -275,7 +277,10 @@ private:
 	const int num = 1;
 
 	float weight[SAMPLE_NUM];
-	int gaussianRange = 10;
+	int gaussianRange = 15;
+	float prevRange;
+	int gaussianCoefficient = 1;
+	int prevGaussianCoefficient;
 
 #ifdef _DEBUG
 	friend class imguiManager;
