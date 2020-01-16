@@ -10,33 +10,6 @@
 #include "ObstacleBox.h"
 #include "Ship.h"
 
-GameObjectCreater* GameObjectCreater::creater = nullptr;
-
-void GameObjectCreater::CreateInstance()
-{
-	if (creater == nullptr)
-	{
-		creater = new GameObjectCreater();
-	}
-}
-
-void GameObjectCreater::DeleteInstance()
-{
-	if (creater != nullptr)
-	{
-		delete creater;
-		creater = nullptr;
-	}
-}
-
-GameObjectCreater::GameObjectCreater()
-{
-}
-
-GameObjectCreater::~GameObjectCreater()
-{
-}
-
 void GameObjectCreater::PlayerAndWallCreate()
 {
 	GameObject* mCameraActor = new PlayerObject();

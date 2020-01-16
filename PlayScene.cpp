@@ -14,7 +14,7 @@ PlayScene::PlayScene()
     dir.diffuseColor = Vector3(0.9f, 0.98f, 1.0f);
     dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
-    GAME_OBJECT_CREATER->PlayerAndWallCreate();
+    GameObjectCreater::PlayerAndWallCreate();
 
 }
 

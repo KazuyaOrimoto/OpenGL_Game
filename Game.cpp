@@ -16,8 +16,6 @@
 #include "Renderer.h"
 #include "InputSystem.h"
 #include "PhysicsWorld.h"
-//#include "GameObjectManager.h"
-#include "GameObjectCreater.h"
 #include "ObstacleManager.h"
 #include "SceneManager.h"
 #include "UIManager.h"
@@ -26,7 +24,7 @@
 #include <SDL_ttf.h>
 #include <string>
 #include "GameObject.h"
-
+#include "SceneManager.h"
 #include "imguiManager.h"
 
 Game::GameState Game::gameState = GameState::EGameplay;
@@ -91,26 +89,17 @@ bool Game::Initialize()
 		return false;
 	}
 
-
-
     // 当たり判定用クラスの初期化
 	PhysicsWorld::CreateInstance();
 
 	// FPS管理クラスの初期化
 	fps = new FPS();
 
-    // ゲームオブジェクト管理クラスの初期化
-    //GameObjectManager::CreateInstance();
-
-    // ゲームオブジェクト生成クラスの初期化
-    GameObjectCreater::CreateInstance();
 
 	// 障害物管理クラスの初期化
     ObstacleManager::CreateInstance();
 
-    // シーン管理クラスの初期化
-    SceneManager::CreateInstance();
-    SCENE_MANAGER->Initialize();
+	SceneManager::ChangeScene(SceneName::Play);
 
 	UIManager::CreateInstance();
 
@@ -128,11 +117,9 @@ void Game::Termination()
 	UnloadData();
     // シングルトンクラスの解放処理
     //GameObjectManager::DeleteInstance();
-    GameObjectCreater::DeleteInstance();
 	Renderer::DeleteInstance();
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
-    SceneManager::DeleteInstance();
 	UIManager::DeleteInstance();
 	imguiManager::DeleteInstance();
     // クラスの解放処理

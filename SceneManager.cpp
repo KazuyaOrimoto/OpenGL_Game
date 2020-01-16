@@ -1,61 +1,53 @@
 ﻿#include "SceneManager.h"
-#include "SceneBase.h"
-#include "TitleScene.h"
-#include "PlayScene.h"
-
-
-SceneManager* SceneManager::sceneManager = nullptr;
-
-void SceneManager::CreateInstance()
-{
-	if (sceneManager == nullptr)
-	{
-		sceneManager = new SceneManager();
-	}
-}
-
-void SceneManager::DeleteInstance()
-{
-	if (sceneManager != nullptr)
-	{
-		delete sceneManager;
-		sceneManager = nullptr;
-	}
-}
-
-void SceneManager::Initialize()
-{
-    nowScene = SceneBase::StartGame();
-}
-
-void SceneManager::Shutdown()
-{
-}
+#include "GameObject.h"
+#include "PlayerObject.h"
+#include "MeshComponent.h"
+#include "Game.h"
+#include "Renderer.h"
+#include "BoxObject.h"
+#include "ObstacleObject.h"
+#include "WallObject.h"
+#include "ObstacleBox.h"
+#include "Ship.h"
 
 void SceneManager::ChangeScene(SceneName _name)
 {
-    delete nowScene;
-    nowScene = nullptr;
     switch (_name)
     {
     case Title:
-        nowScene = new TitleScene();
+		StartTitleScene();
         break;
     case Play:
-        nowScene = new PlayScene();
+		StartPlayScene();
         break;
-    //case Result:
-    //    nowScene = new TitleScene();
-        //break;
     default:
         break;
     }
 }
 
-SceneManager::SceneManager()
+void SceneManager::StartPlayScene()
 {
+	GameObject* mCameraActor = new PlayerObject();
+
+	std::string name = typeid(mCameraActor).name();
+
+	ObstacleBox* box;
+	for (int i = 0; i < 500; i++)
+	{
+		box = new ObstacleBox();
+	}
+
+	for (int i = 0; i < StaticObstacle::ObstacleMaxNum; i++)
+	{
+		ObstacleObject* obstacle = new ObstacleObject(i);
+	}
+
+	for (int i = 0; i < 20; i++)
+	{
+		GameObject* wall = new WallObject(i);
+	}
 }
 
-SceneManager::~SceneManager()
+void SceneManager::StartTitleScene()
 {
 }

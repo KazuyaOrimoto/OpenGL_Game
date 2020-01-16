@@ -108,12 +108,6 @@
     <ClCompile Include="BoxObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneBase.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="ObstacleManager.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
@@ -122,9 +116,6 @@
     </ClCompile>
     <ClCompile Include="WallMeshComponent.cpp">
       <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="WallObject.cpp">
       <Filter>GameObjects</Filter>
@@ -332,12 +323,6 @@
     <ClInclude Include="BoxObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="PlayScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneBase.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="ObstacleManager.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
@@ -346,9 +331,6 @@
     </ClInclude>
     <ClInclude Include="WallMeshComponent.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="WallObject.h">
       <Filter>GameObjects</Filter>

@@ -106,6 +106,7 @@ protected:
 
 	std::string name;
 
+
 public:
 	//-----------------------------------------------------------------------------
 	//							Getter・Setter群
@@ -236,6 +237,8 @@ private:
 
 	//Update中かどうか
 	static bool updatingGameObject;
+
+	std::string className;
 
 private:
 #ifdef _DEBUG
