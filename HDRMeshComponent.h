@@ -9,7 +9,7 @@ class HDRMeshComponent :
 	public MeshComponent
 {
 public:
-	HDRMeshComponent(GameObject* _owner, ShaderType _shaderType = DEFAULT);
+	HDRMeshComponent(GameObject* _owner);
 	~HDRMeshComponent();
 
 	/**

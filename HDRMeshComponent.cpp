@@ -7,8 +7,8 @@
 #include "VertexArray.h"
 #include "Texture.h"
 
-HDRMeshComponent::HDRMeshComponent(GameObject* _owner, ShaderType _shaderType)
-	: MeshComponent(_owner,_shaderType)
+HDRMeshComponent::HDRMeshComponent(GameObject* _owner)
+	: MeshComponent(_owner)
 {
 }
 

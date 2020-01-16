@@ -228,8 +228,6 @@ private:
 
     Shader* spriteShader;
     VertexArray* spriteVerts;
-    Shader* meshShader;
-    Shader* basicShader;
 	Shader* particleShader;
 	VertexArray* particleVertex;   // パーティクル用頂点定義
 	VertexArray* screenVertex;
@@ -278,7 +276,7 @@ private:
 
 	float weight[SAMPLE_NUM];
 	int gaussianRange = 15;
-	float prevRange;
+	int prevRange;
 	int gaussianCoefficient = 1;
 	int prevGaussianCoefficient;
 

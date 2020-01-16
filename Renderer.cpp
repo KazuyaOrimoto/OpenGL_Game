@@ -25,8 +25,6 @@ void Renderer::SetParticleVertex()
 Renderer::Renderer()
 	: spriteShader(nullptr)
 	, spriteVerts(nullptr)
-	, meshShader(nullptr)
-	, basicShader(nullptr)
 	, particleVertex(nullptr)
 	, fullShader(nullptr)
 	, view(Matrix4::Identity)
@@ -188,10 +186,6 @@ void Renderer::Shutdown()
 	delete spriteVerts;
 	spriteShader->Unload();
 	delete spriteShader;
-	meshShader->Unload();
-	delete meshShader;
-	basicShader->Unload();
-	delete basicShader;
 	fullShader->Unload();
 	delete fullShader;
 	SDL_GL_DeleteContext(context);
@@ -423,6 +417,8 @@ void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 	{
 		return;
 	}
+	newShaderToMesh->shader->SetActive();
+	newShaderToMesh->shader->SetMatrixUniform("uViewProj", view * projection);
 	newShaderToMesh->meshComponentArray.emplace_back(_meshComponent);
 	shaderToMeshArray.emplace_back(newShaderToMesh);
 	auto viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
@@ -549,18 +545,18 @@ bool Renderer::LoadShaders()
 	// ビュー行列の設定
 	gaussianShader->SetMatrixUniform("uViewProj", viewProj);
 
-	// 標準のメッシュシェーダーの作成
-	meshShader = new Shader();
-	if (!meshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
-	{
-		return false;
-	}
+	//// 標準のメッシュシェーダーの作成
+	//meshShader = new Shader();
+	//if (!meshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
+	//{
+	//	return false;
+	//}
 
-	basicShader = new Shader();
-	if (!basicShader->Load("Shaders/BasicMesh.vert", "Shaders/BasicMesh.frag"))
-	{
-		return false;
-	}
+	//basicShader = new Shader();
+	//if (!basicShader->Load("Shaders/BasicMesh.vert", "Shaders/BasicMesh.frag"))
+	//{
+	//	return false;
+	//}
 
 	particleShader = new Shader();
 	if (!particleShader->Load("Shaders/Phong.vert", "Shaders/Particle.frag"))
@@ -568,15 +564,15 @@ bool Renderer::LoadShaders()
 		printf("シェーダー読み込み失敗\n");
 	}
 
-	meshShader->SetActive();
+	//meshShader->SetActive();
 	// ビュー行列の設定
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
 	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
 		screenWidth, screenHeight, 25.0f, 13000.0f);
-	meshShader->SetMatrixUniform("uViewProj", view * projection);
+	//meshShader->SetMatrixUniform("uViewProj", view * projection);
 
-	basicShader->SetActive();
-	basicShader->SetMatrixUniform("uViewProj", view * projection);
+	//basicShader->SetActive();
+	//basicShader->SetMatrixUniform("uViewProj", view * projection);
 	return true;
 }
 
@@ -804,7 +800,7 @@ void Renderer::SettingWeight()
 	{
 		double r = 1.0 + 2.0 * i;
 		double w = std::exp(-0.5 * (r * r) / d);
-		weight[i] = w;
+		weight[i] = static_cast<float>(w);
 		if (i > 0)
 		{
 			w *= 2.0;
@@ -813,7 +809,7 @@ void Renderer::SettingWeight()
 	}
 	for (auto i = 0; i < SAMPLE_NUM; i++)
 	{
-		weight[i] /= t;
+		weight[i] /= static_cast<float>(t);
 	}
 }
 

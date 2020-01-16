@@ -6,9 +6,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Ship.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -20,9 +17,6 @@
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="CameraObject.cpp">
       <Filter>GameObjects</Filter>
@@ -44,9 +38,6 @@
     </ClCompile>
     <ClCompile Include="FPS.cpp">
       <Filter>FPS</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaneObject.cpp">
-      <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>InputSystem</Filter>
@@ -99,12 +90,6 @@
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectCreater.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="BoxObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
@@ -113,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="ObstacleObject.cpp">
       <Filter>Obstacle</Filter>
-    </ClCompile>
-    <ClCompile Include="WallMeshComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="WallObject.cpp">
       <Filter>GameObjects</Filter>
@@ -214,14 +196,19 @@
     <ClCompile Include="imgui\imgui_impl_sdl.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="HDRMeshComponent.cpp" />
+    <ClCompile Include="HDRMeshComponent.cpp">
+      <Filter>MeshComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>MeshComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="WallMeshComponent.cpp">
+      <Filter>MeshComponent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Ship.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
@@ -235,9 +222,6 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="CameraObject.h">
       <Filter>GameObjects</Filter>
@@ -259,9 +243,6 @@
     </ClInclude>
     <ClInclude Include="FPS.h">
       <Filter>FPS</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaneObject.h">
-      <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
       <Filter>InputSystem</Filter>
@@ -314,12 +295,6 @@
     <ClInclude Include="BoxCollider.h">
       <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectCreater.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="BoxObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
@@ -328,9 +303,6 @@
     </ClInclude>
     <ClInclude Include="ObstacleObject.h">
       <Filter>Obstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="WallMeshComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="WallObject.h">
       <Filter>GameObjects</Filter>
@@ -438,7 +410,15 @@
     <ClInclude Include="imgui\imgui_impl_sdl.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="HDRMeshComponent.h" />
+    <ClInclude Include="HDRMeshComponent.h">
+      <Filter>MeshComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>MeshComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="WallMeshComponent.h">
+      <Filter>MeshComponent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -500,6 +480,9 @@
     </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{ad0cef99-cd75-4a70-b88a-19cbe42ecf35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MeshComponent">
+      <UniqueIdentifier>{672eea7b-1db4-48bc-aec1-d3172af78e83}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
