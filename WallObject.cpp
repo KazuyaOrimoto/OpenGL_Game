@@ -8,7 +8,7 @@ WallObject::WallObject(int _i)
 	:GameObject()
 {
 	SetScale(1000.0f);
-	SetPosition(Vector3(_i*2000.0f, 0.0f, 0.0f));
+	SetPosition(Vector3(_i*2000.0f, 0.0f, 1000.0f));
 	MeshComponent* mc = new MeshComponent(this);
 	mc->SetMesh(RENDERER->GetMesh("Assets/Wall.gpmesh"));
 	player = GameObject::FindGameObject(Tag::Player);

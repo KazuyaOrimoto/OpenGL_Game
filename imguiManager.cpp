@@ -2,7 +2,6 @@
 
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
 
-// Include glfw3.h after our OpenGL definitions
 #include <GLFW/glfw3.h>
 
 #include "imgui/imgui_impl_glfw.h"
@@ -144,7 +143,7 @@ void imguiManager::Draw()
 
 	// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 	if (show_demo_window)
-		ImGui::ShowDemoWindow(&show_demo_window);
+		//ImGui::ShowDemoWindow(&show_demo_window);
 
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
 	{
@@ -156,7 +155,7 @@ void imguiManager::Draw()
 		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
 		
 		ImGui::InputText("paramater", str , IM_ARRAYSIZE(str));
-		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+		//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		ImGui::Checkbox("GameObjects Window", &showGameObjectsWindow);
 		ImGui::Checkbox("Renderer Debug Window", &RENDERER->isDebugView);
 

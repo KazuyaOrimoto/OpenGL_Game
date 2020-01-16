@@ -283,8 +283,8 @@ private:
 #ifdef _DEBUG
 	friend class imguiManager;
 	bool isDebugView;
-	bool isDrawHDRFrame;
-	bool isNormalFrame;
+	bool isDrawHDRFrame = true;
+	bool isNormalFrame = true;
 	virtual void ShowRenderer();
 #endif // _DEBUG
 };
