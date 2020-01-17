@@ -419,6 +419,7 @@
     <ClInclude Include="WallMeshComponent.h">
       <Filter>MeshComponent</Filter>
     </ClInclude>
+    <ClInclude Include="Common.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
