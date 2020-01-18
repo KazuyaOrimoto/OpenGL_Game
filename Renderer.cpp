@@ -250,7 +250,7 @@ void Renderer::Draw()
 	screenVertex->SetActive();
 	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
 	gaussianShader->SetFloatArrayUniform("weight", SAMPLE_NUM, weight);
-	gaussianShader->SetIntUniform("uRange",gaussianRange);
+	gaussianShader->SetIntUniform("uRange",15);
 	gaussianShader->SetBoolUniform("horizontal", true);
 	// Activate sprite verts quad
 	fboBrightTexture->SetActive();
@@ -274,7 +274,7 @@ void Renderer::Draw()
 	screenVertex->SetActive();
 	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
 	gaussianShader->SetFloatArrayUniform("weight", SAMPLE_NUM, weight);
-	gaussianShader->SetIntUniform("uRange", gaussianRange);
+	gaussianShader->SetIntUniform("uRange", 15);
 	gaussianShader->SetBoolUniform("horizontal",false);
 	// Activate sprite verts quad
 	gaussianTexture->SetActive();
