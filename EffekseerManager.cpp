@@ -18,17 +18,15 @@
 #pragma comment(lib, "glew32s.lib")
 #pragma comment(lib, "winmm.lib")
 
-
-
 #if _DEBUG
 #pragma comment(lib, "VS2017/Debug/Effekseer.lib" )
 #pragma comment(lib, "VS2017/Debug/EffekseerRendererGL.lib" )
 #else
-#pragma comment(lib, "VS2015/Release/Effekseer.lib" )
-#pragma comment(lib, "VS2015/Release/EffekseerRendererGL.lib" )
+#pragma comment(lib, "VS2017/Release/Effekseer.lib" )
+#pragma comment(lib, "VS2017/Release/EffekseerRendererGL.lib" )
 #endif
 
-EffekseerManager*                   EffekseerManager::manager = nullptr;
+EffekseerManager*					EffekseerManager::manager = nullptr;
 ::Effekseer::Manager*               EffekseerManager::g_manager = nullptr;
 ::EffekseerRenderer::Renderer*	    EffekseerManager::g_renderer = nullptr;
 ::Effekseer::Effect*				EffekseerManager::g_effect = nullptr;
@@ -80,7 +78,7 @@ void EffekseerManager::CreateInstance()
 
 void EffekseerManager::DeleteInstance()
 {
-	if (manager == nullptr)
+	if (manager != nullptr)
 	{
 		delete manager;
 		manager = nullptr;
