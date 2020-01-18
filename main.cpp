@@ -10,6 +10,7 @@
 //-----------------------------------------------------------------------------
 #include "SDL.h"
 #include "Game.h"
+#include "EffekseerManager.h"
 
 //-----------------------------------------------------------------------------
 //	@brief	main関数
@@ -23,6 +24,8 @@ int main(int argc, char** argv)
 
     //ゲームクラスの初期化が成功したか
 	bool success = game->Initialize();
+
+	EffekseerManager::CreateInstance();
 	if (success)
 	{
 		game->GameLoop();
@@ -30,6 +33,9 @@ int main(int argc, char** argv)
 
     //ゲームクラスの終了処理
 	game->Termination();
+	EffekseerManager::DeleteInstance();
+
+	delete game;
 
 	return 0;
 }
