@@ -14,6 +14,7 @@
 #include "UIScreen.h"
 #include "UIManager.h"
 #include "imguiManager.h"
+#include "EffekseerManager.h"
 
 Renderer* Renderer::renderer = nullptr;
 
@@ -733,6 +734,7 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 	}
 
 	DrawParticle();
+	EFFECT_MANAGER->Draw();
 
 }
 

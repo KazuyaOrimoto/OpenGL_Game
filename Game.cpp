@@ -154,6 +154,7 @@ void Game::GameLoop()
 	{
 		ProcessInput();
 		UpdateGame();
+		EFFECT_MANAGER->Update();
 		GenerateOutput();
 		fps->Update();
 		IMGUI_MANAGER->Update();

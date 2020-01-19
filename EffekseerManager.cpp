@@ -87,13 +87,15 @@ void EffekseerManager::DeleteInstance()
 void EffekseerManager::InitEffekseer()
 {
 	// 投影行列を設定
-	g_renderer->SetProjectionMatrix(RENDERER->GetProjectionMatrix().GetEffekseerMatrix44());
+	Matrix4 mat4 = RENDERER->GetProjectionMatrix();
+	::Effekseer::Matrix44 mat = RENDERER->GetProjectionMatrix().GetEffekseerMatrix44();
+	g_renderer->SetProjectionMatrix(mat);
 
 	// カメラ行列を設定
 	g_renderer->SetCameraMatrix(RENDERER->GetViewMatrix().GetEffekseerMatrix44());
 
 	// エフェクトの読込
-	g_effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)L"test.efk");
+	g_effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)L"Assets/test.efk");
 
 	// エフェクトの再生
 	g_handle = g_manager->Play(g_effect, 0, 0, 0);
@@ -123,7 +125,8 @@ void EffekseerManager::Update()
 void EffekseerManager::UpdateCameraMatrix()
 {
 	// カメラ行列を設定
-	g_renderer->SetCameraMatrix(RENDERER->GetViewMatrix().GetEffekseerMatrix44());
+	::Effekseer::Matrix44 mat = RENDERER->GetProjectionMatrix().GetEffekseerMatrix44();
+	g_renderer->SetProjectionMatrix(mat);
 }
 
 void EffekseerManager::Draw()

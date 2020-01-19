@@ -37,7 +37,7 @@ void MainCamera::Update(float _deltaTime)
     Matrix4 view = Matrix4::CreateLookAt(actualPos, target, rotate->GetCameraUp());
 
     SetViewMatrix(view);
-	//EFFECT_MANAGER->UpdateCameraMatrix();
+	EFFECT_MANAGER->UpdateCameraMatrix();
 }
 
 void MainCamera::SnapToIdeal()
@@ -51,6 +51,7 @@ void MainCamera::SnapToIdeal()
     Matrix4 view = Matrix4::CreateLookAt(actualPos, target, rotate->GetCameraUp());
 
     SetViewMatrix(view);
+	EFFECT_MANAGER->UpdateCameraMatrix();
 }
 
 Vector3 MainCamera::ComputeCameraPos() const
