@@ -31,7 +31,6 @@ EffekseerManager*					EffekseerManager::manager = nullptr;
 ::EffekseerRenderer::Renderer*	    EffekseerManager::g_renderer = nullptr;
 ::Effekseer::Effect*				EffekseerManager::g_effect = nullptr;
 ::Effekseer::Handle				    EffekseerManager::g_handle = -1;
-::Effekseer::Vector3D			    EffekseerManager::g_position;
 
 #if _WIN32
 static std::wstring ToWide(const char* pText)
@@ -85,42 +84,19 @@ void EffekseerManager::DeleteInstance()
 	}
 }
 
-void EffekseerManager::InitEffekseer(char** _argv)
+void EffekseerManager::InitEffekseer()
 {
-#if _WIN32
-	char current_path[MAX_PATH + 1];
-	GetDirectoryName(current_path, _argv[0]);
-	SetCurrentDirectoryA(current_path);
-#endif
-
-	// 描画用インスタンスの生成
-	g_renderer = ::EffekseerRendererGL::Renderer::Create(2000);
-
-	// エフェクト管理用インスタンスの生成
-	g_manager = ::Effekseer::Manager::Create(2000);
-
-	// 描画用インスタンスから描画機能を設定
-	g_manager->SetSpriteRenderer(g_renderer->CreateSpriteRenderer());
-	g_manager->SetRibbonRenderer(g_renderer->CreateRibbonRenderer());
-	g_manager->SetRingRenderer(g_renderer->CreateRingRenderer());
-	g_manager->SetModelRenderer(g_renderer->CreateModelRenderer());
-
-	// 描画用インスタンスからテクスチャの読込機能を設定
-	// 独自拡張可能、現在はファイルから読み込んでいる。
-	g_manager->SetTextureLoader(g_renderer->CreateTextureLoader());
-	g_manager->SetModelLoader(g_renderer->CreateModelLoader());
-
-	// 視点位置を確定
-	g_position = ::Effekseer::Vector3D(10.0f, 5.0f, 20.0f);
-
 	// 投影行列を設定
-	g_renderer->SetProjectionMatrix(
-		::Effekseer::Matrix44().PerspectiveFovRH_OpenGL(Math::ToRadians(70.0f), (float)RENDERER->GetScreenWidth() / (float)RENDERER->GetScreenHeight(), 25.0f, 13000.0f));
+	g_renderer->SetProjectionMatrix(RENDERER->GetProjectionMatrix().GetEffekseerMatrix44());
 
 	// カメラ行列を設定
-	g_renderer->SetCameraMatrix(
-		::Effekseer::Matrix44().LookAtRH(g_position, ::Effekseer::Vector3D(0.0f, 0.0f, 0.0f), ::Effekseer::Vector3D(0.0f, 1.0f, 0.0f)));
+	g_renderer->SetCameraMatrix(RENDERER->GetViewMatrix().GetEffekseerMatrix44());
 
+	// エフェクトの読込
+	g_effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)L"test.efk");
+
+	// エフェクトの再生
+	g_handle = g_manager->Play(g_effect, 0, 0, 0);
 }
 
 void EffekseerManager::Shutdown()
@@ -142,7 +118,12 @@ void EffekseerManager::Update()
 
 	// エフェクトの更新処理を行う
 	g_manager->Update();
+}
 
+void EffekseerManager::UpdateCameraMatrix()
+{
+	// カメラ行列を設定
+	g_renderer->SetCameraMatrix(RENDERER->GetViewMatrix().GetEffekseerMatrix44());
 }
 
 void EffekseerManager::Draw()
@@ -159,9 +140,23 @@ void EffekseerManager::Draw()
 
 EffekseerManager::EffekseerManager()
 {
+	// 描画用インスタンスの生成
+	g_renderer = ::EffekseerRendererGL::Renderer::Create(10000);
 
+	// エフェクト管理用インスタンスの生成
+	g_manager = ::Effekseer::Manager::Create(10000);
+
+	// 描画用インスタンスから描画機能を設定
+	g_manager->SetSpriteRenderer(g_renderer->CreateSpriteRenderer());
+	g_manager->SetRibbonRenderer(g_renderer->CreateRibbonRenderer());
+	g_manager->SetRingRenderer(g_renderer->CreateRingRenderer());
+	g_manager->SetModelRenderer(g_renderer->CreateModelRenderer());
+
+	// 描画用インスタンスからテクスチャの読込機能を設定
+	// 独自拡張可能、現在はファイルから読み込んでいる。
+	g_manager->SetTextureLoader(g_renderer->CreateTextureLoader());
+	g_manager->SetModelLoader(g_renderer->CreateModelLoader());
 }
-
 
 EffekseerManager::~EffekseerManager()
 {

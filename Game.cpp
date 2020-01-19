@@ -26,6 +26,7 @@
 #include "GameObject.h"
 #include "SceneManager.h"
 #include "imguiManager.h"
+#include "EffekseerManager.h"
 
 Game::GameState Game::gameState = GameState::EGameplay;
 
@@ -58,9 +59,20 @@ bool Game::Initialize()
 		return false;
 	}
 
+
 	// レンダラーの初期化
 	Renderer::CreateInstance();
 	if (!RENDERER->Initialize(1600.0f, 900.0f))
+	{
+		SDL_Log("Failed to initialize renderer");
+		Renderer::DeleteInstance();
+		return false;
+	}
+
+	EffekseerManager::CreateInstance();
+	EFFECT_MANAGER->InitEffekseer();
+
+	if (!RENDERER->LoadData())
 	{
 		SDL_Log("Failed to initialize renderer");
 		Renderer::DeleteInstance();
@@ -103,6 +115,8 @@ bool Game::Initialize()
 
 	UIManager::CreateInstance();
 
+
+
 	UI_MANAGER->LoadText("Assets/English.gptext");
 
 	return true;
@@ -122,6 +136,7 @@ void Game::Termination()
 	ObstacleManager::DeleteInstance();
 	UIManager::DeleteInstance();
 	imguiManager::DeleteInstance();
+	EffekseerManager::DeleteInstance();
     // クラスの解放処理
     delete fps;
     delete inputSystem;

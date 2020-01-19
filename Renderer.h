@@ -62,6 +62,9 @@ public:
 	@return true : 成功 , false : 失敗
 	*/
     bool Initialize(float _screenWidth, float _screenHeight);
+
+	bool LoadData();
+
 	/**
 	@brief  終了処理
 	*/

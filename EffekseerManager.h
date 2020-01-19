@@ -5,6 +5,7 @@
 #include <Effekseer.h>
 #include <EffekseerRendererGL.h>
 
+#define EFFECT_MANAGER EffekseerManager::GetInstance()
 
 class EffekseerManager
 {
@@ -25,7 +26,7 @@ public:
     */
     static void DeleteInstance();
 
-	static void InitEffekseer(char** _argv);
+	void InitEffekseer();
 
 	/**
 	@brief  èIóπèàóù
@@ -33,6 +34,8 @@ public:
 	void Shutdown();
 
 	void Update();
+
+	void UpdateCameraMatrix();
 
 	void Draw();
 
@@ -44,8 +47,10 @@ private:
     static ::EffekseerRenderer::Renderer*	g_renderer;
     static ::Effekseer::Effect*				g_effect;
     static ::Effekseer::Handle				g_handle;
-    static ::Effekseer::Vector3D			g_position;
 
     static EffekseerManager* manager;
+
+	
+
 };
 

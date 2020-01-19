@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "RotateComponent.h"
 #include "PlayerObject.h"
+#include "EffekseerManager.h"
 
 MainCamera::MainCamera(GameObject* _owner)
 	:CameraComponent(_owner)
@@ -36,6 +37,7 @@ void MainCamera::Update(float _deltaTime)
     Matrix4 view = Matrix4::CreateLookAt(actualPos, target, rotate->GetCameraUp());
 
     SetViewMatrix(view);
+	//EFFECT_MANAGER->UpdateCameraMatrix();
 }
 
 void MainCamera::SnapToIdeal()

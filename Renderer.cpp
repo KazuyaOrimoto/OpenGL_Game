@@ -119,6 +119,24 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 	// 一部のプラットフォームで出る無害なエラーコードをクリアする
 	glGetError();
 
+
+	scaleMat = Matrix4::CreateScale(
+		static_cast<float>(screenWidth),
+		static_cast<float>(-screenHeight),
+		1.0f);
+
+	SettingWeight();
+	prevRange = gaussianRange;
+	prevGaussianCoefficient = gaussianCoefficient;
+	// カリング
+	glFrontFace(GL_CCW);
+	glEnable(GL_CULL_FACE);
+
+	return true;
+}
+
+bool Renderer::LoadData()
+{
 	// シェーダーのロード
 	if (!LoadShaders())
 	{
@@ -139,18 +157,6 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 	CreateParticleVerts();
 
 	CreateScreenVerts();
-
-	scaleMat = Matrix4::CreateScale(
-		static_cast<float>(screenWidth),
-		static_cast<float>(-screenHeight),
-		1.0f);
-
-	SettingWeight();
-	prevRange = gaussianRange;
-	prevGaussianCoefficient = gaussianCoefficient;
-	// カリング
-	glFrontFace(GL_CCW);
-	glEnable(GL_CULL_FACE);
 
 	return true;
 }
