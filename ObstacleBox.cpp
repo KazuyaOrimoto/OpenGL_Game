@@ -48,6 +48,7 @@ ObstacleBox::ObstacleBox()
 
 	state = Paused;
 	player = GameObject::FindGameObject(Tag::Player);
+	meshComp->SetVisible(false);
 
 	name = "Box";
 }

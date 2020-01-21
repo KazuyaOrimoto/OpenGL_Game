@@ -131,6 +131,7 @@ void EffekseerManager::UpdateCameraMatrix()
 
 void EffekseerManager::Draw()
 {
+
 	// エフェクトの描画開始処理を行う。
 	g_renderer->BeginRendering();
 
@@ -139,6 +140,7 @@ void EffekseerManager::Draw()
 
 	// エフェクトの描画終了処理を行う。
 	g_renderer->EndRendering();
+
 }
 
 EffekseerManager::EffekseerManager()

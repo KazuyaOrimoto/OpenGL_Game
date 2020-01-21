@@ -77,6 +77,8 @@ public:
 	*/
 	void ComputeWorldTransform();
 
+	static void ResetGameObject();
+
 protected:
     std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
     virtual void OnCollision(const GameObject& _hitObject) {}

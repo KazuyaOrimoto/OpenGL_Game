@@ -142,6 +142,18 @@ void GameObject::ComputeWorldTransform()
 	}
 }
 
+void GameObject::ResetGameObject()
+{
+	while (!gameObjects.empty())
+	{
+		delete gameObjects.back();
+	}
+	while (!pendingGameObjects.empty())
+	{
+		delete pendingGameObjects.back();
+	}
+}
+
 void GameObject::AddGameObject(GameObject * _object)
 {
 	if (updatingGameObject)

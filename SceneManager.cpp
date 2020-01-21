@@ -9,9 +9,11 @@
 #include "WallObject.h"
 #include "ObstacleBox.h"
 #include "Ship.h"
+#include "Titlelogo.h"
 
 void SceneManager::ChangeScene(SceneName _name)
 {
+	GameObject::ResetGameObject();
     switch (_name)
     {
     case Title:
@@ -50,4 +52,5 @@ void SceneManager::StartPlayScene()
 
 void SceneManager::StartTitleScene()
 {
+	new Titlelogo();
 }
