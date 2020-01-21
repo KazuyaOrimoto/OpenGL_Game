@@ -24,7 +24,6 @@ int main(int argc, char** argv)
     //ゲームクラスの初期化が成功したか
 	bool success = game->Initialize();
 
-
 	if (success)
 	{
 		game->GameLoop();

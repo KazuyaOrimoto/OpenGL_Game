@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <windows.h>
 #include <assert.h>
-#include <string>
 
 //----------------------------------------------------------------------------------
 //
@@ -143,13 +142,37 @@ void EffekseerManager::Draw()
 
 }
 
+int EffekseerManager::LoadEffect(std::string _fileName)
+{
+	Effekseer::Effect* effect;
+	//一度読み込んだエフェクトかどうか
+	effect = effects.at(_fileName);
+	//読み込まれたことのないエフェクトだった場合
+	if (effect == nullptr)
+	{
+		effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)_fileName.c_str());
+		effects.insert(std::make_pair(_fileName, effect));
+	}
+	Effekseer::Handle handle = g_manager->Play(effect,Effekseer::Vector3D());
+	g_manager->StopEffect(handle);
+	auto itr = handles.find(counter);
+	while (itr == handles.end())
+	{
+		counter++;
+		itr = handles.find(counter);
+	}
+
+
+	return 0;
+}
+
 EffekseerManager::EffekseerManager()
 {
 	// 描画用インスタンスの生成
-	g_renderer = ::EffekseerRendererGL::Renderer::Create(10000);
+	g_renderer = ::EffekseerRendererGL::Renderer::Create(2000);
 
 	// エフェクト管理用インスタンスの生成
-	g_manager = ::Effekseer::Manager::Create(10000);
+	g_manager = ::Effekseer::Manager::Create(2000);
 
 	// 描画用インスタンスから描画機能を設定
 	g_manager->SetSpriteRenderer(g_renderer->CreateSpriteRenderer());

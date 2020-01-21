@@ -4,6 +4,9 @@
 //----------------------------------------------------------------------------------
 #include <Effekseer.h>
 #include <EffekseerRendererGL.h>
+#include <vector>
+#include <map>
+#include <string>
 
 #define EFFECT_MANAGER EffekseerManager::GetInstance()
 
@@ -39,6 +42,8 @@ public:
 
 	void Draw();
 
+	int LoadEffect(std::string _fileName);
+
 private:
     EffekseerManager();
     ~EffekseerManager();
@@ -50,7 +55,11 @@ private:
 
     static EffekseerManager* manager;
 
-	
+	int counter = 0;
+
+	//ファイル名でメッシュを取得するための連想配列
+	std::map<std::string, Effekseer::Effect*> effects;
+	std::map<int, Effekseer::Handle> handles;
 
 };
 
