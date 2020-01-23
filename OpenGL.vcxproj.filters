@@ -211,6 +211,7 @@
       <Filter>Particle</Filter>
     </ClCompile>
     <ClCompile Include="Titlelogo.cpp" />
+    <ClCompile Include="ResultLogo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -432,6 +433,7 @@
       <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="Titlelogo.h" />
+    <ClInclude Include="ResultLogo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

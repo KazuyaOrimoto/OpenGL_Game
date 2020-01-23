@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "Math.h"
 
 #define EFFECT_MANAGER EffekseerManager::GetInstance()
 
@@ -42,7 +43,9 @@ public:
 
 	void Draw();
 
-	int LoadEffect(std::string _fileName);
+	int PlayEffect(std::string _fileName);
+
+	void StopEffect(int _effectHandle);
 
 private:
     EffekseerManager();

@@ -733,8 +733,6 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 		}
 	}
 
-	DrawParticle();
-
 	EFFECT_MANAGER->Draw();
 
 }

@@ -31,6 +31,7 @@ GameObject::~GameObject()
 	{
 		delete components.back();
 	}
+	components.clear();
 }
 
 /**
@@ -148,10 +149,12 @@ void GameObject::ResetGameObject()
 	{
 		delete gameObjects.back();
 	}
+	gameObjects.clear();
 	while (!pendingGameObjects.empty())
 	{
 		delete pendingGameObjects.back();
 	}
+	pendingGameObjects.clear();
 }
 
 void GameObject::AddGameObject(GameObject * _object)

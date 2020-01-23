@@ -110,11 +110,9 @@ bool Game::Initialize()
 	// 障害物管理クラスの初期化
     ObstacleManager::CreateInstance();
 
-	SceneManager::ChangeScene(SceneName::Play);
+	SceneManager::ChangeScene(SceneName::Title);
 
 	UIManager::CreateInstance();
-
-
 
 	UI_MANAGER->LoadText("Assets/English.gptext");
 
@@ -151,6 +149,7 @@ void Game::GameLoop()
 	// ゲームのメインループを継続するか
 	while (gameState != EQuit)
 	{
+		SceneManager::SceneUpdate();
 		ProcessInput();
 		UpdateGame();
 		EFFECT_MANAGER->Update();
@@ -309,3 +308,5 @@ void ProcessInputs(const InputState & _state)
 	}
 	GameObject::updatingGameObject = false;
 }
+
+

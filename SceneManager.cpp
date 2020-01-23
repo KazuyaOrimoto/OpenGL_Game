@@ -10,21 +10,39 @@
 #include "ObstacleBox.h"
 #include "Ship.h"
 #include "Titlelogo.h"
+#include "ResultLogo.h"
+
+SceneName SceneManager::scene = SceneName::NONE;
+bool SceneManager::needChangeScene = false;
 
 void SceneManager::ChangeScene(SceneName _name)
 {
+	scene = _name;
+	needChangeScene = true;
+}
+
+void SceneManager::SceneUpdate()
+{
+	if (!needChangeScene)
+	{
+		return;
+	}
 	GameObject::ResetGameObject();
-    switch (_name)
-    {
-    case Title:
+	switch (scene)
+	{
+	case Title:
 		StartTitleScene();
-        break;
-    case Play:
+		break;
+	case Play:
 		StartPlayScene();
-        break;
-    default:
-        break;
-    }
+		break;
+	case Result:
+		StartResultScene();
+		break;
+	default:
+		break;
+	}
+	needChangeScene = false;
 }
 
 void SceneManager::StartPlayScene()
@@ -54,3 +72,9 @@ void SceneManager::StartTitleScene()
 {
 	new Titlelogo();
 }
+
+void SceneManager::StartResultScene()
+{
+	new ResultLogo();
+}
+

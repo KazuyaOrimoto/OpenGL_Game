@@ -204,6 +204,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="PlayerAnimationController.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ResultLogo.cpp" />
     <ClCompile Include="RotateComponent.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -289,6 +290,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="PlayerAnimationController.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ResultLogo.h" />
     <ClInclude Include="RotateComponent.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClInclude>

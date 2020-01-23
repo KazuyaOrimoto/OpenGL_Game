@@ -64,6 +64,7 @@ public:
 
 	static GameState GetState() { return gameState; }
 	static void SetState(GameState _state) { gameState = _state; }
+
 	
 
 private:

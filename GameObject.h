@@ -3,7 +3,6 @@
 #include <functional>
 #include "Math.h"
 
-
 class Game;
 class Vector3;
 class Matrix4;

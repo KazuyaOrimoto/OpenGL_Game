@@ -142,7 +142,7 @@ void EffekseerManager::Draw()
 
 }
 
-int EffekseerManager::LoadEffect(std::string _fileName)
+int EffekseerManager::PlayEffect(std::string _fileName)
 {
 	Effekseer::Effect* effect;
 	//一度読み込んだエフェクトかどうか
@@ -154,16 +154,21 @@ int EffekseerManager::LoadEffect(std::string _fileName)
 		effects.insert(std::make_pair(_fileName, effect));
 	}
 	Effekseer::Handle handle = g_manager->Play(effect,Effekseer::Vector3D());
-	g_manager->StopEffect(handle);
 	auto itr = handles.find(counter);
 	while (itr == handles.end())
 	{
-		counter++;
+		counter += 100;
 		itr = handles.find(counter);
 	}
+	handles.insert(std::make_pair(counter,handle));
 
+	return counter;
+}
 
-	return 0;
+void EffekseerManager::StopEffect(int _effectHandle)
+{
+	auto handle = handles.at(_effectHandle);
+	g_manager->StopEffect(handle);
 }
 
 EffekseerManager::EffekseerManager()

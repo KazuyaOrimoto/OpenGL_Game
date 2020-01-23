@@ -13,7 +13,7 @@
 #include "AnimationController.h"
 #include "PlayerAnimationController.h"
 #include "HDRMeshComponent.h"
-
+#include "SceneManager.h"
 #include "MainCamera.h"
 
 BikeObject::BikeObject(PlayerObject* _ownerObject)
@@ -67,6 +67,7 @@ void BikeObject::OnCollision(const GameObject& _hitObject)
 		{
 			return;
 		}
+		SceneManager::ChangeScene(SceneName::Result);
 		//障害物と当たった時の処理
 		//animation = true;
 		//meshComp->SetVisible(false);
