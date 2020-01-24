@@ -25,7 +25,7 @@ PlayerObject::PlayerObject()
     moveComp->SetLeftKey(SDL_SCANCODE_LEFT);
     moveComp->SetMaxStrafeSpeed(2400.0f);
     autoRun = new AutoRunComponent(this);
-    autoRun->SetForwardSpeed(2000.0f);
+    autoRun->SetForwardSpeed(000.0f);
 	//camera = new MainCamera(this);
 	//camera->SnapToIdeal();
 
@@ -75,6 +75,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 			p->SetColor(Vector3(1.0f, 0.5f, 0.2f));
 			p->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ADD);
 			p->SetIsFollowing(false);
+
 		}
 	}
 }

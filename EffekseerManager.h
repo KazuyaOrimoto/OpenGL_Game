@@ -43,7 +43,7 @@ public:
 
 	void Draw();
 
-	int PlayEffect(std::string _fileName);
+	int PlayEffect(std::wstring _fileName);
 
 	void StopEffect(int _effectHandle);
 
@@ -61,7 +61,7 @@ private:
 	int counter = 0;
 
 	//ファイル名でメッシュを取得するための連想配列
-	std::map<std::string, Effekseer::Effect*> effects;
+	std::map<std::wstring, Effekseer::Effect*> effects;
 	std::map<int, Effekseer::Handle> handles;
 
 };

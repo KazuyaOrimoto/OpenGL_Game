@@ -15,6 +15,7 @@
 #include "HDRMeshComponent.h"
 #include "SceneManager.h"
 #include "MainCamera.h"
+#include "EffekseerManager.h"
 
 BikeObject::BikeObject(PlayerObject* _ownerObject)
 	: GameObject()
@@ -112,6 +113,11 @@ void BikeObject::GameObjectInput(const InputState & _state)
 		SetRotation(ownerObject->GetRotation());
 	}
 
+	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed)
+	{
+
+		EFFECT_MANAGER->PlayEffect(L"Effect/Fire.efk");
+	}
 }
 
 bool BikeObject::CanMove()

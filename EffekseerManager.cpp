@@ -94,10 +94,10 @@ void EffekseerManager::InitEffekseer()
 	g_renderer->SetCameraMatrix(RENDERER->GetViewMatrix().GetEffekseerMatrix44());
 
 	// エフェクトの読込
-	g_effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)L"Assets/test.efk");
+	//g_effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)L"Effect/Fire.efk");
 
 	// エフェクトの再生
-	g_handle = g_manager->Play(g_effect, 0, 0, 0);
+	g_handle = g_manager->Play(g_effect, 0, 0, 60);
 }
 
 void EffekseerManager::Shutdown()
@@ -137,30 +137,42 @@ void EffekseerManager::Draw()
 	// エフェクトの描画を行う。
 	g_manager->Draw();
 
+	//有効化してる物を退避
+	glPushAttrib(GL_ENABLE_BIT);
+
 	// エフェクトの描画終了処理を行う。
 	g_renderer->EndRendering();
 
+	//元に戻す
+	glPopAttrib();
+
+	//デプステストが無効化されてるので有効化
+	glEnable(GL_DEPTH_TEST);
+
 }
 
-int EffekseerManager::PlayEffect(std::string _fileName)
+int EffekseerManager::PlayEffect(std::wstring _fileName)
 {
-	Effekseer::Effect* effect;
+	Effekseer::Effect* effect = nullptr;
 	//一度読み込んだエフェクトかどうか
-	effect = effects.at(_fileName);
+	if (effects.size() != 0)
+	{
+		effect = effects.at(_fileName);
+	}
 	//読み込まれたことのないエフェクトだった場合
 	if (effect == nullptr)
 	{
-		effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)_fileName.c_str());
+		effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)(_fileName.c_str()));
 		effects.insert(std::make_pair(_fileName, effect));
 	}
-	Effekseer::Handle handle = g_manager->Play(effect,Effekseer::Vector3D());
+	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D());
 	auto itr = handles.find(counter);
-	while (itr == handles.end())
+	while (itr != handles.end())
 	{
 		counter += 100;
 		itr = handles.find(counter);
 	}
-	handles.insert(std::make_pair(counter,handle));
+	handles.insert(std::make_pair(counter, handle));
 
 	return counter;
 }

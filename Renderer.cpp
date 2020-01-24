@@ -552,19 +552,6 @@ bool Renderer::LoadShaders()
 	// ビュー行列の設定
 	gaussianShader->SetMatrixUniform("uViewProj", viewProj);
 
-	//// 標準のメッシュシェーダーの作成
-	//meshShader = new Shader();
-	//if (!meshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
-	//{
-	//	return false;
-	//}
-
-	//basicShader = new Shader();
-	//if (!basicShader->Load("Shaders/BasicMesh.vert", "Shaders/BasicMesh.frag"))
-	//{
-	//	return false;
-	//}
-
 	particleShader = new Shader();
 	if (!particleShader->Load("Shaders/Phong.vert", "Shaders/Particle.frag"))
 	{
@@ -576,10 +563,6 @@ bool Renderer::LoadShaders()
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
 	projection = Matrix4::CreatePerspectiveFOV(Math::ToRadians(70.0f),
 		screenWidth, screenHeight, 25.0f, 13000.0f);
-	//meshShader->SetMatrixUniform("uViewProj", view * projection);
-
-	//basicShader->SetActive();
-	//basicShader->SetMatrixUniform("uViewProj", view * projection);
 	return true;
 }
 
