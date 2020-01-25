@@ -97,7 +97,7 @@ void EffekseerManager::InitEffekseer()
 	//g_effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)L"Effect/Fire.efk");
 
 	// エフェクトの再生
-	g_handle = g_manager->Play(g_effect, 0, 0, 60);
+	//g_handle = g_manager->Play(g_effect, 0, 0, 60);
 
 	g_renderer->SetRestorationOfStatesFlag(true);
 }
@@ -117,7 +117,7 @@ void EffekseerManager::Shutdown()
 void EffekseerManager::Update()
 {
 	// エフェクトの移動処理を行う
-	g_manager->AddLocation(g_handle, ::Effekseer::Vector3D(0.2f, 0.0f, 0.0f));
+	//g_manager->AddLocation(g_handle, ::Effekseer::Vector3D(0.2f, 0.0f, 0.0f));
 
 	// エフェクトの更新処理を行う
 	g_manager->Update();
@@ -152,7 +152,7 @@ int EffekseerManager::PlayEffect(std::wstring _fileName)
 		effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)(_fileName.c_str()));
 		effects.insert(std::make_pair(_fileName, effect));
 	}
-	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D());
+	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D(0.0f,0.0f,0.0f));
 	auto itr = handles.find(counter);
 	while (itr != handles.end())
 	{

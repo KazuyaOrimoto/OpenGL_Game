@@ -115,7 +115,6 @@ void BikeObject::GameObjectInput(const InputState & _state)
 
 	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed)
 	{
-
 		EFFECT_MANAGER->PlayEffect(L"Effect/Fire.efk");
 	}
 }
