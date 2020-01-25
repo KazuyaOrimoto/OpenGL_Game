@@ -152,7 +152,6 @@ void Game::GameLoop()
 		SceneManager::SceneUpdate();
 		ProcessInput();
 		UpdateGame();
-		EFFECT_MANAGER->Update();
 		GenerateOutput();
 		fps->Update();
 		IMGUI_MANAGER->Update();

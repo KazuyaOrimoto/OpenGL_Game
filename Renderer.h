@@ -221,13 +221,13 @@ private:
 	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*>textures;
 
-
 	//　コンポーネントに追加
 	//std::vector<Particle*> particles;        // パーティクル配列
 
     std::vector<MeshComponent*> basicMeshComponents;
 
 	//クラスのポインタ
+	Texture* tex;
 
     Shader* spriteShader;
     VertexArray* spriteVerts;

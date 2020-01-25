@@ -133,6 +133,9 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 	glFrontFace(GL_CCW);
 	glEnable(GL_CULL_FACE);
 
+	tex = new Texture();
+	tex->Load("Assets/Dummy.png");
+
 	return true;
 }
 
@@ -233,6 +236,8 @@ void Renderer::Draw()
 		prevRange = gaussianRange;
 		prevGaussianCoefficient = gaussianCoefficient;
 	}
+
+	EFFECT_MANAGER->Update();
 
 	//FBOに標準の画面を描画
 	Draw3DScene(fbo, view, projection, 1.0f);
@@ -700,11 +705,11 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 	glDepthMask(GL_TRUE);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
 	// メッシュコンポーネントの描画
-	// デプスバッファ法を有効にする
-	glEnable(GL_DEPTH_TEST);
 	//アルファブレンディングを無効にする
 	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
 	for (auto itr : shaderToMeshArray)
 	{
 		itr->shader->SetActive();
@@ -716,7 +721,23 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 		}
 	}
 
+	//ダミー用スプライト
+	spriteShader->SetActive();
+	spriteVerts->SetActive();
+	tex->SetActive();
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+	EFFECT_MANAGER->BeginRendering();
+
 	EFFECT_MANAGER->Draw();
+
+	//有効化してる物を退避
+	glPushAttrib(GL_ENABLE_BIT);
+
+	EFFECT_MANAGER->EndRendering();
+
+	//元に戻す
+	glPopAttrib();
 
 }
 

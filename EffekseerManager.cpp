@@ -98,6 +98,8 @@ void EffekseerManager::InitEffekseer()
 
 	// エフェクトの再生
 	g_handle = g_manager->Play(g_effect, 0, 0, 60);
+
+	g_renderer->SetRestorationOfStatesFlag(true);
 }
 
 void EffekseerManager::Shutdown()
@@ -131,23 +133,8 @@ void EffekseerManager::UpdateCameraMatrix()
 void EffekseerManager::Draw()
 {
 
-	// エフェクトの描画開始処理を行う。
-	g_renderer->BeginRendering();
-
 	// エフェクトの描画を行う。
 	g_manager->Draw();
-
-	//有効化してる物を退避
-	glPushAttrib(GL_ENABLE_BIT);
-
-	// エフェクトの描画終了処理を行う。
-	g_renderer->EndRendering();
-
-	//元に戻す
-	glPopAttrib();
-
-	//デプステストが無効化されてるので有効化
-	glEnable(GL_DEPTH_TEST);
 
 }
 

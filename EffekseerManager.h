@@ -47,6 +47,9 @@ public:
 
 	void StopEffect(int _effectHandle);
 
+	void BeginRendering() { g_renderer->BeginRendering(); }
+	void EndRendering() { g_renderer->EndRendering(); }
+
 private:
     EffekseerManager();
     ~EffekseerManager();
