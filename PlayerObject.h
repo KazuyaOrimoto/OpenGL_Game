@@ -26,6 +26,11 @@ public:
     bool CanMove();
 
 private:
+#ifdef _DEBUG
+	virtual void ShowGameObject() override;
+#endif // _DEBUG
+	float playerSpeed;
+
     MoveComponent* moveComp;
     MainCamera* camera;
     AutoRunComponent* autoRun;

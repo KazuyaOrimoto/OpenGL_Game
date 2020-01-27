@@ -86,8 +86,7 @@ void EffekseerManager::DeleteInstance()
 void EffekseerManager::InitEffekseer()
 {
 	// “Š‰es—ñ‚ðÝ’è
-	Matrix4 mat4 = RENDERER->GetProjectionMatrix();
-	::Effekseer::Matrix44 mat = RENDERER->GetProjectionMatrix().GetEffekseerMatrix44();
+	::Effekseer::Matrix44 mat = ::Effekseer::Matrix44().PerspectiveFovRH_OpenGL(50.0f / 180.0f * 3.14f, (float)RENDERER->GetScreenWidth() / (float)RENDERER->GetScreenHeight(), 1.0f, 13000.0f);
 	g_renderer->SetProjectionMatrix(mat);
 
 	// ƒJƒƒ‰s—ñ‚ðÝ’è
@@ -152,7 +151,7 @@ int EffekseerManager::PlayEffect(std::wstring _fileName)
 		effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)(_fileName.c_str()));
 		effects.insert(std::make_pair(_fileName, effect));
 	}
-	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D(0.0f,0.0f,0.0f));
+	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D(0.0f,0.0f,60.0f));
 	auto itr = handles.find(counter);
 	while (itr != handles.end())
 	{

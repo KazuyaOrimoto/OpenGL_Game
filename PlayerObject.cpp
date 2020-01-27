@@ -11,6 +11,7 @@
 #include "Math.h"
 #include "ParticleComponent.h"
 #include "Texture.h"
+#include "imguiManager.h"
 
 PlayerObject::PlayerObject()
 	:GameObject()
@@ -25,7 +26,8 @@ PlayerObject::PlayerObject()
     moveComp->SetLeftKey(SDL_SCANCODE_LEFT);
     moveComp->SetMaxStrafeSpeed(2400.0f);
     autoRun = new AutoRunComponent(this);
-    autoRun->SetForwardSpeed(100.0f);
+	playerSpeed = 1000;
+    autoRun->SetForwardSpeed(playerSpeed);
 	//camera = new MainCamera(this);
 	//camera->SnapToIdeal();
 
@@ -46,6 +48,9 @@ PlayerObject::PlayerObject()
 */
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
+
+	autoRun->SetForwardSpeed(playerSpeed);
+
 	// パーティクルのセット　これはあとでパーティクルエミッタクラス作りたい。
 
 	Vector3 randV((rand() % 100) / 10.0f, (rand() % 100) / 10.0f, (rand() % 100) / 10.0f);
@@ -84,3 +89,15 @@ bool PlayerObject::CanMove()
 {
     return rotate->CanMove() && bike->CanMove();
 }
+
+#ifdef _DEBUG
+void PlayerObject::ShowGameObject()
+{
+	ImGui::InputFloat("PlayerSpeed", &playerSpeed);
+
+	ImGui::Text("Position   :   x = %f, y = %f, z = %f", position.x, position.y, position.z);
+	ImGui::Text("Rotation   :   x = %f, y = %f, z = %f,w = %f", rotation.x, rotation.y, rotation.z, rotation.w);
+
+}
+#endif // _DEBUG
+

@@ -218,14 +218,8 @@ std::vector<GameObject*> GameObject::FindGameObjects(Tag _tag)
 
 void GameObject::ShowGameObject()
 {
-
-	ImGui::Begin(name.c_str(), &view);
-
 	ImGui::Text("Position   :   x = %f, y = %f, z = %f", position.x, position.y, position.z);
 	ImGui::Text("Rotation   :   x = %f, y = %f, z = %f,w = %f", rotation.x, rotation.y, rotation.z, rotation.w);
-
-
-	ImGui::End();
 }
 
 #endif // _DEBUG

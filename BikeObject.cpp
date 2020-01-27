@@ -28,7 +28,7 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	SetParent(_ownerObject);
 	meshComp = new HDRMeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/PlanePlayer.gpmesh"));
-	meshComp->SetHDRColor(Vector3(0.5f, 0.0f, 0.0f));
+	meshComp->SetHDRColor(Vector3(0.5f, 0.5f, 0.5f));
 	SetScale(3.0f);
 
 	sphereCollider = new SphereCollider(this, GetOnCollisionFunc());

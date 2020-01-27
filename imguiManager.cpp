@@ -190,12 +190,13 @@ void imguiManager::ShowGameObjects()
 	ImGui::Begin("GameObjects Window",&showGameObjectsWindow);
 	for (auto itr : GameObject::gameObjects)
 	{
-		
 		ImGui::Checkbox(itr->name.c_str(), &itr->view);
+		ImGui::Begin(itr->name.c_str(), &itr->view);
 		if (itr->view)
 		{
 			itr->ShowGameObject();
 		}
+		ImGui::End();
 	}
 	ImGui::End();
 }
