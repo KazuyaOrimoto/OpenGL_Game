@@ -68,7 +68,10 @@ void BikeObject::OnCollision(const GameObject& _hitObject)
 		{
 			return;
 		}
-		SceneManager::ChangeScene(SceneName::Result);
+		
+		ownerObject->playerSpeed += 500;
+
+		//SceneManager::ChangeScene(SceneName::Result);
 		//障害物と当たった時の処理
 		//animation = true;
 		//meshComp->SetVisible(false);

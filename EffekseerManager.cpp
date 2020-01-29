@@ -132,6 +132,14 @@ void EffekseerManager::UpdateCameraMatrix()
 void EffekseerManager::Draw()
 {
 
+	::Effekseer::Matrix44 m44 = g_renderer->GetCameraMatrix();
+	Matrix4 m4 = RENDERER->GetViewMatrix();
+	g_renderer->SetCameraMatrix(m4.GetEffekseerMatrix44());
+
+	::Effekseer::Matrix44 _m44 = g_renderer->GetCameraProjectionMatrix();
+	Matrix4 _m4 = RENDERER->GetProjectionMatrix();
+
+
 	// エフェクトの描画を行う。
 	g_manager->Draw();
 
@@ -151,7 +159,7 @@ int EffekseerManager::PlayEffect(std::wstring _fileName)
 		effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)(_fileName.c_str()));
 		effects.insert(std::make_pair(_fileName, effect));
 	}
-	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D(0.0f,0.0f,60.0f));
+	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D(20.0f,0.0f,60.0f));
 	auto itr = handles.find(counter);
 	while (itr != handles.end())
 	{
@@ -167,6 +175,13 @@ void EffekseerManager::StopEffect(int _effectHandle)
 {
 	auto handle = handles.at(_effectHandle);
 	g_manager->StopEffect(handle);
+}
+
+void EffekseerManager::SetCameraParameter(Vector3 & _position, Vector3 & _front)
+{
+	::Effekseer::Vector3D front = _front.GetEffekseerVector3D();
+	::Effekseer::Vector3D position = _position.GetEffekseerVector3D();
+	g_renderer->SetCameraParameter(front, position);
 }
 
 EffekseerManager::EffekseerManager()

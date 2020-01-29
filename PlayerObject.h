@@ -22,6 +22,7 @@ public:
 	virtual void UpdateGameObject(float _deltaTime);
 
 	RotateComponent* GetRotate() const { return rotate; }
+	float playerSpeed;
 
     bool CanMove();
 
@@ -29,7 +30,6 @@ private:
 #ifdef _DEBUG
 	virtual void ShowGameObject() override;
 #endif // _DEBUG
-	float playerSpeed;
 
     MoveComponent* moveComp;
     MainCamera* camera;

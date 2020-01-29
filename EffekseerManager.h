@@ -47,6 +47,8 @@ public:
 
 	void StopEffect(int _effectHandle);
 
+	void SetCameraParameter(Vector3& _position,  Vector3& _front);
+
 	void BeginRendering() { g_renderer->BeginRendering(); }
 	void EndRendering() { g_renderer->EndRendering(); }
 
