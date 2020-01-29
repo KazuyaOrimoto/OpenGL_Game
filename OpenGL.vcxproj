@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{36679240-81E7-4953-B0DE-126EB19FE058}</ProjectGuid>
     <RootNamespace>Space</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <ProjectName>OpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -160,6 +160,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="BikeObject.cpp" />
     <ClCompile Include="DialogBox.cpp" />
+    <ClCompile Include="EffectComponent.cpp" />
     <ClCompile Include="EffekseerManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -187,7 +188,9 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="JumpAnimation3.cpp" />
     <ClCompile Include="JumpAnimation4.cpp" />
     <ClCompile Include="JumpCheck.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="MainCamera.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -211,6 +214,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SlidingObject.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="SphereObject.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
@@ -245,6 +249,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="BikeObject.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DialogBox.h" />
+    <ClInclude Include="EffectComponent.h" />
     <ClInclude Include="EffekseerManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

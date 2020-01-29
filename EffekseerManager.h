@@ -43,9 +43,13 @@ public:
 
 	void Draw();
 
-	int PlayEffect(std::wstring _fileName);
+	int LoadEffect(std::wstring _fileName);
+	int PlayEffect(std::wstring _fileName , Vector3 _position);
 
-	void StopEffect(int _effectHandle);
+    void SetPosition(int _handle, Vector3 _position);
+    void SetRotation(int _handle,const Quaternion& rotaiton);
+
+    void SetPausedEffect(int _handle,bool _pause);
 
 	void SetCameraParameter(Vector3& _position,  Vector3& _front);
 
@@ -65,9 +69,7 @@ private:
 
 	int counter = 0;
 
-	//ファイル名でメッシュを取得するための連想配列
 	std::map<std::wstring, Effekseer::Effect*> effects;
-	std::map<int, Effekseer::Handle> handles;
 
 };
 

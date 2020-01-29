@@ -708,18 +708,18 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const
 
 	// メッシュコンポーネントの描画
 	//アルファブレンディングを無効にする
-	//glDisable(GL_BLEND);
-	//glEnable(GL_DEPTH_TEST);
-	//for (auto itr : shaderToMeshArray)
-	//{
-	//	itr->shader->SetActive();
-	//	itr->shader->SetMatrixUniform("uViewProj", view * projection);
-	//	SetLightUniforms(itr->shader, view);
-	//	for (auto meshComp : itr->meshComponentArray)
-	//	{
-	//		meshComp->Draw(itr->shader);
-	//	}
-	//}
+	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	for (auto itr : shaderToMeshArray)
+	{
+		itr->shader->SetActive();
+		itr->shader->SetMatrixUniform("uViewProj", view * projection);
+		SetLightUniforms(itr->shader, view);
+		for (auto meshComp : itr->meshComponentArray)
+		{
+			meshComp->Draw(itr->shader);
+		}
+	}
 
 	//ダミー用スプライト
 	spriteShader->SetActive();

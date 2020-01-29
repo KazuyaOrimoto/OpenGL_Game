@@ -145,7 +145,7 @@ void EffekseerManager::Draw()
 
 }
 
-int EffekseerManager::PlayEffect(std::wstring _fileName)
+int EffekseerManager::LoadEffect(std::wstring _fileName)
 {
 	Effekseer::Effect* effect = nullptr;
 	//一度読み込んだエフェクトかどうか
@@ -159,23 +159,44 @@ int EffekseerManager::PlayEffect(std::wstring _fileName)
 		effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)(_fileName.c_str()));
 		effects.insert(std::make_pair(_fileName, effect));
 	}
-	Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D(20.0f,0.0f,60.0f));
-	auto itr = handles.find(counter);
-	while (itr != handles.end())
-	{
-		counter += 100;
-		itr = handles.find(counter);
-	}
-	handles.insert(std::make_pair(counter, handle));
-
-	return counter;
+    Effekseer::Handle handle = g_manager->Play(effect, Effekseer::Vector3D(0.0f,0.0f,0.0f));
+    g_manager->SetPaused(handle,false);
+	return handle;
 }
 
-void EffekseerManager::StopEffect(int _effectHandle)
+int EffekseerManager::PlayEffect(std::wstring _fileName, Vector3 _position)
 {
-	auto handle = handles.at(_effectHandle);
-	g_manager->StopEffect(handle);
+    Effekseer::Effect* effect = nullptr;
+    //一度読み込んだエフェクトかどうか
+    if (effects.size() != 0)
+    {
+        effect = effects.at(_fileName);
+    }
+    //読み込まれたことのないエフェクトだった場合
+    if (effect == nullptr)
+    {
+        effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)(_fileName.c_str()));
+        effects.insert(std::make_pair(_fileName, effect));
+    }
+    Effekseer::Handle handle = g_manager->Play(effect, _position.GetEffekseerVector3D());
+    return handle;
 }
+
+void EffekseerManager::SetPosition(int _handle, Vector3 _position)
+{
+    g_manager->SetLocation(_handle,_position.GetEffekseerVector3D());
+}
+
+void EffekseerManager::SetRotation(int _handle, const Quaternion& rotaiton)
+{
+    g_manager->SetRotation(_handle,Effekseer::Vector3D(rotaiton.x,rotaiton.y,rotaiton.z),rotaiton.w);
+}
+
+void EffekseerManager::SetPausedEffect(int _handle, bool _pause)
+{
+    g_manager->SetPaused(_handle,_pause);
+}
+
 
 void EffekseerManager::SetCameraParameter(Vector3 & _position, Vector3 & _front)
 {

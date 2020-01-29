@@ -212,6 +212,8 @@
     </ClCompile>
     <ClCompile Include="Titlelogo.cpp" />
     <ClCompile Include="ResultLogo.cpp" />
+    <ClCompile Include="EffectComponent.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -434,6 +436,7 @@
     </ClInclude>
     <ClInclude Include="Titlelogo.h" />
     <ClInclude Include="ResultLogo.h" />
+    <ClInclude Include="EffectComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
