@@ -182,7 +182,7 @@ int EffekseerManager::PlayEffect(std::wstring _fileName, Vector3 _position)
     return handle;
 }
 
-void EffekseerManager::SetPosition(int _handle, Vector3 _position)
+void EffekseerManager::SetPosition(int _handle,const Vector3& _position)
 {
     g_manager->SetLocation(_handle,_position.GetEffekseerVector3D());
 }
@@ -190,6 +190,11 @@ void EffekseerManager::SetPosition(int _handle, Vector3 _position)
 void EffekseerManager::SetRotation(int _handle, const Quaternion& rotaiton)
 {
     g_manager->SetRotation(_handle,Effekseer::Vector3D(rotaiton.x,rotaiton.y,rotaiton.z),rotaiton.w);
+}
+
+void EffekseerManager::SetSize(int _handle, const Vector3 _size)
+{
+    g_manager->SetScale(_handle, _size.x,_size.y,_size.z);
 }
 
 void EffekseerManager::SetPausedEffect(int _handle, bool _pause)

@@ -189,7 +189,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="JumpAnimation4.cpp" />
     <ClCompile Include="JumpCheck.cpp" />
     <ClCompile Include="main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="MainCamera.cpp" />
     <ClCompile Include="Math.cpp" />
@@ -214,7 +214,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SlidingObject.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="SphereObject.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />

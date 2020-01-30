@@ -213,7 +213,6 @@
     <ClCompile Include="Titlelogo.cpp" />
     <ClCompile Include="ResultLogo.cpp" />
     <ClCompile Include="EffectComponent.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />

@@ -44,10 +44,11 @@ public:
 	void Draw();
 
 	int LoadEffect(std::wstring _fileName);
-	int PlayEffect(std::wstring _fileName , Vector3 _position);
+	int PlayEffect(std::wstring _fileName , Vector3 _position = Vector3::Zero);
 
-    void SetPosition(int _handle, Vector3 _position);
+    void SetPosition(int _handle,const Vector3& _position);
     void SetRotation(int _handle,const Quaternion& rotaiton);
+    void SetSize(int _handle,const Vector3 _size);
 
     void SetPausedEffect(int _handle,bool _pause);
 

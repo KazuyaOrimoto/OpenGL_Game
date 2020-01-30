@@ -303,7 +303,7 @@ public:
 		return Vector3(_vec.x * _scalar, _vec.y * _scalar, _vec.z * _scalar);
 	}
 
-	Effekseer::Vector3D GetEffekseerVector3D()
+	Effekseer::Vector3D GetEffekseerVector3D() const
 	{
 		Effekseer::Vector3D vec;
 		vec.X = x;

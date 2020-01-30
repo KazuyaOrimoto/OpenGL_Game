@@ -8,9 +8,14 @@ EffectComponent::EffectComponent(GameObject* _owner)
 {
 }
 
-
 EffectComponent::~EffectComponent()
 {
+}
+
+void EffectComponent::Update(float _deltaTime)
+{
+    EFFECT_MANAGER->SetPosition(handle,position);
+    EFFECT_MANAGER->SetRotation(handle,rotation);
 }
 
 void EffectComponent::LoadEffect(std::string _filename)
