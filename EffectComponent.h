@@ -10,19 +10,13 @@ public:
     EffectComponent(GameObject* _owner);
     ~EffectComponent();
 
-    /**
-    @brief	フレーム毎の処理
-    @param	最後のフレームを完了するのに要した時間
-    */
-    virtual void Update(float _deltaTime) override;
-
-    void LoadEffect(std::string _filename);
+    void LoadEffect(std::string _filename,Vector3 _position = Vector3::Zero);
     void Stop();
     void Play();
 
-    void SetPosition(const Vector3& _pos) { position = _pos;}
-    void SetRotation(const Quaternion& _rot) { rotation = _rot; }
-    void SetSize(const Vector3& _size) { size = _size; }
+	void SetPosition(const Vector3& _pos);
+	void SetRotation(const Quaternion& _rot);
+	void SetSize(const Vector3& _size);
 
     Vector3 GetPosition() const { return position; }
     Quaternion GetRotation() const { return rotation; }

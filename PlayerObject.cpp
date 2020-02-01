@@ -12,34 +12,41 @@
 #include "ParticleComponent.h"
 #include "Texture.h"
 #include "imguiManager.h"
+#include "EffectComponent.h"
+#include "EffekseerManager.h"
 
 PlayerObject::PlayerObject()
 	:GameObject()
 {
-    SetPosition(Vector3(0.0f, 0.0f, 60.0f));
+	SetPosition(Vector3(0.0f, 0.0f, 60.0f));
 
-    OBSTACLE_MANAGER->AddPlayer(this);
+	OBSTACLE_MANAGER->AddPlayer(this);
 	rotate = new RotateComponent(this);
 
-    moveComp = new MoveComponent(this);
-    moveComp->SetRightKey(SDL_SCANCODE_RIGHT);
-    moveComp->SetLeftKey(SDL_SCANCODE_LEFT);
-    moveComp->SetMaxStrafeSpeed(2400.0f);
-    autoRun = new AutoRunComponent(this);
-	playerSpeed = 10;
-    autoRun->SetForwardSpeed(playerSpeed);
+	moveComp = new MoveComponent(this);
+	moveComp->SetRightKey(SDL_SCANCODE_RIGHT);
+	moveComp->SetLeftKey(SDL_SCANCODE_LEFT);
+	moveComp->SetMaxStrafeSpeed(2400.0f);
+	autoRun = new AutoRunComponent(this);
+	playerSpeed = 1000;
+	autoRun->SetForwardSpeed(playerSpeed);
 	//camera = new MainCamera(this);
 	//camera->SnapToIdeal();
 
-    bike = new BikeObject(this);
-    autoRun->SetDrilObject(bike);
+	bike = new BikeObject(this);
+	autoRun->SetDrilObject(bike);
 
-    SetScale(10.0f);
+	SetScale(10.0f);
 
-    tag = Tag::Player;
+	tag = Tag::Player;
 	texture = RENDERER->GetTexture("Assets/fire.png");
 
 	name = "Player";
+	effect = new EffectComponent(this);
+	effect->SetPosition(position);
+	effect->LoadEffect("Effect/Fire.efk",position);
+	effect->Play();
+
 }
 
 /**
@@ -50,6 +57,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 {
 
 	autoRun->SetForwardSpeed(playerSpeed);
+	effect->SetPosition(position);
 
 	// パーティクルのセット　これはあとでパーティクルエミッタクラス作りたい。
 
@@ -65,29 +73,17 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	frame++;
 	if (frame % 5 == 0)
 	{
-		for (int i = 0; i < 1; i++)
-		{
-			Vector3 pos;
-			pos = Vector3(-300, 0, 0);
-			pos = pos + randV;
-
-			ParticleComponent* p = new ParticleComponent(this,pos,
-				Velocity,
-				20.0f, 1.0f,
-				randV.x * 0.5f);
-
-			p->SetTextureID(texture->GetTextureID());
-			p->SetColor(Vector3(1.0f, 0.5f, 0.2f));
-			p->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM_ADD);
-			p->SetIsFollowing(false);
-
-		}
+		//EFFECT_MANAGER->PlayEffect(L"Effect/Fire.efk", position);
+		//effect = new EffectComponent(this);
+		//effect->LoadEffect("Effect/Fire.efk", position);
+		//effect->SetPosition(position);
+		//effect->Play();
 	}
 }
 
 bool PlayerObject::CanMove()
 {
-    return rotate->CanMove() && bike->CanMove();
+	return rotate->CanMove() && bike->CanMove();
 }
 
 #ifdef _DEBUG

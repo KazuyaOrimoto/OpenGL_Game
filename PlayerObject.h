@@ -9,6 +9,7 @@ class ObstacleObject;
 class RotateComponent;
 class BikeObject;
 class Texture;
+class EffectComponent;
 
 class PlayerObject : public GameObject
 {
@@ -37,5 +38,6 @@ private:
 	RotateComponent* rotate;
 	BikeObject* bike;
 	Texture* texture;
+	EffectComponent* effect;
 };
 

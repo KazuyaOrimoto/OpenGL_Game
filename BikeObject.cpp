@@ -26,9 +26,9 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	, jump(false)
 {
 	SetParent(_ownerObject);
-	meshComp = new HDRMeshComponent(this);
-	meshComp->SetMesh(RENDERER->GetMesh("Assets/PlanePlayer.gpmesh"));
-	meshComp->SetHDRColor(Vector3(0.5f, 0.5f, 0.5f));
+	//meshComp = new HDRMeshComponent(this);
+	//meshComp->SetMesh(RENDERER->GetMesh("Assets/PlanePlayer.gpmesh"));
+	//meshComp->SetHDRColor(Vector3(0.5f, 0.5f, 0.5f));
 	SetScale(3.0f);
 
 	sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
@@ -118,7 +118,7 @@ void BikeObject::GameObjectInput(const InputState & _state)
 
 	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed)
 	{
-		EFFECT_MANAGER->PlayEffect(L"Effect/Fire.efk",Vector3::Zero);
+		EFFECT_MANAGER->PlayEffect(L"Effect/Fire.efk",ownerObject->GetPosition());
 	}
 }
 
