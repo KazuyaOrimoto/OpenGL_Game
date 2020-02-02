@@ -44,7 +44,7 @@ PlayerObject::PlayerObject()
 	name = "Player";
 	effect = new EffectComponent(this);
 	effect->SetPosition(position);
-	effect->LoadEffect("Effect/Fire.efk",position);
+	effect->LoadEffect("Effect/trail.efk",position);
 	effect->Play();
 
 }

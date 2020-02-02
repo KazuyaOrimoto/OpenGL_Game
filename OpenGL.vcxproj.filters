@@ -212,7 +212,9 @@
     </ClCompile>
     <ClCompile Include="Titlelogo.cpp" />
     <ClCompile Include="ResultLogo.cpp" />
-    <ClCompile Include="EffectComponent.cpp" />
+    <ClCompile Include="EffectComponent.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -435,7 +437,9 @@
     </ClInclude>
     <ClInclude Include="Titlelogo.h" />
     <ClInclude Include="ResultLogo.h" />
-    <ClInclude Include="EffectComponent.h" />
+    <ClInclude Include="EffectComponent.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
