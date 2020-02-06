@@ -12,9 +12,10 @@
 #include <stdlib.h>
 #include "SDL.h"
 
+GameObject* ObstacleBox::player = nullptr;
+
 ObstacleBox::ObstacleBox()
 	:GameObject()
-	, player(nullptr)
 {
 	meshComp = new MeshComponent(this);
 

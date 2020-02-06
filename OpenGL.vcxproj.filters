@@ -215,6 +215,7 @@
     <ClCompile Include="EffectComponent.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="BoostItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -440,6 +441,7 @@
     <ClInclude Include="EffectComponent.h">
       <Filter>Particle</Filter>
     </ClInclude>
+    <ClInclude Include="BoostItem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

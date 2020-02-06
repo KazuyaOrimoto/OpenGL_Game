@@ -9,6 +9,7 @@
 #include <document.h>
 #include <string>
 #include "ObstacleMapLoder.h"
+#include "BoostItem.h"
 
 ObstacleMapLoder* ObstacleObject::mapLoder = nullptr;
 
@@ -48,13 +49,23 @@ void ObstacleObject::CreateObstacle(float _depth)
 	rapidjson::Value& Obstacles = (*doc)["Obstacles"];
     for (Uint16 i = 0; i < Obstacles.Size(); i++)
     {
-        ObstacleBox* box = static_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle(Obstacles[i]["type"].GetString()));
-        if (box == nullptr)
-        {
-            return;
-        }
-        box->SetPosition(Vector3(_depth, Obstacles[i]["x"].GetFloat(), Obstacles[i]["y"].GetFloat()));
-        box->UseObstacle();
+		std::string type = Obstacles[i]["type"].GetString();
+		if (type == "Obstacle")
+		{
+			ObstacleBox* box = static_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle(type));
+			if (box == nullptr)
+			{
+				return;
+			}
+			box->SetPosition(Vector3(_depth, Obstacles[i]["x"].GetFloat(), Obstacles[i]["y"].GetFloat()));
+			box->UseObstacle();
+		}
+
+		else if (type == "Boost")
+		{
+			GameObject* gameObject = new BoostItem();
+			gameObject->SetPosition(Vector3(_depth,Obstacles[i]["x"].GetFloat(),Obstacles[i]["y"].GetFloat()));
+		}
     }
     SetPosition(Vector3(_depth, 0.0f, 0.0f));
 }

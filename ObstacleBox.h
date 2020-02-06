@@ -31,6 +31,6 @@ public:
 private:
 	MeshComponent* meshComp;
 	BoxCollider* boxCollider;
-	GameObject* player;
+	static GameObject* player;
 };
 

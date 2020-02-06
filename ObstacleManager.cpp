@@ -50,12 +50,9 @@ ObstacleBox* ObstacleManager::GetObstacle(std::string _type)
 					return itr;
 				}
 			}
-			if (_type == "JumpingObstacle")
+			if (_type == "Boost")
 			{
-				if (itr->GetTag() == Tag::JumpingObstacle)
-				{
-					return itr;
-				}
+
 			}
 		}
 	}
