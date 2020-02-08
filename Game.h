@@ -36,7 +36,7 @@ public:
 
 //===================== パブリック関数 ======================//
 
-	Game();
+	Game(int _argc, char** _argv);
 	~Game();
 
     /**
@@ -107,5 +107,7 @@ private:
 	FPS*				fps;				// FPS計測クラス
 	InputSystem*		inputSystem;		// 入力管理クラス
 	static GameState	gameState;				// ゲームの状態
+	int argc;
+	char** argv;
 };
 

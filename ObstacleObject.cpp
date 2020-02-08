@@ -66,6 +66,16 @@ void ObstacleObject::CreateObstacle(float _depth)
 			BoostItem* gameObject = static_cast<BoostItem*>(OBSTACLE_MANAGER->GetBoostItem(type));
 			gameObject->UseBoostItem();
 			gameObject->SetPosition(Vector3(_depth,Obstacles[i]["x"].GetFloat(),Obstacles[i]["y"].GetFloat()));
+			//Quaternion r = Quaternion(Vector3::UnitX, Math::ToRadians(Obstacles[i]["w"].GetInt()));
+
+			gameObject->SetRot(Obstacles[i]["w"].GetInt());
+
+			Quaternion rot = gameObject->GetRotation();
+			float rad = Math::ToRadians(Obstacles[i]["w"].GetInt());
+			Quaternion inc(Vector3::UnitX, rad);
+			rot = Quaternion::Concatenate(rot, inc);
+
+			gameObject->SetRotation(rot);
 		}
     }
     SetPosition(Vector3(_depth, 0.0f, 0.0f));

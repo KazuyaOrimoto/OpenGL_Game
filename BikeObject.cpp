@@ -28,7 +28,7 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	SetParent(_ownerObject);
 	meshComp = new HDRMeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/PlanePlayer.gpmesh"));
-	meshComp->SetHDRColor(Vector3(0.5f, 0.5f, 0.5f));
+	meshComp->SetHDRColor(Vector3(0.3f, 0.3f, 0.3f));
 	SetScale(3.0f);
 
 	sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
@@ -62,7 +62,7 @@ void BikeObject::UpdateGameObject(float _deltaTime)
 
 void BikeObject::OnCollision(const GameObject& _hitObject)
 {
-	if (_hitObject.GetTag() == Tag::Obstacle)
+	if (_hitObject.GetTag() == Tag::Boost)
 	{
 		if (jump)
 		{

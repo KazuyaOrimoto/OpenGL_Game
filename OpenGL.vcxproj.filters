@@ -450,9 +450,6 @@
     <Filter Include="Components">
       <UniqueIdentifier>{453546c5-e9de-4e3e-a25b-f98a2b7e8960}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{82d6709d-ae31-4598-b249-044af437e576}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FPS">
       <UniqueIdentifier>{f5cd1200-4d13-4894-b195-06cc32386c5f}</UniqueIdentifier>
     </Filter>
@@ -506,6 +503,9 @@
     </Filter>
     <Filter Include="MeshComponent">
       <UniqueIdentifier>{672eea7b-1db4-48bc-aec1-d3172af78e83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{82d6709d-ae31-4598-b249-044af437e576}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

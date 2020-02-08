@@ -10,13 +10,14 @@
 #include "Mesh.h"
 #include <stdlib.h>
 #include "SDL.h"
+#include "HDRMeshComponent.h"
 
 GameObject* ObstacleBox::player = nullptr;
 
 ObstacleBox::ObstacleBox()
 	:GameObject()
 {
-	meshComp = new MeshComponent(this);
+	meshComp = new HDRMeshComponent(this);
 
 	Mesh* mesh = nullptr;
 	mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
@@ -49,6 +50,7 @@ ObstacleBox::ObstacleBox()
 	state = Paused;
 	player = GameObject::FindGameObject(Tag::Player);
 	meshComp->SetVisible(false);
+	//meshComp->SetHDRColor();
 
 	name = "Box";
 }

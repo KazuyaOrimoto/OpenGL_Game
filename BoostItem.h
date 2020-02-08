@@ -18,8 +18,11 @@ public:
 	virtual void ResetBoostItem();
 	virtual void UseBoostItem();
 
+	void SetRot(float _rot);
+
 private:
 	class EffectComponent* comp;
 	static GameObject* player;
+	float rot;
 };
 

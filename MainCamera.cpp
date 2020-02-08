@@ -7,10 +7,10 @@
 
 MainCamera::MainCamera(GameObject* _owner)
 	:CameraComponent(_owner)
-	, horzDist(1000.0f)
+	, horzDist(500.0f)
 	, vertDist(300.0f)
-	, targetDist(300.0f)
-	, springConstant(100.0f)
+	, targetDist(3000.0f)
+	, springConstant(300.0f)
 	, rotate(nullptr)
 {
 	rotate = (dynamic_cast<PlayerObject*>(_owner->GetParent())->GetRotate());

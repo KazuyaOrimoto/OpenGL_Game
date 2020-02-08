@@ -23,7 +23,7 @@ public:
     /**
     @brief  インスタンスを作成する
     */
-    static void CreateInstance();
+    static void CreateInstance(char** _argv);
 
     /**
     @brief  インスタンスを削除する

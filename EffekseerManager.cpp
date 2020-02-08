@@ -66,7 +66,7 @@ void GetDirectoryName(char* dst, char* src)
 }
 #endif
 
-void EffekseerManager::CreateInstance()
+void EffekseerManager::CreateInstance(char** _argv)
 {
 	if (manager == nullptr)
 	{
@@ -188,7 +188,6 @@ void EffekseerManager::SetPausedEffect(int _handle, bool _pause)
 	g_manager->SetPaused(_handle, _pause);
 	g_manager->SetShown(_handle,!_pause);
 }
-
 
 void EffekseerManager::SetCameraParameter(Vector3 & _position, Vector3 & _front)
 {

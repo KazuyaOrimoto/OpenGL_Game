@@ -1,13 +1,16 @@
 #include "BoostItem.h"
 #include "ObstacleManager.h"
 #include "EffectComponent.h"
+#include "Math.h"
+#include "BoxCollider.h"
+
 
 GameObject* BoostItem::player = nullptr;
 
 BoostItem::BoostItem()
 {
 	comp = new EffectComponent(this);
-	comp->LoadEffect("Effect/Boost.efk",position);
+	comp->LoadEffect("Effect/Boost.efk", position);
 	comp->Stop();
 	state = Paused;
 	if (player == nullptr)
@@ -15,7 +18,11 @@ BoostItem::BoostItem()
 		player = GameObject::FindGameObject(Tag::Player);
 	}
 	OBSTACLE_MANAGER->AddBoostItem(this);
-	tag = Tag::Boost;
+	tag = Tag::Boost;	
+	SetScale(100.0f);
+	BoxCollider* b = new BoxCollider(this, GetOnCollisionFunc());
+	AABB box = { Vector3(-1.0f,-1.0f,-1.0f) , Vector3(1.0f,1.0f,1.0f) };
+	b->SetObjectBox(box);
 }
 
 BoostItem::~BoostItem()
@@ -41,7 +48,11 @@ void BoostItem::UpdateGameObject(float _deltaTime)
 	{
 		ResetBoostItem();
 	}
-	comp->SetPosition(position);
+	Vector3 down = (GetRight() * -1) * 100;
+	comp->SetPosition(position + down);
+	//comp->SetPosition(position);
+	Quaternion r = Quaternion(1.0f, 0.0f, 0.0f, Math::ToRadians(rot));
+	comp->SetRotation(r);
 }
 
 void BoostItem::ResetBoostItem()
@@ -56,4 +67,10 @@ void BoostItem::UseBoostItem()
 	state = Active;
 	GameObject::RemoveGameObject(this);
 	GameObject::AddGameObject(this);
+	rotation = Quaternion::Identity;
+}
+
+void BoostItem::SetRot(float _rot)
+{
+	rot = _rot;
 }

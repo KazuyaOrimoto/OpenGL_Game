@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "GameObject.h"
 
-class MeshComponent;
+class HDRMeshComponent;
 class BoxCollider;
 class PlayerObject;
 
@@ -29,7 +29,7 @@ public:
 	void UpdateGameObject(float _deltaTime) override;
 
 private:
-	MeshComponent* meshComp;
+	HDRMeshComponent* meshComp;
 	BoxCollider* boxCollider;
 	static GameObject* player;
 };
