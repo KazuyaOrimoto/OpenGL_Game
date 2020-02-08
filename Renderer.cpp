@@ -130,8 +130,8 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 	prevRange = gaussianRange;
 	prevGaussianCoefficient = gaussianCoefficient;
 	// カリング
-	glFrontFace(GL_CCW);
-	glEnable(GL_CULL_FACE);
+	//glFrontFace(GL_CCW);
+	//glEnable(GL_CULL_FACE);
 
 	tex = new Texture();
 	tex->Load("Assets/Dummy.png");

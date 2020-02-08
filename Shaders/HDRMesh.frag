@@ -60,7 +60,7 @@ void main()
 	}
 
 	// Final color is texture color times phong light (alpha = 1)
-    outColor = texture(uTexture, fragTexCoord) * vec4(Phong, 1.0f);
+    outColor0 = texture(uTexture, fragTexCoord) * vec4(Phong, 1.0f);
     outColor1.a = outColor0.a;
     vec3 bright = (outColor0.rgb + uHDRColor) - vec3(1.0,1.0,1.0);
     vec3 col = clamp(bright,vec3(0.0,0.0,0.0),vec3(1.0,1.0,1.0));
