@@ -204,10 +204,10 @@ void EffekseerManager::StopEffect(int _handle)
 EffekseerManager::EffekseerManager()
 {
 	// 描画用インスタンスの生成
-	g_renderer = ::EffekseerRendererGL::Renderer::Create(1000);
+	g_renderer = ::EffekseerRendererGL::Renderer::Create(3000);
 
 	// エフェクト管理用インスタンスの生成
-	g_manager = ::Effekseer::Manager::Create(10000);
+	g_manager = ::Effekseer::Manager::Create(15000);
 
 	// 描画用インスタンスから描画機能を設定
 	g_manager->SetSpriteRenderer(g_renderer->CreateSpriteRenderer());
