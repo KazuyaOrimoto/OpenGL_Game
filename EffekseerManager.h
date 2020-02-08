@@ -54,6 +54,8 @@ public:
 
 	void SetCameraParameter(Vector3& _position,  Vector3& _front);
 
+	void StopEffect(int _handle);
+
 	void BeginRendering() { g_renderer->BeginRendering(); }
 	void EndRendering() { g_renderer->EndRendering(); }
 

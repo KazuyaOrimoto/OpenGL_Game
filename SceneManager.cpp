@@ -11,6 +11,7 @@
 #include "Ship.h"
 #include "Titlelogo.h"
 #include "ResultLogo.h"
+#include "BoostItem.h"
 
 SceneName SceneManager::scene = SceneName::NONE;
 bool SceneManager::needChangeScene = false;
@@ -55,6 +56,12 @@ void SceneManager::StartPlayScene()
 	for (int i = 0; i < 500; i++)
 	{
 		box = new ObstacleBox();
+	}
+
+	BoostItem* item;
+	for (int i = 0; i < 50; i++)
+	{
+		item = new BoostItem();
 	}
 
 	for (int i = 0; i < StaticObstacle::ObstacleMaxNum; i++)

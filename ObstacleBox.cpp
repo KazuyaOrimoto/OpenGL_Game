@@ -8,7 +8,6 @@
 #include "PlayerObject.h"
 #include "RotateComponent.h"
 #include "Mesh.h"
-#include "GameObjectManager.h"
 #include <stdlib.h>
 #include "SDL.h"
 

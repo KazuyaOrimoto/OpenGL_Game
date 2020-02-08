@@ -25,6 +25,12 @@ public:
 	RotateComponent* GetRotate() const { return rotate; }
 	float playerSpeed;
 
+	/**
+ @brief	入力処理
+ @param	InputState構造体
+ */
+	virtual void GameObjectInput(const InputState& _state)override;
+
     bool CanMove();
 
 private:

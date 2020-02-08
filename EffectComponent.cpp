@@ -11,6 +11,7 @@ EffectComponent::EffectComponent(GameObject* _owner)
 
 EffectComponent::~EffectComponent()
 {
+	EFFECT_MANAGER->StopEffect(handle);
 }
 
 void EffectComponent::LoadEffect(std::string _filename, Vector3 _position)

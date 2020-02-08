@@ -7,6 +7,7 @@
 
 class PlayerObject;
 class ObstacleBox;
+class BoostItem;
 
 class ObstacleManager
 {
@@ -19,8 +20,11 @@ public:
 	void RemovePlayer() { player = nullptr; }
 	void AddObstacle(ObstacleBox* _obstacle);
 	void RemoveObstacle(ObstacleBox* _obstacle);
+	void AddBoostItem(BoostItem* _boost);
+	void RemoveBoostItem(BoostItem* _boost);
 
 	ObstacleBox* GetObstacle(std::string _type);
+	BoostItem* GetBoostItem(std::string _type);
 
 private:
 	ObstacleManager();
@@ -29,6 +33,7 @@ private:
 
 	PlayerObject* player;
 	std::vector<ObstacleBox*> obstacles;
+	std::vector<BoostItem*> boostItems;
 
 };
 

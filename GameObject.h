@@ -14,6 +14,7 @@ enum Tag
 	NoneTag,
 	Player,
 	Obstacle,
+	Boost,
 	JumpingObstacle,
 	Wall,
 	CheckArea

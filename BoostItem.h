@@ -15,7 +15,11 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime) override;
 
+	virtual void ResetBoostItem();
+	virtual void UseBoostItem();
+
 private:
 	class EffectComponent* comp;
+	static GameObject* player;
 };
 

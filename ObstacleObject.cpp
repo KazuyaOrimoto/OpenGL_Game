@@ -63,7 +63,8 @@ void ObstacleObject::CreateObstacle(float _depth)
 
 		else if (type == "Boost")
 		{
-			GameObject* gameObject = new BoostItem();
+			BoostItem* gameObject = static_cast<BoostItem*>(OBSTACLE_MANAGER->GetBoostItem(type));
+			gameObject->UseBoostItem();
 			gameObject->SetPosition(Vector3(_depth,Obstacles[i]["x"].GetFloat(),Obstacles[i]["y"].GetFloat()));
 		}
     }

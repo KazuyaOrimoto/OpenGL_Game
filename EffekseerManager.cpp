@@ -186,6 +186,7 @@ void EffekseerManager::SetSize(int _handle, const Vector3 _size)
 void EffekseerManager::SetPausedEffect(int _handle, bool _pause)
 {
 	g_manager->SetPaused(_handle, _pause);
+	g_manager->SetShown(_handle,!_pause);
 }
 
 
@@ -196,13 +197,18 @@ void EffekseerManager::SetCameraParameter(Vector3 & _position, Vector3 & _front)
 	g_renderer->SetCameraParameter(front, position);
 }
 
+void EffekseerManager::StopEffect(int _handle)
+{
+	g_manager->StopEffect(_handle);
+}
+
 EffekseerManager::EffekseerManager()
 {
 	// 描画用インスタンスの生成
-	g_renderer = ::EffekseerRendererGL::Renderer::Create(2000);
+	g_renderer = ::EffekseerRendererGL::Renderer::Create(1000);
 
 	// エフェクト管理用インスタンスの生成
-	g_manager = ::Effekseer::Manager::Create(2000);
+	g_manager = ::Effekseer::Manager::Create(10000);
 
 	// 描画用インスタンスから描画機能を設定
 	g_manager->SetSpriteRenderer(g_renderer->CreateSpriteRenderer());

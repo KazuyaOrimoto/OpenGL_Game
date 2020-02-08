@@ -2,6 +2,7 @@
 #include "PlayerObject.h"
 #include "ObstacleBox.h"
 #include "GameObject.h"
+#include "BoostItem.h"
 
 ObstacleManager* ObstacleManager::obstacle = nullptr;
 
@@ -37,6 +38,21 @@ void ObstacleManager::RemoveObstacle(ObstacleBox* _obstacle)
 	}
 }
 
+void ObstacleManager::AddBoostItem(BoostItem * _boost)
+{
+	boostItems.emplace_back(_boost);
+}
+
+void ObstacleManager::RemoveBoostItem(BoostItem * _boost)
+{
+	auto iter = std::find(boostItems.begin(), boostItems.end(), _boost);
+	if (iter != boostItems.end())
+	{
+		std::iter_swap(iter, boostItems.end() - 1);
+		boostItems.pop_back();
+	}
+}
+
 ObstacleBox* ObstacleManager::GetObstacle(std::string _type)
 {
 	for (auto itr : obstacles)
@@ -50,9 +66,23 @@ ObstacleBox* ObstacleManager::GetObstacle(std::string _type)
 					return itr;
 				}
 			}
+		}
+	}
+	return nullptr;
+}
+
+BoostItem * ObstacleManager::GetBoostItem(std::string _type)
+{
+	for (auto itr : boostItems)
+	{
+		if (itr->GetState() == Paused)
+		{
 			if (_type == "Boost")
 			{
-
+				if (itr->GetTag() == Tag::Boost)
+				{
+					return itr;
+				}
 			}
 		}
 	}

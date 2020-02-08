@@ -14,6 +14,7 @@
 #include "imguiManager.h"
 #include "EffectComponent.h"
 #include "EffekseerManager.h"
+#include "InputSystem.h"
 
 PlayerObject::PlayerObject()
 	:GameObject()
@@ -78,6 +79,14 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 		//effect->LoadEffect("Effect/Fire.efk", position);
 		//effect->SetPosition(position);
 		//effect->Play();
+	}
+}
+
+void PlayerObject::GameObjectInput(const InputState & _state)
+{
+	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE))
+	{
+		effect->Stop();
 	}
 }
 
