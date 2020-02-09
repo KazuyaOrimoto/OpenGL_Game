@@ -4,7 +4,6 @@
 #include "Math.h"
 #include "BoxCollider.h"
 
-
 GameObject* BoostItem::player = nullptr;
 
 BoostItem::BoostItem()

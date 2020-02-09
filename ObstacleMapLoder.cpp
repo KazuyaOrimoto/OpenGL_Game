@@ -33,7 +33,7 @@ void ObstacleMapLoder::Initialize()
 	{
 		data = new rapidjson::Document();
 		std::string mapNum = std::to_string(i);
-		fileName = "MapData/map";
+		fileName = "MapData/Stage";
 		fileName = fileName + mapNum;
 		fileName = fileName + ".json";
 		LoadMap(fileName,data);
