@@ -14,6 +14,7 @@
 #include "BoostItem.h"
 #include "GameOverLogo.h"
 #include "GameClearLogo.h"
+#include "TitlePlayer.h"
 
 SceneName SceneManager::scene = SceneName::NONE;
 bool SceneManager::needChangeScene = false;
@@ -83,6 +84,7 @@ void SceneManager::StartPlayScene()
 void SceneManager::StartTitleScene()
 {
 	new Titlelogo();
+	new TitlePlayer();
 }
 
 void SceneManager::StartGameOverScene()

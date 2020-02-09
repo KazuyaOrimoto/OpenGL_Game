@@ -9,7 +9,7 @@ GameOverLogo::GameOverLogo()
 {
 	SpriteComponent* sprite = new SpriteComponent(this);
 	Texture* tex = new Texture();
-	tex->Load("Assets/GameClear.png");
+	tex->Load("Assets/GameOver.png");
 	sprite->SetTexture(tex);
 }
 

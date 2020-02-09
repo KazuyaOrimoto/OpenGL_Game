@@ -218,6 +218,8 @@
     <ClCompile Include="BoostItem.cpp" />
     <ClCompile Include="GameOverLogo.cpp" />
     <ClCompile Include="GameClearLogo.cpp" />
+    <ClCompile Include="TitlePlayer.cpp" />
+    <ClCompile Include="TitleCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -446,6 +448,8 @@
     <ClInclude Include="BoostItem.h" />
     <ClInclude Include="GameOverLogo.h" />
     <ClInclude Include="GameClearLogo.h" />
+    <ClInclude Include="TitlePlayer.h" />
+    <ClInclude Include="TitleCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
