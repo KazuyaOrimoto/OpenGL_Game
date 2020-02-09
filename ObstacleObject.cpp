@@ -10,6 +10,7 @@
 #include <string>
 #include "ObstacleMapLoder.h"
 #include "BoostItem.h"
+#include "WallObject.h"
 
 ObstacleMapLoder* ObstacleObject::mapLoder = nullptr;
 
@@ -37,7 +38,7 @@ void ObstacleObject::UpdateGameObject(float _deltaTime)
 	{
 		return;
 	}
-    if (player->GetPosition().x - 500.0f > position.x)
+    if (player->GetPosition().x - 1000.0f > position.x)
     {
         CreateObstacle(position.x + StaticObstacle::ObstacleMaxNum * StaticObstacle::ObstacleDistanceNum);
     }
@@ -46,37 +47,46 @@ void ObstacleObject::UpdateGameObject(float _deltaTime)
 void ObstacleObject::CreateObstacle(float _depth)
 {
 	rapidjson::Document* doc = mapLoder->GetRandamMap();
-	rapidjson::Value& Obstacles = (*doc)["Obstacles"];
-    for (Uint16 i = 0; i < Obstacles.Size(); i++)
-    {
-		std::string type = Obstacles[i]["type"].GetString();
-		if (type == "Obstacle")
+	//マップのデータがないとき
+	if (doc == nullptr)
+	{
+		WallObject::GameEnd();
+	}
+	//マップのデータがあるとき
+	else
+	{
+		rapidjson::Value& Obstacles = (*doc)["Obstacles"];
+		for (Uint16 i = 0; i < Obstacles.Size(); i++)
 		{
-			ObstacleBox* box = static_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle(type));
-			if (box == nullptr)
+			std::string type = Obstacles[i]["type"].GetString();
+			if (type == "Obstacle")
 			{
-				return;
+				ObstacleBox* box = static_cast<ObstacleBox*>(OBSTACLE_MANAGER->GetObstacle(type));
+				if (box == nullptr)
+				{
+					return;
+				}
+				box->SetPosition(Vector3(_depth, Obstacles[i]["x"].GetFloat(), Obstacles[i]["y"].GetFloat()));
+				box->UseObstacle();
 			}
-			box->SetPosition(Vector3(_depth, Obstacles[i]["x"].GetFloat(), Obstacles[i]["y"].GetFloat()));
-			box->UseObstacle();
+
+			else if (type == "Boost")
+			{
+				BoostItem* gameObject = static_cast<BoostItem*>(OBSTACLE_MANAGER->GetBoostItem(type));
+				gameObject->UseBoostItem();
+				gameObject->SetPosition(Vector3(_depth, Obstacles[i]["x"].GetFloat(), Obstacles[i]["y"].GetFloat()));
+				//Quaternion r = Quaternion(Vector3::UnitX, Math::ToRadians(Obstacles[i]["w"].GetInt()));
+
+				gameObject->SetRot(Obstacles[i]["w"].GetInt());
+
+				Quaternion rot = gameObject->GetRotation();
+				float rad = Math::ToRadians(Obstacles[i]["w"].GetInt());
+				Quaternion inc(Vector3::UnitX, rad);
+				rot = Quaternion::Concatenate(rot, inc);
+
+				gameObject->SetRotation(rot);
+			}
 		}
-
-		else if (type == "Boost")
-		{
-			BoostItem* gameObject = static_cast<BoostItem*>(OBSTACLE_MANAGER->GetBoostItem(type));
-			gameObject->UseBoostItem();
-			gameObject->SetPosition(Vector3(_depth,Obstacles[i]["x"].GetFloat(),Obstacles[i]["y"].GetFloat()));
-			//Quaternion r = Quaternion(Vector3::UnitX, Math::ToRadians(Obstacles[i]["w"].GetInt()));
-
-			gameObject->SetRot(Obstacles[i]["w"].GetInt());
-
-			Quaternion rot = gameObject->GetRotation();
-			float rad = Math::ToRadians(Obstacles[i]["w"].GetInt());
-			Quaternion inc(Vector3::UnitX, rad);
-			rot = Quaternion::Concatenate(rot, inc);
-
-			gameObject->SetRotation(rot);
-		}
-    }
-    SetPosition(Vector3(_depth, 0.0f, 0.0f));
+		SetPosition(Vector3(_depth, 0.0f, 0.0f));
+	}
 }

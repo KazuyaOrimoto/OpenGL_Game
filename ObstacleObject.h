@@ -12,7 +12,7 @@ class ObstacleMapLoder;
 
 namespace StaticObstacle
 {
-	static const int ObstacleMaxNum = 10;
+	static const int ObstacleMaxNum = 5;
 	static const float ObstacleDistanceNum = 4000.0f;
 }
 

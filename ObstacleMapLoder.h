@@ -4,7 +4,7 @@
 
 namespace ObstacleMap
 {
-	const int MAP_QTY = 1;
+	const int MAP_QTY = 16;
 }
 
 class ObstacleMapLoder
@@ -20,5 +20,6 @@ private:
 	void LoadMap(const std::string & argFileName, rapidjson::Document* doc);
 
 	std::vector<rapidjson::Document*> mapDocments;
+	int mapNum;
 };
 

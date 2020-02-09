@@ -119,7 +119,7 @@ bool Game::Initialize()
 	UI_MANAGER->LoadText("Assets/English.gptext");
 
 	// Setup lights
-	RENDERER->SetAmbientLight(Vector3(0.8f, 0.8f, 0.8f));
+	RENDERER->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.direction = Vector3(0.0f, 0.707f, -0.707f);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);

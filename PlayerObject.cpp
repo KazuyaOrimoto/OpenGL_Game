@@ -29,7 +29,7 @@ PlayerObject::PlayerObject()
 	moveComp->SetLeftKey(SDL_SCANCODE_LEFT);
 	moveComp->SetMaxStrafeSpeed(2400.0f);
 	autoRun = new AutoRunComponent(this);
-	playerSpeed = 2000;
+	playerSpeed = 3000;
 	autoRun->SetForwardSpeed(playerSpeed);
 	//camera = new MainCamera(this);
 	//camera->SnapToIdeal();
@@ -45,7 +45,7 @@ PlayerObject::PlayerObject()
 	name = "Player";
 	effect = new EffectComponent(this);
 	effect->SetPosition(position);
-	effect->LoadEffect("Effect/trail.efk",position);
+	effect->LoadEffect("Effect/trail.efk", position);
 	effect->Play();
 
 }
@@ -56,30 +56,18 @@ PlayerObject::PlayerObject()
 */
 void PlayerObject::UpdateGameObject(float _deltaTime)
 {
-
 	autoRun->SetForwardSpeed(playerSpeed);
-	effect->SetPosition(position);
+	effect->SetPosition(position + (GetForward() * -100) + (GetUp() * 15));
 
-	// パーティクルのセット　これはあとでパーティクルエミッタクラス作りたい。
+	GameObject* wall = nullptr;
+	wall = GameObject::FindGameObject(Tag::Wall);
 
-	Vector3 randV((rand() % 100) / 10.0f, (rand() % 100) / 10.0f, (rand() % 100) / 10.0f);
-	Vector3 Velocity = randV * 0.1f;
-	Velocity.x += -0.5f;
-	Velocity.y += -0.5f;
-	Velocity.z += 2.5f;
-
-	// 後にパーティクル発生用クラス作成する
-	// 3フレームに1回　パーティクル発生
-	static int frame = 0;
-	frame++;
-	if (frame % 5 == 0)
+	//壁が無くなってクリア演出を呼ぶタイミング
+	if (wall == nullptr)
 	{
-		//EFFECT_MANAGER->PlayEffect(L"Effect/Fire.efk", position);
-		//effect = new EffectComponent(this);
-		//effect->LoadEffect("Effect/Fire.efk", position);
-		//effect->SetPosition(position);
-		//effect->Play();
+
 	}
+
 }
 
 void PlayerObject::GameObjectInput(const InputState & _state)

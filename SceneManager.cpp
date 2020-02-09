@@ -69,7 +69,7 @@ void SceneManager::StartPlayScene()
 		ObstacleObject* obstacle = new ObstacleObject(i);
 	}
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		GameObject* wall = new WallObject(i);
 	}

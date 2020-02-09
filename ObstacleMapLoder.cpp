@@ -16,12 +16,17 @@ ObstacleMapLoder::~ObstacleMapLoder()
 
 rapidjson::Document* ObstacleMapLoder::GetRandamMap()
 {
-	int i = rand() % ObstacleMap::MAP_QTY;
-	return mapDocments[i];
+	mapNum++;
+	if (mapNum >= ObstacleMap::MAP_QTY)
+	{
+		return nullptr;
+	}
+	return mapDocments[mapNum];
 }
 
 void ObstacleMapLoder::Initialize()
 {
+	mapNum = -1;
 	std::string fileName;
 	rapidjson::Document* data = nullptr;
 	for (int i = 1; i <= ObstacleMap::MAP_QTY; i++)

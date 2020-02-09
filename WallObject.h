@@ -13,7 +13,10 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime) override;
 
+	static void GameEnd() { gameEnd = true; }
+
 private:
-	GameObject* player;
+	static GameObject* player;
+	static bool gameEnd;
 };
 
