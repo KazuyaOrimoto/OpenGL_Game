@@ -7,7 +7,8 @@ enum SceneName
 	NONE,
 	Title,
 	Play,
-	Result
+	GameOver,
+	GameClear
 };
 
 class SceneBase;
@@ -22,7 +23,8 @@ public:
 private:
 	static void StartPlayScene();
 	static void StartTitleScene();
-	static void StartResultScene();
+	static void StartGameOverScene();
+	static void StartGameClearScene();
 
 	static SceneName scene;
 	static bool needChangeScene;

@@ -1,23 +1,24 @@
-#include "ResultLogo.h"
+#include "GameOverLogo.h"
 #include "SpriteComponent.h"
 #include "Texture.h"
 #include "InputSystem.h"
 #include "SceneManager.h"
 
 
-ResultLogo::ResultLogo()
+GameOverLogo::GameOverLogo()
 {
 	SpriteComponent* sprite = new SpriteComponent(this);
 	Texture* tex = new Texture();
-	tex->Load("Assets/Result.png");
+	tex->Load("Assets/GameClear.png");
 	sprite->SetTexture(tex);
 }
 
-ResultLogo::~ResultLogo()
+GameOverLogo::~GameOverLogo()
 {
+
 }
 
-void ResultLogo::GameObjectInput(const InputState & _state)
+void GameOverLogo::GameObjectInput(const InputState & _state)
 {
 	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Held)
 	{

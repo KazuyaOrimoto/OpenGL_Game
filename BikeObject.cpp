@@ -64,17 +64,11 @@ void BikeObject::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Boost)
 	{
-		if (jump)
-		{
-			return;
-		}
-		
 		ownerObject->playerSpeed += 500;
-
-		//SceneManager::ChangeScene(SceneName::Result);
-		//障害物と当たった時の処理
-		//animation = true;
-		//meshComp->SetVisible(false);
+	}
+	else if (_hitObject.GetTag() == Tag::Obstacle)
+	{
+		SceneManager::ChangeScene(SceneName::GameOver);
 	}
 }
 

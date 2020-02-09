@@ -12,6 +12,8 @@
 #include "Titlelogo.h"
 #include "ResultLogo.h"
 #include "BoostItem.h"
+#include "GameOverLogo.h"
+#include "GameClearLogo.h"
 
 SceneName SceneManager::scene = SceneName::NONE;
 bool SceneManager::needChangeScene = false;
@@ -37,8 +39,11 @@ void SceneManager::SceneUpdate()
 	case Play:
 		StartPlayScene();
 		break;
-	case Result:
-		StartResultScene();
+	case GameOver:
+		StartGameOverScene();
+		break;
+	case GameClear:
+		StartGameClearScene();
 		break;
 	default:
 		break;
@@ -80,8 +85,13 @@ void SceneManager::StartTitleScene()
 	new Titlelogo();
 }
 
-void SceneManager::StartResultScene()
+void SceneManager::StartGameOverScene()
 {
-	new ResultLogo();
+	new GameOverLogo();
+}
+
+void SceneManager::StartGameClearScene()
+{
+	new GameClearLogo();
 }
 

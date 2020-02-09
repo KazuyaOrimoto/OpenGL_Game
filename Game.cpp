@@ -112,7 +112,7 @@ bool Game::Initialize()
 	// 障害物管理クラスの初期化
     ObstacleManager::CreateInstance();
 
-	SceneManager::ChangeScene(SceneName::Play);
+	SceneManager::ChangeScene(SceneName::Title);
 
 	UIManager::CreateInstance();
 

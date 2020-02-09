@@ -15,6 +15,7 @@
 #include "EffectComponent.h"
 #include "EffekseerManager.h"
 #include "InputSystem.h"
+#include "SceneManager.h"
 
 PlayerObject::PlayerObject()
 	:GameObject()
@@ -65,7 +66,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 	//壁が無くなってクリア演出を呼ぶタイミング
 	if (wall == nullptr)
 	{
-
+		SceneManager::ChangeScene(SceneName::GameClear);
 	}
 
 }

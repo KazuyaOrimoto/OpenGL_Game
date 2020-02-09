@@ -216,6 +216,8 @@
       <Filter>Particle</Filter>
     </ClCompile>
     <ClCompile Include="BoostItem.cpp" />
+    <ClCompile Include="GameOverLogo.cpp" />
+    <ClCompile Include="GameClearLogo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -442,6 +444,8 @@
       <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="BoostItem.h" />
+    <ClInclude Include="GameOverLogo.h" />
+    <ClInclude Include="GameClearLogo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
