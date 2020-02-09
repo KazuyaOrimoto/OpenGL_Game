@@ -14,5 +14,6 @@ public:
 	virtual void UpdateGameObject(float _deltaTime) override;
 
 	virtual void GameObjectInput(const InputState& _state) override;
+
 };
 

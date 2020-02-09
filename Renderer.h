@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <SDL.h>
 #include "Math.h"
-#include "ParticleComponent.h"
 
 #define RENDERER Renderer::GetInstance()
 
@@ -93,18 +92,6 @@ public:
 	void RemoveSprite(SpriteComponent* _spriteComponent);
 
 	/**
-	@brief  パーティクルの追加
-	@param	追加するParticleObjectクラスのポインタ
-	*/
-	void AddParticle(ParticleComponent* _particleComponent);
-
-	/**
-	@brief  スプライトの削除
-	@param	削除するParticleObjectクラスのポインタ
-	*/
-	void RemoveParticle(ParticleComponent* _particleComponent);
-
-	/**
 	@brief  テクスチャの取得
 	@param	取得したいテクスチャのファイル名
 	@return Textureクラスのポインタ
@@ -185,14 +172,9 @@ private:
 	@return true : 成功 , false : 失敗
 	*/
     bool LoadShaders();
-	/**
-	@brief  Sprite用の頂点バッファとインデックスバッファの作成
-	*/
-    void CreateSpriteVerts();
-	void CreateParticleVerts();
-	void CreateScreenVerts();
 
-	void DrawParticle();
+	void CreateScreenVerts();
+	void CreateSpriteVerts();
 
 	void Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj,
 		float viewPortScale = 1.0f, bool lit = true);
@@ -203,7 +185,6 @@ private:
 	*/
     void SetLightUniforms(Shader* _shader, const Matrix4& view);
 
-	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM blendType);
 	void ChangeTexture(int changeTextureID);
 	Vector3 CalcCameraPos();
 
@@ -217,7 +198,6 @@ private:
 	//スプライトコンポーネントのポインタの可変長コンテナ
 	std::vector<SpriteComponent*> sprites;
 	//パーティクルのポインタ
-	std::vector<ParticleComponent*> particles;
 	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*>textures;
 
@@ -231,8 +211,6 @@ private:
 
     Shader* spriteShader;
     VertexArray* spriteVerts;
-	Shader* particleShader;
-	VertexArray* particleVertex;   // パーティクル用頂点定義
 	VertexArray* screenVertex;
 
 	std::vector<ShaderToMesh*> shaderToMeshArray;

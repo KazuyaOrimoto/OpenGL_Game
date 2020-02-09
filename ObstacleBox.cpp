@@ -21,17 +21,6 @@ ObstacleBox::ObstacleBox()
 
 	Mesh* mesh = nullptr;
 	mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
-	//switch ()
-	//{
-	//case Box:
-	//	mesh = RENDERER->GetMesh("Assets/cube.gpmesh");
-	//	break;
-	//case Wall:
-	//	mesh = RENDERER->GetMesh("Assets/ObstacleWall.gpmesh");
-	//	break;
-	//default:
-	//	break;
-	//}
 
 	meshComp->SetMesh(mesh);
 	boxCollider = new BoxCollider(this, GetOnCollisionFunc());

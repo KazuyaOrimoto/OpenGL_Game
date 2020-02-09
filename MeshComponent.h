@@ -14,7 +14,7 @@ public:
 	@param	アタッチするゲームオブジェクトのポインタ
 	*/
     MeshComponent(GameObject* _owner);
-    ~MeshComponent();
+    virtual ~MeshComponent();
 
 	/**
 	@brief　描画処理

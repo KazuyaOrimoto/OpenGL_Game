@@ -5,7 +5,7 @@ class BoostItem :
 {
 public:
 	BoostItem();
-	virtual ~BoostItem() override;
+	~BoostItem();
 
 	virtual void OnCollision(const GameObject& _hitObject) override;
 

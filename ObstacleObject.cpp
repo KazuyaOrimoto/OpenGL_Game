@@ -30,6 +30,11 @@ ObstacleObject::ObstacleObject(int _i)
 
 ObstacleObject::~ObstacleObject()
 {
+	if (mapLoder != nullptr)
+	{
+		delete mapLoder;
+		mapLoder = nullptr;
+	}
 }
 
 void ObstacleObject::UpdateGameObject(float _deltaTime)

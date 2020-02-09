@@ -3,12 +3,12 @@
 #include "Texture.h"
 #include "InputSystem.h"
 #include "SceneManager.h"
+#include "Renderer.h"
 
 Titlelogo::Titlelogo()
 {
 	SpriteComponent* sprite = new SpriteComponent(this);
-	Texture* tex = new Texture();
-	tex->Load("Assets/Title.png");
+	Texture* tex = RENDERER->GetTexture("Assets/Title.png");
 	sprite->SetTexture(tex);
 }
 

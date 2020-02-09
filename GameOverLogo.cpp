@@ -3,13 +3,12 @@
 #include "Texture.h"
 #include "InputSystem.h"
 #include "SceneManager.h"
-
+#include "Renderer.h"
 
 GameOverLogo::GameOverLogo()
 {
 	SpriteComponent* sprite = new SpriteComponent(this);
-	Texture* tex = new Texture();
-	tex->Load("Assets/GameOver.png");
+	Texture* tex = RENDERER->GetTexture("Assets/GameOver.png");
 	sprite->SetTexture(tex);
 }
 

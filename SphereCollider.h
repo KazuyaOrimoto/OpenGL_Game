@@ -7,7 +7,7 @@ class SphereCollider final : public ColliderComponent
 {
 public:
 	SphereCollider(GameObject* _owner, onCollisionFunc _func, int _updateOrder = 200, int _collisionOrder = 100);
-	virtual ~SphereCollider() override;
+	~SphereCollider();
 
 	virtual void OnUpdateWorldTransform() override;
 

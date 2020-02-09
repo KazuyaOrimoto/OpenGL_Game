@@ -20,13 +20,11 @@ Renderer* Renderer::renderer = nullptr;
 
 void Renderer::SetParticleVertex()
 {
-	particleVertex->SetActive();
 }
 
 Renderer::Renderer()
 	: spriteShader(nullptr)
 	, spriteVerts(nullptr)
-	, particleVertex(nullptr)
 	, fullShader(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
@@ -158,8 +156,6 @@ bool Renderer::LoadData()
 	//スプライト用の頂点配列を作成
 	CreateSpriteVerts();
 
-	CreateParticleVerts();
-
 	CreateScreenVerts();
 
 	return true;
@@ -188,16 +184,27 @@ void Renderer::Shutdown()
 		fboBrightTexture->Unload();
 		delete fboBrightTexture;
 	}
+	if (gaussianFinalTexture != nullptr)
+	{
+		//glDeleteFramebuffers(1, &gaussian);
+		gaussianFinalTexture->Unload();
+		delete gaussianFinalTexture;
+	}
 	for (auto itr : shaderToMeshArray)
 	{
 		delete itr->shader;
 	}
 
 	delete spriteVerts;
+
 	spriteShader->Unload();
 	delete spriteShader;
 	fullShader->Unload();
-	delete fullShader;
+	delete fullShader;	
+	gaussianShader->Unload();
+	delete gaussianShader;
+	tex->Unload();
+	delete tex;
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 }
@@ -394,16 +401,6 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 	sprites.erase(iter);
 }
 
-void Renderer::AddParticle(ParticleComponent * _particleComponent)
-{
-	particles.push_back(_particleComponent);
-}
-
-void Renderer::RemoveParticle(ParticleComponent * _particleComponent)
-{
-	auto iter = std::find(particles.begin(), particles.end(), _particleComponent);
-	particles.erase(iter);
-}
 
 /**
 @brief  メッシュコンポーネントの追加
@@ -557,12 +554,6 @@ bool Renderer::LoadShaders()
 	// ビュー行列の設定
 	gaussianShader->SetMatrixUniform("uViewProj", viewProj);
 
-	particleShader = new Shader();
-	if (!particleShader->Load("Shaders/Phong.vert", "Shaders/Particle.frag"))
-	{
-		printf("シェーダー読み込み失敗\n");
-	}
-
 	//meshShader->SetActive();
 	// ビュー行列の設定
 	view = Matrix4::CreateLookAt(Vector3::Zero, Vector3::UnitX, Vector3::UnitZ);
@@ -591,23 +582,6 @@ void Renderer::CreateSpriteVerts()
 	spriteVerts = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
-// パーティクル頂点作成
-void Renderer::CreateParticleVerts()
-{
-	float vertices[] = {
-		-0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
-		 0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 1.f, 0.f, // top right
-		 0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 1.f, 1.f, // bottom right
-		-0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 0.f, 1.f  // bottom left
-	};
-
-
-	unsigned int indices[] = {
-	0, 2, 1,
-	2, 0, 3
-	};
-	particleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
-}
 
 void Renderer::CreateScreenVerts()
 {
@@ -623,70 +597,6 @@ void Renderer::CreateScreenVerts()
 	2, 3, 0
 	};
 	screenVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
-}
-
-void Renderer::DrawParticle()
-{
-
-	std::sort(particles.begin(), particles.end(), std::greater<ParticleComponent*>());
-
-	if (particles.size() == 0)
-	{
-		return;
-	}
-	// ブレンドモード初期状態取得
-	ParticleComponent::PARTICLE_BLEND_ENUM blendType, prevType;
-	auto itr = particles.begin();
-	blendType = prevType = (*itr)->GetBlendType();
-
-	// テクスチャID初期状態取得
-	int nowTexture, prevTexture;
-	nowTexture = prevTexture = (*itr)->GetTextureID();
-
-	// ビュープロジェクション行列
-	Matrix4 viewProjectionMat;
-	viewProjectionMat = view * projection;
-
-	// シェーダーON
-	particleShader->SetActive();
-	particleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
-
-	// 全てのパーティクルのビルボード行列をセット
-	Matrix4 tmp;
-	tmp = Matrix4::CreateRotationZ(0.5f * 3.14159f);
-	(*itr)->SetBillboardMat(tmp);
-
-	glEnable(GL_BLEND);
-	glDepthMask(GL_FALSE);
-
-	// すべてのパーティクルを描画
-	ChangeBlendMode(blendType);
-	ChangeTexture(nowTexture);
-
-	for (auto particle : particles)
-	{
-		//ブレンドモード変更が必要なら変更する
-		blendType = particle->GetBlendType();
-		if (blendType != prevType)
-		{
-			ChangeBlendMode(blendType);
-		}
-		// テクスチャ変更が必要なら変更する
-		nowTexture = particle->GetTextureID();
-		if (nowTexture != prevTexture)
-		{
-			ChangeTexture(nowTexture);
-		}
-
-		// パーティクル描画
-		particle->Draw(particleShader);
-
-		// 前回描画状態として保存
-		prevType = blendType;
-		prevTexture = nowTexture;
-	}
-	glDisable(GL_BLEND);
-	glDepthMask(GL_TRUE);
 }
 
 void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4 & view, const Matrix4 & proj, float viewPortScale, bool lit)
@@ -755,24 +665,6 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 		dirLight.diffuseColor);
 	_shader->SetVectorUniform("uDirLight.mSpecColor",
 		dirLight.specColor);
-}
-
-void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM blendType)
-{
-	switch (blendType)
-	{
-	case ParticleComponent::PARTICLE_BLEND_ENUM_ADD:
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成
-		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA:
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // アルファブレンド
-		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM_MULT:
-		glBlendFunc(GL_ZERO, GL_SRC_COLOR); //乗算合成
-		break;
-	default:
-		break;
-	}
 }
 
 void Renderer::ChangeTexture(int changeTextureID)

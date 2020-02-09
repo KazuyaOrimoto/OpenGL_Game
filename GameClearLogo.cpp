@@ -3,13 +3,12 @@
 #include "Texture.h"
 #include "InputSystem.h"
 #include "SceneManager.h"
-
+#include "Renderer.h"
 
 GameClearLogo::GameClearLogo()
 {
 	SpriteComponent* sprite = new SpriteComponent(this);
-	Texture* tex = new Texture();
-	tex->Load("Assets/GameClear.png");
+	Texture* tex = RENDERER->GetTexture("Assets/GameClear.png");
 	sprite->SetTexture(tex);
 }
 

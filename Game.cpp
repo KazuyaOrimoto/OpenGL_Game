@@ -135,6 +135,7 @@ void Game::Termination()
 {
     // データのアンロード
 	UnloadData();
+	GameObject::ResetGameObject();
     // シングルトンクラスの解放処理
     //GameObjectManager::DeleteInstance();
 	Renderer::DeleteInstance();
