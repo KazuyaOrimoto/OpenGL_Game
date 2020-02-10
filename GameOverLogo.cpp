@@ -19,11 +19,11 @@ GameOverLogo::~GameOverLogo()
 
 void GameOverLogo::GameObjectInput(const InputState & _state)
 {
-	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Held)
+	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed)
 	{
 		SceneManager::ChangeScene(SceneName::Title);
 	}
-	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == ButtonState::Held)
+	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == ButtonState::Pressed)
 	{
 		SceneManager::ChangeScene(SceneName::Title);
 	}

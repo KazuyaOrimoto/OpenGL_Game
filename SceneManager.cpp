@@ -54,6 +54,8 @@ void SceneManager::SceneUpdate()
 
 void SceneManager::StartPlayScene()
 {
+	RENDERER->SetScreenMat(Vector3(1.0f, 1.0f, 1.0f), Quaternion::Identity, Vector3(0.0f, 0.0f, 0.0f));
+
 	GameObject* mCameraActor = new PlayerObject();
 
 	std::string name = typeid(mCameraActor).name();
@@ -85,6 +87,7 @@ void SceneManager::StartTitleScene()
 {
 	new Titlelogo();
 	new TitlePlayer();
+	RENDERER->SetScreenMat(Vector3(1.0f,1.0f,1.0f),Quaternion::Identity,Vector3(0.0f,-0.0f,0.0f));
 }
 
 void SceneManager::StartGameOverScene()
@@ -96,4 +99,3 @@ void SceneManager::StartGameClearScene()
 {
 	new GameClearLogo();
 }
-

@@ -9,7 +9,6 @@
 #include "ObstacleObject.h"
 #include "BikeObject.h"
 #include "Math.h"
-#include "ParticleComponent.h"
 #include "Texture.h"
 #include "imguiManager.h"
 #include "EffectComponent.h"

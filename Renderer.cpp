@@ -18,8 +18,19 @@
 
 Renderer* Renderer::renderer = nullptr;
 
-void Renderer::SetParticleVertex()
+void Renderer::SetScreenMat(const Vector3& scale, const Quaternion& rotation, const Vector3& position)
 {
+	scaleMat = Matrix4::CreateScale(
+		static_cast<float>(screenWidth),
+		static_cast<float>(-screenHeight),
+		1.0f);
+
+	Matrix4 worldTransform = Matrix4::Identity;
+	worldTransform *= Matrix4::CreateScale(scale);
+	worldTransform *= Matrix4::CreateFromQuaternion(rotation);
+	worldTransform *= Matrix4::CreateTranslation(position);
+
+	scaleMat *= worldTransform;
 }
 
 Renderer::Renderer()
@@ -118,8 +129,12 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 	// 一部のプラットフォームで出る無害なエラーコードをクリアする
 	glGetError();
 
-
 	scaleMat = Matrix4::CreateScale(
+		static_cast<float>(screenWidth),
+		static_cast<float>(-screenHeight),
+		1.0f); 
+
+	normalMat = Matrix4::CreateScale(
 		static_cast<float>(screenWidth),
 		static_cast<float>(-screenHeight),
 		1.0f);
@@ -267,7 +282,7 @@ void Renderer::Draw()
 	glDisable(GL_DEPTH_TEST);
 	gaussianShader->SetActive();
 	screenVertex->SetActive();
-	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
+	gaussianShader->SetMatrixUniform("uWorldTransform", normalMat);
 	gaussianShader->SetFloatArrayUniform("weight", SAMPLE_NUM, weight);
 	gaussianShader->SetIntUniform("uRange",15);
 	gaussianShader->SetBoolUniform("horizontal", true);
@@ -291,7 +306,7 @@ void Renderer::Draw()
 	glDisable(GL_DEPTH_TEST);
 	gaussianShader->SetActive();
 	screenVertex->SetActive();
-	gaussianShader->SetMatrixUniform("uWorldTransform", scaleMat);
+	gaussianShader->SetMatrixUniform("uWorldTransform", normalMat);
 	gaussianShader->SetFloatArrayUniform("weight", SAMPLE_NUM, weight);
 	gaussianShader->SetIntUniform("uRange", 15);
 	gaussianShader->SetBoolUniform("horizontal",false);
@@ -304,7 +319,9 @@ void Renderer::Draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glDisable(GL_DEPTH_TEST);
 	glDepthMask(GL_FALSE);
+#ifdef _DEBUG
 	if (isNormalFrame)
+#endif // _DEBUG
 	{
 		glViewport(0, 0,
 			static_cast<int>(screenWidth * 1.0f),
@@ -317,8 +334,9 @@ void Renderer::Draw()
 		fboTexture->SetActive();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 	}
-
+#ifdef _DEBUG
 	if (isDrawHDRFrame)
+#endif // _DEBUG
 	{
 		glViewport(0, 0,
 			static_cast<int>(screenWidth * num),
@@ -355,12 +373,13 @@ void Renderer::Draw()
 	}
 
 	// Draw any UI screens
-	for (auto ui : UI_MANAGER->GetUIStack())
-	{
-		ui->Draw(spriteShader);
-	}
-
+	//for (auto ui : UI_MANAGER->GetUIStack())
+	//{
+	//	ui->Draw(spriteShader);
+	//}
+#ifdef USE_IMGUI
 	IMGUI_MANAGER->Draw();
+#endif // USE_IMGUI
 
 	SDL_GL_SwapWindow(window);
 
@@ -811,7 +830,11 @@ bool Renderer::CreateFBO()
 	return true;
 }
 
+#ifdef _DEBUG
 void Renderer::ShowRenderer()
 {
 
 }
+
+#endif // _DEBUG
+

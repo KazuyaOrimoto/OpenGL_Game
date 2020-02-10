@@ -132,6 +132,7 @@ void imguiManager::Update()
 	
 
 }
+#ifdef _DEBUG
 
 void imguiManager::Draw()
 {
@@ -213,4 +214,5 @@ void imguiManager::ShowRenderer()
 	ImGui::End();
 }
 
+#endif // _DEBUG
 

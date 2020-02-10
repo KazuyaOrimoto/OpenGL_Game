@@ -10,7 +10,7 @@ TitlePlayer::TitlePlayer()
 {
 	meshComp = new HDRMeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/PlanePlayer.gpmesh"));
-	meshComp->SetHDRColor(Vector3(0.8f, 0.8f, 0.8f));
+	meshComp->SetHDRColor(Vector3(0.6f, 0.6f, 0.6f));
 	SetScale(3.0f);
 	tag = Tag::Player;
 	autoRun = new AutoRunComponent(this);

@@ -149,8 +149,6 @@ public:
 
 	Matrix4 GetViewMatrix() const { return view; };
 
-	void SetParticleVertex();
-
 	Matrix4 GetProjectionMatrix() { return projection; }
 
 	SDL_Renderer* GetSDLRenderer() { return sdlRenderer; }
@@ -159,6 +157,8 @@ public:
 
 	SDL_GLContext GetContext() { return context; }
 
+	void SetScreenMat(const Vector3& scale, const Quaternion& rotation,const Vector3& position);
+	
 private:
 	//コンストラクタ、デストラクタの隠蔽
 	Renderer();
@@ -237,6 +237,7 @@ private:
 	SDL_Renderer* sdlRenderer;
 
 	Matrix4 scaleMat;
+	Matrix4 normalMat;
 
 
 	//テクスチャレンダリング用

@@ -168,9 +168,6 @@
     <ClCompile Include="JumpAnimation4.cpp">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleComponent.cpp">
-      <Filter>Particle</Filter>
-    </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
@@ -210,7 +207,6 @@
     <ClCompile Include="EffekseerManager.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
-    <ClCompile Include="Titlelogo.cpp" />
     <ClCompile Include="ResultLogo.cpp" />
     <ClCompile Include="EffectComponent.cpp">
       <Filter>Particle</Filter>
@@ -218,8 +214,15 @@
     <ClCompile Include="BoostItem.cpp" />
     <ClCompile Include="GameOverLogo.cpp" />
     <ClCompile Include="GameClearLogo.cpp" />
-    <ClCompile Include="TitlePlayer.cpp" />
-    <ClCompile Include="TitleCamera.cpp" />
+    <ClCompile Include="TitleCamera.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Titlelogo.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePlayer.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -388,9 +391,6 @@
     <ClInclude Include="JumpAnimation4.h">
       <Filter>PlayerObject\Aniamtion\Jump</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleComponent.h">
-      <Filter>Particle</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -440,7 +440,6 @@
     <ClInclude Include="EffekseerManager.h">
       <Filter>Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Titlelogo.h" />
     <ClInclude Include="ResultLogo.h" />
     <ClInclude Include="EffectComponent.h">
       <Filter>Particle</Filter>
@@ -448,8 +447,15 @@
     <ClInclude Include="BoostItem.h" />
     <ClInclude Include="GameOverLogo.h" />
     <ClInclude Include="GameClearLogo.h" />
-    <ClInclude Include="TitlePlayer.h" />
-    <ClInclude Include="TitleCamera.h" />
+    <ClInclude Include="TitleCamera.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Titlelogo.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePlayer.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -514,6 +520,9 @@
     </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{82d6709d-ae31-4598-b249-044af437e576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Title">
+      <UniqueIdentifier>{23f8796d-8bfb-4809-bc39-81b4eba22cb9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

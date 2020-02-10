@@ -9,7 +9,7 @@
 
 
 UVScrollMesh::UVScrollMesh(GameObject* _owner)
-	:MeshComponent(_owner, UV_SCROLL)
+	:MeshComponent(_owner)
 {
 }
 

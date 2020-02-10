@@ -15,5 +15,8 @@ public:
 
 	virtual void GameObjectInput(const InputState& _state) override;
 
+
+private:
+	bool change;
 };
 

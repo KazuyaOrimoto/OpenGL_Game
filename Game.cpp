@@ -61,7 +61,6 @@ bool Game::Initialize()
 		return false;
 	}
 
-
 	// レンダラーの初期化
 	Renderer::CreateInstance();
 	if (!RENDERER->Initialize(1600.0f, 900.0f))
@@ -81,12 +80,16 @@ bool Game::Initialize()
 		return false;
 	}
 
+#ifdef USE_IMGUI
 	imguiManager::CreateInstance();
-	if (!IMGUI_MANAGER->Initialize(RENDERER->GetSDLWindow(),RENDERER->GetContext(),RENDERER->GetScreenWidth(),RENDERER->GetScreenHeight()))
+	if (!IMGUI_MANAGER->Initialize(RENDERER->GetSDLWindow(), RENDERER->GetContext(), RENDERER->GetScreenWidth(), RENDERER->GetScreenHeight()))
 	{
 		SDL_Log("Failed to initialize imgui");
 		return false;
 	}
+#endif // USE_IMGUI
+
+
 
     // 入力管理クラスの初期化
 	inputSystem = new InputSystem();
@@ -121,7 +124,7 @@ bool Game::Initialize()
 	// Setup lights
 	RENDERER->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(0.0f, 0.707f, -0.707f);
+	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
@@ -142,6 +145,9 @@ void Game::Termination()
 	PhysicsWorld::DeleteInstance();
 	ObstacleManager::DeleteInstance();
 	UIManager::DeleteInstance();
+#ifdef USE_IMGUI
+	imguiManager::DeleteInstance();
+#endif // USE_IMGUI
 	imguiManager::DeleteInstance();
 	EffekseerManager::DeleteInstance();
     // クラスの解放処理
@@ -164,7 +170,9 @@ void Game::GameLoop()
 		UpdateGame();
 		GenerateOutput();
 		fps->Update();
+#ifdef USE_IMGUI
 		IMGUI_MANAGER->Update();
+#endif // USE_IMGUI
 	}
 }
 
@@ -178,11 +186,12 @@ void Game::UnloadData()
 		RENDERER->UnloadData();
 		RENDERER->Shutdown();
 	}
-
+#ifdef USE_IMGUI
 	if (IMGUI_MANAGER != nullptr)
 	{
 		IMGUI_MANAGER->Shutdown();
 	}
+#endif // USE_IMGUI
 }
 
 void Game::HandleKeyPress(int key)
@@ -253,8 +262,9 @@ void Game::ProcessInput()
 			break;
 		}
 	}
-
+#ifdef USE_IMGUI
 	IMGUI_MANAGER->SetSDLEvent(event);
+#endif // USE_IMGUI
 
 	inputSystem->Update();
 	const InputState& state = inputSystem->GetState();
@@ -266,6 +276,10 @@ void Game::ProcessInput()
 	else if (!UI_MANAGER->UIEmpty())
 	{
 		UI_MANAGER->ProcessInput(state);
+	}
+	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::Pressed)
+	{
+		gameState = Game::EQuit;
 	}
 }
 
