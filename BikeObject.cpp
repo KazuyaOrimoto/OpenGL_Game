@@ -64,7 +64,7 @@ void BikeObject::OnCollision(const GameObject& _hitObject)
 {
 	if (_hitObject.GetTag() == Tag::Boost)
 	{
-		ownerObject->playerSpeed += 500;
+		ownerObject->playerSpeed += 200;
 	}
 	else if (_hitObject.GetTag() == Tag::Obstacle)
 	{

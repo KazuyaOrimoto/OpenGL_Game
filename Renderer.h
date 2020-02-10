@@ -257,7 +257,7 @@ private:
 	const int num = 1;
 
 	float weight[SAMPLE_NUM];
-	int gaussianRange = 15;
+	int gaussianRange = 100;
 	int prevRange;
 	int gaussianCoefficient = 1;
 	int prevGaussianCoefficient;

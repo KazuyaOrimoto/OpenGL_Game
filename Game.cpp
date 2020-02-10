@@ -63,7 +63,7 @@ bool Game::Initialize()
 
 	// レンダラーの初期化
 	Renderer::CreateInstance();
-	if (!RENDERER->Initialize(1600.0f, 900.0f))
+	if (!RENDERER->Initialize(1920.0f,1080.0f))
 	{
 		SDL_Log("Failed to initialize renderer");
 		Renderer::DeleteInstance();
@@ -122,7 +122,7 @@ bool Game::Initialize()
 	UI_MANAGER->LoadText("Assets/English.gptext");
 
 	// Setup lights
-	RENDERER->SetAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
 	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);

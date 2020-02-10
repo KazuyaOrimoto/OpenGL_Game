@@ -39,7 +39,7 @@ ObstacleBox::ObstacleBox()
 	state = Paused;
 	player = GameObject::FindGameObject(Tag::Player);
 	meshComp->SetVisible(false);
-	meshComp->SetHDRColor(Vector3(0.1f,0.1f,0.1f));
+	meshComp->SetHDRColor(Vector3(0.8f,0.8f,0.8f));
 
 	name = "Box";
 }

@@ -19,6 +19,7 @@ WallObject::WallObject(int _i)
 	tag = Tag::Wall;
 
 	name = "Wall";
+	gameEnd = false;
 }
 
 WallObject::~WallObject()
