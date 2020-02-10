@@ -269,8 +269,8 @@ void Renderer::Draw()
 
 	// Set viewport size based on scale
 	glViewport(0, 0,
-		static_cast<int>(screenWidth * (1.0f / num)),
-		static_cast<int>(screenHeight * (1.0f / num))
+		static_cast<int>(screenWidth * (1.0f / 2)),
+		static_cast<int>(screenHeight * (1.0f / 2))
 	);
 
 	// Clear color buffer/depth buffer
@@ -293,8 +293,8 @@ void Renderer::Draw()
 	glBindFramebuffer(GL_FRAMEBUFFER, gaussianFinal);
 
 	glViewport(0, 0,
-		static_cast<int>(screenWidth * 1.0f),
-		static_cast<int>(screenHeight * 1.0f)
+		static_cast<int>(screenWidth * (1.0f / 2)),
+		static_cast<int>(screenHeight * (1.0f / 2))
 	);
 
 	// Clear color buffer/depth buffer
@@ -339,8 +339,8 @@ void Renderer::Draw()
 #endif // _DEBUG
 	{
 		glViewport(0, 0,
-			static_cast<int>(screenWidth * num),
-			static_cast<int>(screenHeight * num)
+			static_cast<int>(screenWidth * 1.0),
+			static_cast<int>(screenHeight * 1.0)
 		);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -785,7 +785,7 @@ bool Renderer::CreateFBO()
 	glBindFramebuffer(GL_FRAMEBUFFER, gaussian);
 
 	gaussianTexture = new Texture();
-	gaussianTexture->CreateForRendering(width, height, GL_RGB);
+	gaussianTexture->CreateForRendering(width / 2, height / 2, GL_RGB);
 
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, gaussianTexture->GetTextureID(), 0);
 
@@ -809,7 +809,7 @@ bool Renderer::CreateFBO()
 	glBindFramebuffer(GL_FRAMEBUFFER, gaussianFinal);
 
 	gaussianFinalTexture = new Texture();
-	gaussianFinalTexture->CreateForRendering(width, height, GL_RGB);
+	gaussianFinalTexture->CreateForRendering(width / 2, height / 2, GL_RGB);
 
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, gaussianFinalTexture->GetTextureID(), 0);
 
