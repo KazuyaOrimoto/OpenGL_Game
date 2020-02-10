@@ -1,0 +1,23 @@
+P　プレイヤー
+Wal　壁
+Thi　薄床
+Rou ロウソク
+Bos ボス
+Bow　ボス出入口
+Gor ゴール
+E1 チュートリアル雨
+E2 Melee
+E3 Range
+E4 Tank
+T1 移動
+T2 ジャンプ
+T3 ダブル
+T4 通り抜け
+T5 ローリング
+T6 攻撃
+T7 回復
+I1 斧
+I2 投げ
+I3 ハンマー
+I4
+I5

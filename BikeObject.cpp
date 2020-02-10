@@ -28,7 +28,7 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	SetParent(_ownerObject);
 	meshComp = new HDRMeshComponent(this);
 	meshComp->SetMesh(RENDERER->GetMesh("Assets/PlanePlayer.gpmesh"));
-	meshComp->SetHDRColor(Vector3(0.5f, 0.5f, 0.5f));
+	meshComp->SetHDRColor(Vector3(0.7f, 0.7f, 0.7f));
 	SetScale(3.0f);
 
 	sphereCollider = new SphereCollider(this, GetOnCollisionFunc());
@@ -94,16 +94,21 @@ void BikeObject::GameObjectInput(const InputState & _state)
 		rot = Quaternion::Concatenate(rot, inc);
 		SetRotation(rot);
 	}
-	else if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE))
+	else if (_state.Controller.GetLAxisVec().x > 0.1)
 	{
-		if (canJumping && !jump)
-		{
-			controller->Jump();
-			animationComp->SetActive(false);
-			jump = true;
-			sphereCollider->CollisionPause();
-			SetRotation(ownerObject->GetRotation());
-		}
+		Quaternion rot = ownerObject->GetRotation();
+		float rad = Math::ToRadians(-10);
+		Quaternion inc(Vector3::UnitX, rad);
+		rot = Quaternion::Concatenate(rot, inc);
+		SetRotation(rot);
+	}
+	else if (_state.Controller.GetLAxisVec().x < -0.1)
+	{
+		Quaternion rot = ownerObject->GetRotation();
+		float rad = Math::ToRadians(10);
+		Quaternion inc(Vector3::UnitX, rad);
+		rot = Quaternion::Concatenate(rot, inc);
+		SetRotation(rot);
 	}
 	else
 	{

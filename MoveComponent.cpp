@@ -56,4 +56,13 @@ void MoveComponent::ProcessInput(const InputState & _state)
 	{
 		starafeSpeed -= maxStrafeSpeed;
 	}
+	float direction = _state.Controller.GetLAxisVec().x;
+	if (direction > 0.1)
+	{
+		starafeSpeed += maxStrafeSpeed * direction;
+	}
+	if (direction < -0.1)
+	{
+		starafeSpeed -= maxStrafeSpeed * -direction;
+	}
 }

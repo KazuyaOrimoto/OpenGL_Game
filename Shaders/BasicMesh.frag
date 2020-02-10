@@ -22,5 +22,5 @@ void main()
 {
 	// Sample color from texture
     outColor0 = texture(uTexture, fragTexCoord);
-    outColor1 = vec4(0.0,0.0,0.0,0.0);
+    outColor1 = outColor0;
 }

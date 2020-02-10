@@ -103,6 +103,32 @@ void RotateComponent::ProcessInput(const InputState & _state)
 		moveRot = cameraQuat;
         right = false;
     }
+	else if (_state.Controller.GetLAxisVec().x > 0.1)
+	{
+		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RIGHT) == ButtonState::Pressed)
+		{
+			f = 0.0f;
+			addF = 0.02f;
+		}
+		float rad = Math::ToRadians(moveTorque);
+		Quaternion inc(Vector3::UnitX, rad);
+		target = Quaternion::Concatenate(rot, inc);
+		moveRot = cameraQuat;
+		right = true;
+	}
+	else if (_state.Controller.GetLAxisVec().x < 0.1)
+	{
+		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_LEFT) == ButtonState::Pressed)
+		{
+			f = 0.0f;
+			addF = 0.02f;
+		}
+		float rad = Math::ToRadians(-moveTorque);
+		Quaternion inc(Vector3::UnitX, rad);
+		target = Quaternion::Concatenate(rot, inc);
+		moveRot = cameraQuat;
+		right = false;
+	}
 	else
 	{
 		f = 0.0f;

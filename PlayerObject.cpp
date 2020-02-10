@@ -72,10 +72,7 @@ void PlayerObject::UpdateGameObject(float _deltaTime)
 
 void PlayerObject::GameObjectInput(const InputState & _state)
 {
-	if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE))
-	{
-		effect->Stop();
-	}
+
 }
 
 bool PlayerObject::CanMove()

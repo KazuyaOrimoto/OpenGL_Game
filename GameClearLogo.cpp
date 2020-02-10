@@ -26,4 +26,12 @@ void GameClearLogo::GameObjectInput(const InputState & _state)
 	{
 		SceneManager::ChangeScene(SceneName::Title);
 	}
+	if (_state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A))
+	{
+		SceneManager::ChangeScene(SceneName::Title);
+	}
+	if (_state.Controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B))
+	{
+		SceneManager::ChangeScene(SceneName::Title);
+	}
 }

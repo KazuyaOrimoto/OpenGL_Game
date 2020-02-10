@@ -27,11 +27,8 @@ void Titlelogo::GameObjectInput(const InputState & _state)
 {
 	if (!change)
 	{
-		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::None)
-		{
-			change = true;
-		}
-		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == ButtonState::None)
+		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::None && _state.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == ButtonState::None
+			 && !_state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) && !_state.Controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B))
 		{
 			change = true;
 		}
@@ -43,6 +40,14 @@ void Titlelogo::GameObjectInput(const InputState & _state)
 			SceneManager::ChangeScene(SceneName::Play);
 		}
 		if (_state.Keyboard.GetKeyState(SDL_SCANCODE_RETURN) == ButtonState::Pressed)
+		{
+			SceneManager::ChangeScene(SceneName::Play);
+		}
+		if (_state.Controller.GetButtonState(SDL_CONTROLLER_BUTTON_A))
+		{
+			SceneManager::ChangeScene(SceneName::Play);
+		}
+		if (_state.Controller.GetButtonValue(SDL_CONTROLLER_BUTTON_B))
 		{
 			SceneManager::ChangeScene(SceneName::Play);
 		}
