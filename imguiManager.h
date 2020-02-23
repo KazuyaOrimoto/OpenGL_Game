@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include "imgui/imgui.h"
 
-//#define USE_IMGUI
+#define USE_IMGUI
 
 #define IMGUI_MANAGER imguiManager::GetInstance()
 

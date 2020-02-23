@@ -36,5 +36,7 @@ private:
 
 	float springConstant;
 
+	float radsave;
+
 };
 

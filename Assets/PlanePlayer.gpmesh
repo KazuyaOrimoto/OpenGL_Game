@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"HDRMesh",
 	"textures":[
-		"Assets/PlanePlayer.png"
+		"Assets/UV.png"
 	],
 	"specularPower":100,
 	"vertices":[

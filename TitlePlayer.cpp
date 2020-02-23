@@ -14,7 +14,7 @@ TitlePlayer::TitlePlayer()
 	SetScale(3.0f);
 	tag = Tag::Player;
 	autoRun = new AutoRunComponent(this);
-	autoRun->SetForwardSpeed(3000);
+	//autoRun->SetForwardSpeed(1000);
 	camera = new TitleCamera(this);
 	camera->SnapToIdeal();
 
@@ -32,5 +32,6 @@ TitlePlayer::~TitlePlayer()
 void TitlePlayer::UpdateGameObject(float _deltaTime)
 {
 	effect->SetPosition(position + (GetForward() * -100) + (GetUp() * 15));
+
 
 }
