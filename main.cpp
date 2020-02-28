@@ -19,7 +19,7 @@
 int main(int argc, char** argv)
 {
     //ゲームクラスの定義
-	Game* game = new Game(argc,argv);
+	Game* game = new Game();
 
     //ゲームクラスの初期化が成功したか
 	bool success = game->Initialize();

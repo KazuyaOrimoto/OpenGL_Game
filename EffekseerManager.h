@@ -23,14 +23,17 @@ public:
     /**
     @brief  インスタンスを作成する
     */
-    static void CreateInstance(char** _argv);
+    static void CreateInstance();
 
     /**
     @brief  インスタンスを削除する
     */
     static void DeleteInstance();
 
-	void InitEffekseer();
+	/**
+	@brief  初期化処理
+	*/
+	void Initialize();
 
 	/**
 	@brief  終了処理

@@ -160,14 +160,12 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="BikeObject.cpp" />
-    <ClCompile Include="DialogBox.cpp" />
     <ClCompile Include="EffectComponent.cpp" />
     <ClCompile Include="EffekseerManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="FollowCameraObject.cpp" />
-    <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="FPSGameObject.cpp" />
@@ -204,7 +202,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="ObstacleManager.cpp" />
     <ClCompile Include="ObstacleMapLoder.cpp" />
     <ClCompile Include="ObstacleObject.cpp" />
-    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PhysicsWorld.cpp" />
     <ClCompile Include="PlayerAnimationController.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
@@ -223,8 +220,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="Titlelogo.cpp" />
     <ClCompile Include="TitlePlayer.cpp" />
-    <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="UIScreen.cpp" />
     <ClCompile Include="UVScrollMesh.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -252,14 +247,12 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Component.h" />
     <ClInclude Include="BikeObject.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="DialogBox.h" />
     <ClInclude Include="EffectComponent.h" />
     <ClInclude Include="EffekseerManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="FollowCameraObject.h" />
-    <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="FPSGameObject.h" />
@@ -295,7 +288,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="ObstacleManager.h" />
     <ClInclude Include="ObstacleMapLoder.h" />
     <ClInclude Include="ObstacleObject.h" />
-    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PhysicsWorld.h" />
     <ClInclude Include="PlayerAnimationController.h" />
     <ClInclude Include="PlayerObject.h" />
@@ -314,8 +306,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="Titlelogo.h" />
     <ClInclude Include="TitlePlayer.h" />
-    <ClInclude Include="UIManager.h" />
-    <ClInclude Include="UIScreen.h" />
     <ClInclude Include="UVScrollMesh.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

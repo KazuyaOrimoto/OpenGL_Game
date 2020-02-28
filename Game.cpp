@@ -18,26 +18,24 @@
 #include "PhysicsWorld.h"
 #include "ObstacleManager.h"
 #include "SceneManager.h"
-#include "UIManager.h"
-#include "PauseMenu.h"
-#include "UIScreen.h"
-#include <SDL_ttf.h>
 #include <string>
 #include "GameObject.h"
 #include "SceneManager.h"
 #include "imguiManager.h"
 #include "EffekseerManager.h"
 
+//-----------------------------------------------------------------------------
+//	@brief	staticメンバ変数の初期化
+//-----------------------------------------------------------------------------
 Game::GameState Game::gameState = GameState::EGameplay;
 
 /**
 @brief  コンストラクタ
 */
-Game::Game(int _argc, char** _argv)
+Game::Game()
 	// メンバ変数の初期化
 	: fps(nullptr)
-	, argc(_argc)
-	, argv(_argv)
+	, inputSystem(nullptr)
 {
 }
 
@@ -61,8 +59,9 @@ bool Game::Initialize()
 		return false;
 	}
 
-	// レンダラーの初期化
+	// Rendererクラスのインスタンスの作成
 	Renderer::CreateInstance();
+	// Rendererの初期化
 	if (!RENDERER->Initialize(1920.0f,1080.0f))
 	{
 		SDL_Log("Failed to initialize renderer");
@@ -70,9 +69,12 @@ bool Game::Initialize()
 		return false;
 	}
 
-	EffekseerManager::CreateInstance(argv);
-	EFFECT_MANAGER->InitEffekseer();
+	// Effekseerクラスのインスタンスの作成
+	EffekseerManager::CreateInstance();
+	// Effekseerクラスの初期化
+	EFFECT_MANAGER->Initialize();
 
+	// Rendererの必要なデータのロード
 	if (!RENDERER->LoadData())
 	{
 		SDL_Log("Failed to initialize renderer");
@@ -81,7 +83,9 @@ bool Game::Initialize()
 	}
 
 #ifdef USE_IMGUI
+	// ImguiManagerクラスのインスタンスの作成
 	imguiManager::CreateInstance();
+	//ImguiManagerの初期化に失敗した場合
 	if (!IMGUI_MANAGER->Initialize(RENDERER->GetSDLWindow(), RENDERER->GetContext(), RENDERER->GetScreenWidth(), RENDERER->GetScreenHeight()))
 	{
 		SDL_Log("Failed to initialize imgui");
@@ -89,44 +93,23 @@ bool Game::Initialize()
 	}
 #endif // USE_IMGUI
 
-
-
-    // 入力管理クラスの初期化
+	fps = new FPS();
 	inputSystem = new InputSystem();
+	// InputSystemの初期化に失敗した場合
 	if (!inputSystem->Initialize())
 	{
 		SDL_Log("Failed to initialize input system");
 		return false;
 	}
 
-	// Initialize SDL_ttf
-	if (TTF_Init() != 0)
-	{
-		SDL_Log("Failed to initialize SDL_ttf");
-		return false;
-	}
-
-    // 当たり判定用クラスの初期化
+    // PhysicsWorldクラスのインスタンスの作成
 	PhysicsWorld::CreateInstance();
 
-	// FPS管理クラスの初期化
-	fps = new FPS();
-
-	// 障害物管理クラスの初期化
+	// ObstacleManagerクラスのインスタンスの作成
     ObstacleManager::CreateInstance();
 
+	// 最初のシーンをTitleに設定
 	SceneManager::ChangeScene(SceneName::Title);
-
-	UIManager::CreateInstance();
-
-	UI_MANAGER->LoadText("Assets/English.gptext");
-
-	// Setup lights
-	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
-	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
-	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	return true;
 }
@@ -138,19 +121,18 @@ void Game::Termination()
 {
     // データのアンロード
 	UnloadData();
-	GameObject::ResetGameObject();
-    // シングルトンクラスの解放処理
-    //GameObjectManager::DeleteInstance();
+	// Rendererクラスのインスタンスの削除
 	Renderer::DeleteInstance();
+	// PhysicsWorldクラスのインスタンスの削除
 	PhysicsWorld::DeleteInstance();
+	// ObstacleManagerクラスのインスタンスの削除
 	ObstacleManager::DeleteInstance();
-	UIManager::DeleteInstance();
+	// EffekseerManagerクラスのインスタンスの削除
+	EffekseerManager::DeleteInstance();
 #ifdef USE_IMGUI
+	// imguiManagerクラスのインスタンスの削除
 	imguiManager::DeleteInstance();
 #endif // USE_IMGUI
-	imguiManager::DeleteInstance();
-	EffekseerManager::DeleteInstance();
-    // クラスの解放処理
     delete fps;
     delete inputSystem;
     // サブシステムの終了
@@ -181,6 +163,7 @@ void Game::GameLoop()
 */
 void Game::UnloadData()
 {
+	GameObject::DeleteAllGameObjects();
 	if (RENDERER != nullptr)
 	{
 		RENDERER->UnloadData();
@@ -194,38 +177,12 @@ void Game::UnloadData()
 #endif // USE_IMGUI
 }
 
-void Game::HandleKeyPress(int key)
-{
-	switch (key)
-	{
-	case SDLK_ESCAPE:
-		// Create pause menu
-		new PauseMenu();
-		break;
-	case '1':
-	{
-		// Load English text
-		UI_MANAGER->LoadText("Assets/English.gptext");
-		break;
-	}
-	case '2':
-	{
-		// Load Russian text
-		UI_MANAGER->LoadText("Assets/Russian.gptext");
-		break;
-	}
-	default:
-		break;
-	}
-}
-
 /**
 @brief  入力関連の処理
 */
 void Game::ProcessInput()
 {
 	inputSystem->PrepareForUpdate();
-
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -234,49 +191,21 @@ void Game::ProcessInput()
 		case SDL_QUIT:
 			gameState = GameState::EQuit;
 			break;
-		case SDL_KEYDOWN:
-			if (!event.key.repeat)
-			{
-				if (gameState == GameState::EGameplay)
-				{
-					HandleKeyPress(event.key.keysym.sym);
-				}
-				else if (!UI_MANAGER->UIEmpty())
-				{
-					UI_MANAGER->HandleKeyPress(event.key.keysym.sym);
-				}
-			}
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			if (gameState == EGameplay)
-			{
-				HandleKeyPress(event.button.button);
-				inputSystem->ProcessEvent(event);
-			}
-			else if (!UI_MANAGER->UIEmpty())
-			{
-				UI_MANAGER->HandleKeyPress(event.button.button);
-			}
-			break;
 		default:
 			break;
 		}
 	}
+	inputSystem->Update();
 #ifdef USE_IMGUI
 	IMGUI_MANAGER->SetSDLEvent(event);
 #endif // USE_IMGUI
-
-	inputSystem->Update();
 	const InputState& state = inputSystem->GetState();
 
 	if (gameState == Game::EGameplay)
 	{
 		ProcessInputs(state);
 	}
-	else if (!UI_MANAGER->UIEmpty())
-	{
-		UI_MANAGER->ProcessInput(state);
-	}
+	//Escapeを押された場合
 	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::Pressed)
 	{
 		gameState = Game::EQuit;
@@ -298,10 +227,12 @@ void Game::UpdateGame()
 {
 	float deltaTime = fps->GetDeltaTime();
 	
-	UI_MANAGER->Update(deltaTime);
 	UpdateGameObjects(deltaTime);
 }
 
+/**
+@brief  ゲームオブジェクトのアップデート処理
+*/
 void UpdateGameObjects(float _deltaTime)
 {
 	if (Game::GetState() == Game::GameState::EGameplay)
@@ -313,6 +244,7 @@ void UpdateGameObjects(float _deltaTime)
 		}
 		GameObject::updatingGameObject = false;
 
+		//Update中に追加されたGameObjectの処理
 		for (auto pending : GameObject::pendingGameObjects)
 		{
 			pending->ComputeWorldTransform();
@@ -322,6 +254,9 @@ void UpdateGameObjects(float _deltaTime)
 	}
 }
 
+/**
+@brief  ゲームオブジェクトの入力処理
+*/
 void ProcessInputs(const InputState & _state)
 {
 	GameObject::updatingGameObject = true;

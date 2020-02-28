@@ -18,7 +18,6 @@
 #include <vector>
 #include <string>
 
-
 //-----------------------------------------------------------------------------
 //	@brief	前方宣言
 //-----------------------------------------------------------------------------
@@ -33,10 +32,15 @@ class SceneBase;
 class Game final
 {
 public:
+//===================== publicのメンバ関数 ======================//
 
-//===================== パブリック関数 ======================//
-
-	Game(int _argc, char** _argv);
+	/**
+	@brief	コンストラクタ
+	*/
+	Game();
+	/**
+	@brief	デストラクタ
+	*/
 	~Game();
 
     /**
@@ -55,6 +59,9 @@ public:
 	*/
 	void GameLoop();
 
+	/**
+	@brief  ゲームの状態を表す
+	*/
 	enum GameState
 	{
 		EGameplay,
@@ -62,13 +69,20 @@ public:
 		EQuit
 	};
 
+	/**
+	@brief  ゲームの状態を取得する
+	@return GameState型の状態
+	*/
 	static GameState GetState() { return gameState; }
+
+	/**
+	@brief  ゲームの状態を設定する
+	@param	GameState型の状態
+	*/
 	static void SetState(GameState _state) { gameState = _state; }
 
-	
-
 private:
-//===================== プライベート関数 ======================//
+//===================== privateのメンバ関数 ======================//
 
 	/**
 	@brief  入力関連の処理
@@ -90,8 +104,6 @@ private:
 	*/
 	void UnloadData();
 
-	void HandleKeyPress(int key);
-
 	/**
 	@brief  ゲームオブジェクトのアップデート処理
 	*/
@@ -102,12 +114,10 @@ private:
 	*/
 	friend void ProcessInputs(const struct InputState& _state);
 
-//===================== メンバ変数 ======================//
+//===================== privateのメンバ変数 ======================//
 
 	FPS*				fps;				// FPS計測クラス
 	InputSystem*		inputSystem;		// 入力管理クラス
-	static GameState	gameState;				// ゲームの状態
-	int argc;
-	char** argv;
+	static GameState	gameState;			// ゲームの状態
 };
 

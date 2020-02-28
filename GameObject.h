@@ -9,6 +9,7 @@ class Matrix4;
 class Component;
 struct InputState;
 
+// GameObjectを識別するためのタグ
 enum Tag
 {
 	NoneTag,
@@ -77,13 +78,14 @@ public:
 	*/
 	void ComputeWorldTransform();
 
-	static void ResetGameObject();
+	/**
+	@brief	GameObjectをすべて削除する
+	*/
+	static void DeleteAllGameObjects();
 
 protected:
     std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
     virtual void OnCollision(const GameObject& _hitObject) {}
-
-    //virtual void OnTrigger(GameObject& _triggerObject) {}
 
 	//ゲームオブジェクトの状態
 	State state;

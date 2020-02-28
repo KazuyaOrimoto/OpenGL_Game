@@ -10,9 +10,6 @@
 #include <fstream>
 #include <sstream>
 #include <document.h>
-#include "Font.h"
-#include "UIScreen.h"
-#include "UIManager.h"
 #include "imguiManager.h"
 #include "EffekseerManager.h"
 
@@ -98,20 +95,23 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 	// ハードウェアアクセラレーションを使う
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-	//ウィンドウの作成
-	window = SDL_CreateWindow("OpenGL Game", 0, 0,
+	// ウィンドウの作成
+	window = SDL_CreateWindow("Ace", 0, 0,
 		static_cast<int>(screenWidth), static_cast<int>(screenHeight), SDL_WINDOW_OPENGL);
 
+	// ウィンドウの作成に失敗した場合
 	if (!window)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		return false;
 	}
 
+	// SDLのRendererの作成
 	sdlRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	// SDLのRendererの作成に失敗した場合
 	if (!sdlRenderer)
 	{
-		printf("SDLRendererの作成に失敗 : %s", SDL_GetError());
+		printf("Failed to create SDL Renderer : %s", SDL_GetError());
 		return false;
 	}
 
@@ -120,6 +120,7 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight)
 
 	// GLEWの初期化
 	glewExperimental = GL_TRUE;
+	//
 	if (glewInit() != GLEW_OK)
 	{
 		SDL_Log("Failed to initialize GLEW.");

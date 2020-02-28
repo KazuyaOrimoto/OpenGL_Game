@@ -31,42 +31,7 @@ EffekseerManager*					EffekseerManager::manager = nullptr;
 ::Effekseer::Effect*				EffekseerManager::g_effect = nullptr;
 ::Effekseer::Handle				    EffekseerManager::g_handle = -1;
 
-#if _WIN32
-static std::wstring ToWide(const char* pText)
-{
-	int Len = ::MultiByteToWideChar(CP_ACP, 0, pText, -1, NULL, 0);
-
-	wchar_t* pOut = new wchar_t[Len + 1];
-	::MultiByteToWideChar(CP_ACP, 0, pText, -1, pOut, Len);
-	std::wstring Out(pOut);
-	delete[] pOut;
-
-	return Out;
-}
-
-void GetDirectoryName(char* dst, char* src)
-{
-	auto Src = std::string(src);
-	int pos = 0;
-	int last = 0;
-	while (Src.c_str()[pos] != 0)
-	{
-		dst[pos] = Src.c_str()[pos];
-
-		if (Src.c_str()[pos] == L'\\' || Src.c_str()[pos] == L'/')
-		{
-			last = pos;
-		}
-
-		pos++;
-	}
-
-	dst[pos] = 0;
-	dst[last] = 0;
-}
-#endif
-
-void EffekseerManager::CreateInstance(char** _argv)
+void EffekseerManager::CreateInstance()
 {
 	if (manager == nullptr)
 	{
@@ -83,7 +48,10 @@ void EffekseerManager::DeleteInstance()
 	}
 }
 
-void EffekseerManager::InitEffekseer()
+/**
+@brief  初期化処理
+*/
+void EffekseerManager::Initialize()
 {
 	// 投影行列を設定
 	::Effekseer::Matrix44 mat = ::Effekseer::Matrix44().PerspectiveFovRH_OpenGL(50.0f / 180.0f * 3.14f, (float)RENDERER->GetScreenWidth() / (float)RENDERER->GetScreenHeight(), 1.0f, 13000.0f);
@@ -92,12 +60,7 @@ void EffekseerManager::InitEffekseer()
 	// カメラ行列を設定
 	g_renderer->SetCameraMatrix(RENDERER->GetViewMatrix().GetEffekseerMatrix44());
 
-	// エフェクトの読込
-	//g_effect = Effekseer::Effect::Create(g_manager, (const EFK_CHAR*)L"Effect/Fire.efk");
-
-	// エフェクトの再生
-	//g_handle = g_manager->Play(g_effect, 0, 0, 60);
-
+	// ステートを復帰するかどうかのフラグをtrueにする
 	g_renderer->SetRestorationOfStatesFlag(true);
 }
 

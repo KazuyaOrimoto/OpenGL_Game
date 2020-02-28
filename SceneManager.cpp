@@ -31,7 +31,7 @@ void SceneManager::SceneUpdate()
 	{
 		return;
 	}
-	GameObject::ResetGameObject();
+	GameObject::DeleteAllGameObjects();
 	switch (scene)
 	{
 	case Title:
@@ -55,6 +55,13 @@ void SceneManager::SceneUpdate()
 void SceneManager::StartPlayScene()
 {
 	RENDERER->SetScreenMat(Vector3(1.0f, 1.0f, 1.0f), Quaternion::Identity, Vector3(0.0f, 0.0f, 0.0f));
+
+	// ライトの設定
+	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
+	DirectionalLight& dir = RENDERER->GetDirectionalLight();
+	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
+	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	GameObject* mCameraActor = new PlayerObject();
 
@@ -87,7 +94,7 @@ void SceneManager::StartTitleScene()
 {
 	new Titlelogo();
 	new TitlePlayer();
-	RENDERER->SetScreenMat(Vector3(1.0f,1.0f,1.0f),Quaternion::Identity,Vector3(0.0f,-0.0f,0.0f));
+	RENDERER->SetScreenMat(Vector3(1.0f,1.0f,1.0f),Quaternion::Identity,Vector3(0.0f,0.0f,0.0f));
 }
 
 void SceneManager::StartGameOverScene()

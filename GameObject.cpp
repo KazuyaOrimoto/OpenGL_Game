@@ -143,7 +143,7 @@ void GameObject::ComputeWorldTransform()
 	}
 }
 
-void GameObject::ResetGameObject()
+void GameObject::DeleteAllGameObjects()
 {
 	while (!gameObjects.empty())
 	{
