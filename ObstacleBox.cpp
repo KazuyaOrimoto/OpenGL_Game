@@ -63,7 +63,7 @@ void ObstacleBox::ResetObstacle()
 {
 	SetPosition(Vector3::Zero);
 	state = Paused;
-	boxCollider->CollisionPause();
+	boxCollider->SetActive(false);
 	meshComp->SetVisible(false);
 }
 
@@ -71,7 +71,7 @@ void ObstacleBox::UseObstacle()
 {
 	meshComp->SetVisible(true);
 	state = Active;
-	boxCollider->CollisionActive();
+	boxCollider->SetActive(true);
 	GameObject::RemoveGameObject(this);
 	GameObject::AddGameObject(this);
 }

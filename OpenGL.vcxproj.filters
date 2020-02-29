@@ -130,10 +130,7 @@
     <ClCompile Include="EffekseerManager.cpp">
       <Filter>System\Effekseer</Filter>
     </ClCompile>
-    <ClCompile Include="ResultLogo.cpp" />
     <ClCompile Include="BoostItem.cpp" />
-    <ClCompile Include="GameOverLogo.cpp" />
-    <ClCompile Include="GameClearLogo.cpp" />
     <ClCompile Include="TitleCamera.cpp">
       <Filter>Title</Filter>
     </ClCompile>
@@ -166,6 +163,12 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>System\PhysicsWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClearLogo.cpp">
+      <Filter>Result</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverLogo.cpp">
+      <Filter>Result</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,10 +310,7 @@
     <ClInclude Include="EffekseerManager.h">
       <Filter>System\Effekseer</Filter>
     </ClInclude>
-    <ClInclude Include="ResultLogo.h" />
     <ClInclude Include="BoostItem.h" />
-    <ClInclude Include="GameOverLogo.h" />
-    <ClInclude Include="GameClearLogo.h" />
     <ClInclude Include="TitleCamera.h">
       <Filter>Title</Filter>
     </ClInclude>
@@ -340,6 +340,12 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>System\PhysicsWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClearLogo.h">
+      <Filter>Result</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverLogo.h">
+      <Filter>Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +408,9 @@
     </Filter>
     <Filter Include="System\Math">
       <UniqueIdentifier>{6a202267-f302-460a-bad2-773b2329bbdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Result">
+      <UniqueIdentifier>{55dd4f32-e056-49dd-af52-3437745ef973}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,6 @@
 #include "ObstacleBox.h"
 #include "Ship.h"
 #include "Titlelogo.h"
-#include "ResultLogo.h"
 #include "BoostItem.h"
 #include "GameOverLogo.h"
 #include "GameClearLogo.h"
