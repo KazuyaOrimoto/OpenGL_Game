@@ -1,3 +1,4 @@
+#ifdef _DEBUG
 #include "imguiManager.h"
 
 #include <GL/gl3w.h>    // Initialize with gl3wInit()
@@ -129,7 +130,7 @@ void imguiManager::Update()
 {
 	ImGui_ImplSDL2_ProcessEvent(&event);
 
-	
+
 
 }
 #ifdef _DEBUG
@@ -154,8 +155,8 @@ void imguiManager::Draw()
 		ImGui::Begin("Debug Window");                          // Create a window called "Hello, world!" and append into it.
 
 		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		
-		ImGui::InputText("paramater", str , IM_ARRAYSIZE(str));
+
+		ImGui::InputText("paramater", str, IM_ARRAYSIZE(str));
 		//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		ImGui::Checkbox("GameObjects Window", &showGameObjectsWindow);
 		ImGui::Checkbox("Renderer Debug Window", &RENDERER->isDebugView);
@@ -188,7 +189,7 @@ void imguiManager::Draw()
 
 void imguiManager::ShowGameObjects()
 {
-	ImGui::Begin("GameObjects Window",&showGameObjectsWindow);
+	ImGui::Begin("GameObjects Window", &showGameObjectsWindow);
 	for (auto itr : GameObject::gameObjects)
 	{
 		ImGui::Checkbox(itr->name.c_str(), &itr->view);
@@ -208,11 +209,16 @@ void imguiManager::ShowRenderer()
 
 	ImGui::Checkbox("DrawNormalFrame", &RENDERER->isNormalFrame);
 	ImGui::Checkbox("DrawHDRFrame", &RENDERER->isDrawHDRFrame);
-	ImGui::SliderInt("Gaussian", &RENDERER->gaussianRange,1,400);
-	ImGui::SliderInt("GaussianCoefficient", &RENDERER->gaussianCoefficient,1,1000);
+	ImGui::SliderInt("Gaussian", &RENDERER->gaussianRange, 1, 400);
+	ImGui::SliderInt("GaussianCoefficient", &RENDERER->gaussianCoefficient, 1, 1000);
 
 	ImGui::End();
 }
 
 #endif // _DEBUG
+
+
+
+#endif //  _DEBUG
+
 

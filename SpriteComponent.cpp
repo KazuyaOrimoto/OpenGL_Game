@@ -1,4 +1,11 @@
-﻿#include "SpriteComponent.h"
+﻿//=============================================================================
+//	@file	SpriteComponent.cpp
+//	@brief	スプライトを描画するためのコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "SpriteComponent.h"
 #include "Texture.h"
 #include "Shader.h"
 #include "GameObject.h"

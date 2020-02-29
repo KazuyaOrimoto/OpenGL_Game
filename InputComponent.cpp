@@ -1,4 +1,11 @@
-﻿#include "InputComponent.h"
+﻿//=============================================================================
+//	@file	InputComponent.cpp
+//	@brief	入力をもとに移動をするコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "InputComponent.h"
 #include "GameObject.h"
 #include "InputSystem.h"
 

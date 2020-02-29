@@ -14,7 +14,7 @@ TitlePlayer::TitlePlayer()
 	SetScale(3.0f);
 	tag = Tag::Player;
 	autoRun = new AutoRunComponent(this);
-	//autoRun->SetForwardSpeed(1000);
+	autoRun->SetForwardSpeed(1000);
 	camera = new TitleCamera(this);
 	camera->SnapToIdeal();
 

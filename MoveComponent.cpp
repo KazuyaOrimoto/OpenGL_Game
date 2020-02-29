@@ -1,4 +1,11 @@
-﻿#include "MoveComponent.h"
+﻿//=============================================================================
+//	@file	MoveComponent.cpp
+//	@brief	移動をするコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "MoveComponent.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "Renderer.h"

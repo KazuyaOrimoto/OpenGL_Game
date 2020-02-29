@@ -37,12 +37,6 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="FPSCamera.cpp">
-      <Filter>FPSCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSGameObject.cpp">
-      <Filter>FPSCamera</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerObject.cpp">
       <Filter>PlayerObject</Filter>
     </ClCompile>
@@ -130,7 +124,6 @@
     <ClCompile Include="EffekseerManager.cpp">
       <Filter>System\Effekseer</Filter>
     </ClCompile>
-    <ClCompile Include="BoostItem.cpp" />
     <ClCompile Include="TitleCamera.cpp">
       <Filter>Title</Filter>
     </ClCompile>
@@ -170,6 +163,9 @@
     <ClCompile Include="GameOverLogo.cpp">
       <Filter>Result</Filter>
     </ClCompile>
+    <ClCompile Include="BoostItem.cpp">
+      <Filter>Obstacle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveComponent.h">
@@ -207,12 +203,6 @@
     </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSCamera.h">
-      <Filter>FPSCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSGameObject.h">
-      <Filter>FPSCamera</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObject.h">
       <Filter>PlayerObject</Filter>
@@ -310,7 +300,6 @@
     <ClInclude Include="EffekseerManager.h">
       <Filter>System\Effekseer</Filter>
     </ClInclude>
-    <ClInclude Include="BoostItem.h" />
     <ClInclude Include="TitleCamera.h">
       <Filter>Title</Filter>
     </ClInclude>
@@ -347,6 +336,9 @@
     <ClInclude Include="GameOverLogo.h">
       <Filter>Result</Filter>
     </ClInclude>
+    <ClInclude Include="BoostItem.h">
+      <Filter>Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -357,9 +349,6 @@
     </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{baceb5f2-8168-4a27-a023-a8b9d9ba8383}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FPSCamera">
-      <UniqueIdentifier>{b427765a-6a2f-4bbd-b4b0-d4aa06f05efb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Collider">
       <UniqueIdentifier>{016f7373-9fd9-4a05-bbd3-36e0ad2fe6f6}</UniqueIdentifier>

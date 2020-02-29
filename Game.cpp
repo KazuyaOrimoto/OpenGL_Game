@@ -21,8 +21,10 @@
 #include <string>
 #include "GameObject.h"
 #include "SceneManager.h"
-#include "imguiManager.h"
 #include "EffekseerManager.h"
+#ifdef _DEBUG
+#include "imguiManager.h"
+#endif // _DEBUG
 
 //-----------------------------------------------------------------------------
 //	@brief	staticメンバ変数の初期化
@@ -81,7 +83,7 @@ bool Game::Initialize()
 		Renderer::DeleteInstance();
 		return false;
 	}
-
+#ifdef _DEBUG
 #ifdef USE_IMGUI
 	// ImguiManagerクラスのインスタンスの作成
 	imguiManager::CreateInstance();
@@ -92,6 +94,8 @@ bool Game::Initialize()
 		return false;
 	}
 #endif // USE_IMGUI
+#endif // _DEBUG
+
 
 	fps = new FPS();
 	inputSystem = new InputSystem();

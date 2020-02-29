@@ -1,9 +1,12 @@
+#ifdef _DEBUG
+#define USE_IMGUI
+
 #pragma once
 
 #include <SDL.h>
 #include "imgui/imgui.h"
 
-#define USE_IMGUI
+
 
 #define IMGUI_MANAGER imguiManager::GetInstance()
 
@@ -63,4 +66,7 @@ private:
 	float screenHeight;
 	char str[128];
 };
+
+
+#endif // _DEBUG
 

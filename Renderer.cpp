@@ -10,8 +10,11 @@
 #include <fstream>
 #include <sstream>
 #include <document.h>
-#include "imguiManager.h"
 #include "EffekseerManager.h"
+
+#ifdef _DEBUG
+#include "imguiManager.h"
+#endif // _DEBUG
 
 Renderer* Renderer::renderer = nullptr;
 

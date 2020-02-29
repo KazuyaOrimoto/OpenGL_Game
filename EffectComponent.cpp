@@ -1,3 +1,10 @@
+//=============================================================================
+//	@file	EffectComponent.cpp
+//	@brief	Effekseerのエフェクトを使うためのコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
 #include "EffectComponent.h"
 #include <codecvt>
 #include "EffekseerManager.h"
