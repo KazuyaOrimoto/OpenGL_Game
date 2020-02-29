@@ -160,8 +160,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="EffekseerManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="FollowCamera.cpp" />
-    <ClCompile Include="FollowCameraObject.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="FPSGameObject.cpp" />
@@ -229,8 +227,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="EffekseerManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="FollowCamera.h" />
-    <ClInclude Include="FollowCameraObject.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="FPSGameObject.h" />

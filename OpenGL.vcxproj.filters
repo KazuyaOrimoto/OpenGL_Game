@@ -61,12 +61,6 @@
     <ClCompile Include="SphereCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="FollowCamera.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="FollowCameraObject.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
     <ClCompile Include="SphereObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
@@ -234,12 +228,6 @@
     </ClInclude>
     <ClInclude Include="SphereCollider.h">
       <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="FollowCamera.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FollowCameraObject.h">
-      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="SphereObject.h">
       <Filter>GameObjects</Filter>
