@@ -95,6 +95,11 @@ void SceneManager::StartTitleScene()
 	new Titlelogo();
 	new TitlePlayer();
 	RENDERER->SetScreenMat(Vector3(1.0f,1.0f,1.0f),Quaternion::Identity,Vector3(0.0f,0.0f,0.0f));
+	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
+	DirectionalLight& dir = RENDERER->GetDirectionalLight();
+	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
+	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 }
 
 void SceneManager::StartGameOverScene()

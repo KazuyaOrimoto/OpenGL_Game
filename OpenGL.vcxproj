@@ -146,10 +146,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\External\gl3w\GL\gl3w.c" />
-    <ClCompile Include="ActionArea.cpp" />
-    <ClCompile Include="AnimationClip.cpp" />
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AutoRunComponent.cpp" />
     <ClCompile Include="BoostItem.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
@@ -184,11 +180,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputSystem.cpp" />
-    <ClCompile Include="JumpAnimation.cpp" />
-    <ClCompile Include="JumpAnimation2.cpp" />
-    <ClCompile Include="JumpAnimation3.cpp" />
-    <ClCompile Include="JumpAnimation4.cpp" />
-    <ClCompile Include="JumpCheck.cpp" />
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -198,12 +189,10 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="ObstacleBox.cpp" />
-    <ClCompile Include="ObstacleCheck.cpp" />
     <ClCompile Include="ObstacleManager.cpp" />
     <ClCompile Include="ObstacleMapLoder.cpp" />
     <ClCompile Include="ObstacleObject.cpp" />
     <ClCompile Include="PhysicsWorld.cpp" />
-    <ClCompile Include="PlayerAnimationController.cpp" />
     <ClCompile Include="PlayerObject.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResultLogo.cpp" />
@@ -220,22 +209,12 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="Titlelogo.cpp" />
     <ClCompile Include="TitlePlayer.cpp" />
-    <ClCompile Include="UVScrollMesh.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="VertexArray.cpp" />
-    <ClCompile Include="WallMeshComponent.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="WallObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\External\gl3w\GL\gl3w.h" />
     <ClInclude Include="..\..\External\gl3w\GL\glcorearb.h" />
-    <ClInclude Include="ActionArea.h" />
-    <ClInclude Include="AnimationClip.h" />
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AutoRunComponent.h" />
     <ClInclude Include="BoostItem.h" />
     <ClInclude Include="BoxCollider.h" />
@@ -246,7 +225,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="BikeObject.h" />
-    <ClInclude Include="Common.h" />
     <ClInclude Include="EffectComponent.h" />
     <ClInclude Include="EffekseerManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -273,23 +251,16 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputSystem.h" />
-    <ClInclude Include="JumpAnimation.h" />
-    <ClInclude Include="JumpAnimation2.h" />
-    <ClInclude Include="JumpAnimation3.h" />
-    <ClInclude Include="JumpAnimation4.h" />
-    <ClInclude Include="JumpCheck.h" />
     <ClInclude Include="MainCamera.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="ObstacleBox.h" />
-    <ClInclude Include="ObstacleCheck.h" />
     <ClInclude Include="ObstacleManager.h" />
     <ClInclude Include="ObstacleMapLoder.h" />
     <ClInclude Include="ObstacleObject.h" />
     <ClInclude Include="PhysicsWorld.h" />
-    <ClInclude Include="PlayerAnimationController.h" />
     <ClInclude Include="PlayerObject.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResultLogo.h" />
@@ -306,31 +277,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="Titlelogo.h" />
     <ClInclude Include="TitlePlayer.h" />
-    <ClInclude Include="UVScrollMesh.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="VertexArray.h" />
-    <ClInclude Include="WallMeshComponent.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="WallObject.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\AlphaTest.frag" />
-    <None Include="Shaders\AlphaTest.vert" />
-    <None Include="Shaders\BasicMesh.frag" />
-    <None Include="Shaders\BasicMesh.vert" />
-    <None Include="Shaders\FullScreenRender.frag" />
-    <None Include="Shaders\FullScreenRender.vert" />
-    <None Include="Shaders\GausuBokasi.frag" />
-    <None Include="Shaders\Phong.frag" />
-    <None Include="Shaders\Phong.vert" />
-    <None Include="Shaders\Sprite.frag" />
-    <None Include="Shaders\Sprite.vert" />
-    <None Include="Shaders\UVScroll.frag" />
-    <None Include="Shaders\UVScroll.vert" />
-    <None Include="Shaders\WallShader.frag" />
-    <None Include="Shaders\WallShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="imgui\imgui.natvis" />

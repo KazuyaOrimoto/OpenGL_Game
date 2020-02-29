@@ -6,12 +6,6 @@
 #include "SphereCollider.h"
 #include "ObstacleBox.h"
 #include "InputSystem.h"
-#include "jumpCheck.h"
-#include "ObstacleCheck.h"
-#include "ActionArea.h"
-#include "AnimationComponent.h"
-#include "AnimationController.h"
-#include "PlayerAnimationController.h"
 #include "HDRMeshComponent.h"
 #include "SceneManager.h"
 #include "MainCamera.h"
@@ -37,12 +31,6 @@ BikeObject::BikeObject(PlayerObject* _ownerObject)
 	SetPosition(ownerObject->GetPosition());
 
 	tag = Tag::Player;
-	jumpCheck = new JumpCheck(this);
-	obstacleCheck = new ObstacleCheck(this);
-	action = new ActionArea(ownerObject);
-
-	animationComp = new AnimationComponent(this);
-	controller = new PlayerAnimationController(this,animationComp);
 
 	camera = new MainCamera(this);
 	camera->SnapToIdeal();
@@ -56,8 +44,6 @@ BikeObject::~BikeObject()
 
 void BikeObject::UpdateGameObject(float _deltaTime)
 {
-	ActionDetermining();
-	Animation();
 }
 
 void BikeObject::OnCollision(const GameObject& _hitObject)
@@ -130,47 +116,5 @@ bool BikeObject::CanMove()
 	else
 	{
 		return true;
-	}
-}
-
-void BikeObject::Animation()
-{
-	if (jump)
-	{
-		if (animationComp->AnimationEnd())
-		{
-			animNum = 0;
-			jump = false;
-			sphereCollider->CollisionActive();
-		}
-	}
-}
-
-/**
-@brief	アクションを決定する
-*/
-void BikeObject::ActionDetermining()
-{
-	//ジャンプできるかどうか
-	bool canJump = jumpCheck->CanJump() && obstacleCheck->OnObstacle();
-	//ジャンプ中でないとき
-	if (!canJumping)
-	{
-		//ジャンプできるとき
-		if (canJump)
-		{
-			canJumping = true;
-			action->CanJump();
-		}
-	}
-	//ジャンプできないとき
-	if (!canJump)
-	{
-		action->CanNotJump();
-		canJumping = false;
-	}
-	if (jump && !canJump)
-	{
-		animationComp->SetActive(true);
 	}
 }

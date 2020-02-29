@@ -7,9 +7,6 @@ class SphereCollider;
 class ObstacleBox;
 class JumpCheck;
 class ObstacleCheck;
-class ActionArea;
-class AnimationComponent;
-class PlayerAnimationController;
 class MainCamera;
 
 static Vector3 CHECK_AREA_MIN = Vector3(1500.0f, -1.0f, -1.0f);
@@ -40,26 +37,16 @@ public:
 	MainCamera* GetCamera() { return camera; }
 
 private:
-	void Animation();
-	/**
-	@brief	アクションを決定する
-	*/
-	void ActionDetermining();
 
 	HDRMeshComponent* meshComp;
     PlayerObject* ownerObject;
     SphereCollider* sphereCollider;
-	AnimationComponent* animationComp;
-	PlayerAnimationController* controller;
 
-	JumpCheck* jumpCheck;
-	ObstacleCheck* obstacleCheck;
 	MainCamera* camera;
 
 	bool animation;
 	int animNum;
 	bool canJumping;
-	ActionArea* action;
 
 	bool jump;
 };
