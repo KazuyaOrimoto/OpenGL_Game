@@ -1,4 +1,11 @@
-﻿#include "Renderer.h"
+﻿//=============================================================================
+//	@file	Renderer.cpp
+//	@brief	描画全般の管理をする
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "Renderer.h"
 #include "Texture.h"
 #include "Mesh.h"
 #include <algorithm>

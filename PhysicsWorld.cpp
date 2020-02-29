@@ -1,4 +1,11 @@
-﻿#include "PhysicsWorld.h"
+﻿//=============================================================================
+//	@file	PhysicsWorld.cpp
+//	@brief	当たり判定を行う
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "PhysicsWorld.h"
 #include <algorithm>
 #include <SDL.h>
 #include "SphereCollider.h"

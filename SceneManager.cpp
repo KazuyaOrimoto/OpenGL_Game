@@ -1,4 +1,11 @@
-﻿#include "SceneManager.h"
+﻿//=============================================================================
+//	@file	SceneManager.cpp
+//	@brief	シーンの変更時のオブジェクトの生成
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "SceneManager.h"
 #include "GameObject.h"
 #include "PlayerObject.h"
 #include "MeshComponent.h"
