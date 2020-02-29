@@ -1,4 +1,11 @@
-﻿#include "ObstacleBox.h"
+﻿//=============================================================================
+//	@file	ObstacleBox.cpp
+//	@brief	障害物のボックスのオブジェクト
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "ObstacleBox.h"
 #include "BoxCollider.h"
 #include "MeshComponent.h"
 #include "Game.h"

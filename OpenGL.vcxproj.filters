@@ -79,12 +79,6 @@
     <ClCompile Include="ObstacleMapLoder.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
-    <ClCompile Include="BikeObject.cpp">
-      <Filter>PlayerObject</Filter>
-    </ClCompile>
-    <ClCompile Include="SlidingObject.cpp">
-      <Filter>Obstacle</Filter>
-    </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>System\Scene</Filter>
     </ClCompile>
@@ -166,6 +160,9 @@
     <ClCompile Include="BoostItem.cpp">
       <Filter>Obstacle</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerModel.cpp">
+      <Filter>PlayerObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveComponent.h">
@@ -244,12 +241,6 @@
       <Filter>Obstacle</Filter>
     </ClInclude>
     <ClInclude Include="ObstacleMapLoder.h">
-      <Filter>Obstacle</Filter>
-    </ClInclude>
-    <ClInclude Include="BikeObject.h">
-      <Filter>PlayerObject</Filter>
-    </ClInclude>
-    <ClInclude Include="SlidingObject.h">
       <Filter>Obstacle</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
@@ -338,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="BoostItem.h">
       <Filter>Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerModel.h">
+      <Filter>PlayerObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

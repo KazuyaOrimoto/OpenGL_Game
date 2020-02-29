@@ -1,4 +1,11 @@
-﻿#include "ObstacleMapLoder.h"
+﻿//=============================================================================
+//	@file	ObstacleMapLoder.cpp
+//	@brief	障害物のマップを外部ファイルから読み込む
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "ObstacleMapLoder.h"
 #include <fstream>
 #include <sstream>
 #include <document.h>

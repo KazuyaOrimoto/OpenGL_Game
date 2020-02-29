@@ -1,4 +1,11 @@
-﻿#include "WallObject.h"
+﻿//=============================================================================
+//	@file	WallObject.cpp
+//	@brief	ステージの壁のオブジェクト
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "WallObject.h"
 #include "MeshComponent.h"
 #include "Renderer.h"
 #include "Mesh.h"

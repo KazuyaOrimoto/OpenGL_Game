@@ -1,4 +1,11 @@
-﻿#include "BoxObject.h"
+﻿//=============================================================================
+//	@file	BoxObject.cpp
+//	@brief	ボックスのオブジェクト
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "BoxObject.h"
 #include "BoxCollider.h"
 #include "MeshComponent.h"
 #include "Game.h"

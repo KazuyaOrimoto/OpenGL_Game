@@ -1,4 +1,11 @@
-﻿#include "MeshComponent.h"
+﻿//=============================================================================
+//	@file	MeshComponent.cpp
+//	@brief	メッシュの描画をするコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "MeshComponent.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "Shader.h"

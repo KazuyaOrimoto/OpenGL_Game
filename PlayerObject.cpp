@@ -1,4 +1,11 @@
-﻿#include "PlayerObject.h"
+﻿//=============================================================================
+//	@file	PlayerObject.cpp
+//	@brief	プレイヤー全体の処理をまとめる
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "PlayerObject.h"
 #include "Game.h"
 #include "Renderer.h"
 #include "MoveComponent.h"
@@ -7,7 +14,7 @@
 #include "RotateComponent.h"
 #include "ObstacleManager.h"
 #include "ObstacleObject.h"
-#include "BikeObject.h"
+#include "PlayerModel.h"
 #include "Math.h"
 #include "Texture.h"
 #include "imguiManager.h"
@@ -34,7 +41,7 @@ PlayerObject::PlayerObject()
 	//camera = new MainCamera(this);
 	//camera->SnapToIdeal();
 
-	bike = new BikeObject(this);
+	bike = new PlayerModel(this);
 	autoRun->SetDrilObject(bike);
 
 	SetScale(10.0f);

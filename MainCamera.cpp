@@ -1,4 +1,11 @@
-﻿#include "MainCamera.h"
+﻿//=============================================================================
+//	@file	MainCamera.cpp
+//	@brief	ゲーム中のメインカメラ
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "MainCamera.h"
 #include "GameObject.h"
 #include "SDL.h"
 #include "RotateComponent.h"

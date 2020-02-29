@@ -1,4 +1,11 @@
-﻿#include "SphereObject.h"
+﻿//=============================================================================
+//	@file	SphereObject.cpp
+//	@brief	球のオブジェクト
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "SphereObject.h"
 #include "Game.h"
 #include "MeshComponent.h"
 #include "SphereCollider.h"

@@ -1,8 +1,15 @@
-﻿#include "AutoRunComponent.h"
+﻿//=============================================================================
+//	@file	AutoRunComponent.h
+//	@brief	自動で前方へ進めるコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "AutoRunComponent.h"
 #include "GameObject.h"
 #include "Game.h"
 #include "Renderer.h"
-#include "BikeObject.h"
+#include "PlayerModel.h"
 
 AutoRunComponent::AutoRunComponent(GameObject* _owner, int _updateOrder)
 	: Component(_owner, _updateOrder)
@@ -19,8 +26,8 @@ void AutoRunComponent::Update(float _deltaTime)
 	Vector3 pos = owner->GetPosition();
 	pos += owner->GetForward() * forwardSpeed * 0.016;
 	owner->SetPosition(pos);
-	if (dril != nullptr)
+	if (playerModel != nullptr)
 	{
-		dril->SetPosition(pos);
+		playerModel->SetPosition(pos);
 	}
 }

@@ -1,4 +1,11 @@
-﻿#pragma once
+﻿//=============================================================================
+//	@file	PlayerObject.h
+//	@brief	プレイヤー全体の処理をまとめる
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#pragma once
 #include "GameObject.h"
 
 class MoveComponent;
@@ -7,7 +14,7 @@ class SphereCollider;
 class AutoRunComponent;
 class ObstacleObject;
 class RotateComponent;
-class BikeObject;
+class PlayerModel;
 class Texture;
 class EffectComponent;
 
@@ -42,7 +49,7 @@ private:
     MainCamera* camera;
     AutoRunComponent* autoRun;
 	RotateComponent* rotate;
-	BikeObject* bike;
+	PlayerModel* bike;
 	Texture* texture;
 	EffectComponent* effect;
 };

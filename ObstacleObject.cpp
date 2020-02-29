@@ -1,4 +1,11 @@
-﻿#include "ObstacleObject.h"
+﻿//=============================================================================
+//	@file	ObstacleObject.h
+//	@brief	同じ区間にある障害物の一括作成
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "ObstacleObject.h"
 #include "Game.h"
 #include "Collision.h"
 #include "ObstacleManager.h"

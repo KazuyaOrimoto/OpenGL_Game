@@ -1,4 +1,11 @@
-﻿#include "CameraObject.h"
+﻿//=============================================================================
+//	@file	CameraObject.h
+//	@brief	カメラのオブジェクト
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "CameraObject.h"
 #include "Game.h"
 #include "SDL_scancode.h"
 #include "Renderer.h"

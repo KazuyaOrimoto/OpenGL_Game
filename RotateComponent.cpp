@@ -1,4 +1,11 @@
-﻿#include "RotateComponent.h"
+﻿//=============================================================================
+//	@file	RotateComponent.cpp
+//	@brief	プレイヤーが壁に当たった時に回転させるコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "RotateComponent.h"
 #include "GameObject.h"
 #include "InputSystem.h"
 #include "Renderer.h"

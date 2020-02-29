@@ -1,7 +1,14 @@
-﻿#pragma once
+﻿//=============================================================================
+//	@file	AutoRunComponent.h
+//	@brief	自動で前方へ進めるコンポーネント
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#pragma once
 #include "Component.h"
 
-class BikeObject;
+class PlayerModel;
 
 class AutoRunComponent :
     public Component
@@ -13,12 +20,12 @@ public:
     void Update(float _deltaTime) override;
     void SetForwardSpeed(float _value) { forwardSpeed = _value; }
     float GetForwardSpeed() const { return forwardSpeed; }
-    void SetDrilObject(BikeObject* _dril) { dril = _dril; }
+    void SetDrilObject(PlayerModel* _playerModel) { playerModel = _playerModel; }
 
 private:
 
     float forwardSpeed;
-	BikeObject* dril;
+	PlayerModel* playerModel;
 
 };
 

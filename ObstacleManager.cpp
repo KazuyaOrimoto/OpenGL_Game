@@ -1,4 +1,11 @@
-﻿#include "ObstacleManager.h"
+﻿//=============================================================================
+//	@file	ObstacleManager.h
+//	@brief	障害物を管理
+//	@autor	居本 和哉
+//	@date	2020/02/29
+//=============================================================================
+
+#include "ObstacleManager.h"
 #include "PlayerObject.h"
 #include "ObstacleBox.h"
 #include "GameObject.h"
