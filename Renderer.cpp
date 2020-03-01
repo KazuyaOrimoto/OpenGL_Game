@@ -43,7 +43,6 @@ void Renderer::SetScreenMat(const Vector3& scale, const Quaternion& rotation, co
 Renderer::Renderer()
 	: spriteShader(nullptr)
 	, spriteVerts(nullptr)
-	, fullShader(nullptr)
 	, view(Matrix4::Identity)
 	, projection(Matrix4::Identity)
 	, screenWidth(0)
@@ -225,8 +224,6 @@ void Renderer::Shutdown()
 
 	spriteShader->Unload();
 	delete spriteShader;
-	fullShader->Unload();
-	delete fullShader;	
 	gaussianShader->Unload();
 	delete gaussianShader;
 	tex->Unload();
@@ -338,9 +335,9 @@ void Renderer::Draw()
 			static_cast<int>(screenWidth * 1.0f),
 			static_cast<int>(screenHeight * 1.0f)
 		);
-		fullShader->SetActive();
+		spriteShader->SetActive();
 		screenVertex->SetActive();
-		fullShader->SetMatrixUniform("uWorldTransform", scaleMat);
+		spriteShader->SetMatrixUniform("uWorldTransform", scaleMat);
 		// Activate sprite verts quad
 		fboTexture->SetActive();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
@@ -355,9 +352,9 @@ void Renderer::Draw()
 		);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		fullShader->SetActive();
+		spriteShader->SetActive();
 		screenVertex->SetActive();
-		fullShader->SetMatrixUniform("uWorldTransform", scaleMat);
+		spriteShader->SetMatrixUniform("uWorldTransform", scaleMat);
 		gaussianFinalTexture->SetActive();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 		glDisable(GL_BLEND);
@@ -566,17 +563,8 @@ bool Renderer::LoadShaders()
 	auto viewProj = Matrix4::CreateSimpleViewProj(screenWidth, screenHeight);
 	spriteShader->SetMatrixUniform("uViewProj", viewProj);
 
-	fullShader = new Shader();
-	if (!fullShader->Load("Shaders/FullScreenRender.vert", "Shaders/FullScreenRender.frag"))
-	{
-		return false;
-	}
-	fullShader->SetActive();
-	// ビュー行列の設定
-	fullShader->SetMatrixUniform("uViewProj", viewProj);
-
 	gaussianShader = new Shader();
-	if (!gaussianShader->Load("Shaders/FullScreenRender.vert", "Shaders/GaussianShader.frag"))
+	if (!gaussianShader->Load("Shaders/Sprite.vert", "Shaders/GaussianShader.frag"))
 	{
 		return false;
 	}

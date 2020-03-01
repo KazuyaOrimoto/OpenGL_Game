@@ -256,7 +256,6 @@ private:
 	class Texture* gaussianTexture;
 	class Texture* gaussianFinalTexture;
 	Matrix4 fboView;
-	Shader* fullShader;
 	Shader* gaussianShader;
 
 	bool CreateFBO();
